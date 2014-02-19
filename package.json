@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Theme tokenizer working with JSON input generating variables for Sass, Stylus, Less and Aura",
   "keywords": [
     "css",
@@ -24,10 +24,10 @@
     "url": "https://github.com/salesforce-ux/theo.git"
   },
   "dependencies": {
-    "handlebars": "~1.3.0",
-    "coffee-script": "~1.7.1"
+    "handlebars": "~1.3.0"
   },
   "devDependencies": {
+    "coffee-script": "~1.7.1",
     "mocha": "~1.17.1",
     "should": "*"
   }
