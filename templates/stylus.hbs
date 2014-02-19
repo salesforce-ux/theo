@@ -1,0 +1,7 @@
+{{#each categories}}
+// {{name}}
+
+{{#each properties}}
+{{#if comment}}// {{comment}}{{/if}}
+{{#stylusVar}}{{name}}{{/stylusVar}} = {{value}}{{/each}}
+{{/each}}

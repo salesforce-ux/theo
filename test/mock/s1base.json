@@ -1,0 +1,20 @@
+{
+  "theme": {
+    "name": "S1 base",
+    "categories": [
+      {
+        "name": "Salesforce Brand",
+        "properties": [
+          {
+            "name":"COLOR_PRIMARY",
+            "value":"#2a94d6"
+          },
+          {
+            "name":"COLOR_LINK",
+            "value":"#006eb3"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+<html>
+<head>
+<style>
+ul {
+  list-style-type: none;
+}
+</style>
+</head>
+<body>
+{{#each categories}}
+<h1>{{name}}</h1>
+<section>
+
+<ul>
+{{#each properties}}
+<li>
+{{name}} = {{#htmlValue}}{{value}}{{/htmlValue}}
+</li>
+{{/each}}
+</ul>
+</section>
+{{/each}}
+</body>
+</html>
