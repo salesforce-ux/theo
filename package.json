@@ -27,7 +27,6 @@
     "handlebars": "~1.3.0"
   },
   "devDependencies": {
-    "coffee-script": "~1.7.1",
     "mocha": "~1.17.1",
     "should": "*"
   }
