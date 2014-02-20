@@ -104,7 +104,7 @@ describe('theo', function(){
       var result = theo.convert('Aura', json);
       assert(result, 'result does not exist');
       assert(result.indexOf('<aura:theme >') != -1, 'Could not find main aura tag.');
-      assert(result.indexOf('<aura:attribute name="colorPrimary" value="#2a94d6" />') != -1, 'Could not find primary color.');
+      assert(result.indexOf('<aura:var name="colorPrimary" value="#2a94d6" />') != -1, 'Could not find primary color.');
     });
 
     it('should add extends if JSON is extending a base.', function(){
