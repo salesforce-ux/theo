@@ -6,12 +6,14 @@ Theme tokenizer working with JSON input generating variables for:
 - [Stylus](http://learnboost.github.io/stylus/)
 - [Less](http://lesscss.org/)
 - [Aura](http://documentation.auraframework.org/auradocs)
+- [plist](http://en.wikipedia.org/wiki/Property_list)
+- [XML](http://en.wikipedia.org/wiki/XML)
 
 ## Usage
 
     npm install theo
     theo Sass ./variables ./output
-    theo "Sass, Stylus, Less, Aura" ./variables ./output
+    theo "Sass, Stylus, Less, Aura, plist, XML" ./variables ./output
 
 The input folder `./variables` in this examples should contain at least one JSON file with the following format:
 

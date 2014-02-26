@@ -22,7 +22,7 @@ describe('theo', function(){
   beforeEach(function(done){
     if(fs.existsSync('./dist')){
       fs.readdirSync('./dist').forEach(function(fileName) {
-        fs.unlinkSync('./dist/' + fileName);
+        //fs.unlinkSync('./dist/' + fileName);
       });
     }
     if(!fs.existsSync('./dist')){
@@ -32,7 +32,7 @@ describe('theo', function(){
   });
 
   after(function(){
-    theo.batch(['Aura', 'Sass' , 'Stylus', 'Less', 'HTML'], './test/mock', 'dist');
+    theo.batch(['Aura', 'Sass' , 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './test/mock', 'dist');
 
     assert(fs.existsSync('./dist/s1base.theme'), 'one.theme was not created.');
     assert(fs.existsSync('./dist/s1sub.theme'), 's1sub.theme was not created.');
@@ -42,6 +42,8 @@ describe('theo', function(){
     assert(fs.existsSync('./dist/s1sub.styl'), 's1sub.scss was not created.');
     assert(fs.existsSync('./dist/s1base.less'), 's1base.less was not created.');
     assert(fs.existsSync('./dist/s1sub.less'), 's1sub.less was not created.');
+    assert(fs.existsSync('./dist/s1base.plist'), 's1base.plist was not created.');
+    assert(fs.existsSync('./dist/s1base.xml'), 's1base.xml was not created.');
   });
 
   describe('batch', function(){
@@ -50,6 +52,8 @@ describe('theo', function(){
       theo.batch('Sass', './test/mock', 'dist');
       theo.batch('Stylus', './test/mock', 'dist');
       theo.batch('Less', './test/mock', 'dist');
+      theo.batch('plist', './test/mock', 'dist');
+      theo.batch('XML', './test/mock', 'dist');
 
       assert(fs.existsSync('./dist/s1base.theme'), 'one.theme was not created.');
       assert(fs.existsSync('./dist/s1sub.theme'), 's1sub.theme was not created.');
@@ -59,6 +63,8 @@ describe('theo', function(){
       assert(fs.existsSync('./dist/s1sub.styl'), 's1sub.styl was not created.');
       assert(fs.existsSync('./dist/s1base.less'), 's1base.less was not created.');
       assert(fs.existsSync('./dist/s1sub.less'), 's1sub.less was not created.');
+      assert(fs.existsSync('./dist/s1base.plist'), 's1base.plist was not created.');
+      assert(fs.existsSync('./dist/s1base.xml'), 's1base.xml was not created.');
     });
   });
 
@@ -111,6 +117,29 @@ describe('theo', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
       var result = theo.convert('Aura', json);
       assert(result.indexOf('<aura:theme extends="one:theme">') != -1, 'Could not find main aura tag with extends.');
+    });
+
+  });
+
+  describe('convert plist', function(){
+    
+    it('should convert a variables object to a plist.', function(){
+      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var result = theo.convert('plist', json);
+      assert(result, 'result does not exist');
+      assert(result.indexOf('<key>COLOR_PRIMARY</key>') != -1, 'Could not find primary color.');
+      assert(result.indexOf('<string>#2a94d6</string>') != -1, 'Could not find primary color value.');
+    });
+
+  });
+
+  describe('convert XML', function(){
+    
+    it('should convert a variables object to XML.', function(){
+      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var result = theo.convert('XML', json);
+      assert(result, 'result does not exist');
+      assert(result.indexOf('<variable name="COLOR_PRIMARY" value="#2a94d6" />') != -1, 'Could not find primary color.');
     });
 
   });
