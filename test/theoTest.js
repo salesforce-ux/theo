@@ -73,8 +73,8 @@ describe('theo', function(){
     it('should convert a variables object to Sass.', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Sass', s1Base);
-      assert(result, 'result does not exist');
-      assert(result.indexOf('$color-primary: #2a94d6;') != -1, 'Could not find primary color.');
+      result.should.exist;
+      result.should.containEql('$color-primary: #2a94d6;');
     });
 
   });
@@ -84,9 +84,8 @@ describe('theo', function(){
     it('should convert a variables object to Stylus.', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Stylus', s1Base);
-      assert(result, 'result does not exist');
-      //console.log(result);
-      assert(result.indexOf('color-primary = #2a94d6') != -1, 'Could not find primary color.');
+      result.should.exist;
+      result.should.containEql('color-primary = #2a94d6');
     });
 
   });
@@ -96,9 +95,8 @@ describe('theo', function(){
     it('should convert a variables object to Less.', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Less', s1Base);
-      assert(result, 'result does not exist');
-      //console.log(result);
-      assert(result.indexOf('@color-primary: #2a94d6;') != -1, 'Could not find primary color.');
+      result.should.exist;
+      result.should.containEql('@color-primary: #2a94d6;');
     });
 
   });
@@ -108,15 +106,15 @@ describe('theo', function(){
     it('should convert a variables object to a theme token.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Aura', json);
-      assert(result, 'result does not exist');
-      assert(result.indexOf('<aura:theme >') != -1, 'Could not find main aura tag.');
-      assert(result.indexOf('<aura:var name="colorPrimary" value="#2a94d6" />') != -1, 'Could not find primary color.');
+      result.should.exist;
+      result.should.containEql('<aura:theme >');
+      result.should.containEql('<aura:var name="colorPrimary" value="#2a94d6" />');
     });
 
     it('should add extends if JSON is extending a base.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
       var result = theo.convert('Aura', json);
-      assert(result.indexOf('<aura:theme extends="one:theme">') != -1, 'Could not find main aura tag with extends.');
+      result.should.containEql('<aura:theme extends="one:theme">');
     });
 
   });
@@ -126,9 +124,9 @@ describe('theo', function(){
     it('should convert a variables object to a plist.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('plist', json);
-      assert(result, 'result does not exist');
-      assert(result.indexOf('<key>COLOR_PRIMARY</key>') != -1, 'Could not find primary color.');
-      assert(result.indexOf('<string>#2a94d6</string>') != -1, 'Could not find primary color value.');
+      result.should.exist;
+      result.should.containEql('<key>COLOR_PRIMARY</key>');
+      result.should.containEql('<string>#2a94d6</string>');
     });
 
   });
@@ -138,8 +136,8 @@ describe('theo', function(){
     it('should convert a variables object to XML.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('XML', json);
-      assert(result, 'result does not exist');
-      assert(result.indexOf('<variable name="COLOR_PRIMARY" value="#2a94d6" />') != -1, 'Could not find primary color.');
+      result.should.exist;
+      result.should.containEql('<variable name="COLOR_PRIMARY" value="#2a94d6" />');
     });
 
   });
@@ -149,8 +147,8 @@ describe('theo', function(){
     it('should convert a variables object to a HTML documentation.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('HTML', json);
-      assert(result, 'result does not exist');
-      assert(result.indexOf('<h1>Salesforce Brand</h1>') != -1, 'Could not find main Salasforce Brand tag.');
+      result.should.exist;
+      result.should.containEql('<h1>Salesforce Brand</h1>');
     });
 
 
