@@ -12,6 +12,11 @@
           {
             "name":"COLOR_LINK",
             "value":"#006eb3"
+          },
+          {
+            "name":"FONT_BOLD",
+            "value":"'ProximaNovaSoft-Bold'",
+            "comment": "Fonts"
           }
         ]
       }

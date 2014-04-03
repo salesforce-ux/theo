@@ -111,6 +111,13 @@ describe('theo', function(){
       result.should.containEql('<aura:var name="colorPrimary" value="#2a94d6" />');
     });
 
+    it('should preserve single quotes.', function(){
+      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var result = theo.convert('Aura', json);
+      result.should.exist;
+      result.should.containEql('<aura:var name="fontBold" value="\'ProximaNovaSoft-Bold\'" />');
+    });
+
     it('should add extends if JSON is extending a base.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
       var result = theo.convert('Aura', json);
