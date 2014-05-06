@@ -133,7 +133,7 @@ describe('theo', function(){
       var result = theo.convert('plist', json);
       result.should.exist;
       result.should.containEql('<key>COLOR_PRIMARY</key>');
-      result.should.containEql('<string>#2a94d6</string>');
+      result.should.containEql('<string>rgb(42,148,214)</string>');
     });
 
   });

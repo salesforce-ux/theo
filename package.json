@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Theme tokenizer working with JSON input generating variables for Sass, Stylus, Less, Aura, iOS (plist) and Android (XML)",
   "keywords": [
     "css",

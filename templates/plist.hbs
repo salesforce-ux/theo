@@ -9,7 +9,7 @@
   {{#each properties}}
   {{#if comment}}<!-- {{comment}}-->{{/if}}
   <key>{{name}}</key>
-  <string>{{value}}</string>{{/each}}
+  <string>{{#iOSValue}}{{value}}{{/iOSValue}}</string>{{/each}}
   {{/each}}
 </dict>
 </plist>
