@@ -1,24 +1,11 @@
 <html>
 <head>
-<style>
-ul {
-  list-style-type: none;
-}
-</style>
+<title>Documentation</title>
 </head>
 <body>
-{{#each categories}}
-<h1>{{name}}</h1>
-<section>
-
-<ul>
 {{#each properties}}
-<li>
-{{name}} = {{#htmlValue}}{{value}}{{/htmlValue}}
-</li>
-{{/each}}
-</ul>
-</section>
+{{#if_eq this.category 'font-color'}}<div style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</div>{{/if_eq}}
+{{#if_eq this.category 'misc'}}{{name}}: {{value}}{{/if_eq}}
 {{/each}}
 </body>
 </html>

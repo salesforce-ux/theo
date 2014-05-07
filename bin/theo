@@ -55,7 +55,6 @@ if(process.argv.length !== 5){
       if(path.extname(fileName) == '.json'){
         try {
           var json = JSON.parse(fs.readFileSync(srcDir + '/' + fileName).toString());
-          var l = json.theme.categories;
           foundJson = true;
         }catch(e){
           console.error(srcDir + '/' + fileName + ': ' + e);

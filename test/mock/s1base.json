@@ -1,24 +1,21 @@
 {
   "theme": {
     "name": "S1 base",
-    "categories": [
+    "properties": [
       {
-        "name": "Salesforce Brand",
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"#2a94d6"
-          },
-          {
-            "name":"COLOR_LINK",
-            "value":"#006eb3"
-          },
-          {
-            "name":"FONT_BOLD",
-            "value":"'ProximaNovaSoft-Bold'",
-            "comment": "Fonts"
-          }
-        ]
+        "name":"COLOR_PRIMARY",
+        "value":"#2a94d6",
+        "category": "font-color"
+      },
+      {
+        "name":"COLOR_LINK",
+        "value":"#006eb3",
+        "category": "font-color"
+      },
+      {
+        "name":"FONT_BOLD",
+        "value":"'ProximaNovaSoft-Bold'",
+        "category": "misc"
       }
     ]
   }

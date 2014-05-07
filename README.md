@@ -20,19 +20,14 @@ The input folder `./variables` in this examples should contain at least one JSON
     {
       "theme": {
         "name": "Name of the theme",
-        "categories": [
+        "properties": [
           {
-            "name": "Name of the category like colors",
-            "properties": [
-              {
-                "name":"COLOR_PRIMARY",
-                "value":"#2a94d6"
-              },
-              {
-                "name":"COLOR_LINK",
-                "value":"#006eb3"
-              }
-            ]
+            "name":"COLOR_PRIMARY",
+            "value":"#2a94d6"
+          },
+          {
+            "name":"COLOR_LINK",
+            "value":"#006eb3"
           }
         ]
       }

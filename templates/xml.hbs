@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<styles>
-{{#each categories}}
-<!-- {{name}} -->
-{{#each properties}}
-{{#if comment}}<!-- {{comment}}-->{{/if}}
-    <variable name="{{name}}" value="{{value}}" />{{/each}}
-{{/each}}
+<styles>{{#each properties}}
+<variable name="{{name}}" value="{{value}}" />{{/each}}
 </styles>
