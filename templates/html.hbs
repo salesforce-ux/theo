@@ -1,11 +1,248 @@
+<!DOCTYPE html>
 <html>
-<head>
-<title>Documentation</title>
-</head>
-<body>
-{{#each properties}}
-{{#if_eq this.category 'font-color'}}<div style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</div>{{/if_eq}}
-{{#if_eq this.category 'misc'}}{{name}}: {{value}}{{/if_eq}}
-{{/each}}
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Design Attribute Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      * { box-sizing: border-box; }
+
+      html {
+        font-size: 62.5%;
+        -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        background: #fff;
+        color: #444;
+      }
+
+      body,
+      h1,
+      h2,
+      ul,
+      p { margin: 0; }
+
+      body {
+        font: 1.6em/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: transparent;
+      }
+
+      ::-moz-selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      ::selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      header,
+      footer,
+      nav,
+      main { display: block; }
+
+      header,
+      footer { background: #eee; }
+
+      header { padding: .9375em 0; }
+
+      h1,
+      h2 {
+        padding: 0;
+        font-weight: normal;
+        line-height: 1;
+      }
+
+      h1 { font-size: 1.125em; }
+
+      h2 {
+        padding: 1.5em 0 0;
+        font-size: 1.375em;
+      }
+
+      h2:first-child { padding-top: 0; }
+
+      ul,
+      p { padding: .75em 0; }
+
+      ul { list-style: none; }
+
+      li { padding: .25em 0; }
+
+      li:first-child { padding-top: 0; }
+
+      li:last-child { padding-bottom: 0; }
+
+      a {
+        text-decoration: none;
+        background: transparent;
+      }
+
+      a,
+      a:visited { color: #369; }
+
+      a:focus,
+      a:hover,
+      a:active { color: #036; }
+
+      a:hover,
+      a:active { outline: 0; }
+
+      strong { font-weight: bold; }
+
+      .container {
+        margin: 0 auto;
+        padding: 0 1.5em;
+      }
+
+      .body {
+        padding: 2em 0;
+        overflow: hidden;
+      }
+
+      nav,
+      footer { font-size: .75em; }
+
+      nav {
+        float: right;
+        padding-left: .75em;
+        width: 25%;
+      }
+
+      main {
+        float: left;
+        padding-right: .75em;
+        width: 75%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header role="banner">
+      <div class="container">
+        <h1>Design Attribute Guide</h1>
+      </div>
+    </header>
+
+    <div class="body">
+      <div class="container">
+        <nav role="navigation">
+          <ul>
+            <li><a href="#text-color">Text Colors</a></li>
+            <li><a href="#background-color">Background Colors</a></li>
+            <li><a href="#border-color">Border Colors</a></li>
+            <li><a href="#input-background-color">Input Background Colors</a></li>
+            <li><a href="#border-style">Border Styles</a></li>
+            <li><a href="#font">Font</a></li>
+            <li><a href="#font-size">Font Sizes</a></li>
+            <li><a href="#line-height">Line Heights</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#misc">Miscellaneous</a></li>
+          </ul>
+        </nav>
+
+        <main role="main">
+          <h2 id="text-color">Text Colors</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'text-color'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="background-color">Background Colors</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'background-color'}}
+                <li style="background-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="border-color">Border Colors</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'border-color'}}
+                <li style="border-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="input-background-color">Input Background Colors</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'input-background-color'}}
+                <li style="background-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="border-style">Border Styles</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'border-style'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="font">Font</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'font'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="font-size">Font Sizes</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'font-size'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="line-height">Line Heights</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'line-heights'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="spacing">Spacing</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'spacing'}}
+                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+
+          <h2 id="misc">Miscellaneous</h2>
+          <ul>
+            {{#each properties}}
+              {{#if_eq this.category 'misc'}}
+                <li>{{name}}: {{value}}</li>
+              {{/if_eq}}
+            {{/each}}
+          </ul>
+        </main>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <p>
+          <strong>Theo</strong>
+          by Salesforce UX
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>
