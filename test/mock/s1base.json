@@ -13,8 +13,63 @@
         "category": "text-color"
       },
       {
+        "name":"BG_1",
+        "value":"#ff9900",
+        "category": "background-color"
+      },
+      {
+        "name":"BORDER_1",
+        "value":"#ff0000",
+        "category": "border-color"
+      },
+      {
+        "name":"FORM",
+        "value":"#ff0000",
+        "category": "input-background-color"
+      },
+      {
+        "name":"BORDER_DEFAULT",
+        "value":"1px dotted green",
+        "category": "border-style"
+      },
+      {
         "name":"FONT_BOLD",
         "value":"'ProximaNovaSoft-Bold'",
+        "category": "font"
+      },
+      {
+        "name":"SMALL",
+        "value":"15px",
+        "category": "font-size"
+      },
+      {
+        "name":"MEDIUM",
+        "value":"17px",
+        "category": "font-size"
+      },
+      {
+        "name":"LARGE",
+        "value":"20px",
+        "category": "font-size"
+      },
+      {
+        "name":"LINE_HEIGHT_DEFAULT",
+        "value":"25px",
+        "category": "line-height"
+      },
+      {
+        "name":"NARROW_SPACING",
+        "value":".3px",
+        "category": "spacing"
+      },
+      {
+        "name":"WIDE_SPACING",
+        "value":"2px",
+        "category": "spacing"
+      },
+      {
+        "name":"FOO",
+        "value":"20px",
         "category": "misc"
       }
     ]

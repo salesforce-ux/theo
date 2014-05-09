@@ -165,7 +165,7 @@
           <ul>
             {{#each properties}}
               {{#if_eq this.category 'border-color'}}
-                <li style="border-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+                <li style="border-style:solid; border-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
               {{/if_eq}}
             {{/each}}
           </ul>
@@ -183,7 +183,7 @@
           <ul>
             {{#each properties}}
               {{#if_eq this.category 'border-style'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+                <li style="border: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
               {{/if_eq}}
             {{/each}}
           </ul>
@@ -201,7 +201,7 @@
           <ul>
             {{#each properties}}
               {{#if_eq this.category 'font-size'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+                <li style="font-size: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
               {{/if_eq}}
             {{/each}}
           </ul>
@@ -209,8 +209,8 @@
           <h2 id="line-height">Line Heights</h2>
           <ul>
             {{#each properties}}
-              {{#if_eq this.category 'line-heights'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+              {{#if_eq this.category 'line-height'}}
+                <li style="line-height: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
               {{/if_eq}}
             {{/each}}
           </ul>
@@ -219,7 +219,7 @@
           <ul>
             {{#each properties}}
               {{#if_eq this.category 'spacing'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+                <li style="letter-spacing: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
               {{/if_eq}}
             {{/each}}
           </ul>
