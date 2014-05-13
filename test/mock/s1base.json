@@ -58,14 +58,24 @@
         "category": "line-height"
       },
       {
+        "name":"LINE_HEIGHT_SIDEBAR",
+        "value":"18px",
+        "category": "line-height"
+      },
+      {
         "name":"NARROW_SPACING",
-        "value":".3px",
+        "value":"8px",
         "category": "spacing"
       },
       {
         "name":"WIDE_SPACING",
-        "value":"2px",
+        "value":"16px",
         "category": "spacing"
+      },
+      {
+        "name":"STAGE_LEFT_WIDTH",
+        "value":"88%",
+        "category": "misc"
       },
       {
         "name":"FOO",

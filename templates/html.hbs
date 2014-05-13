@@ -20,10 +20,13 @@
       h1,
       h2,
       ul,
+      dl,
+      dd,
       p { margin: 0; }
 
       body {
-        font: 1.6em/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.6rem;
         background-color: transparent;
       }
 
@@ -57,22 +60,44 @@
       h1 { font-size: 1.125em; }
 
       h2 {
-        padding: 1.5em 0 0;
+        display: table-caption;
+        padding: 1.5em 0 .5em;
         font-size: 1.375em;
       }
 
-      h2:first-child { padding-top: 0; }
-
       ul,
-      p { padding: .75em 0; }
+      dl { padding: .5em 0; }
 
       ul { list-style: none; }
 
-      li { padding: .25em 0; }
+      li,
+      figcaption,
+      dt,
+      dd { padding: .25em 0; }
 
-      li:first-child { padding-top: 0; }
+      dl { display: table-row; }
 
-      li:last-child { padding-bottom: 0; }
+      dt,
+      dd {
+        display: table-cell;
+        padding-right: .5em;
+        width: 12em;
+        vertical-align: baseline;
+      }
+
+      dt {
+        overflow: hidden;
+        overflow-x: auto;
+      }
+
+      dd { padding-left:  .5em; }
+
+      dd:last-child {
+        padding-right: 0;
+        width: auto;
+      }
+
+      p { padding: .75em 0; }
 
       a {
         text-decoration: none;
@@ -91,9 +116,38 @@
 
       strong { font-weight: bold; }
 
+      code {
+        font-size: 1em;
+        font-family: monospace, monospace;
+      }
+
+      nav,
+      footer p { font-size: .75em; }
+
+      nav {
+        float: right;
+        padding-left: 1.5em;
+        width: 25%;
+      }
+
+      main {
+        float: left;
+        padding-right: 6em;
+        width: 75%;
+      }
+
+      section {
+        display: table;
+        padding-bottom: 1.5em;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+      }
+
       .container {
         margin: 0 auto;
         padding: 0 1.5em;
+        max-width: 80em;
+        overflow: hidden;
       }
 
       .body {
@@ -101,19 +155,16 @@
         overflow: hidden;
       }
 
-      nav,
-      footer { font-size: .75em; }
-
-      nav {
-        float: right;
-        padding-left: .75em;
-        width: 25%;
+      .metric-box {
+        margin: .25em 0;
+        vertical-align: middle;
+        background: #ccc;
       }
 
-      main {
-        float: left;
-        padding-right: .75em;
-        width: 75%;
+      .line-height-example {
+        border-bottom: 1px solid #eee;
+        background-image: linear-gradient(#eee 1px, transparent 1px);
+        background-size: 100% 1em;
       }
     </style>
   </head>
@@ -143,95 +194,146 @@
         </nav>
 
         <main role="main">
-          <h2 id="text-color">Text Colors</h2>
-          <ul>
+          <section>
+            <h2 id="text-color">Background Colors</h2>
             {{#each properties}}
-              {{#if_eq this.category 'text-color'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'text-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="color: {{value}}">The quick brown fox jumps over the lazy dog.</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="background-color">Background Colors</h2>
-          <ul>
+          <section>
+            <h2 id="background-color">Background Colors</h2>
             {{#each properties}}
-              {{#if_eq this.category 'background-color'}}
-                <li style="background-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'background-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="background-color: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="border-color">Border Colors</h2>
-          <ul>
+          <section>
+            <h2 id="border-color">Border Colors</h2>
             {{#each properties}}
-              {{#if_eq this.category 'border-color'}}
-                <li style="border-style:solid; border-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'border-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="border: 2px solid {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="input-background-color">Input Background Colors</h2>
-          <ul>
+          <section>
+            <h2 id="input-background-color">Input Background Colors</h2>
             {{#each properties}}
-              {{#if_eq this.category 'input-background-color'}}
-                <li style="background-color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'input-background-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="background-color: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="border-style">Border Styles</h2>
-          <ul>
+          <section>
+            <h2 id="border-style">Border Styles</h2>
             {{#each properties}}
-              {{#if_eq this.category 'border-style'}}
-                <li style="border: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'border-style'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="border: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="font">Font</h2>
-          <ul>
+          <section>
+            <h2 id="font">Font</h2>
             {{#each properties}}
-              {{#if_eq this.category 'font'}}
-                <li style="color: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'font'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="font-family: {{value}}">Aa</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="font-size">Font Sizes</h2>
-          <ul>
+          <section>
+            <h2 id="font-size">Font Sizes</h2>
             {{#each properties}}
-              {{#if_eq this.category 'font-size'}}
-                <li style="font-size: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'font-size'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="font-size: {{value}}">The quick brown fox jumps over the lazy dog.</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="line-height">Line Heights</h2>
-          <ul>
+          <section>
+            <h2 id="line-height">Line Heights</h2>
             {{#each properties}}
-              {{#if_eq this.category 'line-height'}}
-                <li style="line-height: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
-              {{/if_eq}}
+              <dl>
+                {{#if_eq this.category 'line-height'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div class="line-height-example" style="line-height: {{value}}; background-size: 100% {{value}}">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum id feugiat at, venenatis quis erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris sit amet commodo velit. In hac habitasse platea dictumst. Sed ac velit dolor. Aliquam tempor lectus non arcu vestibulum, a condimentum enim blandit. Vestibulum non vehicula urna. Donec tempus massa gravida libero hendrerit, nec pretium leo viverra. Sed egestas lobortis fringilla.
+                    </div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="spacing">Spacing</h2>
-          <ul>
+          <section>
+            <h2 id="spacing">Spacing</h2>
             {{#each properties}}
               {{#if_eq this.category 'spacing'}}
-                <li style="letter-spacing: {{value}}">{{#auraVar}}{{name}}{{/auraVar}}</li>
+                <dl>
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div class="metric-box" style="width: {{value}}; height: {{value}}"></div>
+                  </dd>
+                </dl>
               {{/if_eq}}
             {{/each}}
-          </ul>
+          </section>
 
-          <h2 id="misc">Miscellaneous</h2>
-          <ul>
+          <section>
+            <h2 id="misc">Miscellaneous</h2>
             {{#each properties}}
               {{#if_eq this.category 'misc'}}
-                <li>{{name}}: {{value}}</li>
+                <dl>
+                  <dt><code>{{name}}</code>:</dt>
+                  <dd>{{value}}</dd>
+                </dl>
               {{/if_eq}}
             {{/each}}
-          </ul>
+          </section>
         </main>
       </div>
     </div>
