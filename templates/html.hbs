@@ -212,6 +212,22 @@
 
           <tr>
             <td colspan="4">
+              <h2 id="gradient">Gradients</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'gradient'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="background-image: {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}          
+
+          <tr>
+            <td colspan="4">
               <h2 id="border-color">Border Colors</h2>
             </td>
           </tr>
@@ -287,22 +303,6 @@
                 <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
                 <td><code>{{value}}</code></td>
                 <td class="example" style="box-shadow: {{value}}"></td>
-                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
-              </tr>
-            {{/if_eq}}
-          {{/each}}
-
-          <tr>
-            <td colspan="4">
-              <h2 id="gradient">Gradients</h2>
-            </td>
-          </tr>
-          {{#each properties}}
-            {{#if_eq this.category 'gradient'}}
-              <tr>
-                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
-                <td><code>{{value}}</code></td>
-                <td class="example" style="background-image: {{value}}"></td>
                 <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
               </tr>
             {{/if_eq}}
@@ -388,7 +388,7 @@
             </td>
           </tr>
           {{#each properties}}
-            {{#if_eq this.category 'spacing'}}
+            {{#if_eq this.category 'radius'}}
               <tr>
                 <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
                 <td><code>{{value}}</code></td>
