@@ -19,7 +19,6 @@
       body,
       h1,
       h2,
-      ul,
       dl,
       dd,
       p { margin: 0; }
@@ -42,13 +41,13 @@
 
       header,
       footer,
-      nav,
       main { display: block; }
 
-      header,
-      footer { background: #eee; }
-
-      header { padding: .9375em 0; }
+      main {
+        margin: 0 -0.5em;
+        padding-top: 2em;
+        padding-bottom: 2em;
+      }
 
       h1,
       h2 {
@@ -60,41 +59,16 @@
       h1 { font-size: 1.125em; }
 
       h2 {
-        display: table-caption;
+        margin-top: 1em;
         padding: 1.5em 0 .5em;
+        border-top: 1px solid #eee;
         font-size: 1.375em;
       }
 
-      ul,
-      dl { padding: .5em 0; }
-
-      ul { list-style: none; }
-
-      li,
-      figcaption,
-      dt,
-      dd { padding: .25em 0; }
-
-      dl { display: table-row; }
-
-      dt,
-      dd {
-        display: table-cell;
-        padding-right: .5em;
-        width: 12em;
-        vertical-align: baseline;
-      }
-
-      dt {
-        overflow: hidden;
-        overflow-x: auto;
-      }
-
-      dd { padding-left:  .5em; }
-
-      dd:last-child {
-        padding-right: 0;
-        width: auto;
+      tr:first-child h2 {
+        margin-top: 0;
+        border-top: 0;
+        padding-top: 0;
       }
 
       p { padding: .75em 0; }
@@ -116,34 +90,49 @@
 
       strong { font-weight: bold; }
 
+      hr {
+        -moz-box-sizing: content-box;
+             box-sizing: content-box;
+        display: block;
+        margin: 1em 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+        padding: 0;
+        height: 1px;
+      }
+
       code {
         font-size: 1em;
         font-family: monospace, monospace;
       }
 
-      nav,
-      footer p { font-size: .75em; }
-
-      nav {
-        float: right;
-        padding-left: 1.5em;
-        width: 25%;
-      }
-
-      main {
-        float: left;
-        padding-right: 6em;
-        width: 75%;
-      }
-
-      section {
-        display: table;
-        padding-bottom: 1.5em;
-        border-bottom: 1px solid #eee;
+      table {
+        border-collapse: separate;
+        border-spacing: .5em;
         width: 100%;
       }
 
-      section:last-child { border-bottom: 0; }
+      th,
+      td {
+        padding: 0;
+        vertical-align: baseline;
+        -ms-word-break: break-all;
+            word-break: break-all;
+            word-break: break-word;
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
+      }
+
+      th {
+        font-weight: normal;
+        text-align: left;
+      }
+
+      .banner,
+      .contentinfo { background: #eee; }
+
+      .banner { padding: .9375em 0; }
 
       .container {
         margin: 0 auto;
@@ -152,181 +141,269 @@
         overflow: hidden;
       }
 
-      .body {
-        padding: 2em 0;
-        overflow: hidden;
-      }
+      .example { width: 20em; }
 
-      .metric-box {
-        margin: .25em 0;
+      .description,
+      .contentinfo p { font-size: .75em; }
+
+      .description { width: 26.66666666666667em; }
+
+      .metric-box,
+      .radius-box {
+        display: inline-block;
         vertical-align: middle;
         background: #ccc;
       }
 
+      .radius-box {
+        width: 100%;
+        height: 1.125em;
+      }
+
       .line-height-example {
-        border-bottom: 1px solid #eee;
-        background-image: linear-gradient(#eee 1px, transparent 1px);
+        border-bottom: 1px solid #ccc;
+        background-image: linear-gradient(#ccc 1px, transparent 1px);
         background-size: 100% 1em;
       }
     </style>
   </head>
 
   <body>
-    <header role="banner">
+    <header role="banner" class="banner">
       <div class="container">
         <h1>Design Attribute Guide</h1>
       </div>
     </header>
 
-    <div class="body">
-      <div class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="#text-color">Text Colors</a></li>
-            <li><a href="#background-color">Background Colors</a></li>
-            <li><a href="#border-color">Border Colors</a></li>
-            <li><a href="#border-style">Border Styles</a></li>
-            <li><a href="#font">Font</a></li>
-            <li><a href="#font-size">Font Sizes</a></li>
-            <li><a href="#line-height">Line Heights</a></li>
-            <li><a href="#spacing">Spacing</a></li>
-            <li><a href="#misc">Miscellaneous</a></li>
-          </ul>
-        </nav>
+    <div class="container">
+      <main role="main">
+        <table>
+          <tr>
+            <td colspan="4">
+              <h2 id="text-color">Text Colors</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'text-color'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="color: {{value}}">The quick brown fox jumps over the lazy dog.</td>
+                {{#if comment}}<td class="description">{{comment}}</td>{{/if}}
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-        <main role="main">
-          <section>
-            <h2 id="text-color">Text Colors</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'text-color'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd>
-                    <div style="color: {{value}}">The quick brown fox jumps over the lazy dog.</div>
-                  </dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="background-color">Background Colors</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'background-color'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="background-color: {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="background-color">Background Colors</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'background-color'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd style="background-color: {{value}}"></dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="border-color">Border Colors</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'border-color'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="border: 2px solid {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="border-color">Border Colors</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'border-color'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd style="border: 2px solid {{value}}"></dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="border-style">Border Styles</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'border-style'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="border: {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="border-style">Border Styles</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'border-style'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd style="border: {{value}}"></dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="hr-color">Horizontal Rule Color</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'hr-color'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <hr style="border-top-color: {{value}}" />
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="font">Font</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'font'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd>
-                    <div style="font-family: {{value}}">Aa</div>
-                  </dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="drop-shadow">Drop Shadow</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'drop-shadow'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="box-shadow: {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="font-size">Font Sizes</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'font-size'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd>
-                    <div style="font-size: {{value}}">The quick brown fox jumps over the lazy dog.</div>
-                  </dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="inner-shadow">Inner Drop Shadow</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'inner-shadow'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example" style="box-shadow: {{value}}"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="line-height">Line Heights</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'line-height'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd>
-                    <div class="line-height-example" style="line-height: {{value}}; background-size: 100% {{value}}">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum id feugiat at, venenatis quis erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris sit amet commodo velit. In hac habitasse platea dictumst. Sed ac velit dolor. Aliquam tempor lectus non arcu vestibulum, a condimentum enim blandit. Vestibulum non vehicula urna. Donec tempus massa gravida libero hendrerit, nec pretium leo viverra. Sed egestas lobortis fringilla.
-                    </div>
-                  </dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="font">Font</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'font'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <div style="font-family: {{value}}">Aa</div>
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="spacing">Spacing</h2>
-            {{#each properties}}
-              {{#if_eq this.category 'spacing'}}
-                <dl>
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd>
-                    <div class="metric-box" style="width: {{value}}; height: {{value}}"></div>
-                  </dd>
-                </dl>
-              {{/if_eq}}
-            {{/each}}
-          </section>
+          <tr>
+            <td colspan="4">
+              <h2 id="font-size">Font Sizes</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'font-size'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <div style="font-size: {{value}}">The quick brown fox jumps over the lazy dog.</div>
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
 
-          <section>
-            <h2 id="misc">Miscellaneous</h2>
-            {{#each properties}}
-              {{#if_eq this.category 'misc'}}
-                <dl>
-                  <dt><code>{{name}}</code>:</dt>
-                  <dd>{{value}}</dd>
-                </dl>
-              {{/if_eq}}
-            {{/each}}
-          </section>
-        </main>
-      </div>
+          <tr>
+            <td colspan="4">
+              <h2 id="line-height">Line Heights</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'line-height'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <div class="line-height-example" style="line-height: {{value}}; background-size: 100% {{value}}">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum id feugiat at, venenatis quis erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris sit amet commodo velit. In hac habitasse platea dictumst. Sed ac velit dolor. Aliquam tempor lectus non arcu vestibulum, a condimentum enim blandit. Vestibulum non vehicula urna. Donec tempus massa gravida libero hendrerit, nec pretium leo viverra. Sed egestas lobortis fringilla.
+                  </div>
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
+
+          <tr>
+            <td colspan="4">
+              <h2 id="spacing">Spacing</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'spacing'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <div class="metric-box" style="width: {{value}}; height: {{value}}"></div>
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
+
+          <tr>
+            <td colspan="4">
+              <h2 id="radius">Radius</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'spacing'}}
+              <tr>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code></th>
+                <td><code>{{value}}</code></td>
+                <td class="example">
+                  <div class="radius-box" style="border-radius: {{value}}"></div>
+                </td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
+
+          <tr>
+            <td colspan="4">
+              <h2 id="misc">Miscellaneous</h2>
+            </td>
+          </tr>
+          {{#each properties}}
+            {{#if_eq this.category 'misc'}}
+              <tr>
+                <th><code>{{name}}</code>:</th>
+                <td><code>{{value}}</code></td>
+                <td class="example"></td>
+                <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+              </tr>
+            {{/if_eq}}
+          {{/each}}
+        </table>
+      </main>
     </div>
 
-    <footer role="contentinfo">
+    <footer role="contentinfo" class="contentinfo">
       <div class="container">
         <p>
           <strong>Theo</strong>

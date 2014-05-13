@@ -5,7 +5,8 @@
       {
         "name":"COLOR_PRIMARY",
         "value":"#2a94d6",
-        "category": "text-color"
+        "category": "text-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"COLOR_LINK",
@@ -20,6 +21,11 @@
       {
         "name":"BORDER_1",
         "value":"#ff0000",
+        "category": "border-color"
+      },
+      {
+        "name":"BORDER_2",
+        "value":"#aabbcc",
         "category": "border-color"
       },
       {
@@ -80,7 +86,7 @@
       {
         "name":"DROP_SHADOW_2",
         "value":"0 1px 3px rgba(0,0,0,.1)",
-        "category": "misc"
+        "category": "drop-shadow"
       },
       {
         "name":"INNER_SHADOW_1",
