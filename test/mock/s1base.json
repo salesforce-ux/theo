@@ -1,24 +1,86 @@
 {
   "theme": {
     "name": "S1 base",
-    "categories": [
+    "properties": [
       {
-        "name": "Salesforce Brand",
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"#2a94d6"
-          },
-          {
-            "name":"COLOR_LINK",
-            "value":"#006eb3"
-          },
-          {
-            "name":"FONT_BOLD",
-            "value":"'ProximaNovaSoft-Bold'",
-            "comment": "Fonts"
-          }
-        ]
+        "name":"COLOR_PRIMARY",
+        "value":"#2a94d6",
+        "category": "text-color"
+      },
+      {
+        "name":"COLOR_LINK",
+        "value":"#006eb3",
+        "category": "text-color"
+      },
+      {
+        "name":"BG_1",
+        "value":"#ff9900",
+        "category": "background-color"
+      },
+      {
+        "name":"BORDER_1",
+        "value":"#ff0000",
+        "category": "border-color"
+      },
+      {
+        "name":"FORM",
+        "value":"#ff0000",
+        "category": "input-background-color"
+      },
+      {
+        "name":"BORDER_DEFAULT",
+        "value":"1px dotted green",
+        "category": "border-style"
+      },
+      {
+        "name":"FONT_BOLD",
+        "value":"'ProximaNovaSoft-Bold'",
+        "category": "font"
+      },
+      {
+        "name":"SMALL",
+        "value":"15px",
+        "category": "font-size"
+      },
+      {
+        "name":"MEDIUM",
+        "value":"17px",
+        "category": "font-size"
+      },
+      {
+        "name":"LARGE",
+        "value":"20px",
+        "category": "font-size"
+      },
+      {
+        "name":"LINE_HEIGHT_DEFAULT",
+        "value":"25px",
+        "category": "line-height"
+      },
+      {
+        "name":"LINE_HEIGHT_SIDEBAR",
+        "value":"18px",
+        "category": "line-height"
+      },
+      {
+        "name":"NARROW_SPACING",
+        "value":"8px",
+        "category": "spacing"
+      },
+      {
+        "name":"WIDE_SPACING",
+        "value":"16px",
+        "category": "spacing"
+      },
+      {
+        "name":"STAGE_LEFT_WIDTH",
+        "value":"88%",
+        "category": "misc"
+      },
+      {
+        "name":"FOO",
+        "value":"20px",
+        "category": "misc"
       }
     ]
   }

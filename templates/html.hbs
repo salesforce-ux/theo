@@ -1,24 +1,352 @@
+<!DOCTYPE html>
 <html>
-<head>
-<style>
-ul {
-  list-style-type: none;
-}
-</style>
-</head>
-<body>
-{{#each categories}}
-<h1>{{name}}</h1>
-<section>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Design Attribute Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      * { box-sizing: border-box; }
 
-<ul>
-{{#each properties}}
-<li>
-{{name}} = {{#htmlValue}}{{value}}{{/htmlValue}}
-</li>
-{{/each}}
-</ul>
-</section>
-{{/each}}
-</body>
+      html {
+        font-size: 62.5%;
+        -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        background: #fff;
+        color: #444;
+      }
+
+      body,
+      h1,
+      h2,
+      ul,
+      dl,
+      dd,
+      p { margin: 0; }
+
+      body {
+        font: 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 1.6rem;
+        background-color: transparent;
+      }
+
+      ::-moz-selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      ::selection {
+        background: #b3d4fc;
+        text-shadow: none;
+      }
+
+      header,
+      footer,
+      nav,
+      main { display: block; }
+
+      header,
+      footer { background: #eee; }
+
+      header { padding: .9375em 0; }
+
+      h1,
+      h2 {
+        padding: 0;
+        font-weight: normal;
+        line-height: 1;
+      }
+
+      h1 { font-size: 1.125em; }
+
+      h2 {
+        display: table-caption;
+        padding: 1.5em 0 .5em;
+        font-size: 1.375em;
+      }
+
+      ul,
+      dl { padding: .5em 0; }
+
+      ul { list-style: none; }
+
+      li,
+      figcaption,
+      dt,
+      dd { padding: .25em 0; }
+
+      dl { display: table-row; }
+
+      dt,
+      dd {
+        display: table-cell;
+        padding-right: .5em;
+        width: 12em;
+        vertical-align: baseline;
+      }
+
+      dt {
+        overflow: hidden;
+        overflow-x: auto;
+      }
+
+      dd { padding-left:  .5em; }
+
+      dd:last-child {
+        padding-right: 0;
+        width: auto;
+      }
+
+      p { padding: .75em 0; }
+
+      a {
+        text-decoration: none;
+        background: transparent;
+      }
+
+      a,
+      a:visited { color: #369; }
+
+      a:focus,
+      a:hover,
+      a:active { color: #036; }
+
+      a:hover,
+      a:active { outline: 0; }
+
+      strong { font-weight: bold; }
+
+      code {
+        font-size: 1em;
+        font-family: monospace, monospace;
+      }
+
+      nav,
+      footer p { font-size: .75em; }
+
+      nav {
+        float: right;
+        padding-left: 1.5em;
+        width: 25%;
+      }
+
+      main {
+        float: left;
+        padding-right: 6em;
+        width: 75%;
+      }
+
+      section {
+        display: table;
+        padding-bottom: 1.5em;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+      }
+
+      section:last-child { border-bottom: 0; }
+
+      .container {
+        margin: 0 auto;
+        padding: 0 1.5em;
+        max-width: 80em;
+        overflow: hidden;
+      }
+
+      .body {
+        padding: 2em 0;
+        overflow: hidden;
+      }
+
+      .metric-box {
+        margin: .25em 0;
+        vertical-align: middle;
+        background: #ccc;
+      }
+
+      .line-height-example {
+        border-bottom: 1px solid #eee;
+        background-image: linear-gradient(#eee 1px, transparent 1px);
+        background-size: 100% 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header role="banner">
+      <div class="container">
+        <h1>Design Attribute Guide</h1>
+      </div>
+    </header>
+
+    <div class="body">
+      <div class="container">
+        <nav role="navigation">
+          <ul>
+            <li><a href="#text-color">Text Colors</a></li>
+            <li><a href="#background-color">Background Colors</a></li>
+            <li><a href="#border-color">Border Colors</a></li>
+            <li><a href="#input-background-color">Input Background Colors</a></li>
+            <li><a href="#border-style">Border Styles</a></li>
+            <li><a href="#font">Font</a></li>
+            <li><a href="#font-size">Font Sizes</a></li>
+            <li><a href="#line-height">Line Heights</a></li>
+            <li><a href="#spacing">Spacing</a></li>
+            <li><a href="#misc">Miscellaneous</a></li>
+          </ul>
+        </nav>
+
+        <main role="main">
+          <section>
+            <h2 id="text-color">Text Colors</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'text-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="color: {{value}}">The quick brown fox jumps over the lazy dog.</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="background-color">Background Colors</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'background-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="background-color: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="border-color">Border Colors</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'border-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="border: 2px solid {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="input-background-color">Input Background Colors</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'input-background-color'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="background-color: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="border-style">Border Styles</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'border-style'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd style="border: {{value}}"></dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="font">Font</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'font'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="font-family: {{value}}">Aa</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="font-size">Font Sizes</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'font-size'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div style="font-size: {{value}}">The quick brown fox jumps over the lazy dog.</div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="line-height">Line Heights</h2>
+            {{#each properties}}
+              <dl>
+                {{#if_eq this.category 'line-height'}}
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div class="line-height-example" style="line-height: {{value}}; background-size: 100% {{value}}">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum id feugiat at, venenatis quis erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris sit amet commodo velit. In hac habitasse platea dictumst. Sed ac velit dolor. Aliquam tempor lectus non arcu vestibulum, a condimentum enim blandit. Vestibulum non vehicula urna. Donec tempus massa gravida libero hendrerit, nec pretium leo viverra. Sed egestas lobortis fringilla.
+                    </div>
+                  </dd>
+                {{/if_eq}}
+              </dl>
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="spacing">Spacing</h2>
+            {{#each properties}}
+              {{#if_eq this.category 'spacing'}}
+                <dl>
+                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
+                  <dd>{{value}}</dd>
+                  <dd>
+                    <div class="metric-box" style="width: {{value}}; height: {{value}}"></div>
+                  </dd>
+                </dl>
+              {{/if_eq}}
+            {{/each}}
+          </section>
+
+          <section>
+            <h2 id="misc">Miscellaneous</h2>
+            {{#each properties}}
+              {{#if_eq this.category 'misc'}}
+                <dl>
+                  <dt><code>{{name}}</code>:</dt>
+                  <dd>{{value}}</dd>
+                </dl>
+              {{/if_eq}}
+            {{/each}}
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <p>
+          <strong>Theo</strong>
+          by Salesforce UX
+        </p>
+      </div>
+    </footer>
+  </body>
 </html>

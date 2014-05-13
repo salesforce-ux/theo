@@ -1,7 +1,2 @@
-{{#each categories}}
-// {{name}}
-
-{{#each properties}}
-{{#if comment}}// {{comment}}{{/if}}
-{{#lessVar}}{{name}}{{/lessVar}}: {{value}};{{/each}}
+{{#each properties}}{{#lessVar}}{{name}}{{/lessVar}}: {{value}};
 {{/each}}

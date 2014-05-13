@@ -1,11 +1,5 @@
 <!-- This file is being generated. Please reach out to jlevine@salesforce.com or nmcwilliams@salesforce.com
      if you need to do any changes. Changes are maintained here: https://git.soma.salesforce.com/ux/s1variables -->
-<aura:theme {{#if extends}}extends="{{extends}}"{{/if}}>
-    {{#each categories}}
-    <!-- {{name}} -->
-      {{#each properties}}
-      {{#if comment}}<!-- {{comment}} -->{{/if}}
-      <aura:var name="{{#auraVar}}{{name}}{{/auraVar}}" value="{{value}}" />{{/each}}
-
-    {{/each}}
+<aura:theme {{#if extends}}extends="{{extends}}"{{/if}}>{{#each properties}}
+  <aura:var name="{{#auraVar}}{{name}}{{/auraVar}}" value="{{value}}" />{{/each}}
 </aura:theme>

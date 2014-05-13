@@ -149,13 +149,13 @@ describe('theo', function(){
 
   });
 
-  describe('convert HTML', function(){
+  describe('create docs', function(){
     
     it('should convert a variables object to a HTML documentation.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('HTML', json);
       result.should.exist;
-      result.should.containEql('<h1>Salesforce Brand</h1>');
+      result.should.containEql('<html>');
     });
 
 
