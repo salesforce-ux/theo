@@ -114,6 +114,11 @@
         "category": "radius"
       },
       {
+        "name":"GRADIENT_GLOBAL_HEADER",
+        "value":"linear-gradient(#3C5069,#2F3E52)",
+        "category": "gradient"
+      },
+      {
         "name":"STAGE_LEFT_WIDTH",
         "value":"88%",
         "category": "misc"
