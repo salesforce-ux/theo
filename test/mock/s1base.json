@@ -25,7 +25,7 @@
       {
         "name":"FORM",
         "value":"#ff0000",
-        "category": "input-background-color"
+        "category": "background-color"
       },
       {
         "name":"BORDER_DEFAULT",
@@ -71,6 +71,41 @@
         "name":"WIDE_SPACING",
         "value":"16px",
         "category": "spacing"
+      },
+      {
+        "name":"DROP_SHADOW_1",
+        "value":"0 1px 3px rgba(0,0,0,.2)",
+        "category": "drop-shadow"
+      },
+      {
+        "name":"DROP_SHADOW_2",
+        "value":"0 1px 3px rgba(0,0,0,.1)",
+        "category": "misc"
+      },
+      {
+        "name":"INNER_SHADOW_1",
+        "value":"inset 0 2px 2px rgba(0,0,0,.07)",
+        "category": "inner-shadow"
+      },
+      {
+        "name":"INNER_SHADOW_2",
+        "value":"inset 0 2px 2px rgba(0,0,0,.14)",
+        "category": "inner-shadow"
+      },
+      {
+        "name":"HR_1",
+        "value":"#eceef0",
+        "category": "hr-color"
+      },
+      {
+        "name":"BORDER_RADIUS_LARGE",
+        "value":"8px",
+        "category": "radius"
+      },
+      {
+        "name":"BORDER_RADIUS_DEFAULT",
+        "value":"5px",
+        "category": "radius"
       },
       {
         "name":"STAGE_LEFT_WIDTH",

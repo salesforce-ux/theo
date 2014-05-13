@@ -185,7 +185,6 @@
             <li><a href="#text-color">Text Colors</a></li>
             <li><a href="#background-color">Background Colors</a></li>
             <li><a href="#border-color">Border Colors</a></li>
-            <li><a href="#input-background-color">Input Background Colors</a></li>
             <li><a href="#border-style">Border Styles</a></li>
             <li><a href="#font">Font</a></li>
             <li><a href="#font-size">Font Sizes</a></li>
@@ -232,19 +231,6 @@
                   <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
                   <dd>{{value}}</dd>
                   <dd style="border: 2px solid {{value}}"></dd>
-                {{/if_eq}}
-              </dl>
-            {{/each}}
-          </section>
-
-          <section>
-            <h2 id="input-background-color">Input Background Colors</h2>
-            {{#each properties}}
-              <dl>
-                {{#if_eq this.category 'input-background-color'}}
-                  <dt><code>{{#auraVar}}{{name}}{{/auraVar}}</code></dt>
-                  <dd>{{value}}</dd>
-                  <dd style="background-color: {{value}}"></dd>
                 {{/if_eq}}
               </dl>
             {{/each}}
