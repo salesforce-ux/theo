@@ -408,7 +408,7 @@
           {{#each properties}}
             {{#if_eq this.category 'misc'}}
               <tr>
-                <th><code>{{name}}</code>:</th>
+                <th><code>{{#auraVar}}{{name}}{{/auraVar}}</code>:</th>
                 <td><code>{{value}}</code></td>
                 <td class="example"></td>
                 <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -422,7 +422,7 @@
     <footer role="contentinfo" class="contentinfo">
       <div class="container">
         <p>
-          <strong>Theo</strong>
+          Build with <a href="https://github.com/salesforce-ux/theo">Theo</a>
           by Salesforce UX
         </p>
       </div>
