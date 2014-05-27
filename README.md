@@ -11,7 +11,7 @@ Theme tokenizer working with JSON input generating variables for:
 
 ## Usage
 
-    npm install theo
+    npm install -g theo
     theo Sass ./variables ./output
     theo "Sass, Stylus, Less, Aura, plist, XML" ./variables ./output
 
