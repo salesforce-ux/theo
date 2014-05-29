@@ -12,9 +12,41 @@ Theme tokenizer working with JSON input generating variables for:
 
 ## Usage
 
+You can use theo either via command line or as a node library.
+
+### Command line
+
     npm install -g theo
     theo Sass ./variables ./output
     theo "Sass, Stylus, Less, Aura, plist, XML, HTML" ./variables ./output
+
+### Library
+
+    $ npm install theo --save-dev
+
+Gruntfile.coffee example:
+
+    fs = require 'fs'
+    theo = require 'theo'
+
+    module.exports = (grunt) ->
+
+      grunt.initConfig
+        pkg: grunt.file.readJSON 'package.json'
+        clean: ["./dist"]
+
+      grunt.loadNpmTasks 'grunt-contrib-clean'
+
+      grunt.registerTask 'init', ->
+        fs.mkdir "./dist", '0777' if not fs.existsSync("./dist")
+        
+      grunt.registerTask 'generate', ->
+        theo.batch(['Aura', 'Sass', 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './variables', './dist');
+
+      grunt.registerTask 'default', ['clean', 'init', 'generate']
+
+
+### Variables
 
 The input folder `./variables` in this examples should contain at least one JSON file with the following format:
 
@@ -59,9 +91,22 @@ The generated HTML documentation supports the following categories:
 - gradient
 - misc
 
-## Test
+## Develop & Test
 
-Run tests with:
+To do test driven development you can run:
+
+    make tdd
+
+This will execute all tests whenever you change any JavaScript file.
+It doesn't watch the [handlebars](http://handlebarsjs.com/) templates. In case you work on templates you need to run theo manually like:
+
+    ./bin/theo HTML test/mock dist
+
+In case you get permission denied make sure to make it executable:
+
+    chmod a+x ./bin/theo
+
+Before creating a pull request make sure to run tests:
 
     make test
 
