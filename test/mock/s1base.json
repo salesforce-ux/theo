@@ -11,122 +11,146 @@
       {
         "name":"COLOR_LINK",
         "value":"#006eb3",
-        "category": "text-color"
+        "category": "text-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BG_1",
         "value":"#ff9900",
-        "category": "background-color"
+        "category": "background-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BORDER_1",
         "value":"#ff0000",
-        "category": "border-color"
+        "category": "border-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BORDER_2",
         "value":"#aabbcc",
-        "category": "border-color"
+        "category": "border-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"FORM",
         "value":"#ff0000",
-        "category": "background-color"
+        "category": "background-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BORDER_DEFAULT",
         "value":"1px dotted green",
-        "category": "border-style"
+        "category": "border-style",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"FONT_BOLD",
         "value":"'ProximaNovaSoft-Bold'",
-        "category": "font"
+        "category": "font",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"SMALL",
         "value":"15px",
-        "category": "font-size"
+        "category": "font-size",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"MEDIUM",
         "value":"17px",
-        "category": "font-size"
+        "category": "font-size",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"LARGE",
         "value":"20px",
-        "category": "font-size"
+        "category": "font-size",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"LINE_HEIGHT_DEFAULT",
         "value":"25px",
-        "category": "line-height"
+        "category": "line-height",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"LINE_HEIGHT_SIDEBAR",
         "value":"18px",
-        "category": "line-height"
+        "category": "line-height",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"NARROW_SPACING",
         "value":"8px",
-        "category": "spacing"
+        "category": "spacing",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"WIDE_SPACING",
         "value":"16px",
-        "category": "spacing"
+        "category": "spacing",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"DROP_SHADOW_1",
         "value":"0 1px 3px rgba(0,0,0,.2)",
-        "category": "drop-shadow"
+        "category": "drop-shadow",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"DROP_SHADOW_2",
         "value":"0 1px 3px rgba(0,0,0,.1)",
-        "category": "drop-shadow"
+        "category": "drop-shadow",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"INNER_SHADOW_1",
         "value":"inset 0 2px 2px rgba(0,0,0,.07)",
-        "category": "inner-shadow"
+        "category": "inner-shadow",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"INNER_SHADOW_2",
         "value":"inset 0 2px 2px rgba(0,0,0,.14)",
-        "category": "inner-shadow"
+        "category": "inner-shadow",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"HR_1",
         "value":"#eceef0",
-        "category": "hr-color"
+        "category": "hr-color",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BORDER_RADIUS_LARGE",
         "value":"8px",
-        "category": "radius"
+        "category": "radius",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"BORDER_RADIUS_DEFAULT",
         "value":"5px",
-        "category": "radius"
+        "category": "radius",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"GRADIENT_GLOBAL_HEADER",
         "value":"linear-gradient(#3C5069,#2F3E52)",
-        "category": "gradient"
+        "category": "gradient",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"STAGE_LEFT_WIDTH",
         "value":"88%",
-        "category": "misc"
+        "category": "misc",
+        "comment": "Lorem ipsum"
       },
       {
         "name":"FOO",
         "value":"20px",
-        "category": "misc"
+        "category": "misc",
+        "comment": "Lorem ipsum"
       }
     ]
   }

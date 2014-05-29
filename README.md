@@ -30,20 +30,10 @@ Gruntfile.coffee example:
     theo = require 'theo'
 
     module.exports = (grunt) ->
-
-      grunt.initConfig
-        pkg: grunt.file.readJSON 'package.json'
-        clean: ["./dist"]
-
-      grunt.loadNpmTasks 'grunt-contrib-clean'
-
-      grunt.registerTask 'init', ->
-        fs.mkdir "./dist", '0777' if not fs.existsSync("./dist")
         
-      grunt.registerTask 'generate', ->
-        theo.batch(['Aura', 'Sass', 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './variables', './dist');
-
-      grunt.registerTask 'default', ['clean', 'init', 'generate']
+      grunt.registerTask 'default', ->
+        fs.mkdir './dist', '0777' if not fs.existsSync('./dist')
+        theo.batch ['Aura', 'Sass', 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './variables', './dist'
 
 
 ### Variables
@@ -90,6 +80,9 @@ The generated HTML documentation supports the following categories:
 - radius
 - gradient
 - misc
+
+This is an example of how the docs look like:
+![Alt text](/assets/doc_example.png?raw=true "HTML Docs Example")
 
 ## Develop & Test
 
