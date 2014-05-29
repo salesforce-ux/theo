@@ -8,12 +8,13 @@ Theme tokenizer working with JSON input generating variables for:
 - [Aura](http://documentation.auraframework.org/auradocs)
 - [plist](http://en.wikipedia.org/wiki/Property_list)
 - [XML](http://en.wikipedia.org/wiki/XML)
+- HTML documentation
 
 ## Usage
 
-    npm install theo
+    npm install -g theo
     theo Sass ./variables ./output
-    theo "Sass, Stylus, Less, Aura, plist, XML" ./variables ./output
+    theo "Sass, Stylus, Less, Aura, plist, XML, HTML" ./variables ./output
 
 The input folder `./variables` in this examples should contain at least one JSON file with the following format:
 
@@ -23,17 +24,40 @@ The input folder `./variables` in this examples should contain at least one JSON
         "properties": [
           {
             "name":"COLOR_PRIMARY",
-            "value":"#2a94d6"
+            "value":"#2a94d6",
+            "category": "text-color",
+            "comment": "Lorem ipsum"
           },
           {
             "name":"COLOR_LINK",
-            "value":"#006eb3"
+            "value":"#006eb3",
+            "category": "text-color",
+            "comment": "Lorem ipsum"
           }
         ]
       }
     }
 
 You could also start by cloning one of the [mock files](test/mock/s1base.json).
+
+## Documentation
+
+The generated HTML documentation supports the following categories:
+
+- text-color
+- background-color
+- border-color
+- border-style
+- font
+- font-size
+- line-height
+- spacing
+- drop-shadow
+- inner-shadow
+- hr-color
+- radius
+- gradient
+- misc
 
 ## Test
 
