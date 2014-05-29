@@ -1,11 +1,11 @@
 theo
 ====
 
-Theme tokenizer working with JSON input generating variables for:
+A theme tokenizer that works with JSON input to generate variables for:
 
-- [Sass](http://sass-lang.com/)
-- [Stylus](http://learnboost.github.io/stylus/)
-- [Less](http://lesscss.org/)
+- [Sass](http://sass-lang.com)
+- [Stylus](http://learnboost.github.io/stylus)
+- [Less](http://lesscss.org)
 - [Aura](http://documentation.auraframework.org/auradocs)
 - [plist](http://en.wikipedia.org/wiki/Property_list)
 - [XML](http://en.wikipedia.org/wiki/XML)
@@ -37,7 +37,7 @@ Multiple output formats:
     theo = require 'theo'
 
     module.exports = (grunt) ->
-        
+
       grunt.registerTask 'default', ->
         fs.mkdir './dist', '0777' if not fs.existsSync('./dist')
         theo.batch ['Aura', 'Sass', 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './variables', './dist'
