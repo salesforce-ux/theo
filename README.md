@@ -2,6 +2,7 @@ theo
 ====
 
 Theme tokenizer working with JSON input generating variables for:
+
 - [Sass](http://sass-lang.com/)
 - [Stylus](http://learnboost.github.io/stylus/)
 - [Less](http://lesscss.org/)
@@ -12,19 +13,25 @@ Theme tokenizer working with JSON input generating variables for:
 
 ## Usage
 
-You can use theo either via command line or as a node library.
+You can use _theo_ either via command line or as a node library.
 
 ### Command line
 
     npm install -g theo
+
+One output format:
+
     theo Sass ./variables ./output
+
+Multiple output formats:
+
     theo "Sass, Stylus, Less, Aura, plist, XML, HTML" ./variables ./output
 
 ### Library
 
     $ npm install theo --save-dev
 
-Gruntfile.coffee example:
+`Gruntfile.coffee` example:
 
     fs = require 'fs'
     theo = require 'theo'
