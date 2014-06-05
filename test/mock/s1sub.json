@@ -2,6 +2,7 @@
   "theme": {
     "name": "S1 sub",
     "extends": "one:theme",
+    "imports": ["one:mqCommons"],
     "properties": [
       {
         "name":"COLOR_PRIMARY",

@@ -124,6 +124,12 @@ describe('theo', function(){
       result.should.containEql('<aura:theme extends="one:theme">');
     });
 
+    it('should add imports if JSON has a list of imports.', function(){
+      json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
+      var result = theo.convert('Aura', json);
+      result.should.containEql('<aura:importTheme name="one:mqCommons"/>');
+    });
+
   });
 
   describe('convert plist', function(){
