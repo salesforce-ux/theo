@@ -74,7 +74,7 @@ describe('theo', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Sass', s1Base);
       result.should.exist;
-      result.should.containEql('$color-primary: #2a94d6;');
+      result.should.containEql('$color-curious-blue: #2a94d6;');
     });
 
   });
@@ -85,7 +85,7 @@ describe('theo', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Stylus', s1Base);
       result.should.exist;
-      result.should.containEql('color-primary = #2a94d6');
+      result.should.containEql('color-curious-blue = #2a94d6');
     });
 
   });
@@ -96,7 +96,7 @@ describe('theo', function(){
       s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('Less', s1Base);
       result.should.exist;
-      result.should.containEql('@color-primary: #2a94d6;');
+      result.should.containEql('@color-curious-blue: #2a94d6;');
     });
 
   });
@@ -108,7 +108,7 @@ describe('theo', function(){
       var result = theo.convert('Aura', json);
       result.should.exist;
       result.should.containEql('<aura:theme >');
-      result.should.containEql('<aura:var name="colorPrimary" value="#2a94d6" />');
+      result.should.containEql('<aura:var name="colorCuriousBlue" value="#2a94d6" />');
     });
 
     it('should preserve single quotes.', function(){
@@ -138,7 +138,7 @@ describe('theo', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('plist', json);
       result.should.exist;
-      result.should.containEql('<key>COLOR_PRIMARY</key>');
+      result.should.containEql('<key>COLOR_CURIOUS_BLUE</key>');
       result.should.containEql('<string>rgb(42,148,214)</string>');
     });
 
@@ -150,7 +150,7 @@ describe('theo', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
       var result = theo.convert('XML', json);
       result.should.exist;
-      result.should.containEql('<variable name="COLOR_PRIMARY" value="#2a94d6" />');
+      result.should.containEql('<variable name="COLOR_CURIOUS_BLUE" value="#2a94d6" />');
     });
 
   });
