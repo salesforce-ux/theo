@@ -73,6 +73,7 @@ You could also start by cloning one of the [mock files](test/mock/s1base.json).
 
 The generated HTML documentation supports the following categories:
 
+- color
 - text-color
 - background-color
 - border-color
