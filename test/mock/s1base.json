@@ -3,154 +3,289 @@
     "name": "S1 base",
     "properties": [
       {
-        "name":"COLOR_PRIMARY",
+        "name": "STAGE_LEFT_WIDTH",
+        "value": "88%",
+        "category": "misc",
+        "comment": "NOTE: This is also in oneHelper.js for JavaScript, if you change this, change that."
+      },
+      {
+        "name":"SLIDE_DURATION",
+        "value":"0.25s",
+        "category": "misc",
+        "comment": "NOTE: This is also in oneHelper.js for JavaScript, if you change this, change that."
+      },
+      {
+        "name":"TABLET_STAGE_LEFT_WIDTH",
+        "value":"250px",
+        "category": "misc",
+        "comment": ""
+      },
+      {
+        "name":"PHONE_HEADER_HEIGHT",
+        "value":"42px",
+        "category": "misc",
+        "comment": ""
+      },
+      {
+        "name":"PHONE_FOOTER_HEIGHT",
+        "value":"44px",
+        "category": "misc",
+        "comment": ""
+      },
+      {
+        "name":"COLOR_WHITE",
+        "value":"#ffffff",
+        "category": "color",
+        "comment": "global use, card bgd, input default bgd, text-color-5, modal action header, secondary btn, bg-1 class, all lists"
+      },
+      {
+        "name":"COLOR_BLACK_ALPHA_07",
+        "value":"rgba(0,0,0,.07)",
+        "category": "color",
+        "comment": "modal action header btn's"
+      },
+      {
+        "name":"COLOR_BLACK_ALPHA_16",
+        "value":"rgba(0,0,0,.16)",
+        "category": "color",
+        "comment": "primary and secondary header btn's, object home search bgd, modal action header btn active state"
+      },
+
+      {
+        "name":"COLOR_BLACK_ALPHA_24",
+        "value":"rgba(0,0,0,.24)",
+        "category": "color",
+        "comment": "modal action header btn's"
+      },
+      {
+        "name":"COLOR_PORCELAIN",
+        "value":"#f5f6f7",
+        "category": "color",
+        "comment": "bg-3 class, border--3 class used only on white (card, lists, etc.)"
+      },
+      {
+        "name":"COLOR_PALE_ROYAL_BLUE",
+        "value":"#f0f1f2",
+        "category": "color",
+        "comment": "App bgd, bg-2 class"
+      },
+      {
+        "name":"COLOR_GEYSER",
+        "value":"#dadee2",
+        "category": "color",
+        "comment": "border--2 class used only between gray and white, disabled input bgd, anchor subtitle color, text-color-7 class, secondary btn and radio/checkbox borders"
+      },
+      {
+        "name":"COLOR_CASPER",
+        "value":"#9faab5",
+        "category": "color",
+        "comment": "text-color-3 class, inactive indicator dots bgd, all icons in inputs"
+      },
+      {
+        "name":"COLOR_REGENT_GRAY",
+        "value":"#8595a6",
+        "category": "color",
+        "comment": "Action icons"
+      },
+      {
+        "name":"COLOR_SLATE_GRAY",
+        "value":"#66788a",
+        "category": "color",
+        "comment": "Secondary header bgd (child browser, file preview, etc.), input placeholder text"
+      },
+      {
+        "name":"COLOR_BLUE_BAYOUX",
+        "value":"#485c70",
+        "category": "color",
+        "comment": "text-color-4 class, secondary btn text, input disabled text"
+      },
+      {
+        "name":"COLOR_NEVADA",
+        "value":"#686c70",
+        "category": "color",
+        "comment": "text-color-2 class, modal action title and modal action btn text color"
+      },
+      {
+        "name":"COLOR_GRAY_ROYAL_BLUE",
+        "value":"#34495e",
+        "category": "color",
+        "comment": "Anchor bgd, stage left list items, bg-4 class, border--6 class"
+      },
+      {
+        "name":"COLOR_DARK_GRAY_ROYAL_BLUE",
+        "value":"#2a4158",
+        "category": "color",
+        "comment": "Input typed text, org switcher top bgd, bg-5 class"
+      },
+      {
+        "name":"COLOR_PICKLED_BLUEWOOD",
+        "value":"#253647",
+        "category": "color",
+        "comment": "Org switcher drop arrow bgd, bg-20 class"
+      },
+      {
+        "name":"COLOR_CAPE_COD",
+        "value":"#3c3d3e",
+        "category": "color",
+        "comment": "text-color-1 class"
+      },
+      {
+        "name":"COLOR_CURIOUS_BLUE",
         "value":"#2a94d6",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
+        "category": "color",
+        "comment": "S1 primary blue, primary header, primary btn, do not use this for link text"
       },
       {
-        "name":"COLOR_LINK",
-        "value":"#006eb3",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_LOCHMARA",
+        "value":"#137cbd",
+        "category": "color",
+        "comment": "Primary btn active bgd"
       },
       {
-        "name":"BG_1",
-        "value":"#ff9900",
-        "category": "background-color",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_DEEP_CERULEAN",
+        "value":"#006EB3",
+        "category": "color",
+        "comment": "All text links (508c)"
       },
       {
-        "name":"BORDER_1",
-        "value":"#ff0000",
-        "category": "border-color",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_WARNING",
+        "value":"#e6b739",
+        "category": "color",
+        "comment": "Alert icon"
       },
       {
-        "name":"BORDER_2",
-        "value":"#aabbcc",
-        "category": "border-color",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_CUSTOMER",
+        "value":"#ff9c00",
+        "category": "color",
+        "comment": ""
       },
       {
-        "name":"FORM",
-        "value":"#ff0000",
-        "category": "background-color",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_INPUT_ERROR_BGD",
+        "value":"#f6e4e4",
+        "category": "color",
+        "comment": "input error bgd"
       },
       {
-        "name":"BORDER_DEFAULT",
-        "value":"1px dotted green",
-        "category": "border-style",
-        "comment": "Lorem ipsum"
+        "name":"COLOR_ERROR",
+        "value":"#c06057",
+        "category": "color",
+        "comment": "Notifications badge background"
+      },
+      {
+        "name":"COLOR_INPUT_ERROR",
+        "value":"#b5362d",
+        "category": "color",
+        "comment": "input placeholder error text (508c)"
+      },
+      {
+        "name":"FONT_REGULAR",
+        "value":"'ProximaNovaSoft-Regular'",
+        "category": "font"
+      },
+      {
+        "name":"FONT_MEDIUM",
+        "value":"'ProximaNovaSoft-Medium'",
+        "category": "font"
+      },
+      {
+        "name":"FONT_SEMIBOLD",
+        "value":"'ProximaNovaSoft-Semibold'",
+        "category": "font"
       },
       {
         "name":"FONT_BOLD",
         "value":"'ProximaNovaSoft-Bold'",
-        "category": "font",
-        "comment": "Lorem ipsum"
+        "category": "font"
       },
       {
-        "name":"SMALL",
-        "value":"15px",
-        "category": "font-size",
-        "comment": "Lorem ipsum"
+        "name":"TEXT_LARGEST",
+        "value":"22px",
+        "category": "font-size"
       },
       {
-        "name":"MEDIUM",
-        "value":"17px",
-        "category": "font-size",
-        "comment": "Lorem ipsum"
+        "name":"TEXT_19",
+        "value":"19px",
+        "category": "font-size"
       },
       {
-        "name":"LARGE",
-        "value":"20px",
-        "category": "font-size",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"LINE_HEIGHT_DEFAULT",
-        "value":"25px",
-        "category": "line-height",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"LINE_HEIGHT_SIDEBAR",
+        "name":"TEXT_LARGE",
         "value":"18px",
-        "category": "line-height",
-        "comment": "Lorem ipsum"
+        "category": "font-size"
       },
       {
-        "name":"NARROW_SPACING",
-        "value":"8px",
-        "category": "spacing",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"WIDE_SPACING",
+        "name":"TEXT_SEMILARGE",
         "value":"16px",
-        "category": "spacing",
-        "comment": "Lorem ipsum"
+        "category": "font-size"
       },
       {
-        "name":"DROP_SHADOW_1",
-        "value":"0 1px 3px rgba(0,0,0,.2)",
-        "category": "drop-shadow",
-        "comment": "Lorem ipsum"
+        "name":"TEXT_DEFAULT",
+        "value":"15px",
+        "category": "font-size"
       },
       {
-        "name":"DROP_SHADOW_2",
-        "value":"0 1px 3px rgba(0,0,0,.1)",
-        "category": "drop-shadow",
-        "comment": "Lorem ipsum"
+        "name":"TEXT_SMALL",
+        "value":"14px",
+        "category": "font-size"
       },
       {
-        "name":"INNER_SHADOW_1",
-        "value":"inset 0 2px 2px rgba(0,0,0,.07)",
-        "category": "inner-shadow",
-        "comment": "Lorem ipsum"
+        "name":"TEXT_SMALLEST",
+        "value":"13px",
+        "category": "font-size"
       },
       {
-        "name":"INNER_SHADOW_2",
-        "value":"inset 0 2px 2px rgba(0,0,0,.14)",
-        "category": "inner-shadow",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"HR_1",
-        "value":"#eceef0",
-        "category": "hr-color",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"BORDER_RADIUS_LARGE",
-        "value":"8px",
-        "category": "radius",
-        "comment": "Lorem ipsum"
+        "name":"BORDER_RADIUS_SMALL",
+        "value":"3px",
+        "category": "radius"
       },
       {
         "name":"BORDER_RADIUS_DEFAULT",
         "value":"5px",
-        "category": "radius",
-        "comment": "Lorem ipsum"
+        "category": "radius"
       },
       {
-        "name":"GRADIENT_GLOBAL_HEADER",
-        "value":"linear-gradient(#3C5069,#2F3E52)",
-        "category": "gradient",
-        "comment": "Lorem ipsum"
+        "name":"BORDER_RADIUS_LARGE",
+        "value":"8px",
+        "category": "radius"
       },
       {
-        "name":"STAGE_LEFT_WIDTH",
-        "value":"88%",
-        "category": "misc",
-        "comment": "Lorem ipsum"
+        "name":"SPACING_EXTRA_LARGE",
+        "value":"28px",
+        "category": "spacing"
       },
       {
-        "name":"FOO",
-        "value":"20px",
-        "category": "misc",
-        "comment": "Lorem ipsum"
+        "name":"SPACING_LARGE",
+        "value":"18px",
+        "category": "spacing"
+      },
+      {
+        "name":"SPACING_MEDIUM",
+        "value":"14px",
+        "category": "spacing"
+      },
+      {
+        "name":"SPACING_SMALL",
+        "value":"8px",
+        "category": "spacing"
+      },
+      {
+        "name":"SPACING_SMALLEST",
+        "value":"7px",
+        "category": "spacing"
+      },
+      {
+        "name":"SPACING_TINY",
+        "value":"3px",
+        "category": "spacing"
+      },
+      {
+        "name":"LINE_HEIGHT_LARGE",
+        "value":"19px",
+        "category": "line-height"
+      },
+      {
+        "name":"LINE_HEIGHT_MEDIUM",
+        "value":"17px",
+        "category": "line-height"
       }
     ]
   }
