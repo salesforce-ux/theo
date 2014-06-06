@@ -50,7 +50,6 @@
         "category": "color",
         "comment": "primary and secondary header btn's, object home search bgd, modal action header btn active state"
       },
-
       {
         "name":"COLOR_BLACK_ALPHA_24",
         "value":"rgba(0,0,0,.24)",
@@ -94,16 +93,16 @@
         "comment": "Secondary header bgd (child browser, file preview, etc.), input placeholder text"
       },
       {
-        "name":"COLOR_BLUE_BAYOUX",
-        "value":"#485c70",
-        "category": "color",
-        "comment": "text-color-4 class, secondary btn text, input disabled text"
-      },
-      {
         "name":"COLOR_NEVADA",
         "value":"#686c70",
         "category": "color",
         "comment": "text-color-2 class, modal action title and modal action btn text color"
+      },
+      {
+        "name":"COLOR_BLUE_BAYOUX",
+        "value":"#485c70",
+        "category": "color",
+        "comment": "text-color-4 class, secondary btn text, input disabled text"
       },
       {
         "name":"COLOR_GRAY_ROYAL_BLUE",
@@ -128,6 +127,12 @@
         "value":"#3c3d3e",
         "category": "color",
         "comment": "text-color-1 class"
+      },
+      {
+        "name":"COLOR_FOAM",
+        "value":"#f0f8fc",
+        "category": "color",
+        "comment": "New notification background"
       },
       {
         "name":"COLOR_CURIOUS_BLUE",
