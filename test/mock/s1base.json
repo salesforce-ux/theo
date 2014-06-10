@@ -1,6 +1,12 @@
 {
   "theme": {
     "name": "S1 base",
+    "aliases": [
+      {
+        "name": "white",
+        "value": "#ffffff"
+      }
+    ],
     "properties": [
       {
         "name": "STAGE_LEFT_WIDTH",
@@ -34,7 +40,7 @@
       },
       {
         "name":"COLOR_WHITE",
-        "value":"#ffffff",
+        "value":"{!white}",
         "category": "color",
         "comment": "global use, card bgd, input default bgd, text-color-5, modal action header, secondary btn, bg-1 class, all lists"
       },

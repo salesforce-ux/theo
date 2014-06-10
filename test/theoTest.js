@@ -130,6 +130,12 @@ describe('theo', function(){
       result.should.containEql('<aura:importTheme name="one:mqCommons"/>');
     });
 
+    it('should resolve aliases.', function(){
+      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var result = theo.convert('Aura', json);
+      result.should.containEql('<aura:var name="colorWhite" value="#ffffff" />');
+    });
+
   });
 
   describe('convert plist', function(){

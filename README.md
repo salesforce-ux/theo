@@ -67,6 +67,28 @@ The input folder `./variables` in this examples should contain at least one JSON
       }
     }
 
+Optionally _theo_ also supports aliases:
+
+    {
+      "theme": {
+        "name": "Name of the theme",
+        "aliases": [
+          {
+            "name": "blue",
+            "value": "#2a94d6"
+          }
+        ],
+        "properties": [
+          {
+            "name":"COLOR_PRIMARY",
+            "value":"{!blue}",
+            "category": "text-color",
+            "comment": "Lorem ipsum"
+          }
+        ]
+      }
+    }
+
 You could also start by cloning one of the [mock files](test/mock/s1base.json).
 
 ## Documentation
