@@ -118,20 +118,13 @@ This is an example of how the docs look like:
 
 To do test driven development you can run:
 
-    make tdd
+    gulp tdd
 
-This will execute all tests whenever you change any JavaScript file.
-It doesn't watch the [handlebars](http://handlebarsjs.com/) templates. In case you work on templates you need to run theo manually like:
+This will execute all tests whenever you change any JavaScript file or template.
 
-    ./bin/theo HTML test/mock dist
+Before creating a pull request make sure to run the tests:
 
-In case you get permission denied make sure to make it executable:
-
-    chmod a+x ./bin/theo
-
-Before creating a pull request make sure to run tests:
-
-    make test
+    gulp
 
 ## License
 
