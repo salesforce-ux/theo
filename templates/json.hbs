@@ -1,0 +1,9 @@
+{
+  "variables": [
+  {{#each properties}}
+    {
+      "name": "{{#camelCase}}{{name}}{{/camelCase}}",
+      "value": "{{#iOSValue}}{{value}}{{/iOSValue}}"
+    }{{#unless @last}},{{/unless}}{{/each}}
+  ]
+}

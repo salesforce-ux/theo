@@ -5,5 +5,5 @@
   <aura:importTheme name="{{this}}"/>{{/each}}
   {{#each properties}}
   {{#if comment}}<!-- {{comment}} -->{{/if}}
-  <aura:var name="{{#auraVar}}{{name}}{{/auraVar}}" value="{{value}}" />{{/each}}
+  <aura:var name="{{#camelCase}}{{name}}{{/camelCase}}" value="{{value}}" />{{/each}}
 </aura:theme>

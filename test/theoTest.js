@@ -32,7 +32,7 @@ describe('theo', function(){
   });
 
   after(function(){
-    theo.batch(['Aura', 'Sass' , 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './test/mock', 'dist');
+    theo.batch(['Aura', 'Sass' , 'Stylus', 'Less', 'JSON', 'XML', 'HTML'], './test/mock', 'dist');
 
     assert(fs.existsSync('./dist/s1base.theme'), 'one.theme was not created.');
     assert(fs.existsSync('./dist/s1sub.theme'), 's1sub.theme was not created.');
@@ -42,7 +42,7 @@ describe('theo', function(){
     assert(fs.existsSync('./dist/s1sub.styl'), 's1sub.scss was not created.');
     assert(fs.existsSync('./dist/s1base.less'), 's1base.less was not created.');
     assert(fs.existsSync('./dist/s1sub.less'), 's1sub.less was not created.');
-    assert(fs.existsSync('./dist/s1base.plist'), 's1base.plist was not created.');
+    assert(fs.existsSync('./dist/s1base.json'), 's1base.json was not created.');
     assert(fs.existsSync('./dist/s1base.xml'), 's1base.xml was not created.');
   });
 
@@ -52,7 +52,7 @@ describe('theo', function(){
       theo.batch('Sass', './test/mock', 'dist');
       theo.batch('Stylus', './test/mock', 'dist');
       theo.batch('Less', './test/mock', 'dist');
-      theo.batch('plist', './test/mock', 'dist');
+      theo.batch('JSON', './test/mock', 'dist');
       theo.batch('XML', './test/mock', 'dist');
 
       assert(fs.existsSync('./dist/s1base.theme'), 'one.theme was not created.');
@@ -63,7 +63,7 @@ describe('theo', function(){
       assert(fs.existsSync('./dist/s1sub.styl'), 's1sub.styl was not created.');
       assert(fs.existsSync('./dist/s1base.less'), 's1base.less was not created.');
       assert(fs.existsSync('./dist/s1sub.less'), 's1sub.less was not created.');
-      assert(fs.existsSync('./dist/s1base.plist'), 's1base.plist was not created.');
+      assert(fs.existsSync('./dist/s1base.json'), 's1base.json was not created.');
       assert(fs.existsSync('./dist/s1base.xml'), 's1base.xml was not created.');
     });
   });
@@ -138,14 +138,17 @@ describe('theo', function(){
 
   });
 
-  describe('convert plist', function(){
+  describe('convert JSON', function(){
     
-    it('should convert a variables object to a plist.', function(){
+    it('should convert a variables object to JSON.', function(){
       json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('plist', json);
+      var result = theo.convert('JSON', json);
       result.should.exist;
-      result.should.containEql('<key>COLOR_CURIOUS_BLUE</key>');
-      result.should.containEql('<string>rgb(42,148,214)</string>');
+      result.should.containEql('colorWhite');
+
+      var json = JSON.parse(result);
+      json.variables.should.be.instanceof(Array);
+      json.variables.length.should.be.greaterThan(1);
     });
 
   });

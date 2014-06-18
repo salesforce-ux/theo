@@ -194,7 +194,7 @@
           {{#each properties}}
           {{#if_eq this.category 'color'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-color: {{value}}; border: 1px solid #f2f2f2;"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -211,7 +211,7 @@
           {{#each properties}}
           {{#if_eq this.category 'text-color'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="color: {{value}};">The quick brown fox jumps over the lazy dog.</td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -228,7 +228,7 @@
           {{#each properties}}
           {{#if_eq this.category 'background-color'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-color: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -245,7 +245,7 @@
           {{#each properties}}
           {{#if_eq this.category 'gradient'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-image: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -262,7 +262,7 @@
           {{#each properties}}
           {{#if_eq this.category 'border-color'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="border: 2px solid {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -279,7 +279,7 @@
           {{#each properties}}
           {{#if_eq this.category 'border-style'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="border: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -296,7 +296,7 @@
           {{#each properties}}
           {{#if_eq this.category 'hr-color'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <hr style="border-top-color: {{value}};">
@@ -315,7 +315,7 @@
           {{#each properties}}
           {{#if_eq this.category 'drop-shadow'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="box-shadow: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -332,7 +332,7 @@
           {{#each properties}}
           {{#if_eq this.category 'inner-shadow'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="box-shadow: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
@@ -349,7 +349,7 @@
           {{#each properties}}
           {{#if_eq this.category 'font'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <div style="font-family: {{value}};">Aa</div>
@@ -368,7 +368,7 @@
           {{#each properties}}
           {{#if_eq this.category 'font-size'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <div style="font-size: {{value}};">The quick brown fox jumps over the lazy dog.</div>
@@ -387,7 +387,7 @@
           {{#each properties}}
           {{#if_eq this.category 'line-height'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <div class="line-height-example" style="line-height: {{value}}; background-size: 100% {{value}}">
@@ -408,7 +408,7 @@
           {{#each properties}}
           {{#if_eq this.category 'spacing'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <div class="metric-box" style="width: {{value}}; height: {{value}};"></div>
@@ -427,7 +427,7 @@
           {{#each properties}}
           {{#if_eq this.category 'radius'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example">
               <div class="radius-box" style="border-radius: {{value}};"></div>
@@ -446,7 +446,7 @@
           {{#each properties}}
           {{#if_eq this.category 'misc'}}
           <tr>
-            <td><code>{{#auraVar}}{{name}}{{/auraVar}}</code></td>
+            <td><code>{{#camelCase}}{{name}}{{/camelCase}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>

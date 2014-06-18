@@ -7,8 +7,8 @@ A theme tokenizer that works with JSON input to generate variables for:
 - [Stylus](http://learnboost.github.io/stylus)
 - [Less](http://lesscss.org)
 - [Aura](http://documentation.auraframework.org/auradocs)
-- [plist](http://en.wikipedia.org/wiki/Property_list)
-- [XML](http://en.wikipedia.org/wiki/XML)
+- [JSON](http://json.org/) targeting iOS
+- [XML](http://en.wikipedia.org/wiki/XML) targeting Android
 - HTML documentation
 
 ## Usage
@@ -25,7 +25,7 @@ One output format:
 
 Multiple output formats:
 
-    theo "Sass, Stylus, Less, Aura, plist, XML, HTML" ./variables ./output
+    theo "Sass, Stylus, Less, Aura, JSON, XML, HTML" ./variables ./output
 
 ### Library
 
@@ -40,7 +40,7 @@ Multiple output formats:
 
       grunt.registerTask 'default', ->
         fs.mkdir './dist', '0777' if not fs.existsSync('./dist')
-        theo.batch ['Aura', 'Sass', 'Stylus', 'Less', 'plist', 'XML', 'HTML'], './variables', './dist'
+        theo.batch ['Aura', 'Sass', 'Stylus', 'Less', 'JSON', 'XML', 'HTML'], './variables', './dist'
 
 
 ### Variables
