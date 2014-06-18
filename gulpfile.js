@@ -14,10 +14,7 @@ gulp.task('tdd', function() {
   
   gulp.watch(['lib/**', 'templates/**', 'test/**'])
     .on('change', function(file){
-      gulp.src(['test/*.js'], { read: false })
-        .pipe(mocha({reporter: 'spec'}))
-        .on('error', gutil.log);
-
+      gulp.start('mocha');
     });
 
 });
