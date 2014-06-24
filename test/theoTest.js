@@ -71,8 +71,9 @@ describe('theo', function(){
   describe('convert Sass', function(){
 
     it('should convert a variables object to Sass.', function(){
-      s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Sass', s1Base);
+      var s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Sass', s1Base, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('$color-curious-blue: #2a94d6;');
     });
@@ -82,8 +83,9 @@ describe('theo', function(){
   describe('convert Stylus', function(){
 
     it('should convert a variables object to Stylus.', function(){
-      s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Stylus', s1Base);
+      var s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Stylus', s1Base, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('color-curious-blue = #2a94d6');
     });
@@ -93,8 +95,9 @@ describe('theo', function(){
   describe('convert Less', function(){
 
     it('should convert a variables object to Less.', function(){
-      s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Less', s1Base);
+      var s1Base = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Less', s1Base, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('@color-curious-blue: #2a94d6;');
     });
@@ -104,35 +107,40 @@ describe('theo', function(){
   describe('convert Aura', function(){
     
     it('should convert a variables object to a theme token.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Aura', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Aura', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('<aura:theme >');
       result.should.containEql('<aura:var name="colorCuriousBlue" value="#2a94d6" />');
     });
 
     it('should preserve single quotes.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Aura', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Aura', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('<aura:var name="fontBold" value="\'ProximaNovaSoft-Bold\'" />');
     });
 
     it('should add extends if JSON is extending a base.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
-      var result = theo.convert('Aura', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Aura', json, aliasesJSON.aliases);
       result.should.containEql('<aura:theme extends="one:theme">');
     });
 
     it('should add imports if JSON has a list of imports.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
-      var result = theo.convert('Aura', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1sub.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Aura', json, aliasesJSON.aliases);
       result.should.containEql('<aura:importTheme name="one:mqCommons"/>');
     });
 
     it('should resolve aliases.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('Aura', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('Aura', json, aliasesJSON.aliases);
       result.should.containEql('<aura:var name="colorWhite" value="#ffffff" />');
     });
 
@@ -141,8 +149,9 @@ describe('theo', function(){
   describe('convert JSON', function(){
     
     it('should convert a variables object to JSON.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('JSON', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('JSON', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('colorWhite');
 
@@ -156,8 +165,9 @@ describe('theo', function(){
   describe('convert XML', function(){
     
     it('should convert a variables object to XML.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('XML', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('XML', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('<variable name="COLOR_CURIOUS_BLUE" value="#2a94d6" />');
     });
@@ -167,8 +177,9 @@ describe('theo', function(){
   describe('create docs', function(){
     
     it('should convert a variables object to a HTML documentation.', function(){
-      json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
-      var result = theo.convert('HTML', json);
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('HTML', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('<html>');
     });

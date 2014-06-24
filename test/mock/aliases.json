@@ -1,0 +1,12 @@
+{
+  "aliases": [
+    {
+      "name": "white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    }
+  ]
+}

@@ -1,12 +1,7 @@
 {
   "theme": {
     "name": "S1 base",
-    "aliases": [
-      {
-        "name": "white",
-        "value": "#ffffff"
-      }
-    ],
+    "aliases": "aliases.json",
     "properties": [
       {
         "name": "STAGE_LEFT_WIDTH",
