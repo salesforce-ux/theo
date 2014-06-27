@@ -7,6 +7,10 @@
     {
       "name": "black",
       "value": "#000000"
+    },
+    {
+      "name": "black20",
+      "value": "rgba(0,0,0,.2)"
     }
   ]
 }

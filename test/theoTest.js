@@ -160,6 +160,14 @@ describe('theo', function(){
       json.variables.length.should.be.greaterThan(1);
     });
 
+    it('should resolve aliases inside a value', function(){
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('JSON', json, aliasesJSON.aliases);
+      result.should.exist;
+      result.should.containEql('0 1px 3px rgba(0,0,0,.2)');
+    });
+
   });
 
   describe('convert XML', function(){

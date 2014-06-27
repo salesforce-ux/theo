@@ -292,6 +292,11 @@
         "name":"LINE_HEIGHT_MEDIUM",
         "value":"17px",
         "category": "line-height"
+      },
+      {
+        "name":"SHADOW_STRONG",
+        "value":"0 1px 3px {!black20}",
+        "category": "drop-shadow"
       }
     ]
   }
