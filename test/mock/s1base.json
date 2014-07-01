@@ -285,12 +285,12 @@
       },
       {
         "name":"LINE_HEIGHT_LARGE",
-        "value":"19px",
+        "value":"1.5",
         "category": "line-height"
       },
       {
         "name":"LINE_HEIGHT_MEDIUM",
-        "value":"17px",
+        "value":"1.25",
         "category": "line-height"
       },
       {

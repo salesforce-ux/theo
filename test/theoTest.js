@@ -190,6 +190,14 @@ describe('theo', function(){
       var result = theo.convert('HTML', json, aliasesJSON.aliases);
       result.should.exist;
       result.should.containEql('<html>');
+      result.should.containEql('line-height: 1.5');
+    });
+
+    it('should add line-height units to HTML documentation if not present.', function(){
+      var json = JSON.parse(fs.readFileSync('./test/mock/s1base.json').toString());
+      var aliasesJSON = JSON.parse(fs.readFileSync('./test/mock/aliases.json').toString());
+      var result = theo.convert('HTML', json, aliasesJSON.aliases);
+      result.should.containEql('background-size: 100% 1.5em');
     });
 
 
