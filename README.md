@@ -27,6 +27,18 @@ Multiple output formats:
 
     theo "Sass, Stylus, Less, Aura, JSON, XML, HTML" ./variables ./output
 
+Using theo to view alias usage:
+    
+    theo alias-usage ./variables
+    ------------ Sample Output -------------
+      Alias list pulled from the following files: aliases.json 
+
+      Aliases found in the following files: s1base.json s1sub.json 
+
+      white:..............................1
+      black20:............................1
+      black:..............................0
+    ----------------------------------------
 ### Library
 
     $ npm install theo --save-dev
