@@ -69,7 +69,7 @@ if(process.argv.length !== 5 && process.argv[2] !== 'alias-usage'){
   }
   if (type === 'alias-usage') {
     var source = process.argv[3];
-    lib.alias_usage(source);
+    lib.aliasUsage(source);
     return;
   }
 
