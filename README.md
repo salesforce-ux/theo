@@ -103,6 +103,27 @@ Optionally _theo_ also supports aliases:
 
 You could also start by cloning one of the [mock files](test/mock/s1base.json).
 
+### Spacing and Margins
+
+  Generate CSS single-purpose-classes:
+
+    theo spacings-spc input_json_file output_directory
+
+    input_json_file must be in the following format:
+
+    {
+      "theme" : {
+        "properties" : [
+          {
+            "name" : "SPACING_X_LARGE",
+            "value" : "10px",
+            "category" : "spacing",
+            "comment" : "some comment"
+          }
+        ]
+      }
+    }
+
 ## Documentation
 
 The generated HTML documentation supports the following categories:
