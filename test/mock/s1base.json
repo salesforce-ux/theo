@@ -254,7 +254,7 @@
         "category": "radius"
       },
       {
-        "name":"SPACING_EXTRA_LARGE",
+        "name":"SPACING_X_LARGE",
         "value":"28px",
         "category": "spacing"
       },
@@ -274,12 +274,12 @@
         "category": "spacing"
       },
       {
-        "name":"SPACING_SMALLEST",
+        "name":"SPACING_X_SMALL",
         "value":"7px",
         "category": "spacing"
       },
       {
-        "name":"SPACING_TINY",
+        "name":"SPACING_XX_SMALL",
         "value":"3px",
         "category": "spacing"
       },
