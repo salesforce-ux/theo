@@ -203,5 +203,19 @@ describe('theo', function(){
 
   });
 
+  describe('generate spacings', function(){
+    
+    it('should create a css file with the proper spacings.', function(){
+
+      theo.generateSpacings('./test/mock/s1base.json', './generated/spacings.css');
+      var result = fs.readFileSync('./generated/spacings.css').toString();
+      result.should.exist;
+      result.should.containEql('.pal { padding: 28px;  }');
+      result.should.containEql('.pvl { padding-top: 18px;  padding-bottom: 18px; }');
+      result.should.containEql('.mhn { margin-left: 0px;  margin-right: 0px; }');
+    });
+
+  });
+
 
 });
