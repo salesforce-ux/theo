@@ -19,11 +19,11 @@ var lib = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 
 var lib = require(lib + '/theo.js');
 
-if(process.argv.length !== 5 && process.argv[2] !== 'alias-usage'){
+if(process.argv.length !== 5 && (process.argv[2] !== 'alias-usage' && process.argv[2] !== 'spacings-spc')){
   console.error('theo needs 3 parameters: type, srcDir, destDir');
 }else{
   var type = process.argv[2];
-  if (type !== 'alias-usage') {
+  if (type !== 'alias-usage' && type !== 'spacings-spc') {
     type = type.replace(/\s/g, '');
     if(type.split(',').length > 1){
       type = type.split(',');
@@ -48,7 +48,7 @@ if(process.argv.length !== 5 && process.argv[2] !== 'alias-usage'){
   if(!fs.existsSync(srcDir)){
     console.error('srcDir "' + srcDir+ '" not found.');
     process.exit(1);
-  } else {
+  } else if (type === 'alias-usage') {
     var foundJson = false;
     fs.readdirSync(srcDir).forEach(function(fileName) {
       if(path.extname(fileName) == '.json'){
@@ -66,10 +66,14 @@ if(process.argv.length !== 5 && process.argv[2] !== 'alias-usage'){
       console.error('srcDir "' + srcDir + '" does not contain any JSON files.');
       process.exit(1);
     }
-  }
-  if (type === 'alias-usage') {
+
     var source = process.argv[3];
     lib.aliasUsage(source);
+    return;
+  } else if (type === 'spacings-spc') {
+    var source = process.argv[3];
+    var dest = process.argv[4];
+    lib.generateSpacings(source, dest);
     return;
   }
 
