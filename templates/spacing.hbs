@@ -1,3 +1,34 @@
+/* ==========================================================================
+   Spacing-specific single purpose classes
+   ========================================================================== */
+
+/**
+ * Used to adjust the default spacing between components.
+ *
+ * <type><direction><size>
+ * 
+ * type:
+ * p = padding
+ * m = margin
+ *
+ * direction:
+ * a = all
+ * t = top
+ * r = right
+ * b = bottom
+ * l = left
+ * h = horizontal
+ * v = vertical
+ *
+ * size:
+ * n = none
+ * xs = extra small
+ * s = small
+ * m = medium
+ * l = large
+ * x = extra large
+ * xx = extra extra large
+ */
 {{#spacing}}
 .p{{formatLabel}}{{spacingSizeLabel name}} { padding{{spacingFormatLabel formatLabel}}: {{value}}; {{#if label2}} padding{{label2}}: {{value}};{{/if}} }
 .m{{formatLabel}}{{spacingSizeLabel name}} { margin{{spacingFormatLabel formatLabel}}: {{value}}; {{#if label2}} margin{{label2}}: {{value}};{{/if}} }{{/spacing}}

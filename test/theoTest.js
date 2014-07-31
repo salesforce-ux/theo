@@ -207,8 +207,8 @@ describe('theo', function(){
     
     it('should create a css file with the proper spacings.', function(){
 
-      theo.generateSpacings('./test/mock/s1base.json', './generated/spacings.css');
-      var result = fs.readFileSync('./generated/spacings.css').toString();
+      theo.generateSpacings('./test/mock/s1base.json', './dist/spacings.css');
+      var result = fs.readFileSync('./dist/spacings.css').toString();
       result.should.exist;
       result.should.containEql('.paxl { padding: 28px;  }');
       result.should.containEql('.pvl { padding-top: 18px;  padding-bottom: 18px; }')
