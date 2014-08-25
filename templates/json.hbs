@@ -2,8 +2,8 @@
   "variables": [
   {{#each properties}}
     {
-      "name": "{{#camelCase}}{{name}}{{/camelCase}}",
-      "value": "{{#iOSValue}}{{value}}{{/iOSValue}}"
+      "name": "{{camelCase name}}",
+      "value": "{{hex2rgba value}}"
     }{{#unless @last}},{{/unless}}{{/each}}
   ]
 }
