@@ -29,6 +29,6 @@
  * x = extra large
  * xx = extra extra large
  */
-{{#spacing}}
-.p{{formatLabel}}{{spacingSizeLabel name}} { padding{{spacingFormatLabel formatLabel}}: {{value}}; {{#if label2}} padding{{label2}}: {{value}};{{/if}} }
-.m{{formatLabel}}{{spacingSizeLabel name}} { margin{{spacingFormatLabel formatLabel}}: {{value}}; {{#if label2}} margin{{label2}}: {{value}};{{/if}} }{{/spacing}}
+{{#each selectors}}
+.{{selector}} { {{declaration}} }
+{{/each}}
