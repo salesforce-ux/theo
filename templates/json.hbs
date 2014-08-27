@@ -3,7 +3,8 @@
   {{#each properties}}
     {
       "name": "{{camelCase name}}",
-      "value": "{{hex2rgba value}}"
-    }{{#unless @last}},{{/unless}}{{/each}}
+      "value": "{{iosValue this ../this}}"
+    }{{#unless @last}},{{/unless}}
+  {{/each}}
   ]
 }
