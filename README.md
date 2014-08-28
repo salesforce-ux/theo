@@ -1,7 +1,6 @@
-theo
-====
+<img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="100" />
 
-A theme tokenizer that works with JSON input to generate variables for:
+Theo is theme tokenizer that works with JSON input to generate variables for:
 
 - [Sass](http://sass-lang.com)
 - [Stylus](http://learnboost.github.io/stylus)
