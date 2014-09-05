@@ -2,8 +2,6 @@
   "theme": {
     "name": "S1 base",
     "aliases": "aliases.json",
-    "baseFontPercentage": 0.625,
-    "baseFontPixel": 16,
     "properties": [
       {
         "name": "STAGE_LEFT_WIDTH",
