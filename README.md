@@ -10,118 +10,229 @@ Theo is theme tokenizer that works with JSON input to generate variables for:
 - [XML](http://en.wikipedia.org/wiki/XML) targeting Android
 - HTML documentation
 
-## Usage
+## API
 
-You can use _theo_ either via command line or as a node library.
+```javascript
+var theo = require('theo');
 
-### Command line
+theo.convert('./variables/*.json', './dist');
+```
 
-    npm install -g theo
+## theo.convert(src, dest, [options])
 
-One output format:
+### src  
 
-    theo Sass ./variables ./output
+Type: `string`
 
-Multiple output formats:
+A [glob](https://github.com/isaacs/node-glob) pattern that matches at least on `json` theme file
 
-    theo "Sass, Stylus, Less, Aura, JSON, XML, HTML" ./variables ./output
+### dest  
 
-Using theo to view alias usage:
-    
-    theo alias-usage ./variables
-    ------------ Sample Output -------------
-      Alias list pulled from the following files: aliases.json 
+Type: `string`
 
-      Aliases found in the following files: s1base.json s1sub.json 
+A directory where all converted files will be output
 
-      white:..............................1
-      black20:............................1
-      black:..............................0
-    ----------------------------------------
-### Library
+### options
 
-    $ npm install theo --save-dev
+Type: `object`
 
-`Gruntfile.coffee` example:
+Additional options for the conversion
 
-    fs = require 'fs'
-    theo = require 'theo'
+### options.suffix
 
-    module.exports = (grunt) ->
+Type: `string`
 
-      grunt.registerTask 'default', ->
-        fs.mkdir './dist', '0777' if not fs.existsSync('./dist')
-        theo.batch ['Aura', 'Sass', 'Stylus', 'Less', 'JSON', 'XML', 'HTML'], './variables', './dist'
+A suffix to be appended to the file name
 
+### options.templates
 
-### Variables
+Type: `array`
 
-The input folder `./variables` in this examples should contain at least one JSON file with the following format:
+Default: `['scss', 'less', 'styl', 'theme', 'xml', 'android.xml', 'json', 'ios.json', 'html']`
 
-    {
-      "theme": {
-        "name": "Name of the theme",
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"#2a94d6",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          },
-          {
-            "name":"COLOR_LINK",
-            "value":"#006eb3",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          }
-        ]
+By default, all the default in templates will be used in the conversion.
+Use this property to dictate what templates get rendered.
+
+```javascript
+theo.convert('./src', './dest', {
+  templates: ['scss', 'less'] // Only output a .scss and .less file
+});
+```
+
+### options.templatesDirectory
+
+Type: `string`
+
+An additional search path that will be used before the default
+templates directory
+
+```javascript
+// search "./my/templates" for "custom.hbs"
+theo.convert('./src/*.json', './dest', {
+  templatesDirectory: './my/templates'
+  templates: ['custom']
+});
+
+// "./my/templates/scss.hbs" will be used instead of
+// the provided "scss.hbs"
+theo.convert('./src/*.json', './dest', {
+  templatesDirectory: './my/templates'
+  templates: ['scss']
+});
+```
+
+### options.extras
+
+Type: `object`
+
+This object will be globally available in each template.
+
+```javascript
+theo.convert('./src/*.json', './dest', {
+  extras: {
+    foo: 'bar'
+  }
+});
+```
+```
+<span>
+  {{extras.foo}}
+</span>
+```
+
+### options.beforeTemplate(property)
+
+Type: `function`
+
+A function that will be called for each property in the theme.
+This an opportunity to modify / append new values to the property
+before rendering the template.
+
+```javascript
+theo.convert('./src/*.json', './dest', {
+  beforeTempate: function(property) {
+    // property.name
+    // property.value
+    // property.category
+    // Add another key/value
+    property.custom = 'My custom value'
+  }
+});
+```
+```html
+{{#each properties}}
+  {{name}} - {{value}} - {{custom}}
+{{/each}}
+```
+
+## Variables
+
+The input glob `./variables/*.json` in this examples should match at least one JSON file with the following format:
+
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"#2a94d6",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      },
+      {
+        "name":"COLOR_LINK",
+        "value":"#006eb3",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
       }
-    }
+    ]
+  }
+}
+```
+### Aliases
 
 Optionally _theo_ also supports aliases:
-
-    {
-      "theme": {
-        "name": "Name of the theme",
-        "aliases": [
-          {
-            "name": "blue",
-            "value": "#2a94d6"
-          }
-        ],
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"{!blue}",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          }
-        ]
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "aliases": [
+      {
+        "name": "blue",
+        "value": "#2a94d6"
       }
+    ],
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"{!blue}",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      }
+    ]
+  }
+}
+```
+
+Aliases can also be specified in a separate file:
+
+`theme.json`
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "aliases": "./aliases.json",
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"{!blue}",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      }
+    ]
+  }
+}
+```
+
+`aliases.json`
+```json
+{
+  "aliases": [
+    {
+      "name": "blue",
+      "value": "#2a94d6"
     }
+  ]
+}
+```
 
 You could also start by cloning one of the [mock files](test/mock/s1base.json).
 
-### Spacing and Margins
+## Example Usage
+```javascript
+$ npm install theo --save-dev
+```
 
-  Generate CSS single-purpose-classes:
+`Gruntfile.coffee` example:
+```coffeescript
+theo = require 'theo'
 
-    theo spacings-spc input_json_file output_directory
+module.exports = (grunt) ->
+  grunt.registerTask 'default', ->
+    theo.convert './variables/*.json', './dist'
+```
 
-    input_json_file must be in the following format:
+`gulpfile.coffee` example:
+```coffeescript
+gulp = require 'gulp'
+theo = require 'theo'
 
-    {
-      "theme" : {
-        "properties" : [
-          {
-            "name" : "SPACING_X_LARGE",
-            "value" : "10px",
-            "category" : "spacing",
-            "comment" : "some comment"
-          }
-        ]
-      }
-    }
+gulp.task 'default', (done) ->
+  theo.convert './variables/*.json', './dist'
+  done()
+```
+
 
 ## Documentation
 

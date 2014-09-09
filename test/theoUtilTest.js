@@ -12,35 +12,21 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 var should = require('should');
 var assert = require('assert');
-var theoUtil = require('./../lib/theoUtil');
+var theoUtil = require('./../lib/util');
 
 describe('theoUtil', function(){
 
-  describe('camelCase', function(){
-    it('should convert camelCase a given string.', function(){
+  describe('#camelCase()', function(){
+    it('should convert camelCase a given string.', function() {
       theoUtil.camelCase('FOO_BAR').should.equal('fooBar');
       theoUtil.camelCase('FOO-BAR').should.equal('fooBar');
     });
   });
 
-  describe('dasherize', function(){
-    it('should added dashes to given string.', function(){
+  describe('#dasherize()', function(){
+    it('should added dashes to given string.', function() {
       theoUtil.dasherize('FOO_BAR').should.equal('foo-bar');
       theoUtil.dasherize('FOO-BAR').should.equal('foo-bar');
-    });
-  });
-
-  describe('hex2rgba', function(){
-    it('should convert a hex value without prefix to rgba.', function(){
-      theoUtil.hex2rgba('ffffff').should.equal('rgba(255,255,255,1)');
-    });
-
-    xit('should convert a hex value to rgba.', function(){
-      theoUtil.hex2rgba('#ffffff').should.equal('rgba(255,255,255,1)');
-    });
-
-    xit('should convert a hex value with alpha info to rgba.', function(){
-      theoUtil.hex2rgba('#ffffff80').should.equal('rgba(255,255,255,.5)');
     });
   });
 

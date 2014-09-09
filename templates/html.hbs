@@ -192,14 +192,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'color'}}
+          {{#equal this.category 'color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-color: {{value}}; border: 1px solid #f2f2f2;"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -211,14 +211,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'text-color'}}
+          {{#equal this.category 'text-color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="color: {{value}};">The quick brown fox jumps over the lazy dog.</td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -230,14 +230,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'background-color'}}
+          {{#equal this.category 'background-color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-color: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -249,14 +249,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'gradient'}}
+          {{#equal this.category 'gradient'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="background-image: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -268,14 +268,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'border-color'}}
+          {{#equal this.category 'border-color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="border: 2px solid {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -287,14 +287,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'border-style'}}
+          {{#equal this.category 'border-style'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="border: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -306,7 +306,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'hr-color'}}
+          {{#equal this.category 'hr-color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -315,7 +315,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -327,14 +327,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'drop-shadow'}}
+          {{#equal this.category 'drop-shadow'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="box-shadow: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -346,14 +346,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'inner-shadow'}}
+          {{#equal this.category 'inner-shadow'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example" style="box-shadow: {{value}};"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -365,7 +365,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'font'}}
+          {{#equal this.category 'font'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -374,7 +374,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -386,7 +386,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'font-size'}}
+          {{#equal this.category 'font-size'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -395,7 +395,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -407,7 +407,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'line-height'}}
+          {{#equal this.category 'line-height'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -418,7 +418,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -430,7 +430,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'spacing'}}
+          {{#equal this.category 'spacing'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -439,7 +439,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -451,7 +451,7 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'radius'}}
+          {{#equal this.category 'radius'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
@@ -460,7 +460,7 @@
             </td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
 
@@ -472,14 +472,14 @@
             <th>Usage</th>
           </tr>
           {{#each properties}}
-          {{#if_eq this.category 'misc'}}
+          {{#equal this.category 'misc'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
             <td><code>{{value}}</code></td>
             <td class="example"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
-          {{/if_eq}}
+          {{/equal}}
           {{/each}}
           {{/if}}
         </table>
