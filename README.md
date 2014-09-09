@@ -12,11 +12,10 @@ A theme tokenizer that works with JSON input to generate variables for:
 
 ## API
 
-```
+```javascript
 var theo = require('theo');
 
 theo.convert('./variables/*.json', './dist');
-
 ```
 
 ## theo.convert(src, dest, [options])
@@ -49,12 +48,12 @@ A suffix to be appended to the file name
 
 Type: `array`
 
-Default: `['scss', 'less', 'styl', 'theme', 'xml', 'android.xml', 'json', 'ios.json', '.html']`
+Default: `['scss', 'less', 'styl', 'theme', 'xml', 'android.xml', 'json', 'ios.json', 'html']`
 
 By default, all the default in templates will be used in the conversion.
 Use this property to dictate what templates get rendered.
 
-```
+```javascript
 theo.convert('./src', './dest', {
   templates: ['scss', 'less'] // Only output a .scss and .less file
 });
@@ -67,20 +66,20 @@ Type: `string`
 An additional search path that will be used before the default
 templates directory
 
+```javascript
+// search "./my/templates" for "custom.hbs"
+theo.convert('./src', './dest', {
+  templatesDirectory: './my/templates'
+  templates: ['custom']
+});
 
-    // search "./my/templates" for "custom.hbs"
-    theo.convert('./src', './dest', {
-      templatesDirectory: './my/templates'
-      templates: ['custom']
-    });
-
-    // "./my/templates/scss.hbs" will be used instead of
-    // the provided "scss.hbs"
-    theo.convert('./src', './dest', {
-      templatesDirectory: './my/templates'
-      templates: ['scss']
-    });
-
+// "./my/templates/scss.hbs" will be used instead of
+// the provided "scss.hbs"
+theo.convert('./src', './dest', {
+  templatesDirectory: './my/templates'
+  templates: ['scss']
+});
+```
 
 ### options.extras
 
@@ -88,7 +87,7 @@ Type: `object`
 
 This object will be globally available in each template.
 
-```
+```javascript
 theo.convert('./src', './dest', {
   extras: {
     foo: 'bar'
@@ -101,8 +100,6 @@ theo.convert('./src', './dest', {
 </span>
 ```
 
-where is gthe list of supported telatess?
-
 ### options.beforeTemplate(property)
 
 Type: `function`
@@ -111,7 +108,7 @@ A function that will be called for each property in the theme.
 This an opportunity to modify / append new values to the property
 before rendering the template.
 
-```
+```javascript
 theo.convert('./src', './dest', {
   beforeTempate: function(property) {
     // property.name
@@ -122,7 +119,7 @@ theo.convert('./src', './dest', {
   }
 });
 ```
-```
+```html
 {{#each properties}}
   {{name}} - {{value}} - {{custom}}
 {{/each}}
@@ -132,70 +129,110 @@ theo.convert('./src', './dest', {
 
 The input glob `./variables/*.json` in this examples should match at least one JSON file with the following format:
 
-    {
-      "theme": {
-        "name": "Name of the theme",
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"#2a94d6",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          },
-          {
-            "name":"COLOR_LINK",
-            "value":"#006eb3",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          }
-        ]
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"#2a94d6",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      },
+      {
+        "name":"COLOR_LINK",
+        "value":"#006eb3",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
       }
-    }
+    ]
+  }
+}
+```
+### Aliases
 
 Optionally _theo_ also supports aliases:
-
-    {
-      "theme": {
-        "name": "Name of the theme",
-        "aliases": [
-          {
-            "name": "blue",
-            "value": "#2a94d6"
-          }
-        ],
-        "properties": [
-          {
-            "name":"COLOR_PRIMARY",
-            "value":"{!blue}",
-            "category": "text-color",
-            "comment": "Lorem ipsum"
-          }
-        ]
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "aliases": [
+      {
+        "name": "blue",
+        "value": "#2a94d6"
       }
+    ],
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"{!blue}",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      }
+    ]
+  }
+}
+```
+
+Aliases can also be specified in a separate file:
+
+`theme.json`
+```json
+{
+  "theme": {
+    "name": "Name of the theme",
+    "aliases": "./aliases.json",
+    "properties": [
+      {
+        "name":"COLOR_PRIMARY",
+        "value":"{!blue}",
+        "category": "text-color",
+        "comment": "Lorem ipsum"
+      }
+    ]
+  }
+}
+```
+
+`aliases.json`
+```json
+{
+  "aliases": [
+    {
+      "name": "blue",
+      "value": "#2a94d6"
     }
+  ]
+}
+```
 
 You could also start by cloning one of the [mock files](test/mock/s1base.json).
 
 ## Example Usage
-
-    $ npm install theo --save-dev
+```javascript
+$ npm install theo --save-dev
+```
 
 `Gruntfile.coffee` example:
+```coffeescript
+theo = require 'theo'
 
-    theo = require 'theo'
-
-    module.exports = (grunt) ->
-      grunt.registerTask 'default', ->
-        theo.convert './variables/*', './dist'
+module.exports = (grunt) ->
+  grunt.registerTask 'default', ->
+    theo.convert './variables/*', './dist'
+```
 
 `gulpfile.coffee` example:
+```coffeescript
+gulp = require 'gulp'
+theo = require 'theo'
 
-    gulp = require 'gulp'
-    theo = require 'theo'
+gulp.task 'default', (done) ->
+  theo.convert './variables/*', './dist'
+  done()
+```
 
-    gulp.task 'default', (done) ->
-      theo.convert './variables/*', './dist'
-      done()
 
 ## Documentation
 
