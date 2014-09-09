@@ -68,14 +68,14 @@ templates directory
 
 ```javascript
 // search "./my/templates" for "custom.hbs"
-theo.convert('./src', './dest', {
+theo.convert('./src/*.json', './dest', {
   templatesDirectory: './my/templates'
   templates: ['custom']
 });
 
 // "./my/templates/scss.hbs" will be used instead of
 // the provided "scss.hbs"
-theo.convert('./src', './dest', {
+theo.convert('./src/*.json', './dest', {
   templatesDirectory: './my/templates'
   templates: ['scss']
 });
@@ -88,7 +88,7 @@ Type: `object`
 This object will be globally available in each template.
 
 ```javascript
-theo.convert('./src', './dest', {
+theo.convert('./src/*.json', './dest', {
   extras: {
     foo: 'bar'
   }
@@ -109,7 +109,7 @@ This an opportunity to modify / append new values to the property
 before rendering the template.
 
 ```javascript
-theo.convert('./src', './dest', {
+theo.convert('./src/*.json', './dest', {
   beforeTempate: function(property) {
     // property.name
     // property.value
@@ -220,7 +220,7 @@ theo = require 'theo'
 
 module.exports = (grunt) ->
   grunt.registerTask 'default', ->
-    theo.convert './variables/*', './dist'
+    theo.convert './variables/*.json', './dist'
 ```
 
 `gulpfile.coffee` example:
@@ -229,7 +229,7 @@ gulp = require 'gulp'
 theo = require 'theo'
 
 gulp.task 'default', (done) ->
-  theo.convert './variables/*', './dist'
+  theo.convert './variables/*.json', './dist'
   done()
 ```
 
