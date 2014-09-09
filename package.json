@@ -13,9 +13,6 @@
   "author": "Sönke Rohde <soenke.rohde@gmail.com>",
   "license": "BSD 2-Clause",
   "main": "./lib/theo",
-  "bin": {
-    "theo": "./bin/theo"
-  },
   "engines": {
     "node": ">= 0.8.0"
   },
