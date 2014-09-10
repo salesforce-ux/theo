@@ -141,6 +141,12 @@ describe('theo', function() {
         result.s1base['scss'].should.containEql('$color-curious-blue: testValue;');
       });
 
+      it('only parse json files with a "theme" node', function() {
+        (function(){
+          theo.convert('./test/mock/*.json', './dist');
+        }).should.not.throw();        
+      });
+
     });
 
     describe('convert Sass', function() {
