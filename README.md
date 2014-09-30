@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="100" />
 
-Theo is Design Property converter that works with JSON input, generating the following outputs:
+Theo is a _Design Property_ converter that works with JSON input, generating the following outputs:
 
 - [Sass](http://sass-lang.com)
 - [Stylus](http://learnboost.github.io/stylus)
