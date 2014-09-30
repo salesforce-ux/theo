@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="100" />
 
-Theo is theme tokenizer that works with JSON input to generate variables for:
+Theo is Design Property converter that works with JSON input, generating the following outputs:
 
 - [Sass](http://sass-lang.com)
 - [Stylus](http://learnboost.github.io/stylus)
@@ -15,7 +15,7 @@ Theo is theme tokenizer that works with JSON input to generate variables for:
 ```javascript
 var theo = require('theo');
 
-theo.convert('./variables/*.json', './dist');
+theo.convert('./properties/*.json', './dist');
 ```
 
 ## theo.convert(src, dest, [options])
@@ -24,7 +24,7 @@ theo.convert('./variables/*.json', './dist');
 
 Type: `string`
 
-A [glob](https://github.com/isaacs/node-glob) pattern that matches at least on `json` theme file
+A [glob](https://github.com/isaacs/node-glob) pattern that matches at least one `json` theme file
 
 ### dest  
 
@@ -125,9 +125,9 @@ theo.convert('./src/*.json', './dest', {
 {{/each}}
 ```
 
-## Variables
+## Design Properties
 
-The input glob `./variables/*.json` in this examples should match at least one JSON file with the following format:
+The input glob `./properties/*.json` in this examples should match at least one JSON file with the following format:
 
 ```json
 {
@@ -214,25 +214,40 @@ You could also start by cloning one of the [mock files](test/mock/s1base.json).
 $ npm install theo --save-dev
 ```
 
-`Gruntfile.coffee` example:
-```coffeescript
-theo = require 'theo'
+`Gruntfile.js` example:
+```javascript
+var theo = require('theo');
 
-module.exports = (grunt) ->
-  grunt.registerTask 'default', ->
-    theo.convert './variables/*.json', './dist'
+module.exports = function(grunt){
+  // generate all templates
+  grunt.registerTask('default', function(){
+    theo.convert('./properties/*.json', './dist');
+  });
+
+  // generate Stylus and HTML documentation
+  grunt.registerTask('stylus', function(){
+    theo.convert('./properties/*.json', './dist', {templates: ['styl', 'html']});
+  });
+}
 ```
 
-`gulpfile.coffee` example:
-```coffeescript
-gulp = require 'gulp'
-theo = require 'theo'
+`gulpfile.js` example:
+```javascript
+var gulp = require('gulp');
+var theo = require('theo');
 
-gulp.task 'default', (done) ->
-  theo.convert './variables/*.json', './dist'
-  done()
+// generate all templates
+gulp.task('default', function(done){
+  theo.convert('./properties/*.json', './dist');
+  done();
+});
+
+// generate Stylus and HTML documentation
+gulp.task('stylus', function(done){
+  theo.convert('./properties/*.json', './dist', {templates: ['styl', 'html']});
+  done();
+});
 ```
-
 
 ## Documentation
 

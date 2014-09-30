@@ -1,13 +1,16 @@
 {
   "name": "theo",
-  "version": "2.0.2",
-  "description": "Theme tokenizer working with JSON input generating variables for Sass, Stylus, Less, Aura, iOS (JSON), Android (XML) and HTML docs.",
+  "version": "2.0.21",
+  "description": "JSON Design Property converter to Sass, Stylus, Less, Aura, iOS (JSON), Android (XML) and HTML docs.",
   "keywords": [
     "css",
-    "variables",
+    "properties",
     "sass",
+    "scss",
     "stylus",
     "less",
+    "iOS",
+    "Android",
     "aura"
   ],
   "author": "Sönke Rohde <soenke.rohde@gmail.com>",
