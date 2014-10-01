@@ -3,7 +3,8 @@
   {{#each properties}}
     {
       "name": "{{camelCase name}}",
-      "value": "{{iosValue}}"
+      "value": "{{iosValue}}",
+      "category": "{{category}}"
     }{{#unless @last}},{{/unless}}
   {{/each}}
   ]
