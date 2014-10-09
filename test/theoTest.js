@@ -32,7 +32,7 @@ describe('theo', function() {
     
     it('collects alias usage', function() {
       var aliases = theo.aliasUsage('./test/mock/*.json');
-      aliases.should.have.length(3);
+      aliases.should.have.length(4);
       var aliasesWithZeroUsage = aliases.filter(function(alias) {
         if (alias[1] === 0) {
           return alias;
