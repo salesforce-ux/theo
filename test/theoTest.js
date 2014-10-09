@@ -300,15 +300,15 @@ describe('theo', function() {
       });
 
       it('creates a color tag with hext8 value', function() {
-        result.s1base['android.xml'].should.containEql('<color name="COLOR_CURIOUS_BLUE">#ff2a94d6</color>');
+        result.s1base['android.xml'].should.containEql('<color name="COLOR_CURIOUS_BLUE" category="color">#ff2a94d6</color>');
       });
 
       it('converts rems to pixels', function() {
-        result.s1base['android.xml'].should.containEql('<property name="TEXT_LARGEST">22px</property>');
+        result.s1base['android.xml'].should.containEql('<property name="TEXT_LARGEST" category="font-size">22px</property>');
       });
 
       it('should resolve aliases inside a value', function(){
-        result.s1base['android.xml'].should.containEql('<color name="COLOR_WHITE">#ffffffff</color>');
+        result.s1base['android.xml'].should.containEql('<color name="COLOR_WHITE" category="color">#ffffffff</color>');
       });
 
       it('should save the output file with the correct suffix', function() {
