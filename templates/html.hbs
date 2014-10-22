@@ -191,7 +191,7 @@
           {{#equal this.category 'color'}}
           <tr>
             <td><code>{{camelCase name}}</code></td>
-            <td><code>{{value}}</code></td>
+            <td><code>{{value}} {{#if alias}}({{alias}}){{/if}}</code></td>
             <td class="example" style="background-color: {{value}}; border: 1px solid #f2f2f2;"></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
