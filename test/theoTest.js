@@ -29,7 +29,6 @@ function clean(dir) {
 describe('theo', function() {
 
   describe('#aliasUsage()', function() {
-    
     it('collects alias usage', function() {
       var aliases = theo.aliasUsage('./test/mock/*.json');
       aliases.should.have.length(3);
@@ -41,7 +40,6 @@ describe('theo', function() {
       aliasesWithZeroUsage.should.have.length(1);
       aliasesWithZeroUsage[0][0].should.equal('black');
     });
-  
   });
 
   describe('#convert()', function() {
@@ -51,7 +49,6 @@ describe('theo', function() {
     });
 
     describe('options', function() {
-      
       var result;
 
       before(function() {
@@ -61,19 +58,19 @@ describe('theo', function() {
       it('throw an error if no source directory is provided', function() {
         (function(){
           theo.convert();
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if no destination directory is provided', function() {
         (function(){
           theo.convert('./test/mock/s1base.json');
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if options is not an object', function() {
         (function(){
           theo.convert('./test/mock/s1base.json', './dist', 'foobar');
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if options.suffix is not a string', function() {
@@ -81,7 +78,7 @@ describe('theo', function() {
           theo.convert('./test/mock/s1base.json', './dist', {
             suffix: {}
           });
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if options.extras is not an object', function() {
@@ -89,7 +86,7 @@ describe('theo', function() {
           theo.convert('./test/mock/s1base.json', './dist', {
             extras: ''
           });
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if options.beforeTemplate is not a function', function() {
@@ -97,7 +94,7 @@ describe('theo', function() {
           theo.convert('./test/mock/s1base.json', './dist', {
             beforeTemplate: {}
           });
-        }).should.throw();        
+        }).should.throw();
       });
 
       it('throw an error if the template cannot be found', function() {
@@ -105,7 +102,15 @@ describe('theo', function() {
           theo.convert('./test/mock/s1base.json', './dist', {
             templates: ['foo']
           });
-        }).should.throw();        
+        }).should.throw();
+      });
+
+      it('throw an error if any properties are missing categories', function () {
+        (function() {
+          theo.convert('./test/mock/error/missing_category.json', './dist', {
+            templates:['less']
+          });
+        }).should.throw();
       });
 
       it('search the "templatesDirectory" for templates', function() {
@@ -117,7 +122,7 @@ describe('theo', function() {
             templates: ['foo']
           });
         }).should.not.throw();
-        fs.unlinkSync(foo);       
+        fs.unlinkSync(foo);
       });
 
       it('allow templates in "templatesDirectory" to override default templates', function() {
@@ -128,7 +133,7 @@ describe('theo', function() {
           templates: ['scss']
         });
         result.s1base['scss'].should.equal('');
-        fs.unlinkSync(scss);       
+        fs.unlinkSync(scss);
       });
 
       it('inject values into the template if "beforeTemplate" is implemented', function() {
@@ -144,7 +149,7 @@ describe('theo', function() {
       it('only parse json files with a "theme" node', function() {
         (function(){
           theo.convert('./test/mock/*.json', './dist');
-        }).should.not.throw();        
+        }).should.not.throw();
       });
 
     });
@@ -341,7 +346,6 @@ describe('theo', function() {
     });
 
     describe('default', function() {
-      
       var result;
 
       before(function() {
@@ -364,9 +368,6 @@ describe('theo', function() {
         });
         matches.should.have.length(templateNames.length)
       });
-
     });
-
   });
-
 });
