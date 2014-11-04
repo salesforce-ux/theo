@@ -108,6 +108,14 @@ describe('theo', function() {
         }).should.throw();        
       });
 
+      it('throw an error if any properties are missing categories', function () {
+        (function() {
+          theo.convert('./test/mock/error/missing_category.json', './dist', {
+            templates:['less']
+          });
+        }).should.throw(/\w+ did not contain a "category" property/);
+      });
+
       it('search the "templatesDirectory" for templates', function() {
         var foo = path.resolve(__dirname, 'mock/templates/foo.hbs');
         fs.writeFileSync(foo, '');
