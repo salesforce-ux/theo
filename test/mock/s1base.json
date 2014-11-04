@@ -295,7 +295,7 @@
       },
       {
         "name":"SHADOW_STRONG",
-        "value":"0 1px 3px {!black20}",
+        "value":"0 1px {!shadowSpread} {!black20}",
         "category": "drop-shadow"
       }
     ]
