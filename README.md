@@ -138,8 +138,8 @@ var theo = require('theo');
 var themes = theo.getDesignProperties('./src/*.json');
 
 themes.forEach(function(theme) {
-  var fileName = theme.fileName;
-  fs.writeFile('./' + fileName + '-template-ready.json', JSON.stringify(theme, null, 2));
+  var filename = theme.filename;
+  fs.writeFile('./' + filename + '-template-ready.json', JSON.stringify(theme, null, 2));
 });
 ```
 
