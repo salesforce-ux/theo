@@ -125,7 +125,7 @@ theo.convert('./src/*.json', './dest', {
 {{/each}}
 ```
 
-## theo.getThemes(src, [options])
+## theo.getDesignProperties(src, [options])
 
 Return an array of theme objects that have been prepared for templates.
 
@@ -135,7 +135,7 @@ See `theo.convert()` for a list of options
 var fs = require('fs');
 var theo = require('theo');
 
-var themes = theo.getThemes('./src/*.json');
+var themes = theo.getDesignProperties('./src/*.json');
 
 themes.forEach(function(theme) {
   var fileName = theme.fileName;
