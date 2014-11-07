@@ -125,7 +125,7 @@ theo.convert('./src/*.json', './dest', {
 {{/each}}
 ```
 
-## theo.getDesignProperties(src, [options])
+## theo.getThemes(src, [options])
 
 Return an array of theme objects that have been prepared for templates.
 
@@ -135,10 +135,11 @@ See `theo.convert()` for a list of options
 var fs = require('fs');
 var theo = require('theo');
 
-var themes = theo.getDesignProperties('./src/*.json');
+var themes = theo.getThemes('./src/*.json');
 
 themes.forEach(function(theme) {
   var filename = theme.filename;
+  var properties = theme.properties;
   fs.writeFile('./' + filename + '-template-ready.json', JSON.stringify(theme, null, 2));
 });
 ```
