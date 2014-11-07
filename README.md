@@ -125,6 +125,24 @@ theo.convert('./src/*.json', './dest', {
 {{/each}}
 ```
 
+## theo.getThemes(src, [options])
+
+Return an array of theme objects that have been prepared for templates.
+
+See `theo.convert()` for a list of options
+
+```javascript
+var fs = require('fs');
+var theo = require('theo');
+
+var themes = theo.getThemes('./src/*.json');
+
+themes.forEach(function(theme) {
+  var fileName = theme.fileName;
+  fs.writeFile('./' + fileName + '-template-ready.json', JSON.stringify(theme, null, 2));
+});
+```
+
 ## Design Properties
 
 The input glob `./properties/*.json` in this examples should match at least one JSON file with the following format:
