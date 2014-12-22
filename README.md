@@ -286,6 +286,7 @@ The generated HTML documentation supports the following categories:
 - hr-color
 - radius
 - gradient
+- media queries (MQ)
 - misc
 
 This is an example of how the docs look like:

@@ -127,6 +127,7 @@
       th:first-child {
         color: #333;
         font-size: 1.5em;
+        min-width: 8em;
       }
 
       .banner,
@@ -454,6 +455,23 @@
             <td class="example">
               <div class="radius-box" style="border-radius: {{value}};"></div>
             </td>
+            <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
+          </tr>
+          {{/equal}}
+          {{/each}}
+          {{/if}}
+
+          {{#if hasCategory.mq}}
+          <tr id="mq">
+            <th>Media Queries</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+          {{#each properties}}
+          {{#equal this.category 'MQ'}}
+          <tr>
+            <td><code>{{camelCase name}}</code></td>
+            <td><code>{{value}} {{#if alias}}({{alias}}){{/if}}</code></td>
             <td class="description">{{#if comment}}{{comment}}{{/if}}</td>
           </tr>
           {{/equal}}
