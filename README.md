@@ -69,14 +69,14 @@ templates directory
 ```javascript
 // search "./my/templates" for "custom.hbs"
 theo.convert('./src/*.json', './dest', {
-  templatesDirectory: './my/templates'
+  templatesDirectory: './my/templates',
   templates: ['custom']
 });
 
 // "./my/templates/scss.hbs" will be used instead of
 // the provided "scss.hbs"
 theo.convert('./src/*.json', './dest', {
-  templatesDirectory: './my/templates'
+  templatesDirectory: './my/templates',
   templates: ['scss']
 });
 ```
