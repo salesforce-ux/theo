@@ -1,0 +1,20 @@
+{
+  "global": {
+    ".meta": {
+      "baseFontPixel": 16,
+      "baseFontPercentage": 100
+    },
+    "category": "test-b"
+  },
+ 
+  "props": {
+    "a": {
+      "value": "2em",
+      "type": "number"
+    },
+    "d": {
+      "value": "4em",
+      "type": "number"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "properties": [{
+    "name": "a",
+    "value": "foo"
+  },{
+    "name": "b",
+    "value": "bar"
+  }]
+}

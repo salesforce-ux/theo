@@ -1,317 +1,414 @@
-<img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="100" />
+# <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="28" /> Theo
 
-Theo is a _Design Property_ converter that works with JSON input, generating the following outputs:
+[![build status](https://travis-ci.org/salesforce-ux/theo.svg?branch=gulp)](https://travis-ci.org/salesforce-ux/theo)
+[![npm version](https://badge.fury.io/js/theo.svg)](http://badge.fury.io/js/theo)
 
-- [Sass](http://sass-lang.com)
-- [Stylus](http://learnboost.github.io/stylus)
-- [Less](http://lesscss.org)
-- [Aura](http://documentation.auraframework.org/auradocs)
-- [JSON](http://json.org/) targeting iOS
-- [XML](http://en.wikipedia.org/wiki/XML) targeting Android
-- HTML documentation
+Theo is a set of [Gulp](http://gulpjs.com) plugins for
+transforming and formatting [Design Properties](#overview)
+
+## Example
+
+```js
+var gulp = require('gulp');
+var theo = require('theo');
+
+gulp.src('design/props.json')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.format('scss'))
+  .pipe(gulp.dest('dist'));
+```
+
+## Design Properties <a name="overview"></a>
+
+Theo consumes **Design Property** files which are a central location to store
+design related information such as colors, fonts, widths, animations, etc. These raw
+values can then be transformed and formatted to meet the needs of any platform.
+
+Let's say you have a web, native iOS, and native Android application that
+would like to share information such as background colors.
+
+The web might like to consume the colors as **hsla** values
+formatted as SASS variables in an **.scss** file.
+
+iOS might like **rgba** values formatted as **.json**.
+
+Finally, Android might like **8 Digit Hex** values formatted as **.xml**.
+
+Instead of hard coding this information in each platform/format, Theo
+can consume the centralized **Design Properties** and output files for
+each platform.
+
+### Spec
+
+A *Design Properties* file is written in either
+`json` or `yml` and should conform to the following spec:
+
+```json5
+{
+  // Required
+  // A map of property names and value objects
+  "props": {
+    "color_brand": {
+      // Required
+      // Can be any valid JSON value
+      "value": "#ff0000",
+
+      // Required
+      // Describe the type of value
+      // [color|number|...]
+      "type": "color",
+
+      // Required
+      // Descriibe the category of this property
+      // Often used for style guide generation
+      "category": "background",
+
+      // Optional
+      // This value will be included during transform
+      // but excluded during formating
+      ".meta": {
+        // This value might be needed for some special transform
+        "foo": "bar"
+      },
+
+      // Optional
+      // Additional keys can be included and depending on the formatter,
+      // might be visible in the final output
+      "some": "value"
+    }
+  },
+
+  // Optional
+  // This object will be merged into each property
+  // Values defined on a property level will take precedence
+  "global": {
+    "category": "some-category",
+    ".meta": {
+      "foo": "baz"
+    }
+  },
+
+  // Optional
+  // Share values across multiple props
+  // Aliases are resolved like: {!sky}
+  "aliases": {
+    "sky": "blue"
+  },
+
+  // Optional
+  // Array of design property files to be imported
+  // "aliases" will be imported as well
+  // "aliases" will already be resolved
+  // "global" will already be merged into into each prop
+  "imports": [
+    "./some/dir/file.json"
+  ]
+}
+```
+
+## Plugins Overview
+
+Theo is divided into two primary plugins:
+
+### transform
+
+This plugin is responsible for transforming raw values into platform specific values.
+
+For example, the Design Properties might specify a color value as an
+rgba (`rgba(255, 0, 0, 1)`), but an Android app
+might prefer to consume colors as an 8 digit hex (`#ffff0000`)
+
+### format
+
+This plugin is responsible for taking transformed properties and outputting them
+into a new file format.
+
+An Android app might prefer to consume the final values as XML:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorBrand" type="color">#ffbada55</color>
+</resources>
+```
 
 ## API
 
-```javascript
-var theo = require('theo');
+####`theo.plugins.transform(type)`
 
-theo.convert('./properties/*.json', './dist');
+Transform the values for each *Design Property* file according to
+the specified type.
+
+A transform is list of [valueTransforms](#registerValueTransform) that should be applied
+to each property.
+
+**@param {string} type**  
+The name of the registered transform
+
+#### Example:
+
+```js
+gulp.src('./design/props.json')
+  .pipe(theo.plugins.transform('web'));
 ```
 
-## theo.convert(src, dest, [options])
+***
 
-### src  
+####`theo.registerTransform(type, valueTransforms)`
 
-Type: `string`
+Register a new transform. Existing transforms with the same name
+will be overwritten.
 
-A [glob](https://github.com/isaacs/node-glob) pattern that matches at least one `json` theme file
+**@param {string} type**  
+The name of the transform
 
-### dest  
+**@param {array} valueTransforms**  
+An array of registered value transforms
 
-Type: `string`
+#### Example:
 
-A directory where all converted files will be output
-
-### options
-
-Type: `object`
-
-Additional options for the conversion
-
-### options.suffix
-
-Type: `string`
-
-A suffix to be appended to the file name
-
-### options.templates
-
-Type: `array`
-
-Default: `['scss', 'less', 'styl', 'theme', 'xml', 'android.xml', 'json', 'ios.json', 'html']`
-
-By default, all the default in templates will be used in the conversion.
-Use this property to dictate what templates get rendered.
-
-```javascript
-theo.convert('./src', './dest', {
-  templates: ['scss', 'less'] // Only output a .scss and .less file
-});
+```js
+theo.registerTransform('windows', [
+  'color/rgb'
+]);
 ```
 
-### options.templatesDirectory
+#### Pre-defined Transforms:
 
-Type: `string`
+Below is a list of pre-defined transforms and the corresponding
+[valueTransforms](registerValueTransform) that will be applied.
 
-An additional search path that will be used before the default
-templates directory
+*Note*: Generally speaking, the pre-defined transforms assume the original
+*Design Properties* are formatted for the web.
 
-```javascript
-// search "./my/templates" for "custom.hbs"
-theo.convert('./src/*.json', './dest', {
-  templatesDirectory: './my/templates',
-  templates: ['custom']
-});
+**raw**:  
+No valueTransforms will be applied
 
-// "./my/templates/scss.hbs" will be used instead of
-// the provided "scss.hbs"
-theo.convert('./src/*.json', './dest', {
-  templatesDirectory: './my/templates',
-  templates: ['scss']
-});
-```
+**web**:  
+`['color/rgb']`
 
-### options.extras
+**ios**:  
+`['color/rgb', 'relative/pixelValue', 'percentage/float']`
 
-Type: `object`
+**android**:  
+`['color/hex8', 'relative/pixelValue', 'percentage/float']`
 
-This object will be globally available in each template.
+**aura**:  
+`['color/hex']`
 
-```javascript
-theo.convert('./src/*.json', './dest', {
-  extras: {
-    foo: 'bar'
+***
+
+####`theo.registerValueTransform(name, matcher, transformer)` <a name="registerValueTransform"></a>
+
+Register a new valueTransform. Existing valueTransforms with the same name
+will be overwritten.
+
+**@param {string} type**  
+The name of the valueTransform
+
+**@param {function} matcher**  
+An function that should return a boolean indicating if the provided property
+should be transformed
+
+**@param {function} transformer**  
+An function that should return a new value for the provided property
+
+#### Example:
+
+```js
+theo.registerValueTransform('animation/web/curve',
+  // Only run the transform for props that pass the matcher
+  (prop, meta) => prop.type === 'animation-curve',
+  // Return the transformed value
+  (prop, meta) => {
+    let [a,b,c,d] = prop.value;
+    return `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
   }
+);
+```
+
+#### Pre-defined ValueTransforms:
+
+**color/rgb**  
+Parse the value as a color and return an rgb(a) string
+
+**color/hex**  
+Parse the value as a color and return an 6 digit hex string
+
+**color/hex8**  
+Parse the value as a color and return an 8 digit hex string
+
+**percentage/float**  
+Parse a string percentage value and return a float represention
+
+**relative/pixel**  
+Parse a relative size value (em/rem) and return a pixel representation.
+By default, the `baseFontSize` is set to 16 and
+the `baseFontPercentage` is set to 1. These values can be overwritten in a property's
+`.meta` object.
+
+**relative/pixelValue** 
+Same as *relative/pixel*, but removes the `px` extension
+
+***
+
+####`theo.plugins.format(type, [options])`
+
+Format the output for each *Design Property* file according to
+the specified type.
+
+*Note*: This plugin will almost always run after a `transform` call.
+
+**@param {string} type**  
+The name of the registered format
+
+**@param {object} [options]**  
+Additional options to be passed along to the formatter
+
+#### Example:
+
+```js
+gulp.src('design/props.json')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.format('scss'))
+  .pipe(gulp.dest('dist'));
+```
+
+***
+
+####`theo.registerFormat(name, formatter)`
+
+Register a new format. Existing formats with the same name
+will be overwritten.
+
+**@param {string} type**  
+The name of the format
+
+**@param {function} formatter**  
+An function that should return a string representation
+of the reformatted *Design Properties*.
+
+The formatter will be called with two arguments:
+
+**json** - an object with the following layout:
+
+#### Example:
+
+```js
+/**
+ * @param {object} json - see below
+ * @param {object} options - any options that were passed via the `.format()` plugin
+ * @param {string} options.name - The file name
+ */
+theo.registerFormat('scss', (json, options) => {
+  return json.propKeys.map(key => {
+    let prop = json.props[key];
+    // Here is a good spot to reformat the name (camelCase, upperCase, etc)
+    return `$${prop.name}: ${prop.value};`;
+  }).join('\n');
 });
 ```
-```
-<span>
-  {{extras.foo}}
-</span>
-```
 
-### options.beforeTemplate(property)
-
-Type: `function`
-
-A function that will be called for each property in the theme.
-This an opportunity to modify / append new values to the property
-before rendering the template.
-
-```javascript
-theo.convert('./src/*.json', './dest', {
-  beforeTempate: function(property) {
-    // property.name
-    // property.value
-    // property.category
-    // Add another key/value
-    property.custom = 'My custom value'
-  }
-});
-```
-```html
-{{#each properties}}
-  {{name}} - {{value}} - {{custom}}
-{{/each}}
-```
-
-## theo.getThemes(src, [options])
-
-Return an array of theme objects that have been prepared for templates.
-
-See `theo.convert()` for a list of options
-
-```javascript
-var fs = require('fs');
-var theo = require('theo');
-
-var themes = theo.getThemes('./src/*.json');
-
-themes.forEach(function(theme) {
-  var filename = theme.filename;
-  var properties = theme.properties;
-  fs.writeFile('./' + filename + '-template-ready.json', JSON.stringify(theme, null, 2));
-});
-```
-
-## Design Properties
-
-The input glob `./properties/*.json` in this examples should match at least one JSON file with the following format:
-
-```json
+Here is the layout of the `json` argument
+```json5
 {
-  "theme": {
-    "name": "Name of the theme",
-    "properties": [
-      {
-        "name":"COLOR_PRIMARY",
-        "value":"#2a94d6",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
-      },
-      {
-        "name":"COLOR_LINK",
-        "value":"#006eb3",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
-      }
-    ]
-  }
-}
-```
-### Aliases
-
-Optionally _theo_ also supports aliases:
-```json
-{
-  "theme": {
-    "name": "Name of the theme",
-    "aliases": [
-      {
-        "name": "blue",
-        "value": "#2a94d6"
-      }
-    ],
-    "properties": [
-      {
-        "name":"COLOR_PRIMARY",
-        "value":"{!blue}",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
-      }
-    ]
-  }
-}
-```
-
-Aliases can also be specified in a separate file:
-
-`theme.json`
-```json
-{
-  "theme": {
-    "name": "Name of the theme",
-    "aliases": "./aliases.json",
-    "properties": [
-      {
-        "name":"COLOR_PRIMARY",
-        "value":"{!blue}",
-        "category": "text-color",
-        "comment": "Lorem ipsum"
-      }
-    ]
-  }
+  // An object containing the transformed properties
+  "props": {},
+  // An array of the keys for easy iteration
+  "propKeys": []
 }
 ```
 
-`aliases.json`
+#### Pre-defined Formats:
+
+###### json
+
 ```json
 {
-  "aliases": [
+  "PROP_NAME": "PROP_VALUE"
+}
+```
+
+###### ios.json
+
+```json
+{
+  "properties": [
     {
-      "name": "blue",
-      "value": "#2a94d6"
+      "name": "PROP_NAME",
+      "value": "PROP_VALUE",
+      "type": "PROP_TYPE",
+      "category": "PROP_CATEGORY"
     }
   ]
 }
 ```
 
-You could also start by cloning one of the [mock files](test/mock/s1base.json).
+*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
-## Example Usage
-```javascript
-$ npm install theo --save-dev
+###### android.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <property name="PROP_NAME" type="PROP_TYPE" category="PROP_CATEGORY">PROP_VALUE</property>
+  <color name="PROP_NAME" type="color" category="PROP_CATEGORY">PROP_VALUE</color>
+</resources>
 ```
 
-`Gruntfile.js` example:
-```javascript
-var theo = require('theo');
+*Note*: PROP_NAME will be set to upper case
 
-module.exports = function(grunt){
-  // generate all templates
-  grunt.registerTask('default', function(){
-    theo.convert('./properties/*.json', './dist');
-  });
+###### scss
 
-  // generate Stylus and HTML documentation
-  grunt.registerTask('stylus', function(){
-    theo.convert('./properties/*.json', './dist', {templates: ['styl', 'html']});
-  });
-}
+```scss
+$PROP_NAME: PROP_VALUE;
 ```
 
-`gulpfile.js` example:
-```javascript
-var gulp = require('gulp');
-var theo = require('theo');
+*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
-// generate all templates
-gulp.task('default', function(done){
-  theo.convert('./properties/*.json', './dist');
-  done();
-});
+###### sass
 
-// generate Stylus and HTML documentation
-gulp.task('stylus', function(done){
-  theo.convert('./properties/*.json', './dist', {templates: ['styl', 'html']});
-  done();
-});
+```sass
+$PROP_NAME: PROP_VALUE
 ```
 
-## Documentation
+*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
-The generated HTML documentation supports the following categories:
+###### less
 
-- color
-- text-color
-- background-color
-- border-color
-- border-style
-- font
-- font-size
-- line-height
-- spacing
-- drop-shadow
-- inner-shadow
-- hr-color
-- radius
-- gradient
-- media queries (MQ)
-- misc
+```less
+@PROP_NAME: PROP_VALUE;
+```
 
-This is an example of how the docs look like:
-![Alt text](/assets/doc_example.png?raw=true "HTML Docs Example")
+*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
-## Develop & Test
+###### scss
 
-To do test driven development you can run:
+```styl
+PROP_NAME = PROP_VALUE;
+```
 
-    gulp tdd
+*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
-This will execute all tests whenever you change any JavaScript file or template.
+###### aura.theme
 
-Before creating a pull request make sure to run the tests:
+```xml
+<aura:theme>
+  <aura:var name="PROP_NAME" value="PROP_VALUE" />
+</aura:theme>
+```
 
-    gulp
+*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
-## License
+***
 
-Copyright (c) 2014, salesforce.com, inc. All rights reserved.
+####`theo.plugins.legacy()`
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+Transform legacy Theo *Design Properties* to the new spec
 
-Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-Neither the name of salesforce.com, inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+#### Example:
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```js
+gulp.src('./design/props-old.json')
+  .pipe(theo.plugins.legacy());
+```

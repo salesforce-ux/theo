@@ -1,0 +1,29 @@
+{
+  "global": {
+    ".meta": {
+      "baseFontPixel": 16,
+      "baseFontPercentage": 100
+    },
+    "category": "test-c"
+  },
+
+  "aliases": {
+    "land": "green"
+  },
+
+  "imports": [
+    "./a.json",
+    "./b.json"
+  ], 
+ 
+  "props": {
+    "e": {
+      "value": "8em",
+      "type": "number"
+    },
+    "f": {
+      "value": "{!land}",
+      "type": "color"
+    }
+  }
+}

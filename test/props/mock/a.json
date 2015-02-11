@@ -1,0 +1,28 @@
+{
+  "global": {
+    ".meta": {
+      "baseFontPixel": 16,
+      "baseFontPercentage": 100
+    },
+    "category": "test-a"
+  },
+
+  "aliases": {
+    "sky": "blue"
+  },
+ 
+  "props": {
+    "a": {
+      "value": "1em",
+      "type": "number"
+    },
+    "b": {
+      "value": "{!sky}",
+      "type": "color"
+    },
+    "c": {
+      "value": "{!land}",
+      "type": "color"
+    }
+  }
+}

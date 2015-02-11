@@ -1,0 +1,561 @@
+var assert = require('assert');
+var sinon = require('sinon');
+
+var path = require('path');
+var gulp = require('gulp');
+var gulpu = require('gulp-util');
+var through = require('through2');
+var _ = require('lodash');
+var xml2js = require('xml2js');
+
+require('6to5/register')({
+  only: path.resolve('./src')
+});
+
+var $stream = require('../../src/stream-util');
+var $props = require('../../src/props');
+
+function isError(error) {
+  return (error instanceof Error) || (error instanceof gulpu.PluginError);
+}
+
+describe('$props', function() {
+  
+  describe('#getValueTransform()', function() {
+    it('throws an error if the valueTransform is not registered', function() {
+      assert.throws(function() {
+        $props.getValueTransform('foo');
+      });
+    });
+    it('returns a copy of the valueTransform', function() {
+      var t = $props.getValueTransform('color/rgb');
+      assert(typeof t.matcher === 'function');
+      assert(typeof t.transformer === 'function');
+    });
+  });
+
+  describe('#valueTransformIsRegistered()', function() {
+    it('returns true if the value transform is registered', function() {
+      assert($props.valueTransformIsRegistered('color/rgb'));
+    });
+    it('returns false if the value transform isnt registered', function() {
+      assert($props.valueTransformIsRegistered('color/rgb/foo') === false);
+    });
+  });
+
+  describe('#registerValueTransform()', function() {
+    var matcher = function() {};
+    var transformer = function() {};
+    it('throws an error if the name is not passed or is not a string', function() {
+      assert.throws(function() {
+        $props.registerValueTransform();
+      });
+      assert.throws(function() {
+        $props.registerValueTransform(true);
+      });
+    });
+    it('throws an error if the matcher is not passed or not a function', function() {
+      assert.throws(function() {
+        $props.registerValueTransform('foo');
+      });
+      assert.throws(function() {
+        $props.registerValueTransform('foo', true);
+      });
+    });
+    it('throws an error if the transformer is not passed or not a function', function() {
+      assert.throws(function() {
+        $props.registerValueTransform('foo', function() {});
+      });
+      assert.throws(function() {
+        $props.registerValueTransform('foo', function() {}, true);
+      });
+    });
+    it('registers the valueTransform', function() {
+      $props.registerValueTransform('foo', matcher, transformer);
+      var r = $props.getValueTransform('foo');
+      assert(r.matcher === matcher);
+      assert(r.transformer === transformer);
+    });
+    it('registers the valueTransform and overwrites any pre-existing valueTransforms', function() {
+      var m = function() { return true; };
+      var t = function(value) { return value; };
+      $props.registerValueTransform('foo', m, t);
+      var r = $props.getValueTransform('foo');
+      assert(r.matcher !== matcher);
+      assert(r.transformer !== transformer);
+    });
+  });
+
+  describe('#getTransform()', function() {
+    it('throws an error if the transform is not registered', function() {
+      assert.throws(function() {
+        $props.getTransform('foo');
+      });
+    });
+    it('returns a copy of the transform', function() {
+      var t = $props.getTransform('web');
+      assert(_.includes(t, 'color/rgb'));
+    });
+  });
+
+  describe('#transformIsRegistered()', function() {
+    it('returns true if the value transform is registered', function() {
+      assert($props.transformIsRegistered('web'));
+    });
+    it('returns false if the value transform isnt registered', function() {
+      assert($props.transformIsRegistered('foo') === false);
+    });
+  });
+
+  describe('#registerTransform()', function() {
+    it('throws an error if the name is not passed or is not a string', function() {
+      assert.throws(function() {
+        $props.registerTransform();
+      });
+      assert.throws(function() {
+        $props.registerTransform(true);
+      });
+    });
+    it('throws an error if the list of valueMatchers is not passed or not an array', function() {
+      assert.throws(function() {
+        $props.registerTransform('foo');
+      });
+      assert.throws(function() {
+        $props.registerTransform('foo', true);
+      });
+    });
+    it('throws an error if any of the value transforms are not registered', function() {
+      assert.throws(function() {
+        $props.registerTransform('foo', ['hello']);
+      });
+    });
+    it('registers the transform', function() {
+      $props.registerTransform('foo', ['foo']);
+      var r = $props.getTransform('foo');
+      assert(r[0] === 'foo');
+    });
+    it('registers the transform and overwrites any pre-existing transforms', function() {
+      $props.registerTransform('foo', ['color/rgb']);
+      var r = $props.getTransform('foo');
+      assert(r[0] === 'color/rgb');
+    });
+  });
+
+  describe('#getFormat)', function() {
+    it('throws an error if the format is not registered', function() {
+      assert.throws(function() {
+        $props.getFormat('foo');
+      });
+    });
+    it('returns a copy of the format', function() {
+      var f = $props.getFormat('scss');
+      assert(typeof f === 'function');
+    });
+  });
+
+  describe('#formatIsRegistered()', function() {
+    it('returns true if the value transform is registered', function() {
+      assert($props.formatIsRegistered('scss'));
+    });
+    it('returns false if the value transform isnt registered', function() {
+      assert($props.formatIsRegistered('foo') === false);
+    });
+  });
+
+  describe('#registerFormat()', function() {
+    var formatter = function() {};
+    it('throws an error if the name is not passed or is not a string', function() {
+      assert.throws(function() {
+        $props.registerFormat();
+      });
+      assert.throws(function() {
+        $props.registerFormat(true);
+      });
+    });
+    it('throws an error if the formatter is not passed or not an function', function() {
+      assert.throws(function() {
+        $props.registerFormat('foo');
+      });
+      assert.throws(function() {
+        $props.registerFormat('foo', true);
+      });
+    });
+    it('registers the format', function() {
+      $props.registerFormat('foo', formatter);
+      var f = $props.getFormat('foo');
+      assert(f === formatter);
+    });
+  });
+
+});
+
+describe('$props.plugins', function() {
+
+  describe('#legacy()', function() {
+    function legacyA(done, format) {
+      var src = path.resolve(__dirname, 'mock', 'legacy.json')
+      gulp.src(src)
+        .pipe(through.obj(function(file, enc, next) {
+          var json = JSON.parse(file.contents.toString());
+          file.contents = new Buffer(format(json));
+          next(null, file);
+        }))
+        .pipe($props.plugins.legacy())
+        .on('error', function(err) { done(err); })
+        .on('finish', function() { done(); });
+    }
+    function legacyB(done) {
+      var files = [];
+      var src = path.resolve(__dirname, 'mock', 'legacy.json')
+      gulp.src(src)
+        .pipe($props.plugins.legacy())
+        .pipe(through.obj(function(file, enc, next) {
+          files.push(file);
+          next();
+        }))
+        .on('finish', function() { done(files); });
+    }
+    it('pipes an error if invalid Design Properties file is encoutered', function(done) {
+      legacyA(function(error) {
+        assert(isError(error));
+        assert(/encountered an invalid/.test(error.message));
+        done();
+      }, function(json) { return '{"foo":}'; });
+    });
+    it('pipes an error if the Design Properties file is not an object', function(done) {
+      legacyA(function(error) {
+        assert(isError(error));
+        assert(/non object/.test(error.message));
+        done();
+      }, function(json) { return '[]'; });
+    });
+    it('pipes an error if a no "properties" key found', function(done) {
+      legacyA(function(error) {
+        assert(isError(error));
+        assert(/properties/.test(error.message));
+        done();
+      }, function(json) { delete json.properties; return JSON.stringify(json); });
+    });
+    it('pipes an error if a property with no "name" key is found', function(done) {
+      legacyA(function(error) {
+        assert(isError(error));
+        assert(/name/.test(error.message));
+        done();
+      }, function(json) { json.properties = [{"value":"red"}]; return JSON.stringify(json); });
+    });
+    it('created a single JSON file', function(done) {
+      legacyB(function(files) {
+        assert(files.length === 1);
+        done();
+      });
+    });
+    it('produces valid JSON', function(done) {
+      legacyB(function(files) {
+        assert.doesNotThrow(function() {
+          JSON.parse(files[0].contents.toString());
+        });
+        done();
+      })
+    });
+    it('converts legacy design properties to the new format', function(done) {
+      legacyB(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(json.props.a.value === 'foo');
+        assert(json.props.b.value === 'bar');
+        assert(typeof json.properties === 'undefined');
+        done();
+      })
+    });
+  });
+
+  describe('#transform', function() {
+
+  });
+
+  describe('#diff()', function() {
+    var files, log;
+    beforeEach(function(done) {
+      files = [];
+      var src = [
+        path.resolve(__dirname, 'mock', 'a.json'),
+        path.resolve(__dirname, 'mock', 'b.json')
+      ];
+      gulp.src(src)
+        .pipe($props.plugins.transform('ios'))
+        .pipe($props.plugins.diff())
+        .pipe(through.obj(function(file, enc, next) {
+          files.push(file);
+          next();
+        }))
+        .on('finish', done);
+    });
+    it('created a single change log', function() {
+      assert(files.length === 1);
+    });
+    it('produces valid JSON', function() {
+      assert.doesNotThrow(function() {
+        JSON.parse(files[0].contents.toString());
+      });
+    });
+    it('logs changed props', function() {
+      var log = JSON.parse(files[0].contents.toString());
+      assert(_.has(log, 'changed'));
+      assert(_.has(log.changed, 'a'));
+    });
+    it('logs added props', function() {
+      var log = JSON.parse(files[0].contents.toString());
+      assert(_.has(log, 'added'));
+      assert(_.has(log.added, 'd'));
+    });
+    it('logs rempved props', function() {
+      var log = JSON.parse(files[0].contents.toString());
+      assert(_.has(log, 'removed'));
+      assert(_.has(log.removed, 'b'));
+      assert(_.has(log.removed, 'c'));
+    });
+  });
+
+});
+
+describe('$props:valueTransforms', function() {
+  
+  describe('color/rgb', function() {
+    var t = $props.getValueTransform('color/rgb').transformer;
+    it('converts hex to rgb', function() {
+      var p = { value: '#FF0000' };
+      assert(t(p) === 'rgb(255, 0, 0)');
+    });
+    it('converts rgba to rgba', function() {
+      var p = { value: 'rgba(255, 0, 0, 0.8)' };
+      assert(t(p) === 'rgba(255, 0, 0, 0.8)');
+    });
+    it('converts hsla to rgba', function() {
+      var p = { value: 'hsla(0, 100, 50, 0.8)' };
+      assert(t(p) === 'rgba(255, 0, 0, 0.8)');
+    });
+  });
+
+  describe('color/hex', function() {
+    var t = $props.getValueTransform('color/hex').transformer;
+    it('converts rgb to hex', function() {
+      var p = { value: 'rgb(255, 0, 0)' };
+      assert(t(p) === '#ff0000');
+    });
+    it('converts rgba to hex', function() {
+      var p = { value: 'rgb(255, 0, 0, 0.8)' };
+      assert(t(p) === '#ff0000');
+    });
+    it('converts hsla to hex', function() {
+      var p = { value: 'hsla(0, 100, 50, 0.8)' };
+      assert(t(p) === '#ff0000');
+    });
+  });
+
+  describe('color/hex8', function() {
+    var t = $props.getValueTransform('color/hex8').transformer;
+    it('converts hex to hex8', function() {
+      var p = { value: '#FF0000' };
+      assert(t(p) === '#ffff0000');
+    });
+    it('converts rgba to hex8', function() {
+      var p = { value: 'rgba(255, 0, 0, 0.8)' };
+      assert(t(p) === '#ccff0000');
+    });
+    it('converts hsla to hex8', function() {
+      var p = { value: 'hsla(0, 100, 50, 0.8)' };
+      assert(t(p) === '#ccff0000');
+    });
+  });
+
+  describe('percentage/float', function() {
+    var t = $props.getValueTransform('percentage/float').transformer;
+    it('converts a percentage to a float', function() {
+      var p = { value: '50%' };
+      assert(t(p) === '0.5');
+    });
+    it('converts multiple percentages to a floats', function() {
+      var p = { value: 'background-size: 50% 50%' };
+      assert(t(p) === 'background-size: 0.5 0.5');
+    });
+  });
+
+  describe('relative/pixel', function() {
+    var t = $props.getValueTransform('relative/pixel').transformer;
+    it('converts em to px', function() {
+      var p = { value: '1em' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 16 };
+      assert(t(p, m) === '16px');
+    });
+    it('converts rem to px', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 16 };
+      assert(t(p, m) === '16px');
+    });
+    it('takes the baseFontPercentage into account', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 50, baseFontPixel: 16 };
+      assert(t(p, m) === '8px');
+    });
+    it('takes the baseFontPixel into account', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 5 };
+      assert(t(p, m) === '5px');
+    });
+  });
+
+  describe('relative/pixelValue', function() {
+    var t = $props.getValueTransform('relative/pixelValue').transformer;
+    it('converts em to px', function() {
+      var p = { value: '1em' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 16 };
+      assert(t(p, m) === '16');
+    });
+    it('converts rem to px', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 16 };
+      assert(t(p, m) === '16');
+    });
+    it('takes the baseFontPercentage into account', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 50, baseFontPixel: 16 };
+      assert(t(p, m) === '8');
+    });
+    it('takes the baseFontPixel into account', function() {
+      var p = { value: '1rem' };
+      var m = { baseFontPercentage: 100, baseFontPixel: 5 };
+      assert(t(p, m) === '5');
+    });
+  });
+
+});
+
+describe('$props:formats', function() {
+
+  var p = path.resolve(__dirname, 'mock', 'sample.json');
+  var result;
+
+  function $format(format, done) {
+    return function(_done) {
+      gulp.src(p)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format(format))
+        .pipe($stream.first(function(file) {
+          result = file.contents.toString();
+          if (done)
+           return done(_done);
+          return _done();
+        }));
+    };
+  }
+
+  function $toJSON(done) {
+    result = JSON.parse(result);
+    done();
+  }
+
+  function $toXML(done) {
+    xml2js.parseString(result, function(err, r) {
+      result = r;
+      done();
+    });
+  }
+
+  describe('json', function() {
+    before($format('json', $toJSON));
+    it('converts props to json (key/value)', function() {
+      assert(_.has(result, 'account'));
+    });
+  });
+
+  describe('ios.json', function() {
+    before($format('ios.json', $toJSON));
+    it('has a "properties" array', function() {
+      assert(_.has(result, 'properties'));
+      assert(_.isArray(result.properties));
+    });
+    it('properties have a "name" and "value"', function() {
+      assert(_.has(result.properties[0], 'name'));
+      assert(_.has(result.properties[0], 'value'));
+    });
+  });
+
+  describe('android.xml', function() {
+    before($format('android.xml', $toXML));
+    it('has a top level resources node', function() {
+      assert(_.has(result, 'resources'));
+    });
+    it('has property nodes', function() {
+      assert(_.has(result.resources, 'property'));
+    });
+    it('has color nodes', function() {
+      assert(_.has(result.resources, 'color'));
+    });
+    it('resource nodes have a "name" attribute', function() {
+      _.flatten(result.resources).forEach(function(n) {
+        assert(_.has(n.$, 'name'));
+      });
+    });
+    it('resource nodes have a "category" attribute', function() {
+      _.flatten(result.resources).forEach(function(n) {
+        assert(_.has(n.$, 'category'));
+      });
+    });
+  });
+
+  describe('scss', function() {
+    before($format('scss'));
+    it('creates scss syntax', function() {
+      assert(result.match(/\$spacing\-none\: 0\;\n/g) !== null);
+    });
+  });
+
+  describe('sass', function() {
+    before($format('sass'));
+    it('creates sass syntax', function() {
+      assert(result.match(/\$spacing\-none\: 0\n/g) !== null);
+    });
+  });
+
+  describe('less', function() {
+    before($format('less'));
+    it('creates less syntax', function() {
+      assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
+    });
+  });
+
+  describe('styl', function() {
+    before($format('styl'));
+    it('creates stylus syntax', function() {
+      assert(result.match(/spacing\-none \= 0\n/g) !== null);
+    });
+  });
+
+  describe('aura.theme', function() {
+    before($format('aura.theme', $toXML));
+    it('has a top level aura:theme node', function() {
+      assert(_.has(result, 'aura:theme'));
+    });
+    it('has aura:var nodes', function() {
+      assert(_.has(result['aura:theme'], 'aura:var'));
+    });
+    it('var nodes have a "name" attribute', function() {
+      result['aura:theme']['aura:var'].forEach(function(n) {
+        assert(_.has(n.$, 'name'));
+      });
+    });
+    it('valueMatchers nodes have a "category" attribute', function() {
+      result['aura:theme']['aura:var'].forEach(function(n) {
+        assert(_.has(n.$, 'value'));
+      });
+    });
+    it('has aura:importTheme nodes', function() {
+      assert(_.has(result['aura:theme'], 'aura:importTheme'));
+    });
+    it('aura:importTheme nodes have a "name" attribute', function() {
+      result['aura:theme']['aura:importTheme'].forEach(function(n) {
+        assert(_.has(n.$, 'name'));
+      });
+    });
+  });
+
+});
