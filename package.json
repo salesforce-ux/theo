@@ -15,7 +15,7 @@
   ],
   "main": "dist/props/index.js",
   "scripts": {
-    "test": "mocha --recursive",
+    "test": "npm run dist && mocha --recursive",
     "dist": "6to5 src --out-dir dist"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "gulp-util": "^3.0.3",
     "js-yaml": "^3.2.6",
     "lodash": "^3.1.0",
+    "react": "^0.12.2",
     "through2": "^0.6.3",
     "tinycolor2": "^1.1.1",
     "xml2js": "^0.4.5"

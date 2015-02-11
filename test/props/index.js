@@ -1,6 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 
+var fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
 var gulpu = require('gulp-util');
@@ -435,18 +436,23 @@ describe('$props:valueTransforms', function() {
 
 describe('$props:formats', function() {
 
-  var p = path.resolve(__dirname, 'mock', 'sample.json');
+  var paths = {
+    sample: path.resolve(__dirname, 'mock', 'sample.json'),
+    sink: path.resolve(__dirname, 'mock', 'sink.json')
+  };
+
   var result;
 
-  function $format(format, done) {
+  function $format(format, src, done) {
     return function(_done) {
-      gulp.src(p)
+      gulp.src(src)
         .pipe($props.plugins.transform('raw'))
         .pipe($props.plugins.format(format))
         .pipe($stream.first(function(file) {
           result = file.contents.toString();
-          if (done)
+          if (done) {
            return done(_done);
+          }
           return _done();
         }));
     };
@@ -465,14 +471,14 @@ describe('$props:formats', function() {
   }
 
   describe('json', function() {
-    before($format('json', $toJSON));
+    before($format('json', paths.sample, $toJSON));
     it('converts props to json (key/value)', function() {
       assert(_.has(result, 'account'));
     });
   });
 
   describe('ios.json', function() {
-    before($format('ios.json', $toJSON));
+    before($format('ios.json', paths.sample, $toJSON));
     it('has a "properties" array', function() {
       assert(_.has(result, 'properties'));
       assert(_.isArray(result.properties));
@@ -484,7 +490,7 @@ describe('$props:formats', function() {
   });
 
   describe('android.xml', function() {
-    before($format('android.xml', $toXML));
+    before($format('android.xml', paths.sample, $toXML));
     it('has a top level resources node', function() {
       assert(_.has(result, 'resources'));
     });
@@ -507,35 +513,35 @@ describe('$props:formats', function() {
   });
 
   describe('scss', function() {
-    before($format('scss'));
+    before($format('scss', paths.sample));
     it('creates scss syntax', function() {
       assert(result.match(/\$spacing\-none\: 0\;\n/g) !== null);
     });
   });
 
   describe('sass', function() {
-    before($format('sass'));
+    before($format('sass', paths.sample));
     it('creates sass syntax', function() {
       assert(result.match(/\$spacing\-none\: 0\n/g) !== null);
     });
   });
 
   describe('less', function() {
-    before($format('less'));
+    before($format('less', paths.sample));
     it('creates less syntax', function() {
       assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
     });
   });
 
   describe('styl', function() {
-    before($format('styl'));
+    before($format('styl', paths.sample));
     it('creates stylus syntax', function() {
       assert(result.match(/spacing\-none \= 0\n/g) !== null);
     });
   });
 
   describe('aura.theme', function() {
-    before($format('aura.theme', $toXML));
+    before($format('aura.theme', paths.sample, $toXML));
     it('has a top level aura:theme node', function() {
       assert(_.has(result, 'aura:theme'));
     });
@@ -559,6 +565,18 @@ describe('$props:formats', function() {
       result['aura:theme']['aura:importTheme'].forEach(function(n) {
         assert(_.has(n.$, 'name'));
       });
+    });
+  });
+
+  describe('styleguide', function() {
+    before($format('styleguide', paths.sink));
+    it('outputs html', function() {
+      var re = new RegExp(_.escapeRegExp('<!doctype html>'));
+      assert(re.test(result));
+    });
+    it('has example rows', function() {
+      var re = new RegExp(_.escapeRegExp('<td class="example"'));
+      assert(re.test(result));
     });
   });
 
