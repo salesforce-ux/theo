@@ -255,6 +255,8 @@ registerFormat('aura.theme', json => {
   return cleanOutput(xml);
 });
 
+registerFormat('styleguide', require('./formats/styleguide'));
+
 ////////////////////////////////////////////////////////////////////
 // Exports
 ////////////////////////////////////////////////////////////////////
@@ -271,26 +273,28 @@ module.exports = {
      */
     legacy() {
       return through.obj((file, enc, next) => {
+        let newFile = file.clone();
         var json;
         try {
-          json = util.parsePropsFile(file);
+          json = util.parsePropsFile(newFile);
           if (_.isArray(json)) {
-            let err = TheoError('legacy() encountered a non object Design Properties file', file.path);
+            let err = TheoError('legacy() encountered a non object Design Properties file', newFile.path);
             return next(err);
           }
         } catch(e) {
-          let err = TheoError('legacy() encountered an invalid Design Properties file', file.path);
+          let err = TheoError('legacy() encountered an invalid Design Properties file', newFile.path);
           return next(err);
         }
         if (typeof json.properties === 'undefined') {
-          let err = TheoError('legacy() could not find a "properties" key', file.path);
+          let err = TheoError('legacy() could not find a "properties" key', newFile.path);
           return next(err);
         }
+        // Props
         json.props = {};
         for (let i = 0; i < json.properties.length; i++) {
           let prop = json.properties[i];
           if (typeof prop.name === 'undefined') {
-            let err = TheoError('legacy() encountered a property with no "name key', file.path);
+            let err = TheoError('legacy() encountered a property with no "name key', newFile.path);
             return next(err);
           }
           let name = prop.name
@@ -298,8 +302,17 @@ module.exports = {
           json.props[name] = prop;
         }
         delete json.properties;
-        file.contents = new Buffer(JSON.stringify(json));
-        next(null, file);
+        // Aliases
+        if (_.isArray(json.aliases)) {
+          let {aliases} = json;
+          json.aliases = {};
+          _.forEach(aliases, alias => {
+            json.aliases[alias.name] = alias.value;
+          });
+        }
+        // Done
+        newFile.contents = new Buffer(JSON.stringify(json));
+        next(null, newFile);
       });
     },
 

@@ -8,11 +8,7 @@ var gulpu = require('gulp-util');
 var through = require('through2');
 var _ = require('lodash');
 
-require('6to5/register')({
-  only: path.resolve('./src')
-});
-
-var PropSet = require('../../src/props/prop-set');
+var PropSet = require('../../dist/props/prop-set');
 
 function isError(error) {
   return (error instanceof Error) || error instanceof gulpu.PluginError;

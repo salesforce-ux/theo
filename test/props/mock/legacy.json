@@ -1,9 +1,16 @@
 {
+  "aliases": [{
+    "name": "SKY",
+    "value": "blue"
+  }],
   "properties": [{
     "name": "a",
     "value": "foo"
   },{
     "name": "b",
     "value": "bar"
+  },{
+    "name": "c",
+    "value": "{!SKY}"
   }]
 }

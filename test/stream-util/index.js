@@ -5,11 +5,7 @@ var path = require('path');
 var gulp = require('gulp');
 var through = require('through2');
 
-require('6to5/register')({
-  only: path.resolve('./src')
-});
-
-var $stream = require('../../src/stream-util');
+var $stream = require('../../dist/stream-util');
 
 describe('$stream', function() {
 
