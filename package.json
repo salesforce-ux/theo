@@ -36,11 +36,11 @@
     "lodash": "^3.1.0",
     "through2": "^0.6.3",
     "tinycolor2": "^1.1.1",
-    "xml2js": "^0.4.4"
+    "xml2js": "^0.4.5"
   },
   "devDependencies": {
     "6to5": "^3.5.3",
-    "gulp": "^3.8.10",
+    "gulp": "^3.8.11",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2"
   }
