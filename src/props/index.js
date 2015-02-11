@@ -285,24 +285,33 @@ module.exports = {
           let err = TheoError('legacy() encountered an invalid Design Properties file', newFile.path);
           return next(err);
         }
-        if (typeof json.properties === 'undefined') {
-          let err = TheoError('legacy() could not find a "properties" key', newFile.path);
-          return next(err);
-        }
-        // Props
-        json.props = {};
-        for (let i = 0; i < json.properties.length; i++) {
-          let prop = json.properties[i];
-          if (typeof prop.name === 'undefined') {
-            let err = TheoError('legacy() encountered a property with no "name key', newFile.path);
-            return next(err);
+        // Theme
+        if (_.has(json, 'theme')) {
+          // Properties
+          if (_.isArray(json.theme.properties)) {
+            json.props = {};
+            for (let i = 0; i < json.theme.properties.length; i++) {
+              let prop = json.theme.properties[i];
+              if (typeof prop.name === 'undefined') {
+                let err = TheoError('legacy() encountered a property with no "name key', newFile.path);
+                return next(err);
+              }
+              let name = prop.name
+              delete prop.name;
+              json.props[name] = prop;
+            }
           }
-          let name = prop.name
-          delete prop.name;
-          json.props[name] = prop;
+          // Aliases
+          if (_.isArray(json.theme.aliases)) {
+            let {aliases} = json.theme;
+            json.aliases = {};
+            _.forEach(aliases, alias => {
+              json.aliases[alias.name] = alias.value;
+            });
+          }
+          // Cleanup
+          delete json.theme;
         }
-        delete json.properties;
-        // Aliases
         if (_.isArray(json.aliases)) {
           let {aliases} = json;
           json.aliases = {};
@@ -311,7 +320,7 @@ module.exports = {
           });
         }
         // Done
-        newFile.contents = new Buffer(JSON.stringify(json));
+        newFile.contents = new Buffer(JSON.stringify(json, null, 2));
         next(null, newFile);
       });
     },

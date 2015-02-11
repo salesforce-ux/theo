@@ -188,7 +188,7 @@ describe('$props', function() {
 
 describe('$props.plugins', function() {
 
-  describe('#legacy()', function() {
+  describe.only('#legacy()', function() {
     function legacyA(done, format) {
       var src = path.resolve(__dirname, 'mock', 'legacy.json')
       gulp.src(src)
@@ -226,19 +226,12 @@ describe('$props.plugins', function() {
         done();
       }, function(json) { return '[]'; });
     });
-    it('pipes an error if a no "properties" key found', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/properties/.test(error.message));
-        done();
-      }, function(json) { delete json.properties; return JSON.stringify(json); });
-    });
     it('pipes an error if a property with no "name" key is found', function(done) {
       legacyA(function(error) {
         assert(isError(error));
         assert(/name/.test(error.message));
         done();
-      }, function(json) { json.properties = [{"value":"red"}]; return JSON.stringify(json); });
+      }, function(json) { json.theme.properties = [{"value":"red"}]; return JSON.stringify(json); });
     });
     it('created a single JSON file', function(done) {
       legacyB(function(files) {
@@ -259,7 +252,7 @@ describe('$props.plugins', function() {
         var json = JSON.parse(files[0].contents.toString());
         assert(json.props.a.value === 'foo');
         assert(json.props.b.value === 'bar');
-        assert(typeof json.properties === 'undefined');
+        assert(typeof json.theme === 'undefined');
         done();
       })
     });
