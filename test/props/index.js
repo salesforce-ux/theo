@@ -8,12 +8,8 @@ var through = require('through2');
 var _ = require('lodash');
 var xml2js = require('xml2js');
 
-require('6to5/register')({
-  only: path.resolve('./src')
-});
-
-var $stream = require('../../src/stream-util');
-var $props = require('../../src/props');
+var $stream = require('../../dist/stream-util');
+var $props = require('../../dist/props');
 
 function isError(error) {
   return (error instanceof Error) || (error instanceof gulpu.PluginError);
@@ -263,6 +259,14 @@ describe('$props.plugins', function() {
         assert(json.props.a.value === 'foo');
         assert(json.props.b.value === 'bar');
         assert(typeof json.properties === 'undefined');
+        done();
+      })
+    });
+    it('converts legacy aliases to the new format', function(done) {
+      legacyB(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(!_.isArray(json.aliases));
+        assert(_.has(json.aliases, 'SKY'));
         done();
       })
     });
