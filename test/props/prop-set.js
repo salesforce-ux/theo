@@ -269,10 +269,6 @@ describe('PropSet', function() {
         JSON.parse(json);
       });
     });
-    it('removes any non essential keys', function() {
-      var def = JSON.parse(set.toJSON());
-      assert(!_.has(def, 'aliases'));
-    });
     it('adds a "propKeys" array', function() {
       var def = JSON.parse(set.toJSON());
       assert(_.has(def, 'propKeys'));

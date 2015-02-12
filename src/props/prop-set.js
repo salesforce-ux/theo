@@ -69,8 +69,6 @@ class PropSet {
     let def = _.merge({}, this.def);
     // Provide the keys for easy iteration
     def.propKeys = _.keys(def.props);
-    // Cleanup
-    delete def.aliases;
     // Go
     return JSON.stringify(def, null, 2);
   }
