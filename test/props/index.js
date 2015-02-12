@@ -267,7 +267,30 @@ describe('$props.plugins', function() {
   });
 
   describe('#transform', function() {
-
+    it('transforms Design Properties as JSON', function(done) {
+      var error;
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+    });
+    it('transforms Design Properties as YML', function(done) {
+      var error;
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+    });
   });
 
   describe('#diff()', function() {
