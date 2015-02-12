@@ -85,7 +85,8 @@ class PropSet {
 
   _validate(def) {
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
-      throw TheoError('Design Properties contained no "props" object');
+      console.warn('Design Properties contained no "props" object')
+      def.props = {};
     }
     // Make sure properties have all required keys
     _.forEach(def.props, (prop, name) => {

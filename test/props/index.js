@@ -188,7 +188,7 @@ describe('$props', function() {
 
 describe('$props.plugins', function() {
 
-  describe.only('#legacy()', function() {
+  describe('#legacy()', function() {
     function legacyA(done, format) {
       var src = path.resolve(__dirname, 'mock', 'legacy.json')
       gulp.src(src)

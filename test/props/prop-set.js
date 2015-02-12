@@ -95,13 +95,12 @@ describe('PropSet', function() {
   });
 
   describe('#_validate', function() {
-    it('throws an error if no "props" key is found', function() {
-      try {
-        set._validate({});
-      } catch(error) {
-        assert(isError(error));
-        assert(/contained no "props" object/.test(error.message));
-      }
+    it('logs an warning if no "props" key is found', function() {
+      sinon.spy(console, 'warn');
+      set._validate({});
+      assert(console.warn.calledOnce)
+      assert(/props/.test(console.warn.getCall(0).args[0]));
+      console.warn.restore();
     });
     it('throws an error if any prop is malformed', function() {
       var keys = ['value', 'type', 'category'];
