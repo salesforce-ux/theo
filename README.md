@@ -1,7 +1,7 @@
 # <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="28" /> Theo
 
-[![build status](https://travis-ci.org/salesforce-ux/theo.svg)](https://travis-ci.org/salesforce-ux/theo)
-[![npm version](https://badge.fury.io/js/theo.svg)](http://badge.fury.io/js/theo)
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url]
 
 Theo is a set of [Gulp](http://gulpjs.com) plugins for
 transforming and formatting [Design Properties](#overview)
@@ -485,3 +485,9 @@ Transform legacy Theo *Design Properties* to the new spec
 gulp.src('./design/props-old.json')
   .pipe(theo.plugins.legacy());
 ```
+
+[npm-url]: https://npmjs.org/package/theo
+[npm-image]: http://img.shields.io/npm/v/theo.svg
+
+[travis-url]: https://travis-ci.org/salesforce-ux/theo
+[travis-image]: http://img.shields.io/travis/salesforce-ux/theo.svg
