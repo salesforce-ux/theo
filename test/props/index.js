@@ -533,7 +533,7 @@ describe('$props:formats', function() {
     });
   });
 
-  describe.only('aura.theme', function() {
+  describe('aura.theme', function() {
     before($format('aura.theme', paths.sample, $toXML));
     it('has a top level aura:theme node', function() {
       assert(_.has(result, 'aura:theme'));
@@ -565,8 +565,8 @@ describe('$props:formats', function() {
     });
   });
 
-  describe('styleguide', function() {
-    before($format('styleguide', paths.sink));
+  describe('html', function() {
+    before($format('html', paths.sink));
     it('outputs html', function() {
       var re = new RegExp(_.escapeRegExp('<!doctype html>'));
       assert(re.test(result));

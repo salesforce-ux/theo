@@ -8,7 +8,7 @@ let Style = React.createClass({
   render() {
     return (
       <style>
-        {require('./styleguide.style')}
+        {require('./html.style')}
       </style>
     );
   }

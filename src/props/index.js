@@ -257,7 +257,7 @@ registerFormat('aura.theme', json => {
   return cleanOutput(xml);
 });
 
-registerFormat('styleguide', require('./formats/styleguide'));
+registerFormat('html', require('./formats/html'));
 
 ////////////////////////////////////////////////////////////////////
 // Exports
