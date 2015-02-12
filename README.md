@@ -110,7 +110,7 @@ A *Design Properties* file is written in either
 
 Theo is divided into two primary plugins:
 
-### transform
+### [transform](#plugins.transform)
 
 This plugin is responsible for transforming raw values into platform specific values.
 
@@ -118,7 +118,7 @@ For example, the Design Properties might specify a color value as an
 rgba (`rgba(255, 0, 0, 1)`), but an Android app
 might prefer to consume colors as an 8 digit hex (`#ffff0000`)
 
-### format
+### [format](#plugins.format)
 
 This plugin is responsible for taking transformed properties and outputting them
 into a new file format.
@@ -134,7 +134,7 @@ An Android app might prefer to consume the final values as XML:
 
 ## API
 
-####`theo.plugins.transform(type, [options])`
+####`theo.plugins.transform(type, [options])` <a name="plugins.transform"></a>
 
 Transform the values for each *Design Property* file according to
 the specified type.
@@ -262,7 +262,7 @@ Same as *relative/pixel*, but removes the `px` extension
 
 ***
 
-####`theo.plugins.format(type, [options])`
+####`theo.plugins.format(type, [options])`  <a name="plugins.format"></a>
 
 Format the output for each *Design Property* file according to
 the specified type.
@@ -275,12 +275,25 @@ The name of the registered format
 **@param {object} [options]**  
 Additional options to be passed along to the formatter
 
+**@param {function} [options.propsFilter]**  
+A filter function that can be used to filter down the props before formatting
+
 #### Example:
 
 ```js
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.format('scss'))
+  .pipe(gulp.dest('dist'));
+```
+
+```js
+// Only output props with a "color" type
+gulp.src('design/props.json')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.format('scss', {
+    propsFilter: prop => prop.type === 'color'
+  }))
   .pipe(gulp.dest('dist'));
 ```
 
@@ -341,7 +354,17 @@ Here is the layout of the `json` argument
 
 ###### raw.json
 
-No changes
+```json
+{
+  "props": {
+    "PROP_NAME": {
+      "value": "PROP_VALUE",
+      "type": "PROP_TYPE",
+      "category": "PROP_CATEGORY"
+    }
+  }
+}
+```
 
 ###### ios.json
 

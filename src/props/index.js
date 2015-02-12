@@ -337,23 +337,25 @@ module.exports = {
      * @param {string} type
      */
     transform(type, options={}) {
+      let defaults = {
+        includeAlias: false,
+        includeMeta: false
+      };
+      if (typeof options !== 'undefined' && typeof options !== 'object') {
+        throw TheoError('transform() options must be an object');
+      }
+      options = _.merge({}, defaults, options);
+      if (!_.has(TRANSFORMS, type)) {
+        let err = TheoError(`"${type}" is not a registered transform`);
+        return next(err);
+      }
+      let transform = TRANSFORMS[type].map(name => VALUE_TRANSFORMS[name]);
       return through.obj((file, enc, next) => {
-        let defaults = {
-          includeAlias: false,
-          includeMeta: false
-        };
-        if (typeof options !== 'undefined' && typeof options !== 'object') {
-          throw TheoError('transform() options must be an object');
-        }
-        var newFile = file.clone();
-        if (!_.has(TRANSFORMS, type)) {
-          let err = TheoError(`"${type}" is not a registered transform`);
-          return next(err);
-        }
-        let transform = TRANSFORMS[type].map(name => VALUE_TRANSFORMS[name]);
+        let newFile = file.clone();
         try {
           newFile.contents = new PropSet(newFile, transform, options).transform().toBuffer();
-        } catch(err) {
+        }
+        catch(err) {
           return next(err);
         }
         next(null, newFile);
@@ -381,25 +383,33 @@ module.exports = {
      *
      * @param {string} type
      * @param {object} options
-     * @param {string} options.name - The file name
+     * @param {function} [options.propsFilter] - A function that filters props before formatting
      */
     format(type, options={}) {
+      let defaults = {
+        propsFilter: () => true
+      };
+      if (typeof options !== 'object') {
+        throw TheoError('format() options must be an object');
+      }
+      options = _.merge({}, defaults, options);
+      if (typeof options.propsFilter !== 'function') {
+        throw TheoError('format() options.filter must be a function');
+      }
+      // Get the formatter
+      if (typeof FORMATS[type] === 'undefined') {
+        throw TheoError(`"${type}"" is not a registerd format`);
+      }
+      let formatter = FORMATS[type];
       return through.obj((file, enc, next) => {
-        var newFile = file.clone();
+        let newFile = file.clone();
         // Get the transformed JSON
         let json = util.parsePropsFile(newFile);
-        // Get the formatter
-        if (typeof FORMATS[type] === 'undefined') {
-          throw TheoError(`"${type}"" is not a registerd format`);
-        }
-        let formatter = FORMATS[type];
         // Rename the file
-        newFile.path = newFile.path.replace(/\json$/, type);
-        // Format the JSON
-        let defaults = {
-          name: file.relative
-        };
-        let options = _.merge({}, defaults, options);
+        newFile.path = newFile.path.replace(/\(json|yml)$/, type);
+        // Filter out any props that won't be needed for this format
+        json.props = _.filter(json.props, options.propsFilter);
+        // Format the json
         let formatted = formatter(json, options);
         // Set the file contents to the result of the formatter
         newFile.contents = new Buffer(formatted);
@@ -414,7 +424,7 @@ module.exports = {
       let defaults = {
         name: 'diff'
       };
-      if (typeof options !== 'undefined' && typeof options !== 'object') {
+      if (typeof options !== 'object') {
         throw TheoError('diff() options must be an object');
       }
       options = _.merge({}, defaults, options);

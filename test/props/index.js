@@ -293,6 +293,60 @@ describe('$props.plugins', function() {
     });
   });
 
+  describe('#format', function() {
+    it('throws an error for invalid options', function() {
+      assert.throws(function() {
+        $props.plugins.format('web', false);
+      });
+    });
+    it('throws an error if options.propsFilter is not a function', function() {
+      try {
+        $props.plugins.format('web', { propsFilter: false });
+      }
+      catch(e) {
+        assert(typeof error === 'undefined');
+        assert(/function/.test(e.message));
+      }
+    });
+    it('formats props', function(done) {
+      var error, result;
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      var postResult;
+      gulp.src(samplePath)
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          assert.doesNotThrow(function() {
+            JSON.parse(postResult);
+          });
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('raw.json'))
+        .pipe($props.plugins.getResult(function(result) {
+          postResult = result;
+        }));
+    });
+    it('filters props before formatting', function(done) {
+      var error, result;
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      //var preResult = JSON.parse(fs.readFileSync(samplePath));
+      var postResult;
+      gulp.src(samplePath)
+        .on('finish', function() {
+          assert(postResult.props.length === 1)
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('raw.json', { propsFilter: function(prop) { return prop.name === 'account'; } }))
+        .pipe($props.plugins.getResult(function(result) {
+          postResult = JSON.parse(result);
+        }));
+    });
+  });
+
   describe('#getResult', function() {
     it('gets the result of a transform', function(done) {
       var error;

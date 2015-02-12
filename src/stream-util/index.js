@@ -34,7 +34,7 @@ module.exports = {
       throw new Error('filterPath() requires a RegExp argument');
     }
     return this.filter(file => {
-      return file.path && file.path.match(re) !== null;
+      return file.path && re.test(file.path);
     });
   },
 
