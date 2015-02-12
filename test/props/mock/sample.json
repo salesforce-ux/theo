@@ -10,6 +10,8 @@
   "auraImports": [
     "one:mqCommons"
   ],
+
+  "auraExtends": "one:theme",
  
   "props": {
     "spacing_none": {

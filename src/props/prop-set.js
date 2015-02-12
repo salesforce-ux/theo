@@ -31,7 +31,7 @@ class PropSet {
       def = _.merge(def, json);
     }
     catch (e) {
-      throw TheoError('transform() encountered an invalid Design Properties file');
+      throw TheoError(`transform() encountered an invalid Design Properties file: ${this.file.path}`);
     }
     // Globals
     this._resolveGlobals(def);
@@ -85,7 +85,7 @@ class PropSet {
 
   _validate(def) {
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
-      console.warn('Design Properties contained no "props" object')
+      //console.warn('Design Properties contained no "props" object')
       def.props = {};
     }
     // Make sure properties have all required keys

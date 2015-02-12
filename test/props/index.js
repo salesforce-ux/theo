@@ -533,10 +533,14 @@ describe('$props:formats', function() {
     });
   });
 
-  describe('aura.theme', function() {
+  describe.only('aura.theme', function() {
     before($format('aura.theme', paths.sample, $toXML));
     it('has a top level aura:theme node', function() {
       assert(_.has(result, 'aura:theme'));
+    });
+    it('adds the "extends" attribute', function() {
+      assert(_.has(result['aura:theme'].$, 'extends'));
+      assert(result['aura:theme'].$.extends === 'one:theme');
     });
     it('has aura:var nodes', function() {
       assert(_.has(result['aura:theme'], 'aura:var'));

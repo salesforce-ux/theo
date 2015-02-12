@@ -238,17 +238,19 @@ registerFormat('styl', json => {
 });
 
 registerFormat('aura.theme', json => {
-  let imports = _.isArray(json.auraImports) ? json.auraImports : [];
-  imports = imports.map(theme => {
+  let auraImports = _.isArray(json.auraImports) ? json.auraImports : [];
+  let auraExtends = _.isString(json.auraExtends) ? json.auraExtends : null;
+  auraImports = auraImports.map(theme => {
     return `<aura:importTheme name="${theme}" />`;
   }).join('\n  ');
   let props = _.map(json.props, prop => {
     let name = camelCase(prop.name);
     return `<aura:var name="${name}" value="${prop.value}" />`;
   }).join('\n  ');
+  let openTag = auraExtends ? `<aura:theme extends="${auraExtends}">` : `<aura:theme>`;
   let xml = `
-    <aura:theme>
-      ${imports}
+    ${openTag}
+      ${auraImports}
       ${props}
     </aura:theme>
   `;
@@ -278,11 +280,11 @@ module.exports = {
         try {
           json = util.parsePropsFile(newFile);
           if (_.isArray(json)) {
-            let err = TheoError('legacy() encountered a non object Design Properties file', newFile.path);
+            let err = TheoError(`legacy() encountered a non object Design Properties file: ${newFile.path}`);
             return next(err);
           }
         } catch(e) {
-          let err = TheoError('legacy() encountered an invalid Design Properties file', newFile.path);
+          let err = TheoError(`legacy() encountered an invalid Design Properties file: ${newFile.path}`);
           return next(err);
         }
         // Theme
@@ -293,7 +295,7 @@ module.exports = {
             for (let i = 0; i < json.theme.properties.length; i++) {
               let prop = json.theme.properties[i];
               if (typeof prop.name === 'undefined') {
-                let err = TheoError('legacy() encountered a property with no "name key', newFile.path);
+                let err = TheoError(`legacy() encountered a property with no "name" key: ${newFile.path}`);
                 return next(err);
               }
               let name = prop.name
