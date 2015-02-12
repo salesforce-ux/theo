@@ -362,6 +362,9 @@ module.exports = {
         // Get the transformed JSON
         let json = util.parsePropsFile(newFile);
         // Get the formatter
+        if (typeof FORMATS[type] === 'undefined') {
+          throw TheoError(`"${type}"" is not a registerd format`);
+        }
         let formatter = FORMATS[type];
         // Rename the file
         newFile.path = newFile.path.replace(/\json$/, type);
