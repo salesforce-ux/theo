@@ -361,6 +361,22 @@ module.exports = {
     },
 
     /**
+     * Convert the vinyl '.json' file to a JSON primative
+     *
+     * @param {function} [callback]
+     * @return {stream}
+     */    
+    getResult(callback) {
+      return through.obj((file, enc, next) => {
+        if (typeof callback === 'function' && file.isBuffer()) {
+          let result = file.contents.toString();
+          callback(result);
+          return next(null, file);
+        }
+      });
+    },
+
+    /**
      * Format the props JSON into a new output format
      *
      * @param {string} type

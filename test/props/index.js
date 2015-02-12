@@ -293,6 +293,65 @@ describe('$props.plugins', function() {
     });
   });
 
+  describe('#getResult', function() {
+    it('gets the result of a transform', function(done) {
+      var error;
+      var spy = sinon.spy();
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          assert(spy.calledOnce);
+          assert.doesNotThrow(function() {
+            JSON.parse(spy.getCall(0).args[0]);
+          });
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.getResult(spy));
+    });
+    it('gets the result of a format', function(done) {
+      var error;
+      var spy = sinon.spy();
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          assert(spy.calledOnce);
+          assert.doesNotThrow(function() {
+            JSON.parse(spy.getCall(0).args[0]);
+          });
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('raw.json'))
+        .pipe($props.plugins.getResult(spy));
+    });
+    it('passes the file through the stream', function(done) {
+      var error;
+      var spy = sinon.spy();
+      var spy2 = sinon.spy();
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .on('error', function(err) {
+          error = err;
+        })
+        .on('finish', function() {
+          assert(typeof error === 'undefined');
+          assert(spy.calledOnce);
+          assert(spy2.calledOnce);
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('raw.json'))
+        .pipe($props.plugins.getResult(spy))
+        .pipe($props.plugins.getResult(spy2));
+    });
+  });
+
   describe('#diff()', function() {
     var files, log;
     beforeEach(function(done) {

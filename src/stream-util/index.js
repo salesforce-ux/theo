@@ -178,20 +178,23 @@ module.exports = {
   /**
    * Convert the vinyl '.json' file to a JSON primative
    *
-   * @return {stream}
+   * @param {function} [callback]
    */
-  toJSON() {
+  parseJSON(callback) {
     return through.obj((file, enc, next) => {
       let ext = path.extname(file.path);
       if (ext !== '.json') {
-        return next(new Error('toJSON() encountered on non ".json" file'));
+        return next(new Error('parseJSON() encountered on non ".json" file'));
       }
       try {
         let json = JSON.parse(file.contents.toString());
-        return next(null, json);
+        if (typeof callback === 'function') {
+          callback(json);          
+        }
+        return next(null, null);
       }
       catch(e) {
-        let err = new Error('toJSON() encountered an invalid JSON file', file.path);
+        let err = new Error('parseJSON() encountered an invalid JSON file', file.path);
         return next(err);
       }
     });

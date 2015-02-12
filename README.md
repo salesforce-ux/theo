@@ -420,6 +420,38 @@ See [salesforce-ux.github.io/design-properties]()
 
 ***
 
+####`theo.plugins.getResult([callback])`
+
+Get the result of a transform/format
+
+**@param {function} [callback]**  
+The function to call for each result in the stream
+
+#### Example:
+
+```js
+// Get the transformed Design Properties
+gulp.src('design/props.json')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.getResult(result => {
+    let designProps = JSON.parse(result);
+  }));
+```
+
+```js
+// Get the formatted Design Properties
+gulp.src('design/props.json')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.format('android.xml'))
+  .pipe(theo.plugins.getResult(result => {
+    // result will be an XML string
+  }))
+  // The result can still be written to a file
+  .pipe(gulp.dest('dist'));
+```
+
+***
+
 ####`theo.plugins.legacy()`
 
 Transform legacy Theo *Design Properties* to the new spec

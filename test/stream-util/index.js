@@ -218,15 +218,18 @@ describe('$stream', function() {
     });
   });
 
-  describe('#toJSON()', function() {
+  describe('#parseJSON()', function() {
     it('converts a vinyl ".json" file to a JSON primativee', function(done) {
+      var json;
       src()
         .pipe($stream.mergeJSON())
-        .pipe($stream.toJSON())
+        .pipe($stream.parseJSON(function(j) {
+          json = j;
+        }))
         .pipe(collectFiles())
         .on('finish', function() {
-          assert(files.length === 1);
-          assert(files[0].name === 'b');
+          assert(files.length === 0);
+          assert(typeof json !== 'undefined');
           done();
         });
     });
@@ -236,7 +239,7 @@ describe('$stream', function() {
           file.path = 'foobar.txt';
           next(null, file);
         }))
-        .pipe($stream.toJSON())
+        .pipe($stream.parseJSON())
         .on('error', function(err) {
           assert(err !== null);
           done();
@@ -248,7 +251,7 @@ describe('$stream', function() {
           file.contents = new Buffer('{"b":true,}');
           next(null, file);
         }))
-        .pipe($stream.toJSON())
+        .pipe($stream.parseJSON())
         .on('error', function(err) {
           assert(err !== null);
           done();
