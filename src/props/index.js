@@ -406,7 +406,7 @@ module.exports = {
         // Get the transformed JSON
         let json = util.parsePropsFile(newFile);
         // Rename the file
-        newFile.path = newFile.path.replace(/\(json|yml)$/, type);
+        newFile.path = newFile.path.replace(/\.(json|yml)$/, type);
         // Filter out any props that won't be needed for this format
         json.props = _.filter(json.props, options.propsFilter);
         // Format the json
