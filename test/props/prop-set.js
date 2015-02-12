@@ -16,7 +16,7 @@ function isError(error) {
 
 describe('PropSet', function() {
 
-  var set, file, def;
+  var def, file, t1, t2, set;
   
   beforeEach(function() {
     var p = path.resolve(__dirname, 'mock', 'c.json');
@@ -26,11 +26,11 @@ describe('PropSet', function() {
       path: p,
       contents: new Buffer(f)
     });
-    var t1 = {
+    t1 = {
       matcher: function(prop) { return prop.category === 'test-a'; },
       transformer: function(prop) { return prop.value + '__' + prop.name; }
     };
-    var t2 = {
+    t2 = {
       matcher: function(prop) { return prop.category === 'test-b'; },
       transformer: function(prop) { return prop.name; }
     };
@@ -156,8 +156,24 @@ describe('PropSet', function() {
       };
       set._resolveAliases(def);
       assert(def.props.a.value === 'blue');
+      assert(!_.has(def.props.a, 'alias'));
       assert(def.props.b.value === 'blue - blue');
       assert(def.props.c.value === 'blue - green');
+    });
+    it('includes an alias in a prop if specified in the options', function() {
+      set = new PropSet(file, [t1, t2], { includeAlias: true });
+      var def = {
+        aliases: { sky: "blue", land: "green" },
+        props: {
+          a: { value: "{!sky}" },
+          b: { value: "foo" }
+        }
+      };
+      set._resolveAliases(def);
+      assert(def.props.a.value === 'blue');
+      assert(_.has(def.props.a, 'alias'));
+      assert(def.props.a.alias === 'sky');
+      assert(def.props.b.value === 'foo');
     });
   });
 
@@ -207,6 +223,19 @@ describe('PropSet', function() {
       set._transformProps();
       _.forEach(set.def.props, function(prop) {
         assert(!_.has(prop, '.meta'));
+      });
+    });
+    it('deletes the ".meta" key for each prop', function() {
+      set._transformProps();
+      _.forEach(set.def.props, function(prop) {
+        assert(!_.has(prop, '.meta'));
+      });
+    });
+    it('includes the ".meta" key for each prop if specified in the options', function() {
+      set = new PropSet(file, [t1, t2], { includeMeta: true });
+      set._transformProps();
+      _.forEach(set.def.props, function(prop) {
+        assert(_.has(prop, '.meta'));
       });
     });
   }

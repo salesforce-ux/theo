@@ -336,8 +336,15 @@ module.exports = {
      *
      * @param {string} type
      */
-    transform(type) {
+    transform(type, options={}) {
       return through.obj((file, enc, next) => {
+        let defaults = {
+          includeAlias: false,
+          includeMeta: false
+        };
+        if (typeof options !== 'undefined' && typeof options !== 'object') {
+          throw TheoError('transform() options must be an object');
+        }
         var newFile = file.clone();
         if (!_.has(TRANSFORMS, type)) {
           let err = TheoError(`"${type}" is not a registered transform`);
@@ -345,7 +352,7 @@ module.exports = {
         }
         let transform = TRANSFORMS[type].map(name => VALUE_TRANSFORMS[name]);
         try {
-          newFile.contents = new PropSet(newFile, transform).transform().toBuffer();
+          newFile.contents = new PropSet(newFile, transform, options).transform().toBuffer();
         } catch(err) {
           return next(err);
         }

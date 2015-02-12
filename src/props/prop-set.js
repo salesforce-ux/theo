@@ -7,7 +7,7 @@ let TheoError   = require('./util/error');
 
 class PropSet {
   
-  constructor(file, valueTransforms) {
+  constructor(file, valueTransforms, options={}) {
     if (typeof file.isBuffer !== 'function' || typeof file.isBuffer === 'undefined') {
       throw TheoError('transform() must use vinyl files');
     }
@@ -15,6 +15,7 @@ class PropSet {
     this.file = file;
     this.path = file.path;
     this.valueTransforms = valueTransforms;
+    this.options = options;
 
     this._init();
   }
@@ -97,12 +98,22 @@ class PropSet {
   }
 
   _resolveAliases(def) {
+    let options = this.options;
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key);
       let re = new RegExp(`{!${s}}`, 'g');
+      let isAlias = /^{[^\}]*}$/g;
       _.forEach(def.props, prop => {
         if (_.isString(prop.value)) {
-          prop.value = prop.value.replace(re, value);
+          // Value contains an alias
+          if (re.test(prop.value)) {
+            // See if the alias should be included in the prop
+            if (options.includeAlias === true && isAlias.test(prop.value)) {
+              prop.alias = key;
+            }
+            // Reslove the alias
+            prop.value = prop.value.replace(re, value);
+          }
         }
       });
     });
@@ -123,7 +134,7 @@ class PropSet {
         path: p,
         contents: new Buffer(f)
       });
-      return new PropSet(v, this._transform);
+      return new PropSet(v, this._transform, this.options);
     });
   }
 
@@ -135,7 +146,9 @@ class PropSet {
       }
       // Extract the meta data
       let meta = prop['.meta'];
-      delete prop['.meta'];
+      if (this.options.includeMeta !== true) {
+        delete prop['.meta'];        
+      }
       // Transform the value
       this._transformValue(prop, meta);
     });
