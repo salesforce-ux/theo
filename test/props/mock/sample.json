@@ -1,0 +1,40 @@
+{
+  "global": {
+    ".meta": {
+      "baseFontPixel": 16,
+      "baseFontPercentage": 100
+    },
+    "category": "test"
+  },
+
+  "auraImports": [
+    "one:mqCommons"
+  ],
+
+  "auraExtends": "one:theme",
+ 
+  "props": {
+    "spacing_none": {
+      "value": "0",
+      "label": "n",
+      "type": "number"
+    },
+    "spacing_xx_small": {
+      "value": "0.25em",
+      "label": "xxs",
+      "type": "number"
+    },
+    "account": {
+      "value": "#FF0000",
+      "type": "color"
+    },
+    "opportunity": {
+      "value": "rgba(255, 255, 0)",
+      "type": "color"
+    },
+    "stage_left_width": {
+      "value": "25%",
+      "type": "number"
+    }
+  }
+}

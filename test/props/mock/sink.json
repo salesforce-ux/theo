@@ -1,0 +1,686 @@
+{
+  "global": {
+    "type": ""
+  },
+  "aliases": {
+    "TRANSPARENT": "transparent",
+    "BLACK_TRANSPARENT_07": "rgba(0,0,0,.07)",
+    "BLACK_TRANSPARENT_16": "rgba(0,0,0,.16)",
+    "BLACK_TRANSPARENT_24": "rgba(0,0,0,.24)",
+    "BLACK_TRANSPARENT_40": "rgba(0,0,0,.4)",
+    "WHITE_TRANSPARENT_97": "rgba(255,255,255,.97)",
+    "WHITE": "#FFFFFF",
+    "CURIOUS_BLUE": "#2A94D6",
+    "DEEP_CERULEAN": "#006EB3",
+    "TALL_POPPY": "#B5362D",
+    "TULIP_TREE": "#E6B739",
+    "CALIFORNIA": "#FF9F05",
+    "CAPE_COD": "#3C3D3E",
+    "NEVADA": "#686C70",
+    "CASPER": "#9FAAB5",
+    "BLUE_BAYOUX": "#485C70",
+    "SLATE_GREY": "#66788A",
+    "GEYSER": "#DADEE2",
+    "DARK_GREY_ROYAL_BLUE": "#2A4158",
+    "PALE_ROYAL_BLUE": "#F0F1F2",
+    "PORCELAIN": "#F5F6F7",
+    "GREY_ROYAL_BLUE": "#34495E",
+    "NEW_YORK_PINK": "#D68184",
+    "POT_POURRI": "#F6E4E4",
+    "LOCHMARA": "#137CBD",
+    "REGENT_GREY": "#8595A6",
+    "ROLLING_STONE": "#525354",
+    "PICKLED_BLUEWOOD": "#253647",
+    "PICKLED_BLUEWOOD_TRANSPARENT_30": "rgba(37,54,71,.3)",
+    "PICKLED_BLUEWOOD_TRANSPARENT_80": "rgba(37,54,71,.8)",
+    "FOAM": "#F0F8FC",
+    "BAHAMA_BLUE": "#005C94",
+    "KOURNIKOVA": "#FFEC70",
+    "FUZZY_WUZZY_BROWN": "#C06057",
+    "CHATEAU_GREEN": "#43B66A",
+    "MALIBU": "#5EBFFC",
+    "CATSKILL_WHITE": "#E4ECF4"
+  },
+  "props": {
+    "COLOR_TEXT_ACTION_LABEL": {
+      "value": "{!SLATE_GREY}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_ACTION_LABEL_ACTIVE": {
+      "value": "{!NEVADA}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_ALT": {
+      "value": "{!BLUE_BAYOUX}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_BROWSER": {
+      "value": "{!WHITE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_BROWSER_ACTIVE": {
+      "value": "{!BLACK_TRANSPARENT_40}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_CUSTOMER": {
+      "value": "{!CALIFORNIA}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_DEFAULT": {
+      "value": "{!CAPE_COD}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_ERROR": {
+      "value": "{!TALL_POPPY}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_HEADING_WEAK": {
+      "value": "{!DEEP_CERULEAN}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_HINT": {
+      "value": "{!CASPER}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INPUT_DISABLED": {
+      "value": "{!BLUE_BAYOUX}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INPUT_FOCUS_INVERSE": {
+      "value": "{!DARK_GREY_ROYAL_BLUE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INPUT_ICON": {
+      "value": "{!CASPER}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INVERSE": {
+      "value": "{!WHITE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INVERSE_ACTIVE": {
+      "value": "{!MALIBU}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_INVERSE_HOVER": {
+      "value": "{!CASPER}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_LABEL": {
+      "value": "{!NEVADA}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_LINK_ACTIVE": {
+      "value": "{!BAHAMA_BLUE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_LINK_DISABLED": {
+      "value": "{!SLATE_GREY}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_LINK_HOVER": {
+      "value": "{!BAHAMA_BLUE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_MODAL": {
+      "value": "{!WHITE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_MODAL_BUTTON": {
+      "value": "{!NEVADA}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_LINK": {
+      "value": "{!DEEP_CERULEAN}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_PLACEHOLDER": {
+      "value": "{!SLATE_GREY}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_PLACEHOLDER_INVERSE": {
+      "value": "{!GEYSER}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_SECONDARY_BUTTON": {
+      "value": "{!BLUE_BAYOUX}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_SELECTION_HOVER": {
+      "value": "{!CURIOUS_BLUE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_STAGE_LEFT": {
+      "value": "{!GEYSER}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_WARNING": {
+      "value": "{!TULIP_TREE}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_TEXT_WEAK": {
+      "value": "{!NEVADA}",
+      "category": "text-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND": {
+      "value": "{!PALE_ROYAL_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ACTIVE_INVERSE": {
+      "value": "{!PORCELAIN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ALT": {
+      "value": "{!WHITE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ALT_INVERSE": {
+      "value": "{!DARK_GREY_ROYAL_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ANCHOR": {
+      "value": "{!GREY_ROYAL_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BROWSER": {
+      "value": "{!SLATE_GREY}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BROWSER_ACTIVE": {
+      "value": "{!PORCELAIN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_BRAND": {
+      "value": "{!CURIOUS_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_BRAND_ACTIVE": {
+      "value": "{!LOCHMARA}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_BRAND_HOVER": {
+      "value": "{!LOCHMARA}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_COMMENT": {
+      "value": "{!LOCHMARA}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_COMMENT_ACTIVE": {
+      "value": "{!DEEP_CERULEAN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_DISABLED": {
+      "value": "{!PALE_ROYAL_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_INVERSE": {
+      "value": "{!BLACK_TRANSPARENT_16}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_BUTTON_INVERSE_ACTIVE": {
+      "value": "{!BLACK_TRANSPARENT_24}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_CUSTOMER": {
+      "value": "{!CALIFORNIA}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ERROR": {
+      "value": "{!TALL_POPPY}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ERROR_ALT": {
+      "value": "{!NEW_YORK_PINK}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_HIGHLIGHT": {
+      "value": "{!KOURNIKOVA}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ICON_UTILITY": {
+      "value": "{!REGENT_GREY}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INDICATOR_DOT": {
+      "value": "{!CASPER}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INPUT": {
+      "value": "{!WHITE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INPUT_ACTIVE": {
+      "value": "{!WHITE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INPUT_DISABLED": {
+      "value": "{!GEYSER}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INPUT_ERROR": {
+      "value": "{!POT_POURRI}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INPUT_SEARCH": {
+      "value": "{!BLACK_TRANSPARENT_16}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_INVERSE": {
+      "value": "{!GREY_ROYAL_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_MODAL": {
+      "value": "{!WHITE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_MODAL_BRAND": {
+      "value": "{!CURIOUS_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_MODAL_BUTTON": {
+      "value": "{!BLACK_TRANSPARENT_07}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_MODAL_BUTTON_ACTIVE": {
+      "value": "{!BLACK_TRANSPARENT_16}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_NOTIFICATION_BADGE": {
+      "value": "{!FUZZY_WUZZY_BROWN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_NOTIFICATION_NEW": {
+      "value": "{!FOAM}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_ORG_SWITCHER_ARROW": {
+      "value": "{!PICKLED_BLUEWOOD}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_PAYLOAD": {
+      "value": "{!PORCELAIN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_SHADE": {
+      "value": "{!CATSKILL_WHITE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_SUCCESS": {
+      "value": "{!CHATEAU_GREEN}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_TEMP_MODAL": {
+      "value": "{!PICKLED_BLUEWOOD_TRANSPARENT_80}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_TEMP_MODAL_TINT": {
+      "value": "{!PICKLED_BLUEWOOD_TRANSPARENT_30}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_TOAST": {
+      "value": "{!WHITE_TRANSPARENT_97}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BACKGROUND_WARNING": {
+      "value": "{!TULIP_TREE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BRAND": {
+      "value": "{!CURIOUS_BLUE}",
+      "category": "background-color",
+      "comment": ""
+    },
+    "COLOR_BORDER": {
+      "value": "{!PORCELAIN}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_BRAND": {
+      "value": "{!LOCHMARA}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_BUTTON_BROWSER": {
+      "value": "{!GEYSER}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_HINT": {
+      "value": "{!CAPE_COD}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_INPUT": {
+      "value": "{!TRANSPARENT}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_INPUT_ACTIVE": {
+      "value": "{!TRANSPARENT}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SELECTION": {
+      "value": "{!DEEP_CERULEAN}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SELECTION_ACTIVE": {
+      "value": "{!PALE_ROYAL_BLUE}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SELECTION_HOVER": {
+      "value": "{!CURIOUS_BLUE}",
+      "category": "border-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SEPARATOR": {
+      "value": "{!PORCELAIN}",
+      "category": "hr-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SEPARATOR_ALT": {
+      "value": "{!GEYSER}",
+      "category": "hr-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SEPARATOR_INVERSE": {
+      "value": "{!GREY_ROYAL_BLUE}",
+      "category": "hr-color",
+      "comment": ""
+    },
+    "COLOR_BORDER_SEPARATOR_INVERSE_ALT": {
+      "value": "{!DARK_GREY_ROYAL_BLUE}",
+      "category": "hr-color",
+      "comment": ""
+    },
+    "SHADOW_ACTION_OVERFLOW_FOOTER": {
+      "value": "0 -2px 4px {!PORCELAIN}",
+      "category": "shadow",
+      "comment": ""
+    },
+    "FONT_FAMILY_BODY": {
+      "value": "'ProximaNovaSoft-Regular'",
+      "category": "font",
+      "comment": ""
+    },
+    "FONT_FAMILY_STRONG": {
+      "value": "'ProximaNovaSoft-Semibold'",
+      "category": "font",
+      "comment": ""
+    },
+    "FONT_SIZE_XX_SMALL": {
+      "value": "10px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_X_SMALL": {
+      "value": "13px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_SMALL": {
+      "value": "14px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_MEDIUM": {
+      "value": "15px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_LARGE": {
+      "value": "16px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_X_LARGE": {
+      "value": "18px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_XL_LARGE": {
+      "value": "19px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_RECORD_TITLE": {
+      "value": "20px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_XX_LARGE": {
+      "value": "22px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "FONT_SIZE_XXX_LARGE": {
+      "value": "25px",
+      "category": "font-size",
+      "comment": ""
+    },
+    "LINE_HEIGHT_HEADING": {
+      "value": "1.25",
+      "category": "line-height",
+      "comment": ""
+    },
+    "LINE_HEIGHT_TEXT": {
+      "value": "1.5",
+      "category": "line-height",
+      "comment": ""
+    },
+    "SPACING_XX_SMALL": {
+      "value": "2px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "SPACING_X_SMALL": {
+      "value": "7px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "SPACING_SMALL": {
+      "value": "8px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "SPACING_MEDIUM": {
+      "value": "14px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "SPACING_LARGE": {
+      "value": "18px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "SPACING_X_LARGE": {
+      "value": "28px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "BORDER_WIDTH_THIN": {
+      "value": "1px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "BORDER_WIDTH_THICK": {
+      "value": "2px",
+      "category": "spacing",
+      "comment": ""
+    },
+    "BORDER_RADIUS_SMALL": {
+      "value": "3px",
+      "category": "radius",
+      "comment": ""
+    },
+    "BORDER_RADIUS_MEDIUM": {
+      "value": "5px",
+      "category": "radius",
+      "comment": ""
+    },
+    "BORDER_RADIUS_LARGE": {
+      "value": "8px",
+      "category": "radius",
+      "comment": ""
+    },
+    "BORDER_RADIUS_CIRCLE": {
+      "value": "50%",
+      "category": "radius",
+      "comment": ""
+    },
+    "WIDTH_STAGE_LEFT": {
+      "value": "88%",
+      "category": "misc",
+      "comment": ""
+    },
+    "WIDTH_STAGE_LEFT_TABLET": {
+      "value": "250px",
+      "category": "misc",
+      "comment": ""
+    },
+    "HEIGHT_FOOTER": {
+      "value": "44px",
+      "category": "misc",
+      "comment": ""
+    },
+    "HEIGHT_HEADER": {
+      "value": "42px",
+      "category": "misc",
+      "comment": ""
+    },
+    "HEIGHT_INPUT": {
+      "value": "30px",
+      "category": "misc",
+      "comment": ""
+    },
+    "HEIGHT_OVERFLOW_START": {
+      "value": "144px",
+      "category": "misc",
+      "comment": ""
+    },
+    "MAX_HEIGHT_ACTION_OVERFLOW_MENU": {
+      "value": "628px",
+      "category": "misc",
+      "comment": ""
+    },
+    "MAX_HEIGHT_CARD_MEDIA": {
+      "value": "144px",
+      "category": "misc",
+      "comment": ""
+    },
+    "MAX_WIDTH_ACTION_BAR": {
+      "value": "512px",
+      "category": "misc",
+      "comment": ""
+    },
+    "MAX_WIDTH_ACTION_BAR_WITH_LABELS": {
+      "value": "320px",
+      "category": "misc",
+      "comment": ""
+    },
+    "MAX_WIDTH_ACTION_OVERFLOW_MENU": {
+      "value": "512px",
+      "category": "misc",
+      "comment": ""
+    },
+    "SQUARE_ICON_MEDIUM": {
+      "value": "32px",
+      "category": "misc",
+      "comment": ""
+    },
+    "SQUARE_ICON_SMALL": {
+      "value": "16px",
+      "category": "misc",
+      "comment": ""
+    },
+    "SQUARE_RECORD_ANCHOR_PIC": {
+      "value": "48px",
+      "category": "misc",
+      "comment": ""
+    },
+    "SQUARE_TAPPABLE": {
+      "value": "44px",
+      "category": "misc",
+      "comment": ""
+    },
+    "DURATION_SLIDE": {
+      "value": "0.25s",
+      "category": "misc",
+      "comment": ""
+    }
+  }
+}
