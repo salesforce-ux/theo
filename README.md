@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="28" /> Theo
 
-[![build status](https://travis-ci.org/salesforce-ux/theo.svg?branch=gulp)](https://travis-ci.org/salesforce-ux/theo)
+[![build status](https://travis-ci.org/salesforce-ux/theo.svg)](https://travis-ci.org/salesforce-ux/theo)
 [![npm version](https://badge.fury.io/js/theo.svg)](http://badge.fury.io/js/theo)
 
 Theo is a set of [Gulp](http://gulpjs.com) plugins for
