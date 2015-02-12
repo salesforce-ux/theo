@@ -152,6 +152,10 @@ registerFormat('json', json => {
   return JSON.stringify(output, null, 2);
 });
 
+registerFormat('raw.json', json => {
+  return JSON.stringify(json, null, 2);
+});
+
 registerFormat('ios.json', json => {
   let output = {
     properties: _.map(json.props, prop => {
