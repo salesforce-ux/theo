@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A set of Gulp plugins for transforming and formatting [Design Properties](",
   "keywords": [
     "css",
@@ -15,8 +15,9 @@
   ],
   "main": "dist/props/index.js",
   "scripts": {
+    "dist": "6to5 src --out-dir dist",
     "test": "npm run dist && mocha --recursive",
-    "dist": "6to5 src --out-dir dist"
+    "prepublish": "npm run dist"
   },
   "repository": {
     "type": "git",
