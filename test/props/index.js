@@ -345,6 +345,21 @@ describe('$props.plugins', function() {
           postResult = JSON.parse(result);
         }));
     });
+    it('renames the file correctly', function(done) {
+      var resultFile;
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      gulp.src(samplePath)
+        .on('finish', function() {
+          assert(resultFile.relative === 'sample.scss');
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('scss'))
+        .pipe(through.obj(function(file, enc, next) {
+          resultFile = file
+          next(null, file);
+        }))
+    });
   });
 
   describe('#getResult', function() {
