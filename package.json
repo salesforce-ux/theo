@@ -16,7 +16,7 @@
   ],
   "main": "dist/props/index.js",
   "scripts": {
-    "dist": "6to5 src --out-dir dist",
+    "dist": "babel src --out-dir dist",
     "test": "npm run dist && mocha --recursive",
     "prepublish": "npm run dist"
   },
@@ -42,7 +42,7 @@
     "xml2js": "^0.4.5"
   },
   "devDependencies": {
-    "6to5": "^3.5.3",
+    "babel": "^4.0.1",
     "gulp": "^3.8.11",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2"
