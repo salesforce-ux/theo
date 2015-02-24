@@ -104,7 +104,7 @@ class PropSet {
     let options = this.options;
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key);
-      let re = new RegExp(`{!${s}}`, 'g');
+      let re = new RegExp(`\{\!${s}\}`, 'g');
       let isAlias = /^{[^\}]*}$/g;
       _.forEach(def.props, prop => {
         if (_.isString(prop.value)) {
