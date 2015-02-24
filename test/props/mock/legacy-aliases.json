@@ -1,0 +1,12 @@
+{
+  "aliases": [
+    {
+      "name": "SKY",
+      "value": "blue"
+    },
+    {
+      "name": "GRASS",
+      "value": "green"
+    }
+  ]
+}

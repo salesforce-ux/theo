@@ -1,0 +1,24 @@
+{
+  "theme": {
+    "aliases": "legacy-aliases.json",
+    "imports": ["one:mqCommons", "one:actionBackgrounds"],
+    "extends": "one:theme",
+    "properties": [{
+      "name": "a",
+      "value": "foo"
+    },{
+      "name": "b",
+      "value": "bar"
+    },{
+      "name": "c",
+      "value": "{!SKY}"
+    },{
+      "name": "d",
+      "value": "red",
+      "category": "background-color"
+    },{
+      "name": "e",
+      "value": "1px"
+    }]
+  }
+}

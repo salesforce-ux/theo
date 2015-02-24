@@ -317,9 +317,41 @@ module.exports = {
                 let err = TheoError(`legacy() encountered a property with no "name" key: ${newFile.path}`);
                 return next(err);
               }
-              let name = prop.name
+              // Category
+              if (!_.has(prop, 'category')) {
+                prop.category = '';
+              }
+              // Type
+              if (!_.has(prop, 'type')) {
+                if (/color/.test(prop.category)) {
+                  prop.type = 'color';
+                }
+                else if (/(em|rem|px)/.test(prop.value)) {
+                  prop.type = 'size';
+                }
+                else {
+                  prop.type = '';
+                }
+              }
+              // Save the prop
+              let name = prop.name;
               delete prop.name;
               json.props[name] = prop;
+            }
+          }
+          // Aliases
+          if (_.isString(json.theme.aliases)) {
+            let p = path.resolve(path.dirname(file.path), json.theme.aliases);
+            if (fs.existsSync(p)) {
+              try {
+                let a = JSON.parse(fs.readFileSync(p).toString());
+                if (_.has(a, 'aliases') && _.isArray(a.aliases)) {
+                  json.theme.aliases = a.aliases;
+                }
+              } catch(e) {
+                let err = TheoError(`legacy() failed to import alias file ${json.theme.aliases}`);
+                return next(err);
+              }
             }
           }
           // Aliases
@@ -330,9 +362,17 @@ module.exports = {
               json.aliases[alias.name] = alias.value;
             });
           }
+          // Aura
+          if (_.isArray(json.theme.imports)) {
+            json.auraImports = json.theme.imports;
+          }
+          if (_.isString(json.theme.extends)) {
+            json.auraExtends = json.theme.extends;
+          }
           // Cleanup
           delete json.theme;
         }
+        // Aliases
         if (_.isArray(json.aliases)) {
           let {aliases} = json;
           json.aliases = {};

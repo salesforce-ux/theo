@@ -212,6 +212,17 @@ describe('$props.plugins', function() {
         }))
         .on('finish', function() { done(files); });
     }
+    function legacyC(done) {
+      var files = [];
+      var src = path.resolve(__dirname, 'mock', 'legacy-alt.json')
+      gulp.src(src)
+        .pipe($props.plugins.legacy())
+        .pipe(through.obj(function(file, enc, next) {
+          files.push(file);
+          next();
+        }))
+        .on('finish', function() { done(files); });
+    }
     it('pipes an error if invalid Design Properties file is encoutered', function(done) {
       legacyA(function(error) {
         assert(isError(error));
@@ -261,6 +272,36 @@ describe('$props.plugins', function() {
         var json = JSON.parse(files[0].contents.toString());
         assert(!_.isArray(json.aliases));
         assert(_.has(json.aliases, 'SKY'));
+        done();
+      })
+    });
+    it('imports legacy aliases', function(done) {
+      legacyC(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(!_.isArray(json.aliases));
+        assert(_.has(json.aliases, 'SKY'));
+        done();
+      })
+    });
+    it('imports converts imports to auraImports', function(done) {
+      legacyC(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(_.isArray(json.auraImports));
+        done();
+      })
+    });
+    it('imports converts extends to auraExtends', function(done) {
+      legacyC(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(_.isString(json.auraExtends));
+        done();
+      })
+    });
+    it('adds a relevant type if possible', function(done) {
+      legacyC(function(files) {
+        var json = JSON.parse(files[0].contents.toString());
+        assert(json.props.d.type === 'color');
+        assert(json.props.e.type === 'size');
         done();
       })
     });
