@@ -95,13 +95,16 @@ describe('PropSet', function() {
   });
 
   describe('#_validate', function() {
-    /*it('logs an warning if no "props" key is found', function() {
-      sinon.spy(console, 'warn');
-      set._validate({});
-      assert(console.warn.calledOnce)
-      assert(/props/.test(console.warn.getCall(0).args[0]));
-      console.warn.restore();
-    });*/
+    it('throws an error if "props" is an array', function() {
+      try {
+        var def = {props:[]};
+        set._validate(def);
+      } catch(error) {
+        assert(isError(error));
+        var re = new RegExp(_.escapeRegExp('"props" key must be an object'));
+        assert(re.test(error.message));
+      }
+    });
     it('throws an error if any prop is malformed', function() {
       var keys = ['value', 'type', 'category'];
       keys.forEach(function(key) {

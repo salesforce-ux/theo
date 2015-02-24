@@ -83,6 +83,9 @@ class PropSet {
   }
 
   _validate(def) {
+    if (_.isArray(def.props)) {
+      throw TheoError(`Design Properties "props" key must be an object`);
+    }
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
       //console.warn('Design Properties contained no "props" object')
       def.props = {};
