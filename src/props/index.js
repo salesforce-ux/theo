@@ -194,10 +194,14 @@ registerFormat('scss', json => {
 });
 
 registerFormat('list.scss', (json, options) => {
-  let items = json.items.map(item => {
+  let items = _.isArray(json.items) ? json.items : [];
+  items = _.map(items, item => {
     return `"${item}"`;
   }).join(',\n  ');
-  let name = options.name.replace(/\..*/g, '');
+  let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
+  let name = typeof options.name === 'string'
+    ? options.name
+    : `${basename}-list`;
   let output = `
     $${name}: (
       ${items}
@@ -211,7 +215,10 @@ registerFormat('map.scss', (json, options) => {
     let name = kebabCase(prop.name);
     return `"${name}": ${prop.value}`;
   }).join(',\n  ');
-  let name = options.name.replace(/\..*/g, '');
+  let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
+  let name = typeof options.name === 'string'
+    ? options.name
+    : `${basename}-map`;
   let output = `
     $${name}: (
       ${items}
@@ -394,7 +401,7 @@ module.exports = {
       }
       options = _.merge({}, defaults, options);
       if (typeof options.propsFilter !== 'function') {
-        throw TheoError('format() options.filter must be a function');
+        throw TheoError('format() options.propsFilter must be a function');
       }
       // Get the formatter
       if (typeof FORMATS[type] === 'undefined') {
@@ -410,7 +417,9 @@ module.exports = {
         // Filter out any props that won't be needed for this format
         json.props = _.filter(json.props, options.propsFilter);
         // Format the json
-        let formatted = formatter(json, options);
+        let formatted = formatter(json, _.merge({}, options, {
+          path: newFile.path
+        }));
         // Set the file contents to the result of the formatter
         newFile.contents = new Buffer(formatted);
         next(null, newFile);

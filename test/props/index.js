@@ -582,7 +582,8 @@ describe('$props:formats', function() {
 
   var paths = {
     sample: path.resolve(__dirname, 'mock', 'sample.json'),
-    sink: path.resolve(__dirname, 'mock', 'sink.json')
+    sink: path.resolve(__dirname, 'mock', 'sink.json'),
+    list: path.resolve(__dirname, 'mock', 'list.json')
   };
 
   var result;
@@ -660,6 +661,64 @@ describe('$props:formats', function() {
     before($format('scss', paths.sample));
     it('creates scss syntax', function() {
       assert(result.match(/\$spacing\-none\: 0\;\n/g) !== null);
+    });
+  });
+
+  describe('map.scss', function() {
+    it('creates a scss map syntax', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.scss'))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$sample-map: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
+    it('names the map if options.name was passed', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.scss', { name: 'Hello' }))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$Hello: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
+  });
+
+  describe('list.scss', function() {
+    it('creates a scss list syntax', function(done) {
+      gulp.src(paths.list)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('list.scss'))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$list-list: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"a",'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
+    it('names the list if options.name was passed', function(done) {
+      gulp.src(paths.list)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('list.scss', { name: 'Hello' }))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$Hello: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"a",'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
     });
   });
 
