@@ -199,9 +199,13 @@ registerFormat('list.scss', (json, options) => {
     return `"${item}"`;
   }).join(',\n  ');
   let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
-  let name = typeof options.name === 'string'
-    ? options.name
-    : `${basename}-list`;
+  let name = `${basename}-list`;
+  if (_.isFunction(options.name)) {
+    let n = options.name(basename, options.path);
+    if (_.isString(n)) {
+      name = n;
+    }
+  }
   let output = `
     $${name}: (
       ${items}
@@ -216,9 +220,13 @@ registerFormat('map.scss', (json, options) => {
     return `"${name}": ${prop.value}`;
   }).join(',\n  ');
   let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
-  let name = typeof options.name === 'string'
-    ? options.name
-    : `${basename}-map`;
+  let name = `${basename}-map`;
+  if (_.isFunction(options.name)) {
+    let n = options.name(basename, options.path);
+    if (_.isString(n)) {
+      name = n;
+    }
+  }
   let output = `
     $${name}: (
       ${items}
@@ -418,7 +426,7 @@ module.exports = {
         json.props = _.filter(json.props, options.propsFilter);
         // Format the json
         let formatted = formatter(json, _.merge({}, options, {
-          path: newFile.path
+          path: file.path
         }));
         // Set the file contents to the result of the formatter
         newFile.contents = new Buffer(formatted);

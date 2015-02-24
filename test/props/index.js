@@ -681,10 +681,12 @@ describe('$props:formats', function() {
     it('names the map if options.name was passed', function(done) {
       gulp.src(paths.sample)
         .pipe($props.plugins.transform('raw'))
-        .pipe($props.plugins.format('map.scss', { name: 'Hello' }))
+        .pipe($props.plugins.format('map.scss', {name:function(basename, path) {
+          return _.camelCase(basename) + 'Map';
+        }}))
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
-          var hasName = new RegExp(_.escapeRegExp('$Hello: ('));
+          var hasName = new RegExp(_.escapeRegExp('$sampleMap: ('));
           var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
@@ -710,10 +712,12 @@ describe('$props:formats', function() {
     it('names the list if options.name was passed', function(done) {
       gulp.src(paths.list)
         .pipe($props.plugins.transform('raw'))
-        .pipe($props.plugins.format('list.scss', { name: 'Hello' }))
+        .pipe($props.plugins.format('list.scss', {name:function(basename, path) {
+          return 'HelloList';
+        }}))
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
-          var hasName = new RegExp(_.escapeRegExp('$Hello: ('));
+          var hasName = new RegExp(_.escapeRegExp('$HelloList: ('));
           var hasProp = new RegExp(_.escapeRegExp('"a",'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
