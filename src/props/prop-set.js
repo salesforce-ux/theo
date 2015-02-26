@@ -116,9 +116,9 @@ class PropSet {
     let options = this.options;
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key);
-      let re = new RegExp(`\{\!${s}\}`, 'g');
-      let isAlias = /^{[^\}]*}$/g;
       _.forEach(def.props, prop => {
+        let re = new RegExp(`\{\!${s}\}`, 'g');
+        let isAlias = /^{[^\}]*}$/g;
         if (_.isString(prop.value)) {
           // Value contains an alias
           if (re.test(prop.value)) {
