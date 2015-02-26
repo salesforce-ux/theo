@@ -389,7 +389,8 @@ describe('$props.plugins', function() {
       var postResult;
       gulp.src(samplePath)
         .on('finish', function() {
-          assert(postResult.props.length === 1)
+          assert(postResult.propKeys.length === 1);
+          assert(_.keys(postResult.props).length === 1);
           done();
         })
         .pipe($props.plugins.transform('web'))

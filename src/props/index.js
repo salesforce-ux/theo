@@ -475,7 +475,13 @@ module.exports = {
         // Rename the file
         newFile.path = newFile.path.replace(/(json|yml)$/, type);
         // Filter out any props that won't be needed for this format
-        json.props = _.filter(json.props, options.propsFilter);
+        let props = {};
+        let filteredProps = _.filter(json.props, options.propsFilter);
+        _.forEach(filteredProps, prop => {
+          props[prop.name] = prop;
+        });
+        json.props = props;
+        json.propKeys = _.keys(props);
         // Format the json
         let formatted = formatter(json, _.merge({}, options, {
           path: file.path
