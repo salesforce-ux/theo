@@ -190,6 +190,21 @@ describe('PropSet', function() {
       assert(def.props.a.alias === 'sky');
       assert(def.props.b.value === 'foo');
     });
+    it('only resolves aliases if options.resolveAliases isnt false', function() {
+      set = new PropSet(file, [], { resolveAliases: false });
+      var def = {
+        aliases: { sky: "blue", land: "green" },
+        props: {
+          a: { value: "{!sky}" },
+          b: { value: "foo" },
+          c: { value: "{!land} {!sea}" }
+        }
+      };
+      set._init(def);
+      assert(def.props.a.value === '{!sky}');
+      assert(def.props.b.value === 'foo');
+      assert(def.props.c.value === '{!land} {!sea}');
+    });
   });
 
   describe('#_resolveImports', function() {

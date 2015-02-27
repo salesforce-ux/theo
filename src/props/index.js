@@ -404,14 +404,9 @@ module.exports = {
      * @param {string} type
      */
     transform(type, options={}) {
-      let defaults = {
-        includeAlias: false,
-        includeMeta: false
-      };
       if (typeof options !== 'undefined' && typeof options !== 'object') {
         throw TheoError('transform() options must be an object');
       }
-      options = _.merge({}, defaults, options);
       if (!_.has(TRANSFORMS, type)) {
         let err = TheoError(`"${type}" is not a registered transform`);
         return next(err);

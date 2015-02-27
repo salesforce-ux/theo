@@ -24,15 +24,22 @@ class PropSet {
       throw TheoError('transform() must use vinyl files');
     }
 
+    let defaults = {
+      includeAlias: false,
+      includeMeta: false,
+      resolveAliases: true
+    };
+
     this.file = file;
     this.path = file.path;
     this.valueTransforms = valueTransforms;
-    this.options = options;
+    this.options = _.merge({}, defaults, options);
 
     this._init();
   }
 
   _init() {
+    let {options} = this;
     // Create the definition
     let def = {
       global: {},
@@ -51,13 +58,15 @@ class PropSet {
     // Validate
     this._validate(def);
     // Resolve any local aliases before resolving imports
-    this._resolveAliases(def);
+    if (options.resolveAliases !== false) {
+      this._resolveAliases(def);
+    }
     // Collect all the import definitions
     let imports = this._resolveImports(def).map(i => i.def);
     // Merge the imported definitions
     def = _.merge.apply(null, _.flatten([{}, imports, def]));
     // Resolve any additional aliases that were depending on imports
-    if (imports.length > 0) {
+    if (imports.length > 0 && options.resolveAliases !== false) {
       this._resolveAliases(def);
     }
     // Cleanup
