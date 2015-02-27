@@ -104,6 +104,47 @@ describe('PropSet', function() {
       assert(set.def.props.c.value === 'green');
       assert(set.def.props.f.value === 'green');
     });
+    it('only resolves aliases if options.resolveAliases isnt false', function() {
+      var def = {
+        aliases: { sky: "blue", land: "green" },
+        global: { type: "foo", category: "bar" },
+        props: {
+          a: { value: "{!sky}" },
+          b: { value: "foo" },
+          c: { value: "{!land} {!sea}" }
+        }
+      };
+      var defFile = new gulpu.File({
+        path: 'test.json',
+        contents: new Buffer(JSON.stringify(def))
+      });
+      set = new PropSet(defFile, [], { resolveAliases: false });
+      assert(set.def.props.a.value === '{!sky}');
+      assert(set.def.props.b.value === 'foo');
+      assert(set.def.props.c.value === '{!land} {!sea}');
+    });
+    it('includes a ".rawValue" if options.includeRawValue is true', function() {
+      var def = {
+        aliases: { sky: "blue", land: "green", sea: "clear" },
+        global: { type: "foo", category: "bar" },
+        props: {
+          a: { value: "{!sky}" },
+          b: { value: "foo" },
+          c: { value: "{!land} {!sea}" }
+        }
+      };
+      var defFile = new gulpu.File({
+        path: 'test.json',
+        contents: new Buffer(JSON.stringify(def))
+      });
+      set = new PropSet(defFile, [], { includeRawValue: true });
+      assert(set.def.props.a.value === 'blue');
+      assert(set.def.props.a['.rawValue'] === '{!sky}');
+      assert(set.def.props.b.value === 'foo');
+      assert(set.def.props.b['.rawValue'] === 'foo');
+      assert(set.def.props.c.value === 'green clear');
+      assert(set.def.props.c['.rawValue'] === '{!land} {!sea}');
+    });
   });
 
   describe('#_validate', function() {
@@ -189,21 +230,6 @@ describe('PropSet', function() {
       assert(_.has(def.props.a, 'alias'));
       assert(def.props.a.alias === 'sky');
       assert(def.props.b.value === 'foo');
-    });
-    it('only resolves aliases if options.resolveAliases isnt false', function() {
-      set = new PropSet(file, [], { resolveAliases: false });
-      var def = {
-        aliases: { sky: "blue", land: "green" },
-        props: {
-          a: { value: "{!sky}" },
-          b: { value: "foo" },
-          c: { value: "{!land} {!sea}" }
-        }
-      };
-      set._init(def);
-      assert(def.props.a.value === '{!sky}');
-      assert(def.props.b.value === 'foo');
-      assert(def.props.c.value === '{!land} {!sea}');
     });
   });
 

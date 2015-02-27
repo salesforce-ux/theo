@@ -148,10 +148,6 @@ The name of the registered transform
 **@param {object} [options]**  
 Addtional options  
 
-**@param {boolean} [options.includeAlias]**  
-If a prop value is strictly an alias, replace the value and include an "alias" key
-in the prop with the name of the alias  
-
 **@param {boolean} [options.includeMeta]**  
 Don't remove ".meta" key from a prop 
 

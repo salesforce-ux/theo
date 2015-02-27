@@ -26,6 +26,7 @@ class PropSet {
 
     let defaults = {
       includeAlias: false,
+      includeRawValue: false,
       includeMeta: false,
       resolveAliases: true
     };
@@ -52,6 +53,12 @@ class PropSet {
     }
     catch (e) {
       throw TheoError(`transform() encountered an invalid Design Properties file: ${this.file.path}`);
+    }
+    // Raw
+    if (options.includeRawValue === true) {
+      _.forEach(def.props, prop => {
+        prop['.rawValue'] = _.merge({}, prop).value;
+      });
     }
     // Globals
     this._resolveGlobals(def);
@@ -133,6 +140,7 @@ class PropSet {
           if (re.test(prop.value)) {
             // See if the alias should be included in the prop
             if (options.includeAlias === true && isAlias.test(prop.value)) {
+              console.warn('options.includeAlias will be deprecated soon. Please use options.includeRawValue');
               prop.alias = key;
             }
             // Reslove the alias
