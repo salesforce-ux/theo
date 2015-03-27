@@ -431,11 +431,32 @@ PROP_NAME = PROP_VALUE;
 </aura:theme>
 ```
 
+###### common.js
+
+```js
+module.exports = {
+  PROP_NAME: PROP_VALUE
+};
+```
+
+*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
+
+###### amd.js
+
+```js
+define(function() {
+  return {
+    PROP_NAME: PROP_VALUE
+  };
+});
+```
+
 *Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
 ###### styleguide
 
 See [salesforce-ux.github.io/design-properties]()
+
 
 ***
 
