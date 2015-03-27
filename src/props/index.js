@@ -81,7 +81,7 @@ registerValueTransform('color/hex8',
 );
 
 registerValueTransform('percentage/float',
-  prop => prop.value.match(/%/) !== null,
+  prop => /%/.test(prop.value),
   prop => prop.value.replace(constants.PERCENTAGE_PATTERN, (match, number) => parseFloat(number/100))
 );
 
@@ -289,6 +289,46 @@ registerFormat('aura.theme', json => {
 });
 
 registerFormat('html', require('./formats/html'));
+
+registerFormat('common.js', json => {
+  let values = _.map(json.props, prop => {
+    let name = camelCase(prop.name);
+    let value = prop.value;
+    switch (typeof value) {
+      case 'string':
+      default:
+        value = `"${value}"`;
+    }
+    return `${name}: ${value},`;
+  }).join('\n  ').replace(/,$/, '');
+  let output = `
+    module.exports = {
+      ${values}
+    };
+  `;
+  return cleanOutput(output);
+});
+
+registerFormat('amd.js', json => {
+  let values = _.map(json.props, prop => {
+    let name = camelCase(prop.name);
+    let value = prop.value;
+    switch (typeof value) {
+      case 'string':
+      default:
+        value = `"${value}"`;
+    }
+    return `${name}: ${value},`;
+  }).join('\n  ').replace(/,$/, '');
+  let output = `
+    define(function() {
+      return {
+        ${values}
+      };
+    });
+  `;
+  return cleanOutput(output);
+});
 
 ////////////////////////////////////////////////////////////////////
 // Exports

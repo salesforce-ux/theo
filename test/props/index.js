@@ -642,10 +642,10 @@ describe('$props:formats', function() {
 
   var result;
 
-  function $format(format, src, done) {
+  function $format(transform, format, src, done) {
     return function(_done) {
       gulp.src(src)
-        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.transform(transform))
         .pipe($props.plugins.format(format))
         .pipe($stream.first(function(file) {
           result = file.contents.toString();
@@ -670,14 +670,14 @@ describe('$props:formats', function() {
   }
 
   describe('json', function() {
-    before($format('json', paths.sample, $toJSON));
+    before($format('raw', 'json', paths.sample, $toJSON));
     it('converts props to json (key/value)', function() {
       assert(_.has(result, 'account'));
     });
   });
 
   describe('ios.json', function() {
-    before($format('ios.json', paths.sample, $toJSON));
+    before($format('raw', 'ios.json', paths.sample, $toJSON));
     it('has a "properties" array', function() {
       assert(_.has(result, 'properties'));
       assert(_.isArray(result.properties));
@@ -689,7 +689,7 @@ describe('$props:formats', function() {
   });
 
   describe('android.xml', function() {
-    before($format('android.xml', paths.sample, $toXML));
+    before($format('raw', 'android.xml', paths.sample, $toXML));
     it('has a top level resources node', function() {
       assert(_.has(result, 'resources'));
     });
@@ -712,7 +712,7 @@ describe('$props:formats', function() {
   });
 
   describe('scss', function() {
-    before($format('scss', paths.sample));
+    before($format('raw', 'scss', paths.sample));
     it('creates scss syntax', function() {
       assert(result.match(/\$spacing\-none\: 0\;\n/g) !== null);
     });
@@ -781,28 +781,28 @@ describe('$props:formats', function() {
   });
 
   describe('sass', function() {
-    before($format('sass', paths.sample));
+    before($format('raw', 'sass', paths.sample));
     it('creates sass syntax', function() {
       assert(result.match(/\$spacing\-none\: 0\n/g) !== null);
     });
   });
 
   describe('less', function() {
-    before($format('less', paths.sample));
+    before($format('raw', 'less', paths.sample));
     it('creates less syntax', function() {
       assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
     });
   });
 
   describe('styl', function() {
-    before($format('styl', paths.sample));
+    before($format('raw', 'styl', paths.sample));
     it('creates stylus syntax', function() {
       assert(result.match(/spacing\-none \= 0\n/g) !== null);
     });
   });
 
   describe('aura.theme', function() {
-    before($format('aura.theme', paths.sample, $toXML));
+    before($format('raw', 'aura.theme', paths.sample, $toXML));
     it('has a top level aura:theme node', function() {
       assert(_.has(result, 'aura:theme'));
     });
@@ -834,7 +834,7 @@ describe('$props:formats', function() {
   });
 
   describe('html', function() {
-    before($format('html', paths.sink));
+    before($format('raw', 'html', paths.sink));
     it('outputs html', function() {
       var re = new RegExp(_.escapeRegExp('<!doctype html>'));
       assert(re.test(result));
@@ -842,6 +842,36 @@ describe('$props:formats', function() {
     it('has example rows', function() {
       var re = new RegExp(_.escapeRegExp('<td class="example"'));
       assert(re.test(result));
+    });
+  });
+
+  describe('common.js', function() {
+    before($format('ios', 'common.js', paths.sink));
+    it('outputs a common js module', function() {
+      var a = new RegExp('^' + _.escapeRegExp('module.exports = {'));
+      assert(a.test(result));
+      var b = new RegExp(_.escapeRegExp('};') + '$');
+      assert(b.test(result));
+    });
+    it('evaluates as JavaScript', function() {
+      assert.doesNotThrow(function() {
+        eval('var module = {};' + result);
+      });
+    });
+  });
+
+  describe('amd.js', function() {
+    before($format('ios', 'amd.js', paths.sink));
+    it('outputs a common js module', function() {
+      var a = new RegExp('^' + _.escapeRegExp('define(function() {'));
+      assert(a.test(result));
+      var b = new RegExp(_.escapeRegExp('});') + '$');
+      assert(b.test(result));
+    });
+    it('evaluates as JavaScript', function() {
+      assert.doesNotThrow(function() {
+        eval('var define = function(){};' + result);
+      });
     });
   });
 
