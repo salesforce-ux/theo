@@ -15,11 +15,11 @@ let yaml = require('js-yaml');
 module.exports = {
 
   isRelativeSpacing(value) {
-    return value.match(/(?:r)?em$/g) !== null;
+    return /rem$/.test(value);
   },
 
   remToPx(rem, baseFontPercentage, baseFontPixel) {
-    return ((parseFloat(rem.replace(/r(em)/g, '')) * baseFontPixel) * (baseFontPercentage/100)) + 'px';
+    return ((parseFloat(rem.replace(/rem/g, '')) * baseFontPixel) * (baseFontPercentage/100)) + 'px';
   },
 
   parsePropsFile(file) {

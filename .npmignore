@@ -1,7 +1,5 @@
-.DS_Store
-*.log
-*.node
-node_modules
-assets
-src
-test
+/*
+/*/
+!/dist/
+!README.md
+!package.jsona
