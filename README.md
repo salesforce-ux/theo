@@ -28,7 +28,7 @@ Let's say you have a web, native iOS, and native Android application that
 would like to share information such as background colors.
 
 The web might like to consume the colors as **hsla** values
-formatted as SASS variables in an **.scss** file.
+formatted as Sass variables in an **.scss** file.
 
 iOS might like **rgba** values formatted as **.json**.
 

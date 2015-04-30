@@ -602,6 +602,30 @@
       "category": "radius",
       "comment": ""
     },
+    "ELEVATION_SHADOW_5_BELOW": {
+      "value": "inset 0px 5px 5px 0px {!BLACK_TRANSPARENT_16}",
+      "type": "inner-shadow",
+      "category": "atmosphere",
+      "comment": "-5 elevation"
+    },
+    "ELEVATION_SHADOW_0": {
+      "value": "none",
+      "type": "drop-shadow",
+      "category": "atmosphere",
+      "comment": "0 elevation"
+    },
+    "ELEVATION_SHADOW_5": {
+      "value": "0px 5px 5px 0px {!BLACK_TRANSPARENT_16}",
+      "type": "drop-shadow",
+      "category": "atmosphere",
+      "comment": "5 elevation"
+    },
+    "DURATION_IMMEDIATELY": {
+      "value": "0.05",
+      "type": "seconds",
+      "category": "duration",
+      "comment": "0.05 seconds, 3 frames"
+    },
     "WIDTH_STAGE_LEFT": {
       "value": "88%",
       "category": "misc",

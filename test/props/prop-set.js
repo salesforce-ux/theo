@@ -359,7 +359,7 @@ describe('PropSet', function() {
       assert(_.has(def, 'propKeys'));
       assert(_.isArray(def.propKeys));
       assert(def.propKeys.length === _.keys(def.props).length);
-      assert(_.intersection(def.propsKeys, _.keys(def.props)).length === def.propKeys.length);
+      assert(_.intersection(def.propKeys, _.keys(def.props)).length === def.propKeys.length);
     });
   });
 

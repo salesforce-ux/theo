@@ -500,7 +500,7 @@ module.exports = {
       }
       // Get the formatter
       if (typeof FORMATS[type] === 'undefined') {
-        throw TheoError(`"${type}"" is not a registerd format`);
+        throw TheoError(`"${type}" is not a registerd format`);
       }
       let formatter = FORMATS[type];
       return through.obj((file, enc, next) => {

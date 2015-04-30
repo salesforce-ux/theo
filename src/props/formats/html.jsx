@@ -154,6 +154,15 @@ let Styleguide = React.createClass({
     })
   },
 
+  renderDuration(props) {
+    return props.map(prop => {
+      let example = (
+        <ExampleRow />
+      );
+      return this.renderRow(prop, example);
+    })
+  },
+
   renderLineHeight(props) {
     return props.map(prop => {
       let vHeight = !isNaN(prop.value) ? `${prop.value}em` : prop.value;
@@ -246,6 +255,7 @@ let Styleguide = React.createClass({
                   {this.renderSection('line-height', 'Line Heights')}
                   {this.renderSection('spacing', 'Spacing')}
                   {this.renderSection('radius', 'Radius')}
+                  {this.renderSection('duration', 'Duration')}
                   {this.renderSection('media-query', 'Media Queries')}
                 </table>
               </main>
