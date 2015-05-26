@@ -65,7 +65,7 @@ A *Design Properties* file is written in either
 
       // Optional
       // This value will be included during transform
-      // but excluded during formating
+      // but excluded during formatting
       ".meta": {
         // This value might be needed for some special transform
         "foo": "bar"
