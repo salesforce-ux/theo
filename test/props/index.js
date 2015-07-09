@@ -361,6 +361,15 @@ describe('$props.plugins', function() {
         assert(/function/.test(e.message));
       }
     });
+    it('throws an error if options.propsMap is not a function', function() {
+      try {
+        $props.plugins.format('web', { propsMap: false });
+      }
+      catch(e) {
+        assert(typeof error === 'undefined');
+        assert(/function/.test(e.message));
+      }
+    });
     it('formats props', function(done) {
       var error, result;
       var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
@@ -395,6 +404,29 @@ describe('$props.plugins', function() {
         })
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json', { propsFilter: function(prop) { return prop.name === 'account'; } }))
+        .pipe($props.plugins.getResult(function(result) {
+          postResult = JSON.parse(result);
+        }));
+    });
+    it('maps props before formatting', function(done) {
+      var error, result;
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      //var preResult = JSON.parse(fs.readFileSync(samplePath));
+      var postResult;
+      gulp.src(samplePath)
+        .on('finish', function() {
+          _.forEach(postResult.props, function(prop) {
+            assert(/^PREFIX_/.test(prop.name));
+          });
+          done();
+        })
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.format('raw.json', {
+          propsMap: function(prop) {
+            prop.name = 'PREFIX_' + prop.name;
+            return prop;
+          }
+        }))
         .pipe($props.plugins.getResult(function(result) {
           postResult = JSON.parse(result);
         }));
