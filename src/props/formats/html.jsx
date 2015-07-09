@@ -154,7 +154,7 @@ let Styleguide = React.createClass({
     })
   },
 
-  renderDuration(props) {
+  renderTime(props) {
     return props.map(prop => {
       let example = (
         <ExampleRow />
@@ -255,7 +255,7 @@ let Styleguide = React.createClass({
                   {this.renderSection('line-height', 'Line Heights')}
                   {this.renderSection('spacing', 'Spacing')}
                   {this.renderSection('radius', 'Radius')}
-                  {this.renderSection('duration', 'Duration')}
+                  {this.renderSection('time', 'Time')}
                   {this.renderSection('media-query', 'Media Queries')}
                 </table>
               </main>
