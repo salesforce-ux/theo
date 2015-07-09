@@ -489,7 +489,8 @@ module.exports = {
      */
     format(type, options={}) {
       let defaults = {
-        propsFilter: () => true
+        propsFilter: () => true,
+        propsMap: prop => prop
       };
       if (typeof options !== 'object') {
         throw TheoError('format() options must be an object');
@@ -497,6 +498,9 @@ module.exports = {
       options = _.merge({}, defaults, options);
       if (typeof options.propsFilter !== 'function') {
         throw TheoError('format() options.propsFilter must be a function');
+      }
+      if (typeof options.propsMap !== 'function') {
+        throw TheoError('format() options.propsMap must be a function');
       }
       // Get the formatter
       if (typeof FORMATS[type] === 'undefined') {
@@ -509,14 +513,17 @@ module.exports = {
         let json = util.parsePropsFile(newFile);
         // Rename the file
         newFile.path = newFile.path.replace(/(json|yml)$/, type);
-        // Filter out any props that won't be needed for this format
-        let props = {};
-        let filteredProps = _.filter(json.props, options.propsFilter);
-        _.forEach(filteredProps, prop => {
+        // Run filter/map the props
+        let updatedProps = _(json.props)
+          .filter(options.propsFilter)
+          .map(options.propsMap)
+          .value();
+        // Convert the props to a key/value
+        json.props = _.reduce(updatedProps, (props, prop) => {
           props[prop.name] = prop;
-        });
-        json.props = props;
-        json.propKeys = _.keys(props);
+          return props;
+        }, {});
+        json.propKeys = _.keys(json.props);
         // Format the json
         let formatted = formatter(json, _.merge({}, options, {
           path: file.path

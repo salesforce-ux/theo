@@ -274,6 +274,9 @@ Additional options to be passed along to the formatter
 **@param {function} [options.propsFilter]**  
 A filter function that can be used to filter down the props before formatting
 
+**@param {function} [options.propsMap]**  
+A map function that can be used modifiy the props before formatting
+
 #### Example:
 
 ```js
@@ -288,7 +291,13 @@ gulp.src('design/props.json')
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.format('scss', {
-    propsFilter: prop => prop.type === 'color'
+    // Only return props with the type of "color"
+    propsFilter: prop => prop.type === 'color',
+    // Prefix each prop name with "PREFIX_"
+    propsMap: prop => {
+      prop.name = `PREFIX_${prop.name}`;
+      return prop;
+    }
   }))
   .pipe(gulp.dest('dist'));
 ```
