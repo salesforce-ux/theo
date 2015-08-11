@@ -359,6 +359,7 @@ module.exports = {
      * Transform legacy Theo Design Props
      */
     legacy() {
+      console.warn('plugins.legacy will be deprecated soon. Please use the updated Design Properties spec: https://github.com/salesforce-ux/theo#spec');
       return through.obj((file, enc, next) => {
         let newFile = file.clone();
         var json;
