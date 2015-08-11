@@ -753,7 +753,6 @@ describe('$props:formats', function() {
   describe('default.scss', function() {
     before($format('raw', 'default.scss', paths.sample));
     it('creates default scss syntax', function() {
-      console.log(result);
       assert(result.match(/\$spacing\-none\: 0 \!default\;\n/g) !== null);
     });
   });
