@@ -750,6 +750,14 @@ describe('$props:formats', function() {
     });
   });
 
+  describe('default.scss', function() {
+    before($format('raw', 'default.scss', paths.sample));
+    it('creates default scss syntax', function() {
+      console.log(result);
+      assert(result.match(/\$spacing\-none\: 0 \!default\;\n/g) !== null);
+    });
+  });
+
   describe('map.scss', function() {
     it('creates a scss map syntax', function(done) {
       gulp.src(paths.sample)
@@ -819,9 +827,17 @@ describe('$props:formats', function() {
     });
   });
 
+  describe('default.sass', function() {
+    before($format('raw', 'default.sass', paths.sample));
+    it('creates default sass syntax', function() {
+      assert(result.match(/\$spacing\-none\: 0 \!default\n/g) !== null);
+    });
+  });
+
   describe('less', function() {
     before($format('raw', 'less', paths.sample));
     it('creates less syntax', function() {
+      console.log(result);
       assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
     });
   });

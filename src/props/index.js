@@ -205,6 +205,13 @@ registerFormat('scss', json => {
   }).join('\n');
 });
 
+registerFormat('default.scss', json => {
+  return _.map(json.props, prop => {
+    let name = kebabCase(prop.name);
+    return `$${name}: ${prop.value} !default;`;
+  }).join('\n');
+});
+
 registerFormat('list.scss', (json, options) => {
   let items = _.isArray(json.items) ? json.items : [];
   items = _.map(items, item => {
@@ -251,6 +258,13 @@ registerFormat('sass', json => {
   return _.map(json.props, prop => {
     let name = kebabCase(prop.name);
     return `$${name}: ${prop.value}`;
+  }).join('\n');
+});
+
+registerFormat('default.sass', json => {
+  return _.map(json.props, prop => {
+    let name = kebabCase(prop.name);
+    return `$${name}: ${prop.value} !default`;
   }).join('\n');
 });
 
