@@ -377,7 +377,7 @@ Here is the layout of the `json` argument
 {
   "properties": [
     {
-      "name": "PROP_NAME",
+      "name": "propName",
       "value": "PROP_VALUE",
       "type": "PROP_TYPE",
       "category": "PROP_CATEGORY"
@@ -385,8 +385,6 @@ Here is the layout of the `json` argument
   ]
 }
 ```
-
-*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
 ###### android.xml
 
@@ -402,41 +400,46 @@ Here is the layout of the `json` argument
 
 ###### scss
 
-```scss
-$PROP_NAME: PROP_VALUE;
+```sass
+$prop-name: PROP_VALUE;
 ```
 
-*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
+###### map.scss
+
+```sass
+$file-name-map: (
+  "prop-name-a": PROP_VALUE,
+  "prop-name-b": "PROP_VALUE"
+);
+```
+
+*Note*: Properties of types `["string", "font"]` will be wrapped in double quotes
+
+###### map.variables.scss
+
+```sass
+$file-name-map-variables: (
+  "prop-name": $prop-name
+);
+```
 
 ###### sass
 
 ```sass
-$PROP_NAME: PROP_VALUE
+$prop-name: PROP_VALUE
 ```
-
-*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
 ###### less
 
 ```less
-@PROP_NAME: PROP_VALUE;
+@prop-name: PROP_VALUE;
 ```
-
-*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
-
-###### scss
-
-```styl
-PROP_NAME = PROP_VALUE;
-```
-
-*Note*: PROP_NAME will be set to [kebabCase](https://lodash.com/docs#kebabCase)
 
 ###### aura.theme
 
 ```xml
 <aura:theme>
-  <aura:var name="PROP_NAME" value="PROP_VALUE" />
+  <aura:var name="propName" value="PROP_VALUE" />
 </aura:theme>
 ```
 
@@ -444,23 +447,19 @@ PROP_NAME = PROP_VALUE;
 
 ```js
 module.exports = {
-  PROP_NAME: PROP_VALUE
+  propName: PROP_VALUE
 };
 ```
-
-*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
 ###### amd.js
 
 ```js
 define(function() {
   return {
-    PROP_NAME: PROP_VALUE
+    propName: PROP_VALUE
   };
 });
 ```
-
-*Note*: PROP_NAME will be set to [camelCase](https://lodash.com/docs#camelCase)
 
 ###### styleguide
 
