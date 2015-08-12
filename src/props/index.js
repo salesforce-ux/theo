@@ -234,12 +234,19 @@ registerFormat('list.scss', (json, options) => {
 });
 
 registerFormat('map.scss', (json, options) => {
+  options = _.defaults({}, options, {
+    nameSuffix: '-map' 
+  });
+  let quotedTypes = ['string', 'font'];
   let items = _.map(json.props, prop => {
     let name = kebabCase(prop.name);
-    return `"${name}": ${prop.value}`;
+    let value = _.includes(quotedTypes, prop.type) ? `"${prop.value}"` : prop.value;
+    return `"${name}": ${value}`;
   }).join(',\n  ');
-  let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
-  let name = `${basename}-map`;
+  let basename = path.basename(
+    options.path, path.extname(options.path)
+  ).replace(/\..*/g, '');
+  let name = `${basename}${options.nameSuffix}`;
   if (_.isFunction(options.name)) {
     let n = options.name(basename, options.path);
     if (_.isString(n)) {

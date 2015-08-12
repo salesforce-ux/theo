@@ -771,6 +771,21 @@ describe('$props:formats', function() {
           done();
         }));
     });
+    it('names the map if options.nameSuffix was passed', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.scss', {
+          nameSuffix: '-custom'
+        }))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$sample-custom: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
     it('names the map if options.name was passed', function(done) {
       gulp.src(paths.sample)
         .pipe($props.plugins.transform('raw'))
