@@ -408,18 +408,15 @@ $prop-name: PROP_VALUE;
 
 ```sass
 $file-name-map: (
-  "prop-name-a": PROP_VALUE,
-  "prop-name-b": "PROP_VALUE"
+  "prop-name": (PROP_VALUE),
 );
 ```
-
-*Note*: Properties of types `["string", "font"]` will be wrapped in double quotes
 
 ###### map.variables.scss
 
 ```sass
 $file-name-map-variables: (
-  "prop-name": $prop-name
+  "prop-name": ($prop-name)
 );
 ```
 

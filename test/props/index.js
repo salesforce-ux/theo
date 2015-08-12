@@ -646,7 +646,7 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sample-map: ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
           done();
@@ -661,7 +661,7 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sample-custom: ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
           done();
@@ -676,7 +676,7 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sampleMap: ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
           done();
@@ -692,8 +692,8 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sample-map-variables: ('));
-          var hasPropA = new RegExp(_.escapeRegExp('"spacing-none": $spacing-none,'));
-          var hasPropB = new RegExp(_.escapeRegExp('"font": $font'));
+          var hasPropA = new RegExp(_.escapeRegExp('"spacing-none": ($spacing-none),'));
+          var hasPropB = new RegExp(_.escapeRegExp('"font": ($font)'));
           assert(hasName.test(result));
           assert(hasPropA.test(result));
           assert(hasPropB.test(result));

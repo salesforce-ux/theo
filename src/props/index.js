@@ -237,11 +237,9 @@ registerFormat('map.scss', (json, options) => {
   options = _.defaults({}, options, {
     nameSuffix: '-map' 
   });
-  let quotedTypes = ['string', 'font'];
   let items = _.map(json.props, prop => {
     let name = kebabCase(prop.name);
-    let value = _.includes(quotedTypes, prop.type) ? `"${prop.value}"` : prop.value;
-    return `"${name}": ${value}`;
+    return `"${name}": (${prop.value})`;
   }).join(',\n  ');
   let basename = path.basename(
     options.path, path.extname(options.path)
