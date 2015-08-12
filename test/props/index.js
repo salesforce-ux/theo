@@ -691,9 +691,12 @@ describe('$props:formats', function() {
         .pipe($props.plugins.format('map.variables.scss'))
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
-          var hasName = new RegExp(_.escapeRegExp('$sample-map-variables ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": $spacing-none,'));
-          assert(hasProp.test(result));
+          var hasName = new RegExp(_.escapeRegExp('$sample-map-variables: ('));
+          var hasPropA = new RegExp(_.escapeRegExp('"spacing-none": $spacing-none,'));
+          var hasPropB = new RegExp(_.escapeRegExp('"font": $font'));
+          assert(hasName.test(result));
+          assert(hasPropA.test(result));
+          assert(hasPropB.test(result));
           done();
         }));
     });

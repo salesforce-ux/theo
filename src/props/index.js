@@ -263,10 +263,11 @@ registerFormat('map.scss', (json, options) => {
 
 registerFormat('map.variables.scss', (json, options) => {
   options = _.defaults({}, options, {
-    nameSuffix: 'map-variables' 
+    nameSuffix: '-map-variables' 
   });
   _.transform(json.props, (result, value, name, props) => {
     props[name].value = `$${kebabCase(name)}`;
+    props[name].type = 'variable';
   });
   return FORMATS['map.scss'](json, options);
 });
