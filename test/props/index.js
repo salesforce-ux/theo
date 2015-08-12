@@ -803,6 +803,21 @@ describe('$props:formats', function() {
     });
   });
 
+  describe('map.variables.scss', function() {
+    it('creates a scss map syntax with variable values', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.variables.scss'))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$sample-map-variables ('));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": $spacing-none,'));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
+  });
+
   describe('list.scss', function() {
     it('creates a scss list syntax', function(done) {
       gulp.src(paths.list)

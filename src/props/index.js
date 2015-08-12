@@ -261,6 +261,16 @@ registerFormat('map.scss', (json, options) => {
   return cleanOutput(output);
 });
 
+registerFormat('map.variables.scss', (json, options) => {
+  options = _.defaults({}, options, {
+    nameSuffix: 'map-variables' 
+  });
+  _.transform(json.props, (result, value, name, props) => {
+    props[name].value = `$${kebabCase(name)}`;
+  });
+  return FORMATS['map.scss'](json, options);
+});
+
 registerFormat('sass', json => {
   return _.map(json.props, prop => {
     let name = kebabCase(prop.name);
