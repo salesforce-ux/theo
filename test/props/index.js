@@ -200,125 +200,6 @@ describe('$props', function() {
 
 describe('$props.plugins', function() {
 
-  describe('#legacy()', function() {
-    function legacyA(done, format) {
-      var src = path.resolve(__dirname, 'mock', 'legacy.json')
-      gulp.src(src)
-        .pipe(through.obj(function(file, enc, next) {
-          var json = JSON.parse(file.contents.toString());
-          file.contents = new Buffer(format(json));
-          next(null, file);
-        }))
-        .pipe($props.plugins.legacy())
-        .on('error', function(err) { done(err); })
-        .on('finish', function() { done(); });
-    }
-    function legacyB(done) {
-      var files = [];
-      var src = path.resolve(__dirname, 'mock', 'legacy.json')
-      gulp.src(src)
-        .pipe($props.plugins.legacy())
-        .pipe(through.obj(function(file, enc, next) {
-          files.push(file);
-          next();
-        }))
-        .on('finish', function() { done(files); });
-    }
-    function legacyC(done) {
-      var files = [];
-      var src = path.resolve(__dirname, 'mock', 'legacy-alt.json')
-      gulp.src(src)
-        .pipe($props.plugins.legacy())
-        .pipe(through.obj(function(file, enc, next) {
-          files.push(file);
-          next();
-        }))
-        .on('finish', function() { done(files); });
-    }
-    it('pipes an error if invalid Design Properties file is encoutered', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/encountered an invalid/.test(error.message));
-        done();
-      }, function(json) { return '{"foo":}'; });
-    });
-    it('pipes an error if the Design Properties file is not an object', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/non object/.test(error.message));
-        done();
-      }, function(json) { return '[]'; });
-    });
-    it('pipes an error if a property with no "name" key is found', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/name/.test(error.message));
-        done();
-      }, function(json) { json.theme.properties = [{"value":"red"}]; return JSON.stringify(json); });
-    });
-    it('created a single JSON file', function(done) {
-      legacyB(function(files) {
-        assert(files.length === 1);
-        done();
-      });
-    });
-    it('produces valid JSON', function(done) {
-      legacyB(function(files) {
-        assert.doesNotThrow(function() {
-          JSON.parse(files[0].contents.toString());
-        });
-        done();
-      })
-    });
-    it('converts legacy design properties to the new format', function(done) {
-      legacyB(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(json.props.a.value === 'foo');
-        assert(json.props.b.value === 'bar');
-        assert(typeof json.theme === 'undefined');
-        done();
-      })
-    });
-    it('converts legacy aliases to the new format', function(done) {
-      legacyB(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(!_.isArray(json.aliases));
-        assert(_.has(json.aliases, 'SKY'));
-        done();
-      })
-    });
-    it('imports legacy aliases', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(!_.isArray(json.aliases));
-        assert(_.has(json.aliases, 'SKY'));
-        done();
-      })
-    });
-    it('imports converts imports to auraImports', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(_.isArray(json.auraImports));
-        done();
-      })
-    });
-    it('imports converts extends to auraExtends', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(_.isString(json.auraExtends));
-        done();
-      })
-    });
-    it('adds a relevant type if possible', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(json.props.d.type === 'color');
-        assert(json.props.e.type === 'size');
-        done();
-      })
-    });
-  });
-
   describe('#transform', function() {
     it('transforms Design Properties as JSON', function(done) {
       var error;
@@ -866,7 +747,6 @@ describe('$props:formats', function() {
   describe('less', function() {
     before($format('raw', 'less', paths.sample));
     it('creates less syntax', function() {
-      console.log(result);
       assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
     });
   });

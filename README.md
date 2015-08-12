@@ -498,19 +498,6 @@ gulp.src('design/props.json')
   .pipe(gulp.dest('dist'));
 ```
 
-***
-
-####`theo.plugins.legacy()`
-
-Transform legacy Theo *Design Properties* to the new spec
-
-#### Example:
-
-```js
-gulp.src('./design/props-old.json')
-  .pipe(theo.plugins.legacy());
-```
-
 [npm-url]: https://npmjs.org/package/theo
 [npm-image]: http://img.shields.io/npm/v/theo.svg
 
