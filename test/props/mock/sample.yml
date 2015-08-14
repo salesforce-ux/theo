@@ -25,3 +25,6 @@
     stage_left_width: 
       value: "25%"
       type: "number"
+    font: 
+      value: "'Arial Black', 'Arial Bold', Gadget, sans-serif"
+      type: "font"

@@ -216,21 +216,6 @@ describe('PropSet', function() {
       assert(def.props.b.value === 'blue - blue');
       assert(def.props.c.value === 'blue - green');
     });
-    it('includes an alias in a prop if specified in the options', function() {
-      set = new PropSet(file, [t1, t2], { includeAlias: true });
-      var def = {
-        aliases: { sky: "blue", land: "green" },
-        props: {
-          a: { value: "{!sky}" },
-          b: { value: "foo" }
-        }
-      };
-      set._resolveAliases(def);
-      assert(def.props.a.value === 'blue');
-      assert(_.has(def.props.a, 'alias'));
-      assert(def.props.a.alias === 'sky');
-      assert(def.props.b.value === 'foo');
-    });
   });
 
   describe('#_resolveImports', function() {

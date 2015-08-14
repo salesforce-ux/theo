@@ -234,12 +234,17 @@ registerFormat('list.scss', (json, options) => {
 });
 
 registerFormat('map.scss', (json, options) => {
+  options = _.defaults({}, options, {
+    nameSuffix: '-map' 
+  });
   let items = _.map(json.props, prop => {
     let name = kebabCase(prop.name);
-    return `"${name}": ${prop.value}`;
+    return `"${name}": (${prop.value})`;
   }).join(',\n  ');
-  let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '');
-  let name = `${basename}-map`;
+  let basename = path.basename(
+    options.path, path.extname(options.path)
+  ).replace(/\..*/g, '');
+  let name = `${basename}${options.nameSuffix}`;
   if (_.isFunction(options.name)) {
     let n = options.name(basename, options.path);
     if (_.isString(n)) {
@@ -252,6 +257,17 @@ registerFormat('map.scss', (json, options) => {
     );
   `;
   return cleanOutput(output);
+});
+
+registerFormat('map.variables.scss', (json, options) => {
+  options = _.defaults({}, options, {
+    nameSuffix: '-map-variables' 
+  });
+  _.transform(json.props, (result, value, name, props) => {
+    props[name].value = `$${kebabCase(name)}`;
+    props[name].type = 'variable';
+  });
+  return FORMATS['map.scss'](json, options);
 });
 
 registerFormat('sass', json => {
@@ -354,104 +370,6 @@ module.exports = {
    * Helpers that return transform streams
    */
   plugins: {
-
-    /**
-     * Transform legacy Theo Design Props
-     */
-    legacy() {
-      console.warn('plugins.legacy will be deprecated soon. Please use the updated Design Properties spec: https://github.com/salesforce-ux/theo#spec');
-      return through.obj((file, enc, next) => {
-        let newFile = file.clone();
-        var json;
-        try {
-          json = util.parsePropsFile(newFile);
-          if (_.isArray(json)) {
-            let err = TheoError(`legacy() encountered a non object Design Properties file: ${newFile.path}`);
-            return next(err);
-          }
-        } catch(e) {
-          let err = TheoError(`legacy() encountered an invalid Design Properties file: ${newFile.path}`);
-          return next(err);
-        }
-        // Theme
-        if (_.has(json, 'theme')) {
-          // Properties
-          if (_.isArray(json.theme.properties)) {
-            json.props = {};
-            for (let i = 0; i < json.theme.properties.length; i++) {
-              let prop = json.theme.properties[i];
-              if (typeof prop.name === 'undefined') {
-                let err = TheoError(`legacy() encountered a property with no "name" key: ${newFile.path}`);
-                return next(err);
-              }
-              // Category
-              if (!_.has(prop, 'category')) {
-                prop.category = '';
-              }
-              // Type
-              if (!_.has(prop, 'type')) {
-                if (/color/.test(prop.category)) {
-                  prop.type = 'color';
-                }
-                else if (/(em|rem|px)/.test(prop.value)) {
-                  prop.type = 'size';
-                }
-                else {
-                  prop.type = '';
-                }
-              }
-              // Save the prop
-              let name = prop.name;
-              delete prop.name;
-              json.props[name] = prop;
-            }
-          }
-          // Aliases
-          if (_.isString(json.theme.aliases)) {
-            let p = path.resolve(path.dirname(file.path), json.theme.aliases);
-            if (fs.existsSync(p)) {
-              try {
-                let a = JSON.parse(fs.readFileSync(p).toString());
-                if (_.has(a, 'aliases') && _.isArray(a.aliases)) {
-                  json.theme.aliases = a.aliases;
-                }
-              } catch(e) {
-                let err = TheoError(`legacy() failed to import alias file ${json.theme.aliases}`);
-                return next(err);
-              }
-            }
-          }
-          // Aliases
-          if (_.isArray(json.theme.aliases)) {
-            let {aliases} = json.theme;
-            json.aliases = {};
-            _.forEach(aliases, alias => {
-              json.aliases[alias.name] = alias.value;
-            });
-          }
-          // Aura
-          if (_.isArray(json.theme.imports)) {
-            json.auraImports = json.theme.imports;
-          }
-          if (_.isString(json.theme.extends)) {
-            json.auraExtends = json.theme.extends;
-          }
-          // Cleanup
-          delete json.theme;
-        }
-        // Aliases
-        if (_.isArray(json.aliases)) {
-          let {aliases} = json;
-          json.aliases = {};
-          _.forEach(aliases, alias => {
-            json.aliases[alias.name] = alias.value;
-          });
-        }
-        // Done
-        newFile.contents = new Buffer(JSON.stringify(json, null, 2));
-        next(null, newFile);
-      });
-    },
 
     /**
      * Transform the prop values

@@ -200,125 +200,6 @@ describe('$props', function() {
 
 describe('$props.plugins', function() {
 
-  describe('#legacy()', function() {
-    function legacyA(done, format) {
-      var src = path.resolve(__dirname, 'mock', 'legacy.json')
-      gulp.src(src)
-        .pipe(through.obj(function(file, enc, next) {
-          var json = JSON.parse(file.contents.toString());
-          file.contents = new Buffer(format(json));
-          next(null, file);
-        }))
-        .pipe($props.plugins.legacy())
-        .on('error', function(err) { done(err); })
-        .on('finish', function() { done(); });
-    }
-    function legacyB(done) {
-      var files = [];
-      var src = path.resolve(__dirname, 'mock', 'legacy.json')
-      gulp.src(src)
-        .pipe($props.plugins.legacy())
-        .pipe(through.obj(function(file, enc, next) {
-          files.push(file);
-          next();
-        }))
-        .on('finish', function() { done(files); });
-    }
-    function legacyC(done) {
-      var files = [];
-      var src = path.resolve(__dirname, 'mock', 'legacy-alt.json')
-      gulp.src(src)
-        .pipe($props.plugins.legacy())
-        .pipe(through.obj(function(file, enc, next) {
-          files.push(file);
-          next();
-        }))
-        .on('finish', function() { done(files); });
-    }
-    it('pipes an error if invalid Design Properties file is encoutered', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/encountered an invalid/.test(error.message));
-        done();
-      }, function(json) { return '{"foo":}'; });
-    });
-    it('pipes an error if the Design Properties file is not an object', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/non object/.test(error.message));
-        done();
-      }, function(json) { return '[]'; });
-    });
-    it('pipes an error if a property with no "name" key is found', function(done) {
-      legacyA(function(error) {
-        assert(isError(error));
-        assert(/name/.test(error.message));
-        done();
-      }, function(json) { json.theme.properties = [{"value":"red"}]; return JSON.stringify(json); });
-    });
-    it('created a single JSON file', function(done) {
-      legacyB(function(files) {
-        assert(files.length === 1);
-        done();
-      });
-    });
-    it('produces valid JSON', function(done) {
-      legacyB(function(files) {
-        assert.doesNotThrow(function() {
-          JSON.parse(files[0].contents.toString());
-        });
-        done();
-      })
-    });
-    it('converts legacy design properties to the new format', function(done) {
-      legacyB(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(json.props.a.value === 'foo');
-        assert(json.props.b.value === 'bar');
-        assert(typeof json.theme === 'undefined');
-        done();
-      })
-    });
-    it('converts legacy aliases to the new format', function(done) {
-      legacyB(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(!_.isArray(json.aliases));
-        assert(_.has(json.aliases, 'SKY'));
-        done();
-      })
-    });
-    it('imports legacy aliases', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(!_.isArray(json.aliases));
-        assert(_.has(json.aliases, 'SKY'));
-        done();
-      })
-    });
-    it('imports converts imports to auraImports', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(_.isArray(json.auraImports));
-        done();
-      })
-    });
-    it('imports converts extends to auraExtends', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(_.isString(json.auraExtends));
-        done();
-      })
-    });
-    it('adds a relevant type if possible', function(done) {
-      legacyC(function(files) {
-        var json = JSON.parse(files[0].contents.toString());
-        assert(json.props.d.type === 'color');
-        assert(json.props.e.type === 'size');
-        done();
-      })
-    });
-  });
-
   describe('#transform', function() {
     it('transforms Design Properties as JSON', function(done) {
       var error;
@@ -765,7 +646,22 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sample-map: ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
+          assert(hasName.test(result));
+          assert(hasProp.test(result));
+          done();
+        }));
+    });
+    it('names the map if options.nameSuffix was passed', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.scss', {
+          nameSuffix: '-custom'
+        }))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$sample-custom: ('));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
           done();
@@ -780,9 +676,27 @@ describe('$props:formats', function() {
         .pipe($stream.first(function(file) {
           var result = file.contents.toString();
           var hasName = new RegExp(_.escapeRegExp('$sampleMap: ('));
-          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": 0,'));
+          var hasProp = new RegExp(_.escapeRegExp('"spacing-none": (0),'));
           assert(hasName.test(result));
           assert(hasProp.test(result));
+          done();
+        }));
+    });
+  });
+
+  describe('map.variables.scss', function() {
+    it('creates a scss map syntax with variable values', function(done) {
+      gulp.src(paths.sample)
+        .pipe($props.plugins.transform('raw'))
+        .pipe($props.plugins.format('map.variables.scss'))
+        .pipe($stream.first(function(file) {
+          var result = file.contents.toString();
+          var hasName = new RegExp(_.escapeRegExp('$sample-map-variables: ('));
+          var hasPropA = new RegExp(_.escapeRegExp('"spacing-none": ($spacing-none),'));
+          var hasPropB = new RegExp(_.escapeRegExp('"font": ($font)'));
+          assert(hasName.test(result));
+          assert(hasPropA.test(result));
+          assert(hasPropB.test(result));
           done();
         }));
     });
@@ -836,7 +750,6 @@ describe('$props:formats', function() {
   describe('less', function() {
     before($format('raw', 'less', paths.sample));
     it('creates less syntax', function() {
-      console.log(result);
       assert(result.match(/\@spacing\-none\: 0;\n/g) !== null);
     });
   });

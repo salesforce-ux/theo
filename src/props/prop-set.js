@@ -25,7 +25,6 @@ class PropSet {
     }
 
     let defaults = {
-      includeAlias: false,
       includeRawValue: false,
       includeMeta: false,
       resolveAliases: true
@@ -138,11 +137,6 @@ class PropSet {
         if (_.isString(prop.value)) {
           // Value contains an alias
           if (re.test(prop.value)) {
-            // See if the alias should be included in the prop
-            if (options.includeAlias === true && isAlias.test(prop.value)) {
-              console.warn('options.includeAlias will be deprecated soon. Please use options.includeRawValue');
-              prop.alias = key;
-            }
             // Reslove the alias
             prop.value = prop.value.replace(re, value);
           }
