@@ -59,7 +59,7 @@ A *Design Properties* file is written in either
       "type": "color",
 
       // Required
-      // Descriibe the category of this property
+      // Describe the category of this property
       // Often used for style guide generation
       "category": "background",
 
@@ -146,7 +146,7 @@ to each property.
 The name of the registered transform
 
 **@param {object} [options]**  
-Addtional options  
+Additional options  
 
 **@param {boolean} [options.includeMeta]**  
 Don't remove ".meta" key from a prop 
@@ -245,7 +245,7 @@ Parse the value as a color and return an 6 digit hex string
 Parse the value as a color and return an 8 digit hex string
 
 **percentage/float**  
-Parse a string percentage value and return a float represention
+Parse a string percentage value and return a float representation
 
 **relative/pixel**  
 Parse a relative size value (em/rem) and return a pixel representation.
@@ -275,7 +275,7 @@ Additional options to be passed along to the formatter
 A filter function that can be used to filter down the props before formatting
 
 **@param {function} [options.propsMap]**  
-A map function that can be used modifiy the props before formatting
+A map function that can be used modify the props before formatting
 
 #### Example:
 
