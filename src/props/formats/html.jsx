@@ -141,6 +141,17 @@ let Styleguide = React.createClass({
     })
   },
 
+  renderFontWeight(props) {
+    return props.map(prop => {
+      let example = (
+        <ExampleRow>
+          <div style={{fontWeight:prop.value}}>Aa</div>
+        </ExampleRow>
+      );
+      return this.renderRow(prop, example);
+    })
+  },
+
   renderFontSize(props) {
     return props.map(prop => {
       let example = (
@@ -251,6 +262,7 @@ let Styleguide = React.createClass({
                   {this.renderSection('drop-shadow', 'Drop Shadows')}
                   {this.renderSection('inner-shadow', 'Inner Drop Shadows', this.renderDropShadow)}
                   {this.renderSection('font', 'Fonts')}
+                  {this.renderSection('font-weight', 'Font Weights')}
                   {this.renderSection('font-size', 'Font Sizes')}
                   {this.renderSection('line-height', 'Line Heights')}
                   {this.renderSection('spacing', 'Spacing')}
