@@ -440,6 +440,14 @@ $prop-name: PROP_VALUE
 </aura:theme>
 ```
 
+###### aura.tokens
+
+```xml
+<aura:tokens>
+  <aura:token name="propName" value="PROP_VALUE" />
+</aura:tokens>
+```
+
 ###### common.js
 
 ```js

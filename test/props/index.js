@@ -773,12 +773,12 @@ describe('$props:formats', function() {
     it('has aura:var nodes', function() {
       assert(_.has(result['aura:theme'], 'aura:var'));
     });
-    it('var nodes have a "name" attribute', function() {
+    it('aura:var nodes have a "name" attribute', function() {
       result['aura:theme']['aura:var'].forEach(function(n) {
         assert(_.has(n.$, 'name'));
       });
     });
-    it('valueMatchers nodes have a "category" attribute', function() {
+    it('aura:var nodes have a "value" attribute', function() {
       result['aura:theme']['aura:var'].forEach(function(n) {
         assert(_.has(n.$, 'value'));
       });
@@ -788,6 +788,52 @@ describe('$props:formats', function() {
     });
     it('aura:importTheme nodes have a "name" attribute', function() {
       result['aura:theme']['aura:importTheme'].forEach(function(n) {
+        assert(_.has(n.$, 'name'));
+      });
+    });
+  });
+
+  describe('aura.tokens', function() {
+    before($format('raw', 'aura.tokens', paths.sample, $toXML));
+    it('has a top level aura:tokens node', function() {
+      assert(_.has(result, 'aura:tokens'));
+    });
+    it('adds the "extends" attribute', function() {
+      assert(_.has(result['aura:tokens'].$, 'extends'));
+      assert(result['aura:tokens'].$.extends === 'one:theme');
+    });
+    it('has aura:token nodes', function() {
+      assert(_.has(result['aura:tokens'], 'aura:token'));
+    });
+    it('aura:token nodes have a "name" attribute', function() {
+      result['aura:tokens']['aura:token'].forEach(function(n) {
+        assert(_.has(n.$, 'name'));
+      });
+    });
+    it('aura:token nodes have a "value" attribute', function() {
+      result['aura:tokens']['aura:token'].forEach(function(n) {
+        assert(_.has(n.$, 'value'));
+      });
+    });
+    it('aura:token nodes have a "property" attribute if the token has a "cssProperties" key (array)', function() {
+      var token = _.find(result['aura:tokens']['aura:token'], function(n) {
+        return n.$.name === 'spacingNone';
+      });
+      assert(_.has(token, '$.property'));
+      assert(token.$.property === 'width,height,padding,margin');
+    });
+    it('aura:token nodes have a "property" attribute if the token has a "cssProperties" key (string)', function() {
+      var token = _.find(result['aura:tokens']['aura:token'], function(n) {
+        return n.$.name === 'stageLeftWidth';
+      });
+      assert(_.has(token, '$.property'));
+      assert(token.$.property === 'width');
+    });
+    it('has aura:import nodes', function() {
+      assert(_.has(result['aura:tokens'], 'aura:import'));
+    });
+    it('aura:import nodes have a "name" attribute', function() {
+      result['aura:tokens']['aura:import'].forEach(function(n) {
         assert(_.has(n.$, 'name'));
       });
     });

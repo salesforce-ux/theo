@@ -17,7 +17,8 @@
     "spacing_none": {
       "value": "0",
       "label": "n",
-      "type": "number"
+      "type": "number",
+      "cssProperties": ["width","height","padding","margin"]
     },
     "spacing_xx_small": {
       "value": "0.25em",
@@ -34,7 +35,8 @@
     },
     "stage_left_width": {
       "value": "25%",
-      "type": "number"
+      "type": "number",
+      "cssProperties": "width"
     },
     "font": {
       "value": "'Arial Black', 'Arial Bold', Gadget, sans-serif",

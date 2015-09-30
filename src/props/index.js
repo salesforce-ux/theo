@@ -318,6 +318,36 @@ registerFormat('aura.theme', json => {
   return cleanOutput(xml);
 });
 
+registerFormat('aura.tokens', json => {
+  let auraImports = _.toArray(json.auraImports).map(theme => {
+    return `<aura:import name="${theme}" />`;
+  }).join('\n  ');
+  let auraExtends = _.isString(json.auraExtends) ? json.auraExtends : null;
+  let props = _.map(json.props, prop => {
+    let name = camelCase(prop.name);
+    let cssProperties = (() => {
+      if (_.isString(prop.cssProperties)) {
+        return `property="${prop.cssProperties}"`;
+      }
+      if (_.isArray(prop.cssProperties)) {
+        return `property="${prop.cssProperties.join(',')}"`;
+      }
+      return ''
+    })()
+    return `<aura:token name="${name}" value="${prop.value}" ${cssProperties} />`;
+  }).join('\n  ');
+  let openTag = auraExtends
+    ? `<aura:tokens extends="${auraExtends}">`
+    : `<aura:tokens>`;
+  let xml = `
+    ${openTag}
+      ${auraImports}
+      ${props}
+    </aura:tokens>
+  `;
+  return cleanOutput(xml);
+});
+
 registerFormat('html', require('./formats/html'));
 
 registerFormat('common.js', json => {
