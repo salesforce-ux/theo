@@ -815,19 +815,12 @@ describe('$props:formats', function() {
         assert(_.has(n.$, 'value'));
       });
     });
-    it('aura:token nodes have a "property" attribute if the token has a "cssProperties" key (array)', function() {
+    it('aura:token nodes have a "property" attribute if the token has a "cssProperties" key', function() {
       var token = _.find(result['aura:tokens']['aura:token'], function(n) {
         return n.$.name === 'spacingNone';
       });
       assert(_.has(token, '$.property'));
       assert(token.$.property === 'width,height,padding,margin');
-    });
-    it('aura:token nodes have a "property" attribute if the token has a "cssProperties" key (string)', function() {
-      var token = _.find(result['aura:tokens']['aura:token'], function(n) {
-        return n.$.name === 'stageLeftWidth';
-      });
-      assert(_.has(token, '$.property'));
-      assert(token.$.property === 'width');
     });
     it('has aura:import nodes', function() {
       assert(_.has(result['aura:tokens'], 'aura:import'));

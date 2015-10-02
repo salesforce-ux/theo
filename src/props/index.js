@@ -326,9 +326,6 @@ registerFormat('aura.tokens', json => {
   let props = _.map(json.props, prop => {
     let name = camelCase(prop.name);
     let cssProperties = (() => {
-      if (_.isString(prop.cssProperties)) {
-        return `property="${prop.cssProperties}"`;
-      }
       if (_.isArray(prop.cssProperties)) {
         return `property="${prop.cssProperties.join(',')}"`;
       }

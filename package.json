@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "A set of Gulp plugins for transforming and formatting Design Properties",
   "keywords": [
     "css",
