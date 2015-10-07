@@ -1,6 +1,6 @@
 # Contributing Code
 
-External contributors will be required to sign a Contributor's License Agreement. You can find this file [here](Salesforce_CLA.pdf). Please sign, scan, and send to [osscore@salesforce.com](mailto:osscore@salesforce.com). We look forward to collaborating with you!
+External contributors will be required to sign a Contributor's License Agreement. You can find this file [here](https://github.com/salesforce-ux/design-system/blob/winter-16/Salesforce_CLA.pdf). Please sign, scan, and send to [osscore@salesforce.com](mailto:osscore@salesforce.com). We look forward to collaborating with you!
 
 1. Create a new issue before starting your project so that we can keep track of what you are trying to add/fix. That way, we can also offer suggestions or let you know if there is already an effort in progress.
 2. Fork off this repository.
