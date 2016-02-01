@@ -59,7 +59,7 @@ A *Design Properties* file is written in either
       "type": "color",
 
       // Required
-      // Descriibe the category of this property
+      // Describe the category of this property
       // Often used for style guide generation
       "category": "background",
 
