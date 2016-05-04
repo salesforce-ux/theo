@@ -29,7 +29,7 @@ function isError(error) {
 describe('PropSet', function() {
 
   var def, file, t1, t2, set;
-  
+
   beforeEach(function() {
     var p = path.resolve(__dirname, 'mock', 'c.json');
     var f = fs.readFileSync(p);
@@ -320,7 +320,7 @@ describe('PropSet', function() {
       assert(!t1.transformer.called);
     });
   });
-  
+
   describe('#transform', function() {
     it('transforms the props', transformProps);
     it('returns the PropSet', function() {

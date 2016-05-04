@@ -235,7 +235,7 @@ registerFormat('list.scss', (json, options) => {
 
 registerFormat('map.scss', (json, options) => {
   options = _.defaults({}, options, {
-    nameSuffix: '-map' 
+    nameSuffix: '-map'
   });
   let items = _.map(json.props, prop => {
     let name = kebabCase(prop.name);
@@ -261,7 +261,7 @@ registerFormat('map.scss', (json, options) => {
 
 registerFormat('map.variables.scss', (json, options) => {
   options = _.defaults({}, options, {
-    nameSuffix: '-map-variables' 
+    nameSuffix: '-map-variables'
   });
   _.transform(json.props, (result, value, name, props) => {
     props[name].value = `$${kebabCase(name)}`;
@@ -429,7 +429,7 @@ module.exports = {
      *
      * @param {function} [callback]
      * @return {stream}
-     */    
+     */
     getResult(callback) {
       return through.obj((file, enc, next) => {
         if (typeof callback === 'function' && file.isBuffer()) {

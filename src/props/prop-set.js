@@ -18,7 +18,7 @@ let util        = require('./util');
 let TheoError   = require('./util/error');
 
 class PropSet {
-  
+
   constructor(file, valueTransforms, options={}) {
     if (typeof file.isBuffer !== 'function' || typeof file.isBuffer === 'undefined') {
       throw TheoError('transform() must use vinyl files');
@@ -173,7 +173,7 @@ class PropSet {
       // Extract the meta data
       let meta = prop['.meta'];
       if (this.options.includeMeta !== true) {
-        delete prop['.meta'];        
+        delete prop['.meta'];
       }
       // Transform the value
       this._transformValue(prop, meta);

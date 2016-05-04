@@ -160,7 +160,7 @@ gulp.src('./design/props.json')
 
 ***
 
-####`theo.registerTransform(type, valueTransforms)`
+#### `theo.registerTransform(type, valueTransforms)`
 
 Register a new transform. Existing transforms with the same name
 will be overwritten.
@@ -204,7 +204,7 @@ No valueTransforms will be applied
 
 ***
 
-####`theo.registerValueTransform(name, matcher, transformer)` <a name="registerValueTransform"></a>
+#### `theo.registerValueTransform(name, matcher, transformer)` <a name="registerValueTransform"></a>
 
 Register a new valueTransform. Existing valueTransforms with the same name
 will be overwritten.
@@ -245,7 +245,7 @@ Parse the value as a color and return an 6 digit hex string
 Parse the value as a color and return an 8 digit hex string
 
 **percentage/float**  
-Parse a string percentage value and return a float represention
+Parse a string percentage value and return a float representation
 
 **relative/pixel**  
 Parse a relative size value (em/rem) and return a pixel representation.
@@ -304,7 +304,7 @@ gulp.src('design/props.json')
 
 ***
 
-####`theo.registerFormat(name, formatter)`
+#### `theo.registerFormat(name, formatter)`
 
 Register a new format. Existing formats with the same name
 will be overwritten.
@@ -466,14 +466,14 @@ define(function() {
 });
 ```
 
-###### styleguide
+###### Styleguide
 
-See [salesforce-ux.github.io/design-properties]()
+See <https://salesforce-ux.github.io/design-properties>.
 
 
 ***
 
-####`theo.plugins.getResult([callback])`
+#### `theo.plugins.getResult([callback])`
 
 Get the result of a transform/format
 

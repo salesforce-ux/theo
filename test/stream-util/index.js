@@ -41,7 +41,7 @@ describe('$stream', function() {
   beforeEach(function() {
     files = [];
   });
-  
+
   describe('#filter()', function() {
     it('throws an error if a non functional argument is passed', function() {
       assert.throws(function() {
