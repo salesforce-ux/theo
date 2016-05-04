@@ -59,7 +59,7 @@ A *Design Token* file is written in either
       "type": "color",
 
       // Required
-      // Descriibe the category of this property
+      // Describe the category of this property
       // Often used for style guide generation
       "category": "background",
 
@@ -142,14 +142,14 @@ the specified type.
 A transform is list of [valueTransforms](#registerValueTransform) that should be applied
 to each property.
 
-**@param {string} type**  
+**@param {string} type**
 The name of the registered transform
 
-**@param {object} [options]**  
+**@param {object} [options]**
 Additional options
 
-**@param {boolean} [options.includeMeta]**  
-Don't remove ".meta" key from a prop 
+**@param {boolean} [options.includeMeta]**
+Don't remove ".meta" key from a prop
 
 #### Example:
 
@@ -165,10 +165,10 @@ gulp.src('./design/props.json')
 Register a new transform. Existing transforms with the same name
 will be overwritten.
 
-**@param {string} type**  
+**@param {string} type**
 The name of the transform
 
-**@param {array} valueTransforms**  
+**@param {array} valueTransforms**
 An array of registered value transforms
 
 #### Example:
@@ -187,19 +187,19 @@ Below is a list of pre-defined transforms and the corresponding
 *Note*: Generally speaking, the pre-defined transforms assume the original
 *Design Tokens* are formatted for the web.
 
-**raw**:  
+**raw**:
 No valueTransforms will be applied
 
-**web**:  
+**web**:
 `['color/rgb']`
 
-**ios**:  
+**ios**:
 `['color/rgb', 'relative/pixelValue', 'percentage/float']`
 
-**android**:  
+**android**:
 `['color/hex8', 'relative/pixelValue', 'percentage/float']`
 
-**aura**:  
+**aura**:
 `['color/hex']`
 
 ***
@@ -209,14 +209,14 @@ No valueTransforms will be applied
 Register a new valueTransform. Existing valueTransforms with the same name
 will be overwritten.
 
-**@param {string} type**  
+**@param {string} type**
 The name of the valueTransform
 
-**@param {function} matcher**  
+**@param {function} matcher**
 An function that should return a boolean indicating if the provided property
 should be transformed
 
-**@param {function} transformer**  
+**@param {function} transformer**
 An function that should return a new value for the provided property
 
 #### Example:
@@ -235,25 +235,25 @@ theo.registerValueTransform('animation/web/curve',
 
 #### Pre-defined ValueTransforms:
 
-**color/rgb**  
+**color/rgb**
 Parse the value as a color and return an rgb(a) string
 
-**color/hex**  
+**color/hex**
 Parse the value as a color and return an 6 digit hex string
 
-**color/hex8**  
+**color/hex8**
 Parse the value as a color and return an 8 digit hex string
 
-**percentage/float**  
+**percentage/float**
 Parse a string percentage value and return a float representation
 
-**relative/pixel**  
+**relative/pixel**
 Parse a relative size value (em/rem) and return a pixel representation.
 By default, the `baseFontSize` is set to 16 and
 the `baseFontPercentage` is set to 1. These values can be overwritten in a property's
 `.meta` object.
 
-**relative/pixelValue** 
+**relative/pixelValue**
 Same as *relative/pixel*, but removes the `px` extension
 
 ***
@@ -265,17 +265,17 @@ the specified type.
 
 *Note*: This plugin will almost always run after a `transform` call.
 
-**@param {string} type**  
+**@param {string} type**
 The name of the registered format
 
-**@param {object} [options]**  
+**@param {object} [options]**
 Additional options to be passed along to the formatter
 
-**@param {function} [options.propsFilter]**  
+**@param {function} [options.propsFilter]**
 A filter function that can be used to filter down the props before formatting
 
-**@param {function} [options.propsMap]**  
-A map function that can be used modifiy the props before formatting
+**@param {function} [options.propsMap]**
+A map function that can be used modify the props before formatting
 
 #### Example:
 
@@ -309,10 +309,10 @@ gulp.src('design/props.json')
 Register a new format. Existing formats with the same name
 will be overwritten.
 
-**@param {string} type**  
+**@param {string} type**
 The name of the format
 
-**@param {function} formatter**  
+**@param {function} formatter**
 An function that should return a string representation
 of the reformatted *Design Tokens*.
 
@@ -477,7 +477,7 @@ See <https://salesforce-ux.github.io/design-properties>.
 
 Get the result of a transform/format
 
-**@param {function} [callback]**  
+**@param {function} [callback]**
 The function to call for each result in the stream
 
 #### Example:
