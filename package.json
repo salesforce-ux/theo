@@ -1,11 +1,13 @@
 {
   "name": "theo",
   "version": "4.2.0",
-  "description": "A set of Gulp plugins for transforming and formatting Design Properties",
+  "license": "SEE LICENSE IN README.md",
+  "description": "A set of Gulp plugins for transforming and formatting Design Tokens",
   "keywords": [
     "css",
     "design",
     "properties",
+    "tokens",
     "sass",
     "scss",
     "stylus",

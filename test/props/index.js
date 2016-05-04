@@ -29,7 +29,7 @@ function isError(error) {
 }
 
 describe('$props', function() {
-  
+
   describe('#getValueTransform()', function() {
     it('throws an error if the valueTransform is not registered', function() {
       assert.throws(function() {
@@ -201,7 +201,7 @@ describe('$props', function() {
 describe('$props.plugins', function() {
 
   describe('#transform', function() {
-    it('transforms Design Properties as JSON', function(done) {
+    it('transforms Design Tokens as JSON', function(done) {
       var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
         .on('error', function(err) {
@@ -213,7 +213,7 @@ describe('$props.plugins', function() {
         })
         .pipe($props.plugins.transform('web'))
     });
-    it('transforms Design Properties as YML', function(done) {
+    it('transforms Design Tokens as YML', function(done) {
       var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
         .on('error', function(err) {
@@ -253,7 +253,7 @@ describe('$props.plugins', function() {
     });
     it('formats props', function(done) {
       var error, result;
-      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json');
       var postResult;
       gulp.src(samplePath)
         .on('error', function(err) {
@@ -274,7 +274,7 @@ describe('$props.plugins', function() {
     });
     it('filters props before formatting', function(done) {
       var error, result;
-      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json');
       //var preResult = JSON.parse(fs.readFileSync(samplePath));
       var postResult;
       gulp.src(samplePath)
@@ -291,7 +291,7 @@ describe('$props.plugins', function() {
     });
     it('maps props before formatting', function(done) {
       var error, result;
-      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json');
       //var preResult = JSON.parse(fs.readFileSync(samplePath));
       var postResult;
       gulp.src(samplePath)
@@ -314,7 +314,7 @@ describe('$props.plugins', function() {
     });
     it('renames the file correctly', function(done) {
       var resultFile;
-      var samplePath = path.resolve(__dirname, 'mock', 'sample.json'); 
+      var samplePath = path.resolve(__dirname, 'mock', 'sample.json');
       gulp.src(samplePath)
         .on('finish', function() {
           assert(resultFile.relative === 'sample.scss');
@@ -434,7 +434,7 @@ describe('$props.plugins', function() {
 });
 
 describe('$props:valueTransforms', function() {
-  
+
   describe('color/rgb', function() {
     var t = $props.getValueTransform('color/rgb').transformer;
     it('converts hex to rgb', function() {
@@ -835,7 +835,7 @@ describe('$props:formats', function() {
   describe('html', function() {
     before($format('raw', 'html', paths.sink));
     it('outputs html', function() {
-      var re = new RegExp(_.escapeRegExp('<!doctype html>'));
+      var re = new RegExp(_.escapeRegExp('<!DOCTYPE html>'));
       assert(re.test(result));
     });
     it('has example rows', function() {

@@ -18,7 +18,7 @@ let util        = require('./util');
 let TheoError   = require('./util/error');
 
 class PropSet {
-  
+
   constructor(file, valueTransforms, options={}) {
     if (typeof file.isBuffer !== 'function' || typeof file.isBuffer === 'undefined') {
       throw TheoError('transform() must use vinyl files');
@@ -51,7 +51,7 @@ class PropSet {
       def = _.merge(def, json);
     }
     catch (e) {
-      throw TheoError(`transform() encountered an invalid Design Properties file: ${this.file.path}`);
+      throw TheoError(`transform() encountered an invalid Design Token file: ${this.file.path}`);
     }
     // Raw
     if (options.includeRawValue === true) {
@@ -111,10 +111,10 @@ class PropSet {
 
   _validate(def) {
     if (_.isArray(def.props)) {
-      throw TheoError(`Design Properties "props" key must be an object`);
+      throw TheoError(`Design Token "props" key must be an object`);
     }
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
-      //console.warn('Design Properties contained no "props" object')
+      //console.warn('Design Token contained no "props" object')
       def.props = {};
     }
     // Make sure properties have all required keys
@@ -173,7 +173,7 @@ class PropSet {
       // Extract the meta data
       let meta = prop['.meta'];
       if (this.options.includeMeta !== true) {
-        delete prop['.meta'];        
+        delete prop['.meta'];
       }
       // Transform the value
       this._transformValue(prop, meta);

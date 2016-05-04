@@ -240,7 +240,7 @@ let Styleguide = React.createClass({
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <title>Design Property Guide</title>
+          <title>Design Tokens</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <Style />
         </head>
@@ -250,9 +250,10 @@ let Styleguide = React.createClass({
               <h1>Design Attribute Guide</h1>
             </div>
           </header>
-            <div className="container">
-              <main role="main">
-                <table>
+          <div className="container">
+            <main role="main">
+              <table>
+                <tbody>
                   {this.renderSection('text-color', 'Text Colors')}
                   {this.renderSection('background-color', 'Background Colors')}
                   {this.renderSection('gradient', 'Gradients')}
@@ -269,9 +270,10 @@ let Styleguide = React.createClass({
                   {this.renderSection('radius', 'Radius')}
                   {this.renderSection('time', 'Time')}
                   {this.renderSection('media-query', 'Media Queries')}
-                </table>
-              </main>
-            </div>
+                </tbody>
+              </table>
+            </main>
+          </div>
         </body>
       </html>
     )
@@ -280,7 +282,7 @@ let Styleguide = React.createClass({
 
 module.exports = function(json) {
   return `
-    <!doctype html>
+    <!DOCTYPE html>
     ${React.renderToStaticMarkup(<Styleguide json={json} />)}
   `;
 };
