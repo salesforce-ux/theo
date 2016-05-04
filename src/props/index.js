@@ -23,8 +23,8 @@ let TheoError   = require('./util/error');
 
 let PropSet     = require('./prop-set');
 
-let kebabCase   = require('lodash/string/kebabCase');
-let camelCase   = require('lodash/string/camelCase');
+let kebabCase   = require('lodash/kebabCase');
+let camelCase   = require('lodash/camelCase');
 
 ////////////////////////////////////////////////////////////////////
 // Helpers

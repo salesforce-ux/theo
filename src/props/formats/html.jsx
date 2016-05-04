@@ -11,10 +11,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 let React = require('react');
+let ReactDOMServer = require('react-dom/server');
 
-let groupBy = require('lodash/collection/groupBy');
-let camelCase   = require('lodash/string/camelCase');
-let capitalize   = require('lodash/string/capitalize');
+let groupBy = require('lodash/groupBy');
+let camelCase = require('lodash/camelCase');
+let upperfirst = require('lodash/upperFirst');
 
 let Style = React.createClass({
   render() {
@@ -226,7 +227,7 @@ let Styleguide = React.createClass({
   renderSection(type, heading, fn) {
     let props = this.state.categories[type];
     if (!props) { return null; }
-    let name = capitalize(camelCase(type));
+    let name = upperfirst(camelCase(type));
     let render = typeof fn === 'function' ? fn : this[`render${name}`];
     return [
       this.renderRowHeader(type, heading),
@@ -283,6 +284,6 @@ let Styleguide = React.createClass({
 module.exports = function(json) {
   return `
     <!DOCTYPE html>
-    ${React.renderToStaticMarkup(<Styleguide json={json} />)}
+    ${ReactDOMServer.renderToStaticMarkup(<Styleguide json={json} />)}
   `;
 };
