@@ -201,7 +201,7 @@ describe('$props', function() {
 describe('$props.plugins', function() {
 
   describe('#transform', function() {
-    it('transforms Design Properties as JSON', function(done) {
+    it('transforms Design Tokens as JSON', function(done) {
       var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
         .on('error', function(err) {
@@ -213,7 +213,7 @@ describe('$props.plugins', function() {
         })
         .pipe($props.plugins.transform('web'))
     });
-    it('transforms Design Properties as YML', function(done) {
+    it('transforms Design Tokens as YML', function(done) {
       var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
         .on('error', function(err) {

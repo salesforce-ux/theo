@@ -4,7 +4,7 @@
 [![NPM version][npm-image]][npm-url]
 
 Theo is a set of [Gulp](http://gulpjs.com) plugins for
-transforming and formatting [Design Properties](#overview)
+transforming and formatting [Design Tokens](#overview)
 
 ## Example
 
@@ -18,9 +18,9 @@ gulp.src('design/props.json')
   .pipe(gulp.dest('dist'));
 ```
 
-## Design Properties <a name="overview"></a>
+## Design Tokens <a name="overview"></a>
 
-Theo consumes **Design Property** files which are a central location to store
+Theo consumes **Design Token** files which are a central location to store
 design related information such as colors, fonts, widths, animations, etc. These raw
 values can then be transformed and formatted to meet the needs of any platform.
 
@@ -35,12 +35,12 @@ iOS might like **rgba** values formatted as **.json**.
 Finally, Android might like **8 Digit Hex** values formatted as **.xml**.
 
 Instead of hard coding this information in each platform/format, Theo
-can consume the centralized **Design Properties** and output files for
+can consume the centralized **Design Tokens** and output files for
 each platform.
 
 ### Spec
 
-A *Design Properties* file is written in either
+A *Design Token* file is written in either
 `json` or `yml` and should conform to the following spec:
 
 ```json5
@@ -96,7 +96,7 @@ A *Design Properties* file is written in either
   },
 
   // Optional
-  // Array of design property files to be imported
+  // Array of design token files to be imported
   // "aliases" will be imported as well
   // "aliases" will already be resolved
   // "global" will already be merged into into each prop
@@ -114,13 +114,13 @@ Theo is divided into two primary plugins:
 
 This plugin is responsible for transforming raw values into platform specific values.
 
-For example, the Design Properties might specify a color value as an
+For example, the Design Tokens might specify a color value as an
 rgba (`rgba(255, 0, 0, 1)`), but an Android app
 might prefer to consume colors as an 8 digit hex (`#ffff0000`)
 
 ### [format](#plugins.format)
 
-This plugin is responsible for taking transformed properties and outputting them
+This plugin is responsible for taking transformed tokens and outputting them
 into a new file format.
 
 An Android app might prefer to consume the final values as XML:
@@ -134,9 +134,9 @@ An Android app might prefer to consume the final values as XML:
 
 ## API
 
-####`theo.plugins.transform(type, [options])` <a name="plugins.transform"></a>
+#### `theo.plugins.transform(type, [options])` <a name="plugins.transform"></a>
 
-Transform the values for each *Design Property* file according to
+Transform the values for each *Design Token* file according to
 the specified type.
 
 A transform is list of [valueTransforms](#registerValueTransform) that should be applied
@@ -146,7 +146,7 @@ to each property.
 The name of the registered transform
 
 **@param {object} [options]**  
-Addtional options  
+Additional options
 
 **@param {boolean} [options.includeMeta]**  
 Don't remove ".meta" key from a prop 
@@ -185,7 +185,7 @@ Below is a list of pre-defined transforms and the corresponding
 [valueTransforms](registerValueTransform) that will be applied.
 
 *Note*: Generally speaking, the pre-defined transforms assume the original
-*Design Properties* are formatted for the web.
+*Design Tokens* are formatted for the web.
 
 **raw**:  
 No valueTransforms will be applied
@@ -258,9 +258,9 @@ Same as *relative/pixel*, but removes the `px` extension
 
 ***
 
-####`theo.plugins.format(type, [options])`  <a name="plugins.format"></a>
+#### `theo.plugins.format(type, [options])` <a name="plugins.format"></a>
 
-Format the output for each *Design Property* file according to
+Format the output for each *Design Token* file according to
 the specified type.
 
 *Note*: This plugin will almost always run after a `transform` call.
@@ -314,7 +314,7 @@ The name of the format
 
 **@param {function} formatter**  
 An function that should return a string representation
-of the reformatted *Design Properties*.
+of the reformatted *Design Tokens*.
 
 The formatter will be called with two arguments:
 
@@ -340,7 +340,7 @@ theo.registerFormat('scss', (json, options) => {
 Here is the layout of the `json` argument
 ```json5
 {
-  // An object containing the transformed properties
+  // An object containing the transformed tokens
   "props": {},
   // An array of the keys for easy iteration
   "propKeys": []
@@ -400,7 +400,7 @@ Here is the layout of the `json` argument
 
 ###### scss
 
-```sass
+```scss
 $prop-name: PROP_VALUE;
 ```
 
@@ -483,7 +483,7 @@ The function to call for each result in the stream
 #### Example:
 
 ```js
-// Get the transformed Design Properties
+// Get the transformed Design Tokens
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.getResult(result => {
@@ -492,7 +492,7 @@ gulp.src('design/props.json')
 ```
 
 ```js
-// Get the formatted Design Properties
+// Get the formatted Design Tokens
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.format('android.xml'))

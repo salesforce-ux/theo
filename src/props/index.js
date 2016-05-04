@@ -516,7 +516,7 @@ module.exports = {
             let json = util.parsePropsFile(file);
             propSets.push(json);
           } catch(e) {
-            let err = TheoError('diff() encountered an invalid Design Properties file', file.path);
+            let err = TheoError('diff() encountered an invalid Design Token file', file.path);
             return next(err);
           }
         }

@@ -51,7 +51,7 @@ class PropSet {
       def = _.merge(def, json);
     }
     catch (e) {
-      throw TheoError(`transform() encountered an invalid Design Properties file: ${this.file.path}`);
+      throw TheoError(`transform() encountered an invalid Design Token file: ${this.file.path}`);
     }
     // Raw
     if (options.includeRawValue === true) {
@@ -111,10 +111,10 @@ class PropSet {
 
   _validate(def) {
     if (_.isArray(def.props)) {
-      throw TheoError(`Design Properties "props" key must be an object`);
+      throw TheoError(`Design Token "props" key must be an object`);
     }
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
-      //console.warn('Design Properties contained no "props" object')
+      //console.warn('Design Token contained no "props" object')
       def.props = {};
     }
     // Make sure properties have all required keys
