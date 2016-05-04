@@ -14,8 +14,8 @@ let React = require('react');
 let ReactDOMServer = require('react-dom/server');
 
 let groupBy = require('lodash/groupBy');
-let camelCase   = require('lodash/camelCase');
-let upperfirst   = require('lodash/upperfirst');
+let camelCase = require('lodash/camelCase');
+let upperfirst = require('lodash/upperFirst');
 
 let Style = React.createClass({
   render() {
