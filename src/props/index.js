@@ -202,22 +202,38 @@ registerFormat('custom-properties.css', json => {
   return _.map( json.props, prop => {
     const name = kebabCase(prop.name);
     return `--${name}: ${prop.value};`
-  } ).join('\n')
+  } ).join('\n');
 });
 
 registerFormat('global.custom-properties.css', json => {
-  const computedCustomProperties = _.map( json.props, prop => {
+  const computedCustomProps = _.map( json.props, prop => {
     const name = kebabCase(prop.name);
     return `--${name}: ${prop.value};`;
-  } ).join('\n')
+  } ).join('\n');
 
   return `
     :root {
-      ${computedCustomProperties}
+      ${computedCustomProps}
     }
   `;
 
-})
+});
+
+
+registerFormat('custom-properties.scss', json => {
+  const computedSCSSVars = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `$${name}: ${prop.value};`;
+  } ).join('\n');
+
+  const computedCustomProps = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`;
+  } ).join('\n');
+
+  return `${computedSCSSVars}\n\n${computedCustomProps}`;
+
+});
 
 registerFormat('scss', json => {
   return _.map(json.props, prop => {
