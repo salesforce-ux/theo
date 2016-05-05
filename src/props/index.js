@@ -219,7 +219,6 @@ registerFormat('global.custom-properties.css', json => {
 
 });
 
-
 registerFormat('custom-properties.scss', json => {
   const computedSCSSVars = _.map( json.props, prop => {
     const name = kebabCase(prop.name);
