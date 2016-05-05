@@ -198,6 +198,27 @@ registerFormat('android.xml', json => {
   return cleanOutput(xml);
 });
 
+registerFormat('custom-properties.css', json => {
+  return _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`
+  } ).join('\n')
+});
+
+registerFormat('global.custom-properties.css', json => {
+  const computedCustomProperties = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`;
+  } ).join('\n')
+
+  return `
+    :root {
+      ${computedCustomProperties}
+    }
+  `;
+
+})
+
 registerFormat('scss', json => {
   return _.map(json.props, prop => {
     let name = kebabCase(prop.name);
