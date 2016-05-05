@@ -205,7 +205,7 @@ registerFormat('custom-properties.css', json => {
   } ).join('\n');
 });
 
-registerFormat('global.custom-properties.css', json => {
+registerFormat('default.custom-properties.css', json => {
   const computedCustomProps = _.map( json.props, prop => {
     const name = kebabCase(prop.name);
     return `--${name}: ${prop.value};`;
