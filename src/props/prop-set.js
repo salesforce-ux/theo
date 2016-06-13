@@ -33,7 +33,7 @@ class PropSet {
     this.file = file;
     this.path = file.path;
     this.valueTransforms = valueTransforms;
-    this.options = _.merge({}, defaults, options);
+    this.options = _.assign({}, defaults, options);
 
     this._init();
   }
@@ -104,7 +104,7 @@ class PropSet {
   _resolveGlobals(def) {
     if (_.keys(def.global).length === 0) return;
     _.forEach(def.props, (prop, key) => {
-      def.props[key] = _.merge({}, def.global, prop);
+      def.props[key] = _.assign({}, def.global, prop);
     });
     delete def.global;
   }
@@ -182,8 +182,8 @@ class PropSet {
 
   _transformValue(prop, meta) {
     _.forEach(this.valueTransforms, v => {
-      let p = _.merge({}, prop);
-      let m = _.merge({}, meta);
+      let p = _.assign({}, prop);
+      let m = _.assign({}, meta);
       if (v.matcher(p, m) === true) {
         prop.value = v.transformer(p, m);
       }

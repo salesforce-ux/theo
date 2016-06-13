@@ -177,21 +177,27 @@ describe('PropSet', function() {
   });
 
   describe('#_resolveGlobals', function() {
-    it ('returns undefined if no keys were found in def.global', function() {
+    it('returns undefined if no keys were found in def.global', function() {
       var def = { global: {} };
       assert(set._resolveGlobals(def) === undefined);
     });
-    it ('merges def.global into each def.props', function() {
+    it('merges def.global into each def.props', function() {
       var def = { global: {foo:"bar"}, props: { a: { value:"hello" } } };
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'));
       assert(def.props.a.foo === 'bar');
     });
-    it ('doesn\'t overwrite existing keys', function() {
+    it('doesn\'t overwrite existing keys', function() {
       var def = { global: {foo:"bar"}, props: { a: { foo:"baz" } } };
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'));
       assert(def.props.a.foo === 'baz');
+    });
+    it('doesn\'t merge object values', function() {
+      var def = { global: {foo:["a", "b", "c"]}, props: { a: { foo:["d"] } } };
+      set._resolveGlobals(def)
+      assert(_.has(def.props.a, 'foo'));
+      assert.deepEqual(def.props.a.foo, ['d']);
     });
     it('removes the "global" key from the def', function() {
       var def = { global: {foo:"bar"}, props: { a: { foo:"baz" } } };
@@ -201,7 +207,7 @@ describe('PropSet', function() {
   });
 
   describe('#_resolveAliases', function() {
-    it ('replaces all instances of an alias in string values', function() {
+    it('replaces all instances of an alias in string values', function() {
       var def = {
         aliases: { sky: "blue", land: "green" },
         props: {
@@ -219,19 +225,19 @@ describe('PropSet', function() {
   });
 
   describe('#_resolveImports', function() {
-    it ('returns an empty array if no imports are found', function() {
+    it('returns an empty array if no imports are found', function() {
       var def = { props: {} };
       var imports = set._resolveImports(def);
       assert(_.isArray(imports));
       assert(imports.length === 0);
     });
-    it ('throws an error if an import is not found', function() {
+    it('throws an error if an import is not found', function() {
       var def = { props: {}, imports: ['./foo/bar.json'] };
       assert.throws(function() {
         set._resolveImports(def);
       });
     });
-    it ('returns an array of PropSets', function() {
+    it('returns an array of PropSets', function() {
       var imports = set._resolveImports(def);
       assert(_.isArray(imports));
       assert(imports.length === 2);
