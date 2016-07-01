@@ -134,6 +134,25 @@ An Android app might prefer to consume the final values as XML:
 
 ## API
 
+#### `theo.plugins.file(filePath)` <a name="plugins.file"></a>
+
+Push a new file into a transform stream and return the stream.
+This is an alternative to using gulp.
+
+**@param {string} filePath**
+The name of the registered transform
+
+#### Example:
+
+```js
+let propsFile = path.resolve(__dirname, 'design/props.json')
+theo.plugins
+  .file(propsFile)
+  .pipe(theo.plugins.transform('web'));
+```
+
+***
+
 #### `theo.plugins.transform(type, [options])` <a name="plugins.transform"></a>
 
 Transform the values for each *Design Token* file according to

@@ -199,6 +199,17 @@ describe('$props', function() {
 });
 
 describe('$props.plugins', function() {
+  describe('#file', function() {
+    it('pushes a new file into the stream', function(done) {
+      $props.plugins
+        .file(path.resolve(__dirname, 'mock', 'sample.json'))
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.getResult((result) => {
+          assert(_.has(JSON.parse(result), 'props'));
+          done();
+        }));
+    });
+  });
   describe('#transform', function() {
     it('transforms Design Tokens as JSON', function(done) {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))

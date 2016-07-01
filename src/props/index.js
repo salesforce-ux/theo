@@ -398,9 +398,29 @@ module.exports = {
    */
   plugins: {
     /**
+     * Push a file into a new transform stream
+     *
+     * @param {string} filePath
+     * @return {stream}
+     */
+    file(filePath) {
+      let stream = new through.obj();
+      fs.readFile(filePath, (err, buffer) => {
+        if (err) return stream.emit('error', err);
+        let file = new gulpu.File({
+          path: filePath,
+          contents: buffer
+        });
+        stream.write(file);
+        stream.end();
+      });
+      return stream;
+    },
+    /**
      * Transform the prop values
      *
      * @param {string} type
+     * @return {stream}
      */
     transform(type, options={}) {
       if (typeof options !== 'undefined' && typeof options !== 'object') {
