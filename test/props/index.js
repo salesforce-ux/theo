@@ -199,31 +199,22 @@ describe('$props', function() {
 });
 
 describe('$props.plugins', function() {
-
   describe('#transform', function() {
     it('transforms Design Tokens as JSON', function(done) {
-      var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
-        .on('error', function(err) {
-          error = err;
-        })
-        .on('finish', function() {
-          assert(typeof error === 'undefined');
-          done();
-        })
         .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.getResult((result) => {
+          assert(_.has(JSON.parse(result), 'props'));
+          done();
+        }));
     });
     it('transforms Design Tokens as YML', function(done) {
-      var error;
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
-        .on('error', function(err) {
-          error = err;
-        })
-        .on('finish', function() {
-          assert(typeof error === 'undefined');
-          done();
-        })
         .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.getResult((result) => {
+          assert(_.has(JSON.parse(result), 'props'));
+          done();
+        }));
     });
   });
 
@@ -387,50 +378,6 @@ describe('$props.plugins', function() {
         .pipe($props.plugins.getResult(spy2));
     });
   });
-
-  describe('#diff()', function() {
-    var files, log;
-    beforeEach(function(done) {
-      files = [];
-      var src = [
-        path.resolve(__dirname, 'mock', 'a.json'),
-        path.resolve(__dirname, 'mock', 'b.json')
-      ];
-      gulp.src(src)
-        .pipe($props.plugins.transform('ios'))
-        .pipe($props.plugins.diff())
-        .pipe(through.obj(function(file, enc, next) {
-          files.push(file);
-          next();
-        }))
-        .on('finish', done);
-    });
-    it('created a single change log', function() {
-      assert(files.length === 1);
-    });
-    it('produces valid JSON', function() {
-      assert.doesNotThrow(function() {
-        JSON.parse(files[0].contents.toString());
-      });
-    });
-    it('logs changed props', function() {
-      var log = JSON.parse(files[0].contents.toString());
-      assert(_.has(log, 'changed'));
-      assert(_.has(log.changed, 'a'));
-    });
-    it('logs added props', function() {
-      var log = JSON.parse(files[0].contents.toString());
-      assert(_.has(log, 'added'));
-      assert(_.has(log.added, 'd'));
-    });
-    it('logs rempved props', function() {
-      var log = JSON.parse(files[0].contents.toString());
-      assert(_.has(log, 'removed'));
-      assert(_.has(log.removed, 'b'));
-      assert(_.has(log.removed, 'c'));
-    });
-  });
-
 });
 
 describe('$props:valueTransforms', function() {

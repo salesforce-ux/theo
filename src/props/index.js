@@ -397,7 +397,6 @@ module.exports = {
    * Helpers that return transform streams
    */
   plugins: {
-
     /**
      * Transform the prop values
      *
@@ -492,71 +491,6 @@ module.exports = {
         newFile.contents = new Buffer(formatted);
         next(null, newFile);
       });
-    },
-
-    /**
-     * Diff props
-     */
-    diff(options={}) {
-      let defaults = {
-        name: 'diff'
-      };
-      if (typeof options !== 'object') {
-        throw TheoError('diff() options must be an object');
-      }
-      options = _.merge({}, defaults, options);
-      if (typeof options.name !== 'string') {
-        throw TheoError('diff() options.name must be a string');
-      }
-      let propSets = [];
-      function transform(file, enc, next) {
-        let ext = path.extname(file.relative);
-        if (ext === '.json' || ext === '.yml') {
-          try {
-            let json = util.parsePropsFile(file);
-            propSets.push(json);
-          } catch(e) {
-            let err = TheoError('diff() encountered an invalid Design Token file', file.path);
-            return next(err);
-          }
-        }
-        next();
-      }
-      function flush(next) {
-        let log = {
-          changed: {},
-          added: {},
-          removed: {}
-        };
-        let a = propSets[0].props;
-        let b = propSets[1].props;
-        _.forEach(a, (prop, name) => {
-          // Change
-          if (_.has(b, name)) {
-            let _prop = b[name];
-            if (prop.value !== _prop.value) {
-              log.changed[name] = [prop.value, _prop.value];
-            }
-          }
-          // Remove
-          else {
-            log.removed[name] = prop.value;
-          }
-        });
-        _.forEach(b, (prop, name) => {
-          // Add
-          if (!_.has(a, name)) {
-            log.added[name] = prop.value;
-          }
-        });
-        let file = new gulpu.File({
-          path: `${options.name}.json`,
-          contents: new Buffer(JSON.stringify(log, null, 2))
-        });
-        this.push(file);
-        next();
-      }
-      return through.obj(transform, flush);
     }
 
   },
