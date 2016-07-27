@@ -19,7 +19,7 @@
   "main": "dist/props/index.js",
   "scripts": {
     "dist": "babel src --out-dir dist",
-    "test": "npm run dist && mocha --recursive",
+    "test": "npm run dist && mocha --recursive --reporter min",
     "prepublish": "npm run dist"
   },
   "engines": {
@@ -44,7 +44,7 @@
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "through2": "^2.0.1",
-    "tinycolor2": "^1.1.1",
+    "tinycolor2": "~1.1.1",
     "xml2js": "^0.4.5"
   },
   "devDependencies": {
