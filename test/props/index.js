@@ -397,15 +397,15 @@ describe('$props:valueTransforms', function() {
     var t = $props.getValueTransform('color/rgb').transformer;
     it('converts hex to rgb', function() {
       var p = { value: '#FF0000' };
-      assert(t(p) === 'rgb(255, 0, 0)');
+      assert.equal(t(p), 'rgb(255, 0, 0)');
     });
     it('converts rgba to rgba', function() {
       var p = { value: 'rgba(255, 0, 0, 0.8)' };
-      assert(t(p) === 'rgba(255, 0, 0, 0.8)');
+      assert.equal(t(p), 'rgba(255, 0, 0, 0.8)');
     });
     it('converts hsla to rgba', function() {
-      var p = { value: 'hsla(0, 100, 50, 0.8)' };
-      assert(t(p) === 'rgba(255, 0, 0, 0.8)');
+      var p = { value: 'hsla(0, 100%, 50%, 0.8)' };
+      assert.equal(t(p), 'rgba(255, 0, 0, 0.8)');
     });
   });
 
@@ -413,15 +413,15 @@ describe('$props:valueTransforms', function() {
     var t = $props.getValueTransform('color/hex').transformer;
     it('converts rgb to hex', function() {
       var p = { value: 'rgb(255, 0, 0)' };
-      assert(t(p) === '#ff0000');
+      assert.equal(t(p), '#ff0000');
     });
     it('converts rgba to hex', function() {
       var p = { value: 'rgb(255, 0, 0, 0.8)' };
-      assert(t(p) === '#ff0000');
+      assert.equal(t(p), '#ff0000');
     });
     it('converts hsla to hex', function() {
-      var p = { value: 'hsla(0, 100, 50, 0.8)' };
-      assert(t(p) === '#ff0000');
+      var p = { value: 'hsla(0, 100%, 50%, 0.8)' };
+      assert.equal(t(p), '#ff0000');
     });
   });
 
@@ -429,15 +429,15 @@ describe('$props:valueTransforms', function() {
     var t = $props.getValueTransform('color/hex8').transformer;
     it('converts hex to hex8', function() {
       var p = { value: '#FF0000' };
-      assert(t(p) === '#ffff0000');
+      assert.equal(t(p), '#ffff0000');
     });
     it('converts rgba to hex8', function() {
       var p = { value: 'rgba(255, 0, 0, 0.8)' };
-      assert(t(p) === '#ccff0000');
+      assert.equal(t(p), '#ccff0000');
     });
     it('converts hsla to hex8', function() {
-      var p = { value: 'hsla(0, 100, 50, 0.8)' };
-      assert(t(p) === '#ccff0000');
+      var p = { value: 'hsla(0, 100%, 50%, 0.8)' };
+      assert.equal(t(p), '#ccff0000');
     });
   });
 
@@ -445,11 +445,11 @@ describe('$props:valueTransforms', function() {
     var t = $props.getValueTransform('percentage/float').transformer;
     it('converts a percentage to a float', function() {
       var p = { value: '50%' };
-      assert(t(p) === '0.5');
+      assert.equal(t(p), '0.5');
     });
     it('converts multiple percentages to a floats', function() {
       var p = { value: 'background-size: 50% 50%' };
-      assert(t(p) === 'background-size: 0.5 0.5');
+      assert.equal(t(p), 'background-size: 0.5 0.5');
     });
   });
 
@@ -458,22 +458,22 @@ describe('$props:valueTransforms', function() {
     it('converts em to px', function() {
       var p = { value: '1em' };
       var m = { baseFontPercentage: 100, baseFontPixel: 16 };
-      assert(t(p, m) === '16px');
+      assert.equal(t(p, m), '16px');
     });
     it('converts rem to px', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 100, baseFontPixel: 16 };
-      assert(t(p, m) === '16px');
+      assert.equal(t(p, m), '16px');
     });
     it('takes the baseFontPercentage into account', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 50, baseFontPixel: 16 };
-      assert(t(p, m) === '8px');
+      assert.equal(t(p, m), '8px');
     });
     it('takes the baseFontPixel into account', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 100, baseFontPixel: 5 };
-      assert(t(p, m) === '5px');
+      assert.equal(t(p, m), '5px');
     });
   });
 
@@ -482,22 +482,22 @@ describe('$props:valueTransforms', function() {
     it('converts em to px', function() {
       var p = { value: '1em' };
       var m = { baseFontPercentage: 100, baseFontPixel: 16 };
-      assert(t(p, m) === '16');
+      assert.equal(t(p, m), '16');
     });
     it('converts rem to px', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 100, baseFontPixel: 16 };
-      assert(t(p, m) === '16');
+      assert.equal(t(p, m), '16');
     });
     it('takes the baseFontPercentage into account', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 50, baseFontPixel: 16 };
-      assert(t(p, m) === '8');
+      assert.equal(t(p, m), '8');
     });
     it('takes the baseFontPixel into account', function() {
       var p = { value: '1rem' };
       var m = { baseFontPercentage: 100, baseFontPixel: 5 };
-      assert(t(p, m) === '5');
+      assert.equal(t(p, m), '5');
     });
   });
 
