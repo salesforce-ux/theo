@@ -129,14 +129,24 @@ class PropSet {
 
   _resolveAliases(def) {
     let options = this.options;
-    _.forEach(def.props, (propValues, propName) => {
-      if (_.isString(propValues.value) && propValues.value.startsWith('{!')) {
-        if (def.aliases[propValues.value]) {
-          propValues.value = def.aliases[propValues.value];
-        } else {
-          throw new Error(`Alias ${propValues.value} not found`);
+    _.forEach(def.aliases, (value, key) => {
+      let s = _.escapeRegExp(key);
+      _.forEach(def.props, prop => {
+        let re = new RegExp(`\{\!${s}\}`, 'g');
+        let isAlias = RegExp(/^{[^\}]*}$/g);
+        if (_.isString(prop.value)) {
+          // Value contains an alias
+          if (re.test(prop.value)) {
+            // Resolve the alias
+            prop.value = prop.value.replace(re, value);
+          } else if (isAlias.test(prop.value)) {
+            let alias = prop.value.toString().replace('{!', '').replace('}', '');
+            if (!def.aliases[alias]) {
+              throw new Error(`Alias ${propValues.value} not found`);
+            }
+          }
         }
-      }
+      });
     });
   }
 
