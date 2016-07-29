@@ -217,10 +217,10 @@ describe('PropSet', function() {
         }
       };
       set._resolveAliases(def);
-      assert(def.props.a.value === 'blue');
+      assert.equal(def.props.a.value, 'blue');
       assert(!_.has(def.props.a, 'alias'));
-      assert(def.props.b.value === 'blue - blue');
-      assert(def.props.c.value === 'blue - green');
+      assert.equal(def.props.b.value, 'blue - blue');
+      assert.equal(def.props.c.value, 'blue - green');
     });
   });
   it('throws an error if an alias does not exist', function() {
@@ -228,7 +228,8 @@ describe('PropSet', function() {
       aliases: { sky: "blue" },
       global: { type: "foo", category: "bar" },
       props: {
-        a: { value: "{!randomalias}" }
+        a: { value: "{!sky} {!randomalias}" },
+        b: { value: "{!randomalias}" }
       }
     };
     assert.throws(function() {

@@ -132,18 +132,19 @@ class PropSet {
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key);
       _.forEach(def.props, prop => {
-        let re = new RegExp(`\{\!${s}\}`, 'g');
-        let isAlias = RegExp(/^{[^\}]*}$/g);
+        let isAlias = new RegExp(`\{\!${s}\}`, 'g');
+        let isAliasStructure = RegExp(`\{\![^\}]*\}`, 'g');
         if (_.isString(prop.value)) {
           // Value contains an alias
-          if (re.test(prop.value)) {
+          if (isAlias.test(prop.value)) {
             // Resolve the alias
-            prop.value = prop.value.replace(re, value);
-          } else if (isAlias.test(prop.value)) {
-            let alias = prop.value.toString().replace('{!', '').replace('}', '');
-            if (!def.aliases[alias]) {
-              throw new Error(`Alias ${propValues.value} not found`);
-            }
+            prop.value = prop.value.replace(isAlias, value);
+          } 
+          if (isAliasStructure.test(prop.value)) {
+            _.forEach(prop.value.match(isAliasStructure), a => {
+              let alias = a.toString().replace('{!', '').replace('}', '');
+              if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`);
+            });
           }
         }
       });
