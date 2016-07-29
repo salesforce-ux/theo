@@ -99,7 +99,7 @@ A *Design Token* file is written in either
   // Array of design token files to be imported
   // "aliases" will be imported as well
   // "aliases" will already be resolved
-  // "global" will already be merged into into each prop
+  // "global" will already be merged into each prop
   "imports": [
     "./some/dir/file.json"
   ]
