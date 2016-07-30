@@ -76,7 +76,7 @@ let Styleguide = React.createClass({
 
   renderBackgroundColor(props) {
     return props.map(prop => {
-      let example = <ExampleRow style={{backgroundColor:prop.value, border:'1px solid #f2f2f2;'}} />
+      let example = <ExampleRow style={{backgroundColor:prop.value, border:'1px solid #f2f2f2'}} />
       return this.renderRow(prop, example);
     })
   },
