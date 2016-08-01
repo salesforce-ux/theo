@@ -8,9 +8,10 @@
   },
 
   "aliases": {
-    "sky": "blue"
+    "sky": "blue",
+    "land": "green"
   },
- 
+
   "props": {
     "a": {
       "value": "1em",

@@ -104,7 +104,7 @@ describe('PropSet', function() {
       assert(set.def.props.c.value === 'green');
       assert(set.def.props.f.value === 'green');
     });
-    it('only resolves aliases if options.resolveAliases isnt false', function() {
+    it('only resolves aliases if options.resolveAliases isn\'t false', function() {
       var def = {
         aliases: { sky: "blue", land: "green" },
         global: { type: "foo", category: "bar" },
@@ -217,10 +217,23 @@ describe('PropSet', function() {
         }
       };
       set._resolveAliases(def);
-      assert(def.props.a.value === 'blue');
+      assert.equal(def.props.a.value, 'blue');
       assert(!_.has(def.props.a, 'alias'));
-      assert(def.props.b.value === 'blue - blue');
-      assert(def.props.c.value === 'blue - green');
+      assert.equal(def.props.b.value, 'blue - blue');
+      assert.equal(def.props.c.value, 'blue - green');
+    });
+  });
+  it('throws an error if an alias does not exist', function() {
+    var def = {
+      aliases: { sky: "blue" },
+      global: { type: "foo", category: "bar" },
+      props: {
+        a: { value: "{!sky} {!randomalias}" },
+        b: { value: "{!randomalias}" }
+      }
+    };
+    assert.throws(function() {
+      set._resolveAliases(def);
     });
   });
 
