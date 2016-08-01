@@ -1,3 +1,22 @@
-node_modules
-dist
+# Ignore all hidden dotfiles
+.*
+
+# Whitelist useful dotfiles
+!/.babelrc
+!/.editorconfig
+!/.gitignore
+!/.npmignore
+!/.travis.yml
+
+# Add a .gitkeep file in an empty
+# directory to check it in the repository
+!.gitkeep
+
+# Ignore modules
+/node_modules
+
+# Ignore logs
 *.log
+
+# Distribution folder
+/dist
