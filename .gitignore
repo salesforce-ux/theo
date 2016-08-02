@@ -4,10 +4,11 @@
 # Whitelist useful dotfiles
 !/.babelrc
 !/.editorconfig
+!/.eslintrc.yml
+!/.eslintignore
 !/.gitignore
 !/.npmignore
 !/.travis.yml
-!/.eslintrc.yml
 
 # Add a .gitkeep file in an empty
 # directory to check it in the repository
