@@ -41,11 +41,11 @@
   "dependencies": {
     "gulp-util": "^3.0.7",
     "js-yaml": "^3.6.0",
-    "lodash": "^4.11.2",
-    "react": "^15.0.2",
-    "react-dom": "^15.0.2",
+    "lodash": "^4.14.1",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
     "through2": "^2.0.1",
-    "tinycolor2": "~1.1.1",
+    "tinycolor2": "~1.1.2",
     "xml2js": "^0.4.5"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
     "gulp": "^3.9.1",
-    "mocha": "^2.4.5",
+    "mocha": "^3.0.0",
     "sinon": "^1.12.2"
   }
 }
