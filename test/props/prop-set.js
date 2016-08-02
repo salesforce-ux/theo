@@ -28,14 +28,14 @@ function isError (error) {
   return (error instanceof Error) || error instanceof gulpu.PluginError
 }
 
-describe('PropSet', function () {
+describe('PropSet', () => {
   let def
   let file
   let t1
   let t2
   let set
 
-  beforeEach(function () {
+  beforeEach(() => {
     const p = path.resolve(__dirname, 'mock', 'c.json')
     const f = fs.readFileSync(p)
     def = JSON.parse(f)
@@ -44,18 +44,18 @@ describe('PropSet', function () {
       contents: new Buffer(f)
     })
     t1 = {
-      matcher: function (prop) { return prop.category === 'test-a' },
-      transformer: function (prop) { return prop.value + '__' + prop.name }
+      matcher: (prop) => prop.category === 'test-a',
+      transformer: (prop) => prop.value + '__' + prop.name
     }
     t2 = {
-      matcher: function (prop) { return prop.category === 'test-b' },
-      transformer: function (prop) { return prop.name }
+      matcher: (prop) => prop.category === 'test-b',
+      transformer: (prop) => prop.name
     }
     set = new PropSet(file, [t1, t2])
   })
 
-  describe('#constructor', function () {
-    it('throws an error if a non-vinyl file is passed', function () {
+  describe('#constructor', () => {
+    it('throws an error if a non-vinyl file is passed', () => {
       try {
         const propset = new PropSet(new Buffer('{}'), [])
       } catch (error) {
@@ -63,7 +63,7 @@ describe('PropSet', function () {
         assert(/vinyl/.test(error.message))
       }
     })
-    it('saves the file, path, and transforms', function () {
+    it('saves the file, path, and transforms', () => {
       const file = new gulpu.File({
         path: 'foobar.json',
         contents: new Buffer('{"props":{}}')
@@ -74,7 +74,7 @@ describe('PropSet', function () {
       assert(set.path === 'foobar.json')
       assert(set.valueTransforms === valueTransforms)
     })
-    it('throws an error if invalid JSON is encountered', function () {
+    it('throws an error if invalid JSON is encountered', () => {
       try {
         const file = new gulpu.File({
           path: 'foobar.json',
@@ -86,30 +86,29 @@ describe('PropSet', function () {
         assert(/encountered an invalid/.test(error.message))
       }
     })
-    it('saves the def', function () {
+    it('saves the def', () => {
       assert(_.has(set, 'def'))
     })
-    it('cleans up the def', function () {
+    it('cleans up the def', () => {
       assert(!_.has(set.def, 'global'))
       assert(!_.has(set.def, 'imports'))
     })
-    it('resolves imports', function () {
-      ['a', 'b', 'c', 'd', 'e'].forEach(function (name) {
-        assert(_.has(set.def.props, name))
-      })
+    it('resolves imports', () => {
+      ['a', 'b', 'c', 'd', 'e'].forEach((name) =>
+        assert(_.has(set.def.props, name)))
     })
-    it('resolves imports with duplicate props', function () {
+    it('resolves imports with duplicate props', () => {
       assert(set.def.props.a.value === '2em')
     })
-    it('merges globals before import', function () {
+    it('merges globals before import', () => {
       assert(set.def.props.a.category === 'test-b')
     })
-    it('resolves aliases', function () {
+    it('resolves aliases', () => {
       assert(set.def.props.b.value === 'blue')
       assert(set.def.props.c.value === 'green')
       assert(set.def.props.f.value === 'green')
     })
-    it('only resolves aliases if options.resolveAliases isn\'t false', function () {
+    it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green' },
         global: { type: 'foo', category: 'bar' },
@@ -128,7 +127,7 @@ describe('PropSet', function () {
       assert(set.def.props.b.value === 'foo')
       assert(set.def.props.c.value === '{!land} {!sea}')
     })
-    it('includes a ".rawValue" if options.includeRawValue is true', function () {
+    it('includes a ".rawValue" if options.includeRawValue is true', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green', sea: 'clear' },
         global: { type: 'foo', category: 'bar' },
@@ -152,8 +151,8 @@ describe('PropSet', function () {
     })
   })
 
-  describe('#_validate', function () {
-    it('throws an error if "props" is an array', function () {
+  describe('#_validate', () => {
+    it('throws an error if "props" is an array', () => {
       try {
         const def = {props: []}
         set._validate(def)
@@ -163,9 +162,9 @@ describe('PropSet', function () {
         assert(re.test(error.message))
       }
     })
-    it('throws an error if any prop is malformed', function () {
+    it('throws an error if any prop is malformed', () => {
       const keys = ['value', 'type', 'category']
-      keys.forEach(function (key) {
+      keys.forEach((key) => {
         try {
           const def = {props: {a: {}}}
           _.without(keys, key).forEach(function (k) {
@@ -181,38 +180,38 @@ describe('PropSet', function () {
     })
   })
 
-  describe('#_resolveGlobals', function () {
-    it('returns undefined if no keys were found in def.global', function () {
+  describe('#_resolveGlobals', () => {
+    it('returns undefined if no keys were found in def.global', () => {
       const def = { global: {} }
       assert(set._resolveGlobals(def) === undefined)
     })
-    it('merges def.global into each def.props', function () {
+    it('merges def.global into each def.props', () => {
       const def = { global: {foo: 'bar'}, props: { a: { value: 'hello' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert(def.props.a.foo === 'bar')
     })
-    it('doesn\'t overwrite existing keys', function () {
+    it('doesn\'t overwrite existing keys', () => {
       const def = { global: {foo: 'bar'}, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert(def.props.a.foo === 'baz')
     })
-    it('doesn\'t merge object values', function () {
+    it('doesn\'t merge object values', () => {
       const def = { global: {foo: ['a', 'b', 'c']}, props: { a: { foo: ['d'] } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.deepEqual(def.props.a.foo, ['d'])
     })
-    it('removes the "global" key from the def', function () {
+    it('removes the "global" key from the def', () => {
       const def = { global: {foo: 'bar'}, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(!_.has(def, 'global'))
     })
   })
 
-  describe('#_resolveAliases', function () {
-    it('replaces all instances of an alias in string values', function () {
+  describe('#_resolveAliases', () => {
+    it('replaces all instances of an alias in string values', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green' },
         props: {
@@ -228,7 +227,7 @@ describe('PropSet', function () {
       assert.equal(def.props.c.value, 'blue - green')
     })
   })
-  it('throws an error if an alias does not exist', function () {
+  it('throws an error if an alias does not exist', () => {
     const def = {
       aliases: { sky: 'blue' },
       global: { type: 'foo', category: 'bar' },
@@ -237,25 +236,25 @@ describe('PropSet', function () {
         b: { value: '{!randomalias}' }
       }
     }
-    assert.throws(function () {
+    assert.throws(() => {
       set._resolveAliases(def)
     })
   })
 
-  describe('#_resolveImports', function () {
-    it('returns an empty array if no imports are found', function () {
+  describe('#_resolveImports', () => {
+    it('returns an empty array if no imports are found', () => {
       const def = { props: {} }
       const imports = set._resolveImports(def)
       assert(_.isArray(imports))
       assert(imports.length === 0)
     })
-    it('throws an error if an import is not found', function () {
+    it('throws an error if an import is not found', () => {
       const def = { props: {}, imports: ['./foo/bar.json'] }
-      assert.throws(function () {
+      assert.throws(() => {
         set._resolveImports(def)
       })
     })
-    it('returns an array of PropSets', function () {
+    it('returns an array of PropSets', () => {
       const imports = set._resolveImports(def)
       assert(_.isArray(imports))
       assert(imports.length === 2)
@@ -267,39 +266,39 @@ describe('PropSet', function () {
   })
 
   function transformProps () {
-    it('gives each prop a "name" key', function () {
+    it('gives each prop a "name" key', () => {
       set._transformProps()
-      _.forEach(set.def.props, function (prop, key) {
+      _.forEach(set.def.props, (prop, key) => {
         assert(_.has(prop, 'name'))
         assert(prop.name === key)
       })
     })
-    it('runs each prop through the matcher/transformer', function () {
+    it('runs each prop through the matcher/transformer', () => {
       set._transformProps();
-      ['b', 'c'].forEach(function (name) {
+      ['b', 'c'].forEach((name) => {
         const re = new RegExp('__' + name + '$')
         assert(re.test(set.def.props[name].value))
       });
-      ['a', 'd'].forEach(function (name) {
+      ['a', 'd'].forEach((name) => {
         assert(set.def.props[name].value === name)
       })
     })
-    it('deletes the ".meta" key for each prop', function () {
+    it('deletes the ".meta" key for each prop', () => {
       set._transformProps()
-      _.forEach(set.def.props, function (prop) {
+      _.forEach(set.def.props, (prop) => {
         assert(!_.has(prop, '.meta'))
       })
     })
-    it('deletes the ".meta" key for each prop', function () {
+    it('deletes the ".meta" key for each prop', () => {
       set._transformProps()
-      _.forEach(set.def.props, function (prop) {
+      _.forEach(set.def.props, (prop) => {
         assert(!_.has(prop, '.meta'))
       })
     })
-    it('includes the ".meta" key for each prop if specified in the options', function () {
+    it('includes the ".meta" key for each prop if specified in the options', () => {
       set = new PropSet(file, [t1, t2], { includeMeta: true })
       set._transformProps()
-      _.forEach(set.def.props, function (prop) {
+      _.forEach(set.def.props, (prop) => {
         assert(_.has(prop, '.meta'))
       })
     })
@@ -307,11 +306,11 @@ describe('PropSet', function () {
 
   describe('#_transformProps', transformProps)
 
-  describe('#_transformValue', function () {
+  describe('#_transformValue', () => {
     let t1
     let prop
     let meta
-    beforeEach(function () {
+    beforeEach(() => {
       t1 = {
         matcher: sinon.stub().returns(true),
         transformer: sinon.stub().returns('transform')
@@ -327,19 +326,19 @@ describe('PropSet', function () {
       }
       set.valueTransforms = [t1]
     })
-    it('calls each matcher with the cloned prop and meta', function () {
+    it('calls each matcher with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.matcher.calledOnce)
       assert(t1.matcher.getCall(0).args[0] !== prop)
       assert(t1.matcher.getCall(0).args[1] !== meta)
     })
-    it('calls each transformer with the cloned prop and meta', function () {
+    it('calls each transformer with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.transformer.calledOnce)
       assert(t1.transformer.getCall(0).args[0] !== prop)
       assert(t1.transformer.getCall(0).args[1] !== meta)
     })
-    it('only calls the transformer if the matcher returns true', function () {
+    it('only calls the transformer if the matcher returns true', () => {
       t1.matcher = sinon.stub().returns(false)
       set._transformValue(prop, meta)
       assert(t1.matcher.called)
@@ -347,25 +346,25 @@ describe('PropSet', function () {
     })
   })
 
-  describe('#transform', function () {
+  describe('#transform', () => {
     it('transforms the props', transformProps)
-    it('returns the PropSet', function () {
+    it('returns the PropSet', () => {
       const s = set.transform()
       assert(s === set)
     })
   })
 
-  describe('#toJSON', function () {
-    it('returns a string', function () {
+  describe('#toJSON', () => {
+    it('returns a string', () => {
       assert(typeof set.toJSON() === 'string')
     })
-    it('returns valid JSON', function () {
+    it('returns valid JSON', () => {
       const json = set.toJSON()
-      assert.doesNotThrow(function () {
+      assert.doesNotThrow(() => {
         JSON.parse(json)
       })
     })
-    it('adds a "propKeys" array', function () {
+    it('adds a "propKeys" array', () => {
       const def = JSON.parse(set.toJSON())
       assert(_.has(def, 'propKeys'))
       assert(_.isArray(def.propKeys))
@@ -374,11 +373,11 @@ describe('PropSet', function () {
     })
   })
 
-  describe('#toBuffer', function () {
-    it('returns a Buffer', function () {
+  describe('#toBuffer', () => {
+    it('returns a Buffer', () => {
       assert(set.toBuffer() instanceof Buffer)
     })
-    it('returns a Buffer with the JSON', function () {
+    it('returns a Buffer with the JSON', () => {
       assert(set.toBuffer().toString() === set.toJSON())
     })
   })
