@@ -174,4 +174,4 @@ module.exports = `
     background-size: 100% 1em;
   }
   
-`;
+`
