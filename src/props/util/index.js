@@ -26,7 +26,7 @@ module.exports = {
     if (/\.json$/.test(file.path)) {
       return JSON.parse(file.contents.toString())
     }
-    if (/\.yml$/.test(file.path)) {
+    if (/\.ya?ml$/.test(file.path)) {
       return yaml.safeLoad(file.contents.toString())
     }
   }
