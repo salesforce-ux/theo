@@ -11,6 +11,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 let yaml = require('js-yaml')
+let path = require('path')
 
 module.exports = {
 
@@ -23,11 +24,12 @@ module.exports = {
   },
 
   parsePropsFile (file) {
-    if (/\.json$/.test(file.path)) {
-      return JSON.parse(file.contents.toString())
-    }
-    if (/\.ya?ml$/.test(file.path)) {
-      return yaml.safeLoad(file.contents.toString())
+    switch (path.extname(file.path)) {
+      case '.yaml':
+      case '.yml':
+        return yaml.safeLoad(file.contents.toString())
+      default:
+        return JSON.parse(file.contents.toString())
     }
   }
 
