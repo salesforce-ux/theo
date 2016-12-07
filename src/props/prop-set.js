@@ -136,8 +136,10 @@ class PropSet {
         if (_.isString(prop.value)) {
           // Value contains an alias
           if (isAlias.test(prop.value)) {
+            // Determine if alias value is string or object
+            let aliasValue = _.isString(value) ? value : value.value
             // Resolve the alias
-            prop.value = prop.value.replace(isAlias, value)
+            prop.value = prop.value.replace(isAlias, aliasValue)
           }
           if (isAliasStructure.test(prop.value)) {
             _.forEach(prop.value.match(isAliasStructure), a => {
