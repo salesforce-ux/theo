@@ -84,18 +84,17 @@ class PropSet {
     return this
   }
 
-  _resolveNestedProps (props, parent = "" ) {
+  _resolveNestedProps (props, parent = '') {
     let options = this.options
     let flatProps = {}
     _.forEach(props, (value, key) => {
-      console.log(key, value);
       if (typeof value !== 'string') {
-        let propName = (parent === "" ? "" : parent + "_") + key
+        let propName = (parent === '' ? '' : parent + '_') + key
         flatProps = Object.assign(flatProps, this._resolveNestedProps(value, propName))
         flatProps[propName] = value
       }
     })
-    return flatProps;
+    return flatProps
   }
 
   transform () {
