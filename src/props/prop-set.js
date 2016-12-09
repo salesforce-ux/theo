@@ -52,6 +52,8 @@ class PropSet {
     } catch (e) {
       throw TheoError(`transform() encountered an invalid Design Token file: ${this.file.path}`)
     }
+    // Resolve Nested Props
+    def.props = this._resolveNestedProps(def.props)
     // Raw
     if (options.includeRawValue === true) {
       _.forEach(def.props, prop => {
@@ -80,6 +82,20 @@ class PropSet {
     // Save
     this.def = def
     return this
+  }
+
+  _resolveNestedProps (props, parent = "" ) {
+    let options = this.options
+    let flatProps = {}
+    _.forEach(props, (value, key) => {
+      console.log(key, value);
+      if (typeof value !== 'string') {
+        let propName = (parent === "" ? "" : parent + "_") + key
+        flatProps = Object.assign(flatProps, this._resolveNestedProps(value, propName))
+        flatProps[propName] = value
+      }
+    })
+    return flatProps;
   }
 
   transform () {
