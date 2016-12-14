@@ -780,8 +780,8 @@ describe('$props:formats', () => {
       const re = new RegExp(_.escapeRegExp('<!DOCTYPE html>'))
       assert(re.test(result))
     })
-    it('has example rows', () => {
-      const re = new RegExp(_.escapeRegExp('<td class="example"'))
+    it('has examples', () => {
+      const re = new RegExp(_.escapeRegExp('<div class="metric-box"'))
       assert(re.test(result))
     })
   })
