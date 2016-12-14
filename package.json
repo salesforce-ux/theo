@@ -21,7 +21,7 @@
     "dist": "babel src --out-dir dist",
     "test": "npm run dist && mocha --recursive --reporter min",
     "prepublish": "npm run dist",
-    "lint": "eslint --format 'node_modules/eslint-friendly-formatter' . --ext .js"
+    "lint": "eslint . --ext .js --format codeframe"
   },
   "engines": {
     "node": ">=6.3.1"
@@ -54,7 +54,6 @@
     "babel-preset-react": "^6.16.0",
     "eslint": "^3.12.1",
     "eslint-config-standard": "^6.2.1",
-    "eslint-friendly-formatter": "^2.0.6",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "gulp": "^3.9.1",
