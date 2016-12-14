@@ -1,4 +1,4 @@
-/*eslint new-cap: off*/
+/* eslint new-cap: off */
 /*
 Copyright (c) 2015, salesforce.com, inc. All rights reserved.
 
