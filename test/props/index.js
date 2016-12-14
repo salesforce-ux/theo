@@ -227,6 +227,14 @@ describe('$props.plugins', () => {
           done()
         }))
     })
+    it('transforms Design Tokens as YAML', (done) => {
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.yaml'))
+        .pipe($props.plugins.transform('web'))
+        .pipe($props.plugins.getResult((result) => {
+          assert(_.has(JSON.parse(result), 'props'))
+          done()
+        }))
+    })
   })
 
   describe('#format', () => {
