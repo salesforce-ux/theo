@@ -20,7 +20,7 @@ let upperfirst = require('lodash/upperFirst')
 let Style = React.createClass({
   render () {
     return (
-      <style type="text/css">
+      <style>
         {require('./html.style')}
       </style>
     )
