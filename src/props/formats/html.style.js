@@ -11,129 +11,32 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 module.exports = `
-  
-  * { -moz-box-sizing: border-box; box-sizing: border-box; }
 
   html {
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5;
     background: #fff;
     color: #444;
   }
 
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  dl,
-  dd,
-  p { margin: 0; }
-
-  body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: white;
-    -webkit-font-smoothing: antialiased;
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
   }
 
-  ::-moz-selection { background: #b3d4fc; }
-  ::selection { background: #b3d4fc; }
+  body { font-size: .75rem; }
 
-  header,
-  footer,
-  main { display: block; }
-
-  main {
-    margin: 0 -0.5em;
-    padding-top: 2em;
-    padding-bottom: 2em;
+  ::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    padding: 0;
-    font-weight: normal;
-    line-height: 1.2;
-  }
-
-  h1 { font-size: 2em; }
-
-  h2 {
-    margin-top: 0;
-    padding: 1.5em 0 .5em;
-    font-size: 1.5em;
-  }
-
-  h4 { color: #ccc; }
-
-
-  p { padding: .75em 0; }
-
-  a {
-    text-decoration: none;
-    background: transparent;
-  }
-
-  a,
-  a:visited { color: #369; }
-
-  a:focus,
-  a:hover,
-  a:active { color: #036; }
-
-  a:hover,
-  a:active { outline: 0; }
-
-  strong { font-weight: bold; }
-
-  hr {
-    -moz-box-sizing: content-box;
-         box-sizing: content-box;
-    display: block;
-    margin: 1em 0;
-    border: 0;
-    border-top: 1px solid #ccc;
-    padding: 0;
-    height: 1px;
-  }
-
-  code {
-    font-size: 1em;
-    font-family: monospace, monospace;
-  }
-
-  table {
-    border-collapse: separate;
-    border-spacing: 0 .5em;
-    width: 100%;
-  }
-
-
-  th,
-  td {
-    padding: 0 .5em;
-    vertical-align: baseline;
-    -ms-word-break: break-all;
-        word-break: break-all;
-        word-break: break-word;
-    -webkit-hyphens: auto;
-       -moz-hyphens: auto;
-        -ms-hyphens: auto;
-            hyphens: auto;
-  }
-
-  th {
-    font-weight: normal;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-    padding: 1.5em .4em .5em;
-    color: #ccc;
-  }
-
-  th:first-child {
-    color: #333;
-    font-size: 1.5em;
-    min-width: 8em;
+  ::selection {
+    background: #b3d4fc;
+    text-shadow: none;
   }
 
   .banner,
@@ -143,35 +46,86 @@ module.exports = `
 
   .container {
     margin: 0 auto;
-    padding: 0 1em;
-    max-width: 80em;
-    overflow: hidden;
+    padding: 0 2rem;
+    max-width: 80rem;
   }
 
-  .example { width: 20em; }
+  main {
+    margin-right: -2rem;
+    margin-left:  -2rem;
+    padding-bottom: 2rem;
+  }
 
-  .description,
-  .contentinfo p { font-size: .75em; }
+  h1 {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.25;
+  }
 
-  .description { width: 26.66666666666667em; }
+  table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 1rem;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 0 1rem;
+    vertical-align: baseline;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  th {
+    font-weight: normal;
+    text-align: left;
+  }
+
+  thead th {
+    border-bottom: 1px solid #eee;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+    color: #999;
+  }
+
+  thead th:first-child {
+    font-size: 1.25rem;
+    color: inherit;
+  }
+
+  code { font-family: monaco, Consolas, monospace, monospace; }
+
+  hr {
+    display: block;
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 0;
+    height: 1px;
+  }
 
   .metric-box,
   .radius-box {
     display: inline-block;
     vertical-align: middle;
-    background: #ccc;
+    background: #eee;
   }
 
   .radius-box {
     width: 100%;
-    height: 1.125em;
+    height: 3rem;
+  }
+
+  .radius-box.borderRadiusCircle {
+    width: 3rem;
   }
 
   .line-height-example {
-    border-bottom: 1px solid #ccc;
-    background-image: -webkit-linear-gradient(#ccc 1px, transparent 1px);
-    background-image: linear-gradient(#ccc 1px, transparent 1px);
-    background-size: 100% 1em;
+    border-bottom: 1px solid #eee;
+    background-image: -webkit-linear-gradient(#eee 1px, transparent 1px);
+    background-image: linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 1rem;
   }
-  
+
 `

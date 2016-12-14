@@ -21,7 +21,7 @@
     "dist": "babel src --out-dir dist",
     "test": "npm run dist && mocha --recursive --reporter min",
     "prepublish": "npm run dist",
-    "lint": "eslint . --ext .js --format codeframe"
+    "lint": "eslint . --ext .js,.jsx --format codeframe"
   },
   "engines": {
     "node": ">=6.3.1"
