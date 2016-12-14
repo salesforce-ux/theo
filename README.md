@@ -165,7 +165,12 @@ to each property.
 The name of the registered transform
 
 **@param {object} [options]**
-Additional options
+Additional options (see below)
+
+**@param {boolean} [options.includeRawValue]**
+Include raw value in prop object as `prop['.rawValue']`
+
+**@param {boolean} [options.resolveAliases]**
 
 **@param {boolean} [options.includeMeta]**
 Don't remove ".meta" key from a prop
@@ -174,7 +179,7 @@ Don't remove ".meta" key from a prop
 
 ```js
 gulp.src('./design/props.json')
-  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.transform('web', { includeRawValue: true }))
 ```
 
 ***
