@@ -583,13 +583,13 @@ describe('$props:formats', () => {
   describe('scss', () => {
     before($format('raw', 'scss', paths.sample))
     it('creates scss syntax', () =>
-      assert(result.match(/\$spacing\-none: 0;\n/g) !== null))
+      assert(result.match(/\$spacing-none: 0;\n/g) !== null))
   })
 
   describe('default.scss', () => {
     before($format('raw', 'default.scss', paths.sample))
     it('creates default scss syntax', () =>
-      assert(result.match(/\$spacing\-none: 0 !default;\n/g) !== null))
+      assert(result.match(/\$spacing-none: 0 !default;\n/g) !== null))
   })
 
   describe('map.scss', () => {
@@ -690,25 +690,25 @@ describe('$props:formats', () => {
   describe('sass', () => {
     before($format('raw', 'sass', paths.sample))
     it('creates sass syntax', () =>
-      assert(result.match(/\$spacing\-none: 0\n/g) !== null))
+      assert(result.match(/\$spacing-none: 0\n/g) !== null))
   })
 
   describe('default.sass', () => {
     before($format('raw', 'default.sass', paths.sample))
     it('creates default sass syntax', () =>
-      assert(result.match(/\$spacing\-none: 0 !default\n/g) !== null))
+      assert(result.match(/\$spacing-none: 0 !default\n/g) !== null))
   })
 
   describe('less', () => {
     before($format('raw', 'less', paths.sample))
     it('creates less syntax', () =>
-      assert(result.match(/@spacing\-none: 0;\n/g) !== null))
+      assert(result.match(/@spacing-none: 0;\n/g) !== null))
   })
 
   describe('styl', () => {
     before($format('raw', 'styl', paths.sample))
     it('creates stylus syntax', () =>
-      assert(result.match(/spacing\-none = 0\n/g) !== null))
+      assert(result.match(/spacing-none = 0\n/g) !== null))
   })
 
   describe('aura.theme', () => {
