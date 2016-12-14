@@ -131,7 +131,7 @@ class PropSet {
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key)
       _.forEach(def.props, prop => {
-        let isAlias = new RegExp(`\{\!${s}\}`, 'g')
+        let isAlias = new RegExp(`{!${s}}`, 'g')
         let isAliasStructure = RegExp('{![^}]*}', 'g')
         if (_.isString(prop.value)) {
           // Value contains an alias

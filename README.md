@@ -9,13 +9,13 @@ transforming and formatting [Design Tokens](#overview)
 ## Example
 
 ```js
-var gulp = require('gulp');
-var theo = require('theo');
+const gulp = require('gulp')
+const theo = require('theo')
 
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.format('scss'))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
 ```
 
 ## Design Tokens <a name="overview"></a>
@@ -145,10 +145,10 @@ The name of the registered transform
 #### Example:
 
 ```js
-let propsFile = path.resolve(__dirname, 'design/props.json')
+const propsFile = path.resolve(__dirname, 'design/props.json')
 theo.plugins
   .file(propsFile)
-  .pipe(theo.plugins.transform('web'));
+  .pipe(theo.plugins.transform('web'))
 ```
 
 ***
@@ -179,7 +179,7 @@ Don't remove ".meta" key from a prop
 
 ```js
 gulp.src('./design/props.json')
-  .pipe(theo.plugins.transform('web', { includeRawValue: true }));
+  .pipe(theo.plugins.transform('web', { includeRawValue: true }))
 ```
 
 ***
@@ -200,7 +200,7 @@ An array of registered value transforms
 ```js
 theo.registerTransform('windows', [
   'color/rgb'
-]);
+])
 ```
 
 #### Pre-defined Transforms:
@@ -251,10 +251,10 @@ theo.registerValueTransform('animation/web/curve',
   (prop, meta) => prop.type === 'animation-curve',
   // Return the transformed value
   (prop, meta) => {
-    let [a,b,c,d] = prop.value;
-    return `cubic-bezier(${a}, ${b}, ${c}, ${d})`;
+    const [a, b, c, d] = prop.value
+    return `cubic-bezier(${a}, ${b}, ${c}, ${d})`
   }
-);
+)
 ```
 
 #### Pre-defined ValueTransforms:
@@ -307,7 +307,7 @@ A map function that can be used modify the props before formatting
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.format('scss'))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
 ```
 
 ```js
@@ -319,11 +319,11 @@ gulp.src('design/props.json')
     propsFilter: prop => prop.type === 'color',
     // Prefix each prop name with "PREFIX_"
     propsMap: prop => {
-      prop.name = `PREFIX_${prop.name}`;
-      return prop;
+      prop.name = `PREFIX_${prop.name}`
+      return prop
     }
   }))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
 ```
 
 ***
@@ -354,11 +354,11 @@ The formatter will be called with two arguments:
  */
 theo.registerFormat('scss', (json, options) => {
   return json.propKeys.map(key => {
-    let prop = json.props[key];
+    const prop = json.props[key]
     // Here is a good spot to reformat the name (camelCase, upperCase, etc)
-    return `$${prop.name}: ${prop.value};`;
-  }).join('\n');
-});
+    return `$${prop.name}: ${prop.value};`
+  }).join('\n')
+})
 ```
 
 Here is the layout of the `json` argument
@@ -511,8 +511,8 @@ The function to call for each result in the stream
 gulp.src('design/props.json')
   .pipe(theo.plugins.transform('web'))
   .pipe(theo.plugins.getResult(result => {
-    let designProps = JSON.parse(result);
-  }));
+    const designProps = JSON.parse(result)
+  }))
 ```
 
 ```js
@@ -524,7 +524,7 @@ gulp.src('design/props.json')
     // result will be an XML string
   }))
   // The result can still be written to a file
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest('dist'))
 ```
 
 [npm-url]: https://npmjs.org/package/theo
