@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "5.0.0-beta.1",
+  "version": "5.0.0-beta.2",
   "license": "SEE LICENSE IN README.md",
   "description": "A set of Gulp plugins for transforming and formatting Design Tokens",
   "keywords": [
@@ -21,7 +21,7 @@
     "dist": "babel src --out-dir dist",
     "test": "npm run dist && mocha --recursive --reporter min",
     "prepublish": "npm run dist",
-    "lint": "eslint . --ext .js --format codeframe"
+    "lint": "eslint . --ext .js,.jsx --format codeframe"
   },
   "engines": {
     "node": ">=6.3.1"
