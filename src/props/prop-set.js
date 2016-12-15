@@ -145,7 +145,7 @@ class PropSet {
   }
 
   _replaceAliasedValues (needle, haystack, replacement, def, type) {
-    let isAlias = new RegExp(`\{\!${needle}\}`, 'g')
+    let isAlias = new RegExp(`{!${needle}}`, 'g')
     let isAliasStructure = RegExp('{![^}]*}', 'g')
     if (_.isString(haystack)) {
       // Value contains an alias
