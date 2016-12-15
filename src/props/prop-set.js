@@ -61,7 +61,6 @@ class PropSet {
         prop['.rawValue'] = _.merge({}, prop).value
       })
     }
-
     // Globals
     this._resolveGlobals(def)
     // Validate
