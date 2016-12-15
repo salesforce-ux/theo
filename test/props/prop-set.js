@@ -109,9 +109,8 @@ describe('PropSet', () => {
       assert(set.def.props.f.value === 'green')
     })
     it('resolves aliases calling other aliases', () => {
-      assert(set.def.props.b.value === 'blue')
-      assert(set.def.props.c.value === 'green')
-      assert(set.def.props.f.value === 'green')
+      assert.equal(set.def.props.g.value, 'green')
+      assert.equal(set.def.props.h.value, 'green')
     })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
