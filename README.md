@@ -176,7 +176,7 @@ Include raw value in prop object as `prop['.rawValue']`
 Don't remove ".meta" key from a prop
 
 **@param {function} [options.jsonPreProcess]**
-A function that is fired before each file is merged into the property set. Should return an object representing the modified JSON data.
+A function that is ran before each yaml/json file is merged. Should return an object representing the modified JSON data.
 
 #### Example:
 
@@ -186,6 +186,7 @@ gulp.src('./design/props.json')
     includeRawValue: true,
     jsonPreProcess: function (json) {
       json.global.category = 'someCategory'
+      return json
     } 
   }))
 ```
