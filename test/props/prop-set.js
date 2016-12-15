@@ -112,6 +112,9 @@ describe('PropSet', () => {
       assert.strictEqual(set.def.props.g.value, 'green')
       assert.strictEqual(set.def.props.h.value, 'green')
     })
+    it('resolves aliases set inside of alias objects', () => {
+      assert.strictEqual(set.def.props.j.value, 'green')
+    })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green' },
