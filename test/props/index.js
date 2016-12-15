@@ -18,7 +18,7 @@ const sinon = require('sinon')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gulpu = require('gulp-util')
+const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
@@ -27,7 +27,7 @@ const $stream = require('../../dist/stream-util')
 const $props = require('../../dist/props')
 
 function isError (error) {
-  return (error instanceof Error) || (error instanceof gulpu.PluginError)
+  return (error instanceof Error) || (error instanceof gutil.PluginError)
 }
 
 describe('$props', () => {
@@ -39,8 +39,8 @@ describe('$props', () => {
     })
     it('returns a copy of the valueTransform', () => {
       const t = $props.getValueTransform('color/rgb')
-      assert.equal(typeof t.matcher, 'function')
-      assert.equal(typeof t.transformer, 'function')
+      assert.strictEqual(typeof t.matcher, 'function')
+      assert.strictEqual(typeof t.transformer, 'function')
     })
   })
 
@@ -49,7 +49,7 @@ describe('$props', () => {
       assert($props.valueTransformIsRegistered('color/rgb'))
     })
     it('returns false if the value transform isnt registered', () => {
-      assert.equal($props.valueTransformIsRegistered('color/rgb/foo'), false)
+      assert.strictEqual($props.valueTransformIsRegistered('color/rgb/foo'), false)
     })
   })
 
@@ -83,8 +83,8 @@ describe('$props', () => {
     it('registers the valueTransform', () => {
       $props.registerValueTransform('foo', matcher, transformer)
       const r = $props.getValueTransform('foo')
-      assert.equal(r.matcher, matcher)
-      assert.equal(r.transformer, transformer)
+      assert.strictEqual(r.matcher, matcher)
+      assert.strictEqual(r.transformer, transformer)
     })
     it('registers the valueTransform and overwrites any pre-existing valueTransforms', () => {
       const m = () => { return true }
@@ -113,7 +113,7 @@ describe('$props', () => {
       assert($props.transformIsRegistered('web'))
     })
     it('returns false if the value transform isnt registered', () => {
-      assert.equal($props.transformIsRegistered('foo'), false)
+      assert.strictEqual($props.transformIsRegistered('foo'), false)
     })
   })
 
@@ -142,12 +142,12 @@ describe('$props', () => {
     it('registers the transform', () => {
       $props.registerTransform('foo', ['foo'])
       const r = $props.getTransform('foo')
-      assert.equal(r[0], 'foo')
+      assert.strictEqual(r[0], 'foo')
     })
     it('registers the transform and overwrites any pre-existing transforms', () => {
       $props.registerTransform('foo', ['color/rgb'])
       const r = $props.getTransform('foo')
-      assert.equal(r[0], 'color/rgb')
+      assert.strictEqual(r[0], 'color/rgb')
     })
   })
 
@@ -159,7 +159,7 @@ describe('$props', () => {
     })
     it('returns a copy of the format', () => {
       const f = $props.getFormat('scss')
-      assert.equal(typeof f, 'function')
+      assert.strictEqual(typeof f, 'function')
     })
   })
 
@@ -168,7 +168,7 @@ describe('$props', () => {
       assert($props.formatIsRegistered('scss'))
     })
     it('returns false if the value transform isnt registered', () => {
-      assert.equal($props.formatIsRegistered('foo'), false)
+      assert.strictEqual($props.formatIsRegistered('foo'), false)
     })
   })
 
@@ -193,7 +193,7 @@ describe('$props', () => {
     it('registers the format', () => {
       $props.registerFormat('foo', formatter)
       const f = $props.getFormat('foo')
-      assert.equal(f, formatter)
+      assert.strictEqual(f, formatter)
     })
   })
 })
@@ -277,7 +277,7 @@ describe('$props.plugins', () => {
           error = err
         })
         .on('finish', () => {
-          assert.equal(error instanceof Error, false)
+          assert.strictEqual(error instanceof Error, false)
           assert.doesNotThrow(() => {
             JSON.parse(postResult)
           })
@@ -296,8 +296,8 @@ describe('$props.plugins', () => {
       let postResult
       gulp.src(samplePath)
         .on('finish', () => {
-          assert.equal(postResult.propKeys.length, 1)
-          assert.equal(_.keys(postResult.props).length, 1)
+          assert.strictEqual(postResult.propKeys.length, 1)
+          assert.strictEqual(_.keys(postResult.props).length, 1)
           done()
         })
         .pipe($props.plugins.transform('web'))
@@ -355,7 +355,7 @@ describe('$props.plugins', () => {
           error = err
         })
         .on('finish', () => {
-          assert.equal(typeof error, 'undefined')
+          assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
             JSON.parse(spy.getCall(0).args[0])
@@ -373,7 +373,7 @@ describe('$props.plugins', () => {
           error = err
         })
         .on('finish', () => {
-          assert.equal(typeof error, 'undefined')
+          assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
             JSON.parse(spy.getCall(0).args[0])
@@ -393,7 +393,7 @@ describe('$props.plugins', () => {
           error = err
         })
         .on('finish', () => {
-          assert.equal(typeof error, 'undefined')
+          assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert(spy2.calledOnce)
           done()
@@ -411,15 +411,15 @@ describe('$props:valueTransforms', () => {
     const t = $props.getValueTransform('color/rgb').transformer
     it('converts hex to rgb', () => {
       const p = { value: '#FF0000' }
-      assert.equal(t(p), 'rgb(255, 0, 0)')
+      assert.strictEqual(t(p), 'rgb(255, 0, 0)')
     })
     it('converts rgba to rgba', () => {
       const p = { value: 'rgba(255, 0, 0, 0.8)' }
-      assert.equal(t(p), 'rgba(255, 0, 0, 0.8)')
+      assert.strictEqual(t(p), 'rgba(255, 0, 0, 0.8)')
     })
     it('converts hsla to rgba', () => {
       const p = { value: 'hsla(0, 100%, 50%, 0.8)' }
-      assert.equal(t(p), 'rgba(255, 0, 0, 0.8)')
+      assert.strictEqual(t(p), 'rgba(255, 0, 0, 0.8)')
     })
   })
 
@@ -427,15 +427,15 @@ describe('$props:valueTransforms', () => {
     const t = $props.getValueTransform('color/hex').transformer
     it('converts rgb to hex', () => {
       const p = { value: 'rgb(255, 0, 0)' }
-      assert.equal(t(p), '#ff0000')
+      assert.strictEqual(t(p), '#ff0000')
     })
     it('converts rgba to hex', () => {
       const p = { value: 'rgb(255, 0, 0, 0.8)' }
-      assert.equal(t(p), '#ff0000')
+      assert.strictEqual(t(p), '#ff0000')
     })
     it('converts hsla to hex', () => {
       const p = { value: 'hsla(0, 100%, 50%, 0.8)' }
-      assert.equal(t(p), '#ff0000')
+      assert.strictEqual(t(p), '#ff0000')
     })
   })
 
@@ -443,15 +443,15 @@ describe('$props:valueTransforms', () => {
     const t = $props.getValueTransform('color/hex8').transformer
     it('converts hex to hex8', () => {
       const p = { value: '#FF0000' }
-      assert.equal(t(p), '#ffff0000')
+      assert.strictEqual(t(p), '#ffff0000')
     })
     it('converts rgba to hex8', () => {
       const p = { value: 'rgba(255, 0, 0, 0.8)' }
-      assert.equal(t(p), '#ccff0000')
+      assert.strictEqual(t(p), '#ccff0000')
     })
     it('converts hsla to hex8', () => {
       const p = { value: 'hsla(0, 100%, 50%, 0.8)' }
-      assert.equal(t(p), '#ccff0000')
+      assert.strictEqual(t(p), '#ccff0000')
     })
   })
 
@@ -459,11 +459,11 @@ describe('$props:valueTransforms', () => {
     const t = $props.getValueTransform('percentage/float').transformer
     it('converts a percentage to a float', () => {
       const p = { value: '50%' }
-      assert.equal(t(p), '0.5')
+      assert.strictEqual(t(p), '0.5')
     })
     it('converts multiple percentages to a floats', () => {
       const p = { value: 'background-size: 50% 50%' }
-      assert.equal(t(p), 'background-size: 0.5 0.5')
+      assert.strictEqual(t(p), 'background-size: 0.5 0.5')
     })
   })
 
@@ -472,22 +472,22 @@ describe('$props:valueTransforms', () => {
     it('converts em to px', () => {
       const p = { value: '1em' }
       const m = { baseFontPercentage: 100, baseFontPixel: 16 }
-      assert.equal(t(p, m), '16px')
+      assert.strictEqual(t(p, m), '16px')
     })
     it('converts rem to px', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 100, baseFontPixel: 16 }
-      assert.equal(t(p, m), '16px')
+      assert.strictEqual(t(p, m), '16px')
     })
     it('takes the baseFontPercentage into account', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 50, baseFontPixel: 16 }
-      assert.equal(t(p, m), '8px')
+      assert.strictEqual(t(p, m), '8px')
     })
     it('takes the baseFontPixel into account', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 100, baseFontPixel: 5 }
-      assert.equal(t(p, m), '5px')
+      assert.strictEqual(t(p, m), '5px')
     })
   })
 
@@ -496,22 +496,22 @@ describe('$props:valueTransforms', () => {
     it('converts em to px', () => {
       const p = { value: '1em' }
       const m = { baseFontPercentage: 100, baseFontPixel: 16 }
-      assert.equal(t(p, m), '16')
+      assert.strictEqual(t(p, m), '16')
     })
     it('converts rem to px', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 100, baseFontPixel: 16 }
-      assert.equal(t(p, m), '16')
+      assert.strictEqual(t(p, m), '16')
     })
     it('takes the baseFontPercentage into account', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 50, baseFontPixel: 16 }
-      assert.equal(t(p, m), '8')
+      assert.strictEqual(t(p, m), '8')
     })
     it('takes the baseFontPixel into account', () => {
       const p = { value: '1rem' }
       const m = { baseFontPercentage: 100, baseFontPixel: 5 }
-      assert.equal(t(p, m), '5')
+      assert.strictEqual(t(p, m), '5')
     })
   })
 })
@@ -725,7 +725,7 @@ describe('$props:formats', () => {
       assert(_.has(result, 'aura:theme')))
     it('adds the "extends" attribute', () => {
       assert(_.has(result['aura:theme'].$, 'extends'))
-      assert.equal(result['aura:theme'].$.extends, 'one:theme')
+      assert.strictEqual(result['aura:theme'].$.extends, 'one:theme')
     })
     it('has aura:const nodes', () =>
       assert(_.has(result['aura:theme'], 'aura:var')))
@@ -749,7 +749,7 @@ describe('$props:formats', () => {
     })
     it('adds the "extends" attribute', () => {
       assert(_.has(result['aura:tokens'].$, 'extends'))
-      assert.equal(result['aura:tokens'].$.extends, 'one:theme')
+      assert.strictEqual(result['aura:tokens'].$.extends, 'one:theme')
     })
     it('has aura:token nodes', () => {
       assert(_.has(result['aura:tokens'], 'aura:token'))
@@ -765,7 +765,7 @@ describe('$props:formats', () => {
         n.$.name === 'spacingNone'
       )
       assert(_.has(token, '$.property'))
-      assert.equal(token.$.property, 'width,height,padding,margin')
+      assert.strictEqual(token.$.property, 'width,height,padding,margin')
     })
     it('has aura:import nodes', () =>
       assert(_.has(result['aura:tokens'], 'aura:import')))

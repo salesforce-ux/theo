@@ -18,14 +18,14 @@ const sinon = require('sinon')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gulpu = require('gulp-util')
+const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 
 const PropSet = require('../../dist/props/prop-set')
 
 function isError (error) {
-  return (error instanceof Error) || error instanceof gulpu.PluginError
+  return (error instanceof Error) || error instanceof gutil.PluginError
 }
 
 describe('PropSet', () => {
@@ -39,7 +39,7 @@ describe('PropSet', () => {
     const p = path.resolve(__dirname, 'mock', 'c.json')
     const f = fs.readFileSync(p)
     def = JSON.parse(f)
-    file = new gulpu.File({
+    file = new gutil.File({
       path: p,
       contents: new Buffer(f)
     })
@@ -64,19 +64,19 @@ describe('PropSet', () => {
       }
     })
     it('saves the file, path, and transforms', () => {
-      const file = new gulpu.File({
+      const file = new gutil.File({
         path: 'foobar.json',
         contents: new Buffer('{"props":{}}')
       })
       const valueTransforms = ['foo']
       const set = new PropSet(file, valueTransforms)
-      assert(set.file === file)
-      assert(set.path === 'foobar.json')
-      assert(set.valueTransforms === valueTransforms)
+      assert.strictEqual(set.file, file)
+      assert.strictEqual(set.path, 'foobar.json')
+      assert.strictEqual(set.valueTransforms, valueTransforms)
     })
     it('throws an error if invalid JSON is encountered', () => {
       try {
-        const file = new gulpu.File({
+        const file = new gutil.File({
           path: 'foobar.json',
           contents: new Buffer('{foo:')
         })
@@ -98,15 +98,19 @@ describe('PropSet', () => {
         assert(_.has(set.def.props, name)))
     })
     it('resolves imports with duplicate props', () => {
-      assert(set.def.props.a.value === '2em')
+      assert.strictEqual(set.def.props.a.value, '2em')
     })
     it('merges globals before import', () => {
-      assert(set.def.props.a.category === 'test-b')
+      assert.strictEqual(set.def.props.a.category, 'test-b')
     })
     it('resolves aliases', () => {
-      assert(set.def.props.b.value === 'blue')
-      assert(set.def.props.c.value === 'green')
-      assert(set.def.props.f.value === 'green')
+      assert.strictEqual(set.def.props.b.value, 'blue')
+      assert.strictEqual(set.def.props.c.value, 'green')
+      assert.strictEqual(set.def.props.f.value, 'green')
+    })
+    it('resolves aliases calling other aliases', () => {
+      assert.strictEqual(set.def.props.g.value, 'green')
+      assert.strictEqual(set.def.props.h.value, 'green')
     })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
@@ -118,14 +122,14 @@ describe('PropSet', () => {
           c: { value: '{!land} {!sea}' }
         }
       }
-      const defFile = new gulpu.File({
+      const defFile = new gutil.File({
         path: 'test.json',
         contents: new Buffer(JSON.stringify(def))
       })
       set = new PropSet(defFile, [], { resolveAliases: false })
-      assert(set.def.props.a.value === '{!sky}')
-      assert(set.def.props.b.value === 'foo')
-      assert(set.def.props.c.value === '{!land} {!sea}')
+      assert.strictEqual(set.def.props.a.value, '{!sky}')
+      assert.strictEqual(set.def.props.b.value, 'foo')
+      assert.strictEqual(set.def.props.c.value, '{!land} {!sea}')
     })
     it('includes a ".rawValue" if options.includeRawValue is true', () => {
       const def = {
@@ -137,17 +141,17 @@ describe('PropSet', () => {
           c: { value: '{!land} {!sea}' }
         }
       }
-      const defFile = new gulpu.File({
+      const defFile = new gutil.File({
         path: 'test.json',
         contents: new Buffer(JSON.stringify(def))
       })
       set = new PropSet(defFile, [], { includeRawValue: true })
-      assert(set.def.props.a.value === 'blue')
-      assert(set.def.props.a['.rawValue'] === '{!sky}')
-      assert(set.def.props.b.value === 'foo')
-      assert(set.def.props.b['.rawValue'] === 'foo')
-      assert(set.def.props.c.value === 'green clear')
-      assert(set.def.props.c['.rawValue'] === '{!land} {!sea}')
+      assert.strictEqual(set.def.props.a.value, 'blue')
+      assert.strictEqual(set.def.props.a['.rawValue'], '{!sky}')
+      assert.strictEqual(set.def.props.b.value, 'foo')
+      assert.strictEqual(set.def.props.b['.rawValue'], 'foo')
+      assert.strictEqual(set.def.props.c.value, 'green clear')
+      assert.strictEqual(set.def.props.c['.rawValue'], '{!land} {!sea}')
     })
   })
 
@@ -183,19 +187,19 @@ describe('PropSet', () => {
   describe('#_resolveGlobals', () => {
     it('returns undefined if no keys were found in def.global', () => {
       const def = { global: {} }
-      assert(set._resolveGlobals(def) === undefined)
+      assert.strictEqual(set._resolveGlobals(def), undefined)
     })
     it('merges def.global into each def.props', () => {
       const def = { global: {foo: 'bar'}, props: { a: { value: 'hello' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
-      assert(def.props.a.foo === 'bar')
+      assert.strictEqual(def.props.a.foo, 'bar')
     })
     it('doesn\'t overwrite existing keys', () => {
       const def = { global: {foo: 'bar'}, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
-      assert(def.props.a.foo === 'baz')
+      assert.strictEqual(def.props.a.foo, 'baz')
     })
     it('doesn\'t merge object values', () => {
       const def = { global: {foo: ['a', 'b', 'c']}, props: { a: { foo: ['d'] } } }
@@ -221,10 +225,10 @@ describe('PropSet', () => {
         }
       }
       set._resolveAliases(def)
-      assert.equal(def.props.a.value, 'blue')
+      assert.strictEqual(def.props.a.value, 'blue')
       assert(!_.has(def.props.a, 'alias'))
-      assert.equal(def.props.b.value, 'blue - blue')
-      assert.equal(def.props.c.value, 'blue - green')
+      assert.strictEqual(def.props.b.value, 'blue - blue')
+      assert.strictEqual(def.props.c.value, 'blue - green')
     })
   })
   it('throws an error if an alias does not exist', () => {
@@ -246,7 +250,7 @@ describe('PropSet', () => {
       const def = { props: {} }
       const imports = set._resolveImports(def)
       assert(_.isArray(imports))
-      assert(imports.length === 0)
+      assert.strictEqual(imports.length, 0)
     })
     it('throws an error if an import is not found', () => {
       const def = { props: {}, imports: ['./foo/bar.json'] }
@@ -257,7 +261,7 @@ describe('PropSet', () => {
     it('returns an array of PropSets', () => {
       const imports = set._resolveImports(def)
       assert(_.isArray(imports))
-      assert(imports.length === 2)
+      assert.strictEqual(imports.length, 2)
       assert(imports[0] instanceof PropSet)
       assert(/a\.json$/.test(imports[0].path))
       assert(imports[1] instanceof PropSet)
@@ -270,7 +274,7 @@ describe('PropSet', () => {
       set._transformProps()
       _.forEach(set.def.props, (prop, key) => {
         assert(_.has(prop, 'name'))
-        assert(prop.name === key)
+        assert.strictEqual(prop.name, key)
       })
     })
     it('runs each prop through the matcher/transformer', () => {
@@ -280,7 +284,7 @@ describe('PropSet', () => {
         assert(re.test(set.def.props[name].value))
       });
       ['a', 'd'].forEach((name) => {
-        assert(set.def.props[name].value === name)
+        assert.strictEqual(set.def.props[name].value, name)
       })
     })
     it('deletes the ".meta" key for each prop', () => {
@@ -350,13 +354,13 @@ describe('PropSet', () => {
     it('transforms the props', transformProps)
     it('returns the PropSet', () => {
       const s = set.transform()
-      assert(s === set)
+      assert.strictEqual(s, set)
     })
   })
 
   describe('#toJSON', () => {
     it('returns a string', () => {
-      assert(typeof set.toJSON() === 'string')
+      assert.strictEqual(typeof set.toJSON(), 'string')
     })
     it('returns valid JSON', () => {
       const json = set.toJSON()
@@ -368,8 +372,8 @@ describe('PropSet', () => {
       const def = JSON.parse(set.toJSON())
       assert(_.has(def, 'propKeys'))
       assert(_.isArray(def.propKeys))
-      assert(def.propKeys.length === _.keys(def.props).length)
-      assert(_.intersection(def.propKeys, _.keys(def.props)).length === def.propKeys.length)
+      assert.strictEqual(def.propKeys.length, _.keys(def.props).length)
+      assert.strictEqual(_.intersection(def.propKeys, _.keys(def.props)).length, def.propKeys.length)
     })
   })
 
@@ -378,7 +382,7 @@ describe('PropSet', () => {
       assert(set.toBuffer() instanceof Buffer)
     })
     it('returns a Buffer with the JSON', () => {
-      assert(set.toBuffer().toString() === set.toJSON())
+      assert.strictEqual(set.toBuffer().toString(), set.toJSON())
     })
   })
 })

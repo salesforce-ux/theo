@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 let path = require('path')
 let _ = require('lodash')
 let through = require('through2')
-let gulpu = require('gulp-util')
+let gutil = require('gulp-util')
 
 module.exports = {
 
@@ -106,7 +106,7 @@ module.exports = {
       next(null, null)
     }
     function flush (next) {
-      let file = new gulpu.File({
+      let file = new gutil.File({
         path: `${options.name}.json`,
         contents: new Buffer(JSON.stringify(json, null, 2))
       })
@@ -161,7 +161,7 @@ module.exports = {
     }
     function flush (next) {
       let content = _.merge.apply(null, items)
-      let file = new gulpu.File({
+      let file = new gutil.File({
         path: `${options.name}.json`,
         contents: new Buffer(JSON.stringify(content, null, 2))
       })

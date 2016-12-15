@@ -8,14 +8,16 @@
   },
 
   "aliases": {
-    "land": "green"
+    "land": "green",
+    "foo": "{!land}",
+    "bar": "{!foo}"
   },
 
   "imports": [
     "./a.json",
     "./b.json"
-  ], 
- 
+  ],
+
   "props": {
     "e": {
       "value": "8em",
@@ -23,6 +25,14 @@
     },
     "f": {
       "value": "{!land}",
+      "type": "color"
+    },
+    "g": {
+      "value": "{!foo}",
+      "type": "color"
+    },
+    "h": {
+      "value": "{!bar}",
       "type": "color"
     }
   }

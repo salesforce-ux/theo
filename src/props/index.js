@@ -15,7 +15,7 @@ let path = require('path')
 let fs = require('fs')
 let _ = require('lodash')
 let through = require('through2')
-let gulpu = require('gulp-util')
+let gutil = require('gulp-util')
 let tinycolor = require('tinycolor2')
 
 let util = require('./util')
@@ -409,7 +409,7 @@ module.exports = {
       let stream = new through.obj()
       fs.readFile(filePath, (err, buffer) => {
         if (err) return stream.emit('error', err)
-        let file = new gulpu.File({
+        let file = new gutil.File({
           path: filePath,
           contents: buffer
         })

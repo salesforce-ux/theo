@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 let path = require('path')
 let fs = require('fs')
 let _ = require('lodash')
-let gulpu = require('gulp-util')
+let gutil = require('gulp-util')
 let util = require('./util')
 let TheoError = require('./util/error')
 
@@ -64,7 +64,7 @@ class PropSet {
     this._validate(def)
     // Resolve any local aliases before resolving imports
     if (options.resolveAliases !== false) {
-      this._resolveAliases(def)
+      this._resolveAliases(def, 'local')
     }
     // Collect all the import definitions
     let imports = this._resolveImports(def).map(i => i.def)
@@ -126,28 +126,41 @@ class PropSet {
     })
   }
 
-  _resolveAliases (def) {
+  _resolveAliases (def, type) {
     let options = this.options
     _.forEach(def.aliases, (value, key) => {
       let s = _.escapeRegExp(key)
-      _.forEach(def.props, prop => {
-        let isAlias = new RegExp(`{!${s}}`, 'g')
-        let isAliasStructure = RegExp('{![^}]*}', 'g')
-        if (_.isString(prop.value)) {
-          // Value contains an alias
-          if (isAlias.test(prop.value)) {
-            // Resolve the alias
-            prop.value = prop.value.replace(isAlias, value)
-          }
-          if (isAliasStructure.test(prop.value)) {
-            _.forEach(prop.value.match(isAliasStructure), a => {
-              let alias = a.toString().replace('{!', '').replace('}', '')
-              if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
-            })
-          }
+      let v = _.isString(value) ? value : value.value
+      _.forEach(def.aliases, (value, key) => {
+        if (_.isString(value)) {
+          def.aliases[key] = this._replaceAliasedValues(s, value, v, def, type)
+        } else {
+          def.aliases[key]['value'] = this._replaceAliasedValues(s, value.value, v, def, type)
         }
       })
+      _.forEach(def.props, prop => {
+        prop.value = this._replaceAliasedValues(s, prop.value, v, def, type)
+      })
     })
+  }
+
+  _replaceAliasedValues (needle, haystack, replacement, def, type) {
+    let isAlias = new RegExp(`{!${needle}}`, 'g')
+    let isAliasStructure = RegExp('{![^}]*}', 'g')
+    if (_.isString(haystack)) {
+      // Value contains an alias
+      if (isAlias.test(haystack)) {
+        // Resolve the alias
+        haystack = haystack.replace(isAlias, replacement)
+      }
+      if ((type !== 'local') && isAliasStructure.test(haystack)) {
+        _.forEach(haystack.match(isAliasStructure), a => {
+          let alias = a.toString().replace('{!', '').replace('}', '')
+          if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
+        })
+      }
+    }
+    return haystack
   }
 
   _resolveImports (def) {
@@ -161,7 +174,7 @@ class PropSet {
       if (!f) {
         throw TheoError(`Import not found: ${p}`)
       }
-      let v = new gulpu.File({
+      let v = new gutil.File({
         path: p,
         contents: new Buffer(f)
       })
