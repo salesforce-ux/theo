@@ -175,11 +175,19 @@ Include raw value in prop object as `prop['.rawValue']`
 **@param {boolean} [options.includeMeta]**
 Don't remove ".meta" key from a prop
 
+**@param {function} [options.jsonPreProcess]**
+A function that is fired before each file is merged into the property set. Should return an object representing the modified JSON data.
+
 #### Example:
 
 ```js
 gulp.src('./design/props.json')
-  .pipe(theo.plugins.transform('web', { includeRawValue: true }))
+  .pipe(theo.plugins.transform('web', { 
+    includeRawValue: true,
+    jsonPreProcess: function (json) {
+      json.global.category = 'someCategory'
+    } 
+  }))
 ```
 
 ***

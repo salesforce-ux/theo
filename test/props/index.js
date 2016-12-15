@@ -235,6 +235,19 @@ describe('$props.plugins', () => {
           done()
         }))
     })
+    it('transforms accepts a jsonPreProcess function', (done) => {
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .pipe($props.plugins.transform('web', {
+          jsonPreProcess: function (json) {
+            json.props.spacing_xx_small.label = 'xx_small'
+            return json
+          }
+        }))
+        .pipe($props.plugins.getResult((result) => {
+          assert.strictEqual(JSON.parse(result).props.spacing_xx_small.label, 'xx_small')
+          done()
+        }))
+    })
   })
 
   describe('#format', () => {
