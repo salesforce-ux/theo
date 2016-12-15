@@ -18,7 +18,7 @@ const sinon = require('sinon')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gulpu = require('gulp-util')
+const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
@@ -27,7 +27,7 @@ const $stream = require('../../dist/stream-util')
 const $props = require('../../dist/props')
 
 function isError (error) {
-  return (error instanceof Error) || (error instanceof gulpu.PluginError)
+  return (error instanceof Error) || (error instanceof gutil.PluginError)
 }
 
 describe('$props', () => {

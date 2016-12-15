@@ -18,14 +18,14 @@ const sinon = require('sinon')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gulpu = require('gulp-util')
+const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 
 const PropSet = require('../../dist/props/prop-set')
 
 function isError (error) {
-  return (error instanceof Error) || error instanceof gulpu.PluginError
+  return (error instanceof Error) || error instanceof gutil.PluginError
 }
 
 describe('PropSet', () => {
@@ -39,7 +39,7 @@ describe('PropSet', () => {
     const p = path.resolve(__dirname, 'mock', 'c.json')
     const f = fs.readFileSync(p)
     def = JSON.parse(f)
-    file = new gulpu.File({
+    file = new gutil.File({
       path: p,
       contents: new Buffer(f)
     })
@@ -64,7 +64,7 @@ describe('PropSet', () => {
       }
     })
     it('saves the file, path, and transforms', () => {
-      const file = new gulpu.File({
+      const file = new gutil.File({
         path: 'foobar.json',
         contents: new Buffer('{"props":{}}')
       })
@@ -76,7 +76,7 @@ describe('PropSet', () => {
     })
     it('throws an error if invalid JSON is encountered', () => {
       try {
-        const file = new gulpu.File({
+        const file = new gutil.File({
           path: 'foobar.json',
           contents: new Buffer('{foo:')
         })
@@ -108,6 +108,11 @@ describe('PropSet', () => {
       assert(set.def.props.c.value === 'green')
       assert(set.def.props.f.value === 'green')
     })
+    it('resolves aliases calling other aliases', () => {
+      assert(set.def.props.b.value === 'blue')
+      assert(set.def.props.c.value === 'green')
+      assert(set.def.props.f.value === 'green')
+    })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green' },
@@ -118,7 +123,7 @@ describe('PropSet', () => {
           c: { value: '{!land} {!sea}' }
         }
       }
-      const defFile = new gulpu.File({
+      const defFile = new gutil.File({
         path: 'test.json',
         contents: new Buffer(JSON.stringify(def))
       })
@@ -137,7 +142,7 @@ describe('PropSet', () => {
           c: { value: '{!land} {!sea}' }
         }
       }
-      const defFile = new gulpu.File({
+      const defFile = new gutil.File({
         path: 'test.json',
         contents: new Buffer(JSON.stringify(def))
       })

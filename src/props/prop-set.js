@@ -13,7 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 let path = require('path')
 let fs = require('fs')
 let _ = require('lodash')
-let gulpu = require('gulp-util')
+let gutil = require('gulp-util')
 let util = require('./util')
 let TheoError = require('./util/error')
 
@@ -174,7 +174,7 @@ class PropSet {
       if (!f) {
         throw TheoError(`Import not found: ${p}`)
       }
-      let v = new gulpu.File({
+      let v = new gutil.File({
         path: p,
         contents: new Buffer(f)
       })
