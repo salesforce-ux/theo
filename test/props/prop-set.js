@@ -112,6 +112,23 @@ describe('PropSet', () => {
       assert.strictEqual(set.def.props.g.value, 'green')
       assert.strictEqual(set.def.props.h.value, 'green')
     })
+    it('accepts numbers as values', () => {
+      const numberDef = {
+        aliases: {
+          a: 2
+        },
+        props: {
+          b: { value: 3, type: 'foo', category: 'bar' }
+        }
+      }
+      const defFile = new gutil.File({
+        path: 'number.json',
+        contents: new Buffer(JSON.stringify(numberDef))
+      })
+      const numberSet = new PropSet(defFile, [])
+      assert.strictEqual(numberSet.def.aliases.a.value, 2)
+      assert.strictEqual(numberSet.def.props.b.value, 3)
+    })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
         aliases: { sky: 'blue', land: 'green' },
