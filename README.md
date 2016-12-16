@@ -184,7 +184,7 @@ A function that is ran before each yaml/json file is merged. Should return an ob
 gulp.src('./design/props.json')
   .pipe(theo.plugins.transform('web', { 
     includeRawValue: true,
-    jsonPreProcess: function (json) {
+    jsonPreProcess: json => {
       json.global.category = 'someCategory'
       return json
     } 
