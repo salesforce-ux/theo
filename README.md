@@ -176,7 +176,7 @@ Include raw value in prop object as `prop['.rawValue']`
 Don't remove ".meta" key from a prop
 
 **@param {function} [options.jsonPreProcess]**
-A function that is ran before each yaml/json file is merged. Should return an object representing the modified JSON data.
+A function that is ran before each YAML/JSON file is merged. Should return an object representing the modified JSON data.
 
 #### Example:
 
