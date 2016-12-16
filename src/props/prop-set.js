@@ -48,6 +48,9 @@ class PropSet {
     // Merge the JSON into the definition
     try {
       let json = util.parsePropsFile(this.file)
+      if (options.jsonPreProcess) {
+        json = options.jsonPreProcess(json)
+      }
       def = _.merge(def, json)
     } catch (e) {
       throw TheoError(`transform() encountered an invalid Design Token file: ${this.file.path}`)
