@@ -20,11 +20,11 @@ let tinycolor = require('tinycolor2')
 
 let util = require('./util')
 let constants = require('./util/constants')
+let kebabCase = require('./util/kebabCase')
 let TheoError = require('./util/error')
 
 let PropSet = require('./prop-set')
 
-let kebabCase = require('lodash/kebabCase')
 let camelCase = require('lodash/camelCase')
 
 // //////////////////////////////////////////////////////////////////
@@ -604,6 +604,12 @@ module.exports = {
       throw TheoError(`"${name}" is not a registered format`)
     }
     return FORMATS[name]
-  }
+  },
 
+  /**
+   * Transform a string to kebabCase
+   *
+   * @param {string} string
+   */
+  kebabCase
 }
