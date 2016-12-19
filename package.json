@@ -19,7 +19,7 @@
   "main": "dist/props/index.js",
   "scripts": {
     "dist": "babel src --out-dir dist",
-    "test": "npm run dist && mocha --recursive --reporter min",
+    "test": "npm run dist && mocha --recursive --reporter min --require intelli-espower-loader",
     "prepublish": "npm run dist",
     "lint": "eslint . --ext .js,.jsx --format codeframe"
   },
@@ -57,8 +57,10 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "gulp": "^3.9.1",
+    "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.2.0",
     "no-case": "^2.3.0",
+    "power-assert": "^1.4.2",
     "sinon": "^1.17.6"
   }
 }

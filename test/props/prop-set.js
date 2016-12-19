@@ -333,14 +333,14 @@ describe('PropSet', () => {
     it('calls each matcher with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.matcher.calledOnce)
-      assert(t1.matcher.getCall(0).args[0] !== prop)
-      assert(t1.matcher.getCall(0).args[1] !== meta)
+      assert.notStrictEqual(t1.matcher.getCall(0).args[0], prop)
+      assert.notStrictEqual(t1.matcher.getCall(0).args[1], meta)
     })
     it('calls each transformer with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.transformer.calledOnce)
-      assert(t1.transformer.getCall(0).args[0] !== prop)
-      assert(t1.transformer.getCall(0).args[1] !== meta)
+      assert.notStrictEqual(t1.transformer.getCall(0).args[0], prop)
+      assert.notStrictEqual(t1.transformer.getCall(0).args[1], meta)
     })
     it('only calls the transformer if the matcher returns true', () => {
       t1.matcher = sinon.stub().returns(false)
