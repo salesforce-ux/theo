@@ -133,10 +133,10 @@ class PropSet {
       let v = _.isString(value) ? value : value.value
       _.forEach(def.aliases, (value, key) => {
         if (_.isString(value)) {
-          def.aliases[key] = this._replaceAliasedValues(s, value, v, def, type)
-        } else {
-          def.aliases[key]['value'] = this._replaceAliasedValues(s, value.value, v, def, type)
+          value = {'value': value}
         }
+        def.aliases[key]['value'] = this._replaceAliasedValues(s, value.value, v, def, type)
+        def.aliases[key]['.alias'] = value
       })
       _.forEach(def.props, prop => {
         prop.value = this._replaceAliasedValues(s, prop.value, v, def, type)
