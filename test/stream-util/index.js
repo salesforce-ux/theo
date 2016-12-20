@@ -19,7 +19,7 @@ const gulp = require('gulp')
 const through = require('through2')
 const JSON5 = require('json5')
 
-const $stream = require('../../src/stream-util')
+const $stream = require('../../lib/stream-util')
 
 describe('$stream', () => {
   let files

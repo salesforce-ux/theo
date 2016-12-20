@@ -22,7 +22,7 @@ const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 
-const PropSet = require('../../src/props/prop-set')
+const PropSet = require('../../lib/props/prop-set')
 
 const isError = (error) =>
   (error instanceof Error) || error instanceof gutil.PluginError

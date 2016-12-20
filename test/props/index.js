@@ -23,8 +23,8 @@ const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
 
-const $stream = require('../../src/stream-util')
-const $props = require('../../src/props')
+const $stream = require('../../lib/stream-util')
+const $props = require('../../lib/props')
 
 const isError = (error) =>
   (error instanceof Error) || error instanceof gutil.PluginError
