@@ -201,6 +201,42 @@ registerFormat('android.xml', json => {
   return cleanOutput(xml)
 })
 
+registerFormat('custom-properties.css', json => {
+  return _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`
+  } ).join('\n');
+});
+
+registerFormat('default.custom-properties.css', json => {
+  const computedCustomProps = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`;
+  } ).join('\n');
+
+  return `
+    :root {
+      ${computedCustomProps}
+    }
+  `;
+
+});
+
+registerFormat('custom-properties.scss', json => {
+  const computedSCSSVars = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `$${name}: ${prop.value};`;
+  } ).join('\n');
+
+  const computedCustomProps = _.map( json.props, prop => {
+    const name = kebabCase(prop.name);
+    return `--${name}: ${prop.value};`;
+  } ).join('\n');
+
+  return `${computedSCSSVars}\n\n${computedCustomProps}`;
+
+});
+
 registerFormat('scss', json => {
   return _.map(json.props, prop => {
     let name = kebabCase(prop.name)
