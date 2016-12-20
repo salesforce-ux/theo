@@ -2,9 +2,15 @@
 
 <!-- Release notes authoring guidelines: http://keepachangelog.com/ -->
 
-## [Unreleased]
+<!-- ## [Unreleased] -->
 
-Beta releases are available on npm and release notes are available here: <https://github.com/salesforce-ux/theo/releases>
+## [5.0.0]
+
+Theo v5.0.0 comes with a ton of improvements and drops support for Node.js < 6.
+
+A massive thanks to the contributors who made this release possible, especially to [@micahgodbolt](https://github.com/micahgodbolt).
+
+[View all pull requests merged in v5.0.0](https://github.com/salesforce-ux/theo/pulls?utf8=%E2%9C%93&q=is%3Apr%20milestone%3Av5.0.0%20)
 
 - Support for `*.yaml` files ([#60](https://github.com/salesforce-ux/theo/issues/60))
 - Support for [JSON5](http://json5.org/) syntax (an improvement on JSON)
@@ -37,4 +43,5 @@ Lodash's implementation of `kebabCase` was dropped because it separated numbers 
 
 See <https://github.com/salesforce-ux/theo/releases>
 
-[Unreleased]: https://github.com/salesforce-ux/theo/compare/v4.2.1...master
+[Unreleased]: https://github.com/salesforce-ux/theo/compare/v5.0.0...master
+[5.0.0]: https://github.com/salesforce-ux/theo/compare/v4.2.1...v5.0.0
