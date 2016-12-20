@@ -111,6 +111,13 @@ describe('PropSet', () => {
       assert.strictEqual(set.def.props.g.value, 'green')
       assert.strictEqual(set.def.props.h.value, 'green')
     })
+    it('resolves aliases passing alias data to .alias key', () => {
+      assert.strictEqual(set.def.aliases.land.value, 'green')
+      assert.strictEqual(set.def.aliases.land['.alias'].value, 'green')
+      assert.strictEqual(set.def.aliases.land['.alias'].aliasData, 'importantData')
+      assert.strictEqual(set.def.props.f['.alias']['.alias'].aliasData, 'importantData')
+      assert.notStrictEqual(set.def.props.f['.alias'].aliasData, 'importantData')
+    })
     it('accepts numbers as values', () => {
       const numberDef = {
         aliases: {

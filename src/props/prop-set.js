@@ -140,10 +140,10 @@ class PropSet {
     _.forEach(def.aliases, (replace, key) => {
       let s = _.escapeRegExp(key)
       _.forEach(def.aliases, alias => {
-        alias.value = this._replaceAliasedValues(s, alias.value, replace.value, def, type)
+        this._replaceAliasedValues(s, alias, replace, def, type)
       })
       _.forEach(def.props, prop => {
-        prop.value = this._replaceAliasedValues(s, prop.value, replace.value, def, type)
+        this._replaceAliasedValues(s, prop, replace, def, type)
       })
     })
   }
@@ -152,17 +152,19 @@ class PropSet {
     let isAlias = new RegExp(`{!${needle}}`, 'g')
     let isAliasStructure = RegExp('{![^}]*}', 'g')
     // Value contains an alias
-    if (isAlias.test(haystack)) {
+
+    if (isAlias.test(haystack.value)) {
       // Resolve the alias
-      haystack = haystack.replace(isAlias, replacement)
+      haystack.value = haystack.value.replace(isAlias, replacement.value)
+      // Pass original alias data to .alias key
+      haystack['.alias'] = replacement
     }
-    if ((type !== 'local') && isAliasStructure.test(haystack)) {
-      _.forEach(haystack.match(isAliasStructure), a => {
+    if ((type !== 'local') && isAliasStructure.test(haystack.value)) {
+      _.forEach(haystack.value.match(isAliasStructure), a => {
         let alias = a.toString().replace('{!', '').replace('}', '')
         if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
       })
     }
-    return haystack
   }
 
   _resolveImports (def) {

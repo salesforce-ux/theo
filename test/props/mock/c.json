@@ -8,7 +8,11 @@
   },
 
   "aliases": {
-    "land": "green",
+    "baz": {
+      "value": "green",
+      "aliasData": "importantData"
+    },
+    "land": "{!baz}",
     "foo": "{!land}",
     "bar": "{!foo}"
   },
@@ -33,6 +37,10 @@
     },
     "h": {
       "value": "{!bar}",
+      "type": "color"
+    },
+    "j": {
+      "value": "{!baz}",
       "type": "color"
     }
   }
