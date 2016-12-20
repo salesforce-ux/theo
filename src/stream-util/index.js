@@ -14,6 +14,7 @@ let path = require('path')
 let _ = require('lodash')
 let through = require('through2')
 let gutil = require('gulp-util')
+let JSON5 = require('json5')
 
 module.exports = {
 
@@ -108,7 +109,7 @@ module.exports = {
     function flush (next) {
       let file = new gutil.File({
         path: `${options.name}.json`,
-        contents: new Buffer(JSON.stringify(json, null, 2))
+        contents: new Buffer(JSON5.stringify(json, null, 2))
       })
       this.push(file)
       next()
@@ -150,7 +151,7 @@ module.exports = {
       let ext = path.extname(file.relative)
       if (ext === '.json') {
         try {
-          let json = JSON.parse(file.contents.toString())
+          let json = JSON5.parse(file.contents.toString())
           items.push(json)
         } catch (e) {
           let err = new Error('mergeJSON() encountered an invalid JSON file', file.path)
@@ -163,7 +164,7 @@ module.exports = {
       let content = _.merge.apply(null, items)
       let file = new gutil.File({
         path: `${options.name}.json`,
-        contents: new Buffer(JSON.stringify(content, null, 2))
+        contents: new Buffer(JSON5.stringify(content, null, 2))
       })
       this.push(file)
       next()
@@ -199,7 +200,7 @@ module.exports = {
         return next(new Error('parseJSON() encountered on non ".json" file'))
       }
       try {
-        let json = JSON.parse(file.contents.toString())
+        let json = JSON5.parse(file.contents.toString())
         if (typeof callback === 'function') {
           callback(json)
         }
