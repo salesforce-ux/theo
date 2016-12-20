@@ -12,6 +12,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 let path = require('path')
 let fs = require('fs')
+let JSON5 = require('json5')
 let _ = require('lodash')
 let gutil = require('gulp-util')
 let util = require('./util')
@@ -100,7 +101,7 @@ class PropSet {
     // Provide the keys for easy iteration
     def.propKeys = _.keys(def.props)
     // Go
-    return JSON.stringify(def, null, 2)
+    return JSON5.stringify(def, null, 2)
   }
 
   _resolveGlobals (def) {

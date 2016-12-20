@@ -17,6 +17,7 @@ let _ = require('lodash')
 let through = require('through2')
 let gutil = require('gulp-util')
 let tinycolor = require('tinycolor2')
+let JSON5 = require('json5')
 
 let util = require('./util')
 let constants = require('./util/constants')
@@ -162,11 +163,11 @@ registerFormat('json', json => {
   _.forEach(json.props, prop => {
     output[prop.name] = prop.value
   })
-  return JSON.stringify(output, null, 2)
+  return JSON5.stringify(output, null, 2)
 })
 
 registerFormat('raw.json', json => {
-  return JSON.stringify(json, null, 2)
+  return JSON5.stringify(json, null, 2)
 })
 
 registerFormat('ios.json', json => {
@@ -176,7 +177,7 @@ registerFormat('ios.json', json => {
       return prop
     })
   }
-  return JSON.stringify(output, null, 2)
+  return JSON5.stringify(output, null, 2)
 })
 
 registerFormat('android.xml', json => {

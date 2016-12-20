@@ -17,6 +17,7 @@ var sinon = require('sinon')
 var path = require('path')
 var gulp = require('gulp')
 var through = require('through2')
+let JSON5 = require('json5')
 
 var $stream = require('../../dist/stream-util')
 
@@ -144,7 +145,7 @@ describe('$stream', function () {
           assert(files.length === 1)
           assert(files[0].relative === 'list.json')
           assert.doesNotThrow(function () {
-            JSON.parse(files[0].contents.toString())
+            JSON5.parse(files[0].contents.toString())
           })
           done()
         })
@@ -154,7 +155,7 @@ describe('$stream', function () {
         .pipe($stream.list())
         .pipe(collectFiles())
         .on('finish', function () {
-          var json = JSON.parse(files[0].contents.toString())
+          var json = JSON5.parse(files[0].contents.toString())
           assert(typeof json.items !== 'undefined')
           assert(Array.isArray(json.items))
           assert(json.items.indexOf('a') === 0)
@@ -176,7 +177,7 @@ describe('$stream', function () {
         .pipe($stream.list({ includeExtension: true }))
         .pipe(collectFiles())
         .on('finish', function () {
-          var json = JSON.parse(files[0].contents.toString())
+          var json = JSON5.parse(files[0].contents.toString())
           assert(json.items.indexOf('a.json') === 0)
           assert(json.items.indexOf('b.json') === 1)
           done()
@@ -256,10 +257,10 @@ describe('$stream', function () {
           done()
         })
     })
-    it('pipes an error if invalid JSON is encoutered', function (done) {
+    it('pipes an error if invalid JSON5 file is encoutered', function (done) {
       gulp.src(mockPath('a.json'))
         .pipe(through.obj(function (file, enc, next) {
-          file.contents = new Buffer('{"b":true,}')
+          file.contents = new Buffer('{"b":true,#}')
           next(null, file)
         }))
         .pipe($stream.parseJSON())

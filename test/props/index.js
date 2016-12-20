@@ -22,6 +22,7 @@ const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
+const JSON5 = require('json5')
 
 const $stream = require('../../dist/stream-util')
 const $props = require('../../dist/props')
@@ -205,7 +206,7 @@ describe('$props.plugins', () => {
         .file(path.resolve(__dirname, 'mock', 'sample.json'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON.parse(result), 'props'))
+          assert(_.has(JSON5.parse(result), 'props'))
           done()
         }))
     })
@@ -215,7 +216,7 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON.parse(result), 'props'))
+          assert(_.has(JSON5.parse(result), 'props'))
           done()
         }))
     })
@@ -223,7 +224,7 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON.parse(result), 'props'))
+          assert(_.has(JSON5.parse(result), 'props'))
           done()
         }))
     })
@@ -231,7 +232,7 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yaml'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON.parse(result), 'props'))
+          assert(_.has(JSON5.parse(result), 'props'))
           done()
         }))
     })
@@ -244,7 +245,7 @@ describe('$props.plugins', () => {
           }
         }))
         .pipe($props.plugins.getResult((result) => {
-          assert.strictEqual(JSON.parse(result).props.spacing_xx_small.label, 'xx_small')
+          assert.strictEqual(JSON5.parse(result).props.spacing_xx_small.label, 'xx_small')
           done()
         }))
     })
@@ -292,7 +293,7 @@ describe('$props.plugins', () => {
         .on('finish', () => {
           assert.strictEqual(error instanceof Error, false)
           assert.doesNotThrow(() => {
-            JSON.parse(postResult)
+            JSON5.parse(postResult)
           })
           done()
         })
@@ -316,7 +317,7 @@ describe('$props.plugins', () => {
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json', { propsFilter: function (prop) { return prop.name === 'account' } }))
         .pipe($props.plugins.getResult(function (result) {
-          postResult = JSON.parse(result)
+          postResult = JSON5.parse(result)
         }))
     })
     it('maps props before formatting', (done) => {
@@ -339,7 +340,7 @@ describe('$props.plugins', () => {
           }
         }))
         .pipe($props.plugins.getResult(function (result) {
-          postResult = JSON.parse(result)
+          postResult = JSON5.parse(result)
         }))
     })
     it('renames the file correctly', (done) => {
@@ -371,7 +372,7 @@ describe('$props.plugins', () => {
           assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
-            JSON.parse(spy.getCall(0).args[0])
+            JSON5.parse(spy.getCall(0).args[0])
           })
           done()
         })
@@ -389,7 +390,7 @@ describe('$props.plugins', () => {
           assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
-            JSON.parse(spy.getCall(0).args[0])
+            JSON5.parse(spy.getCall(0).args[0])
           })
           done()
         })
@@ -553,7 +554,7 @@ describe('$props:formats', () => {
   }
 
   function $toJSON (done) {
-    result = JSON.parse(result)
+    result = JSON5.parse(result)
     done()
   }
 

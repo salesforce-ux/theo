@@ -21,6 +21,7 @@ const gulp = require('gulp')
 const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
+const JSON5 = require('json5')
 
 const PropSet = require('../../dist/props/prop-set')
 
@@ -38,7 +39,7 @@ describe('PropSet', () => {
   beforeEach(() => {
     const p = path.resolve(__dirname, 'mock', 'c.json')
     const f = fs.readFileSync(p)
-    def = JSON.parse(f)
+    def = JSON5.parse(f)
     file = new gutil.File({
       path: p,
       contents: new Buffer(f)
@@ -124,7 +125,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON.stringify(def))
+        contents: new Buffer(JSON5.stringify(def))
       })
       set = new PropSet(defFile, [], { resolveAliases: false })
       assert.strictEqual(set.def.props.a.value, '{!sky}')
@@ -143,7 +144,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON.stringify(def))
+        contents: new Buffer(JSON5.stringify(def))
       })
       set = new PropSet(defFile, [], { includeRawValue: true })
       assert.strictEqual(set.def.props.a.value, 'blue')
@@ -365,11 +366,11 @@ describe('PropSet', () => {
     it('returns valid JSON', () => {
       const json = set.toJSON()
       assert.doesNotThrow(() => {
-        JSON.parse(json)
+        JSON5.parse(json)
       })
     })
     it('adds a "propKeys" array', () => {
-      const def = JSON.parse(set.toJSON())
+      const def = JSON5.parse(set.toJSON())
       assert(_.has(def, 'propKeys'))
       assert(_.isArray(def.propKeys))
       assert.strictEqual(def.propKeys.length, _.keys(def.props).length)

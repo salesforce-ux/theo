@@ -7,6 +7,7 @@
 Beta releases are available on npm and release notes are available here: <https://github.com/salesforce-ux/theo/releases>
 
 - Support for `*.yaml` files ([#60](https://github.com/salesforce-ux/theo/issues/60))
+- Support for [JSON5](http://json5.org/) syntax (an improvement on JSON)
 - Improved styleguide theme ([#56](https://github.com/salesforce-ux/theo/pull/56))
 - Aliases can reference other aliases ([#69](https://github.com/salesforce-ux/theo/pull/69))
 - Users may now pre-process the input with custom functions ([#71](https://github.com/salesforce-ux/theo/pull/71))

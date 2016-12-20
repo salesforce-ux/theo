@@ -11,6 +11,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 */
 
 let yaml = require('js-yaml')
+let JSON5 = require('json5')
 let path = require('path')
 
 module.exports = {
@@ -29,7 +30,7 @@ module.exports = {
       case '.yml':
         return yaml.safeLoad(file.contents.toString())
       default:
-        return JSON.parse(file.contents.toString())
+        return JSON5.parse(file.contents.toString())
     }
   }
 

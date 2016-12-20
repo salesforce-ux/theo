@@ -182,12 +182,12 @@ A function that is ran before each YAML/JSON file is merged. Should return an ob
 
 ```js
 gulp.src('./design/props.json')
-  .pipe(theo.plugins.transform('web', { 
+  .pipe(theo.plugins.transform('web', {
     includeRawValue: true,
     jsonPreProcess: json => {
       json.global.category = 'someCategory'
       return json
-    } 
+    }
   }))
 ```
 
@@ -392,7 +392,7 @@ Here is the layout of the `json` argument
 
 ###### raw.json
 
-```json
+```json5
 {
   "props": {
     "PROP_NAME": {
@@ -406,7 +406,7 @@ Here is the layout of the `json` argument
 
 ###### ios.json
 
-```json
+```json5
 {
   "properties": [
     {
