@@ -42,6 +42,7 @@
     "gulp-util": "^3.0.7",
     "js-yaml": "^3.7.0",
     "lodash": "^4.17.2",
+    "no-case": "^2.3.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "through2": "^2.0.3",
@@ -59,7 +60,6 @@
     "gulp": "^3.9.1",
     "intelli-espower-loader": "^1.0.1",
     "mocha": "^3.2.0",
-    "no-case": "^2.3.0",
     "power-assert": "^1.4.2",
     "sinon": "^1.17.6"
   }
