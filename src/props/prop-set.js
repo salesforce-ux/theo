@@ -130,19 +130,19 @@ class PropSet {
   }
 
   _resolveAliases (def, type) {
-    let options = this.options
+    // convert all aliases to object format
     _.forEach(def.aliases, (value, key) => {
+      if (typeof value !== 'object') {
+        def.aliases[key] = {'value': value}
+      }
+    })
+    _.forEach(def.aliases, (replace, key) => {
       let s = _.escapeRegExp(key)
-      let v = _.isString(value) ? value : value.value
-      _.forEach(def.aliases, (value, key) => {
-        if (_.isString(value)) {
-          def.aliases[key] = this._replaceAliasedValues(s, value, v, def, type)
-        } else {
-          def.aliases[key]['value'] = this._replaceAliasedValues(s, value.value, v, def, type)
-        }
+      _.forEach(def.aliases, alias => {
+        alias.value = this._replaceAliasedValues(s, alias.value, replace.value, def, type)
       })
       _.forEach(def.props, prop => {
-        prop.value = this._replaceAliasedValues(s, prop.value, v, def, type)
+        prop.value = this._replaceAliasedValues(s, prop.value, replace.value, def, type)
       })
     })
   }
@@ -150,18 +150,16 @@ class PropSet {
   _replaceAliasedValues (needle, haystack, replacement, def, type) {
     let isAlias = new RegExp(`{!${needle}}`, 'g')
     let isAliasStructure = RegExp('{![^}]*}', 'g')
-    if (_.isString(haystack)) {
-      // Value contains an alias
-      if (isAlias.test(haystack)) {
-        // Resolve the alias
-        haystack = haystack.replace(isAlias, replacement)
-      }
-      if ((type !== 'local') && isAliasStructure.test(haystack)) {
-        _.forEach(haystack.match(isAliasStructure), a => {
-          let alias = a.toString().replace('{!', '').replace('}', '')
-          if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
-        })
-      }
+    // Value contains an alias
+    if (isAlias.test(haystack)) {
+      // Resolve the alias
+      haystack = haystack.replace(isAlias, replacement)
+    }
+    if ((type !== 'local') && isAliasStructure.test(haystack)) {
+      _.forEach(haystack.match(isAliasStructure), a => {
+        let alias = a.toString().replace('{!', '').replace('}', '')
+        if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
+      })
     }
     return haystack
   }
