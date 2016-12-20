@@ -93,7 +93,11 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
   // Share values across multiple props
   // Aliases are resolved like: {!sky}
   "aliases": {
-    "sky": "blue"
+    "sky": "blue",
+    "grass": {
+      "value": "green",
+      "yourMetadata": "How grass looks"
+    }
   },
 
   // Optional
