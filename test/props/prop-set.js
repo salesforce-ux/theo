@@ -21,13 +21,11 @@ const gulp = require('gulp')
 const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
-const JSON5 = require('json5')
 
-const PropSet = require('../../dist/props/prop-set')
+const PropSet = require('../../src/props/prop-set')
 
-function isError (error) {
-  return (error instanceof Error) || error instanceof gutil.PluginError
-}
+const isError = (error) =>
+  (error instanceof Error) || error instanceof gutil.PluginError
 
 describe('PropSet', () => {
   let def
@@ -39,10 +37,10 @@ describe('PropSet', () => {
   beforeEach(() => {
     const p = path.resolve(__dirname, 'mock', 'c.json')
     const f = fs.readFileSync(p)
-    def = JSON5.parse(f)
+    def = JSON.parse(f)
     file = new gutil.File({
       path: p,
-      contents: new Buffer(f)
+      contents: Buffer.from(f, 'utf8')
     })
     t1 = {
       matcher: (prop) => prop.category === 'test-a',
@@ -58,7 +56,7 @@ describe('PropSet', () => {
   describe('#constructor', () => {
     it('throws an error if a non-vinyl file is passed', () => {
       try {
-        const propset = new PropSet(new Buffer('{}'), [])
+        const propset = new PropSet(Buffer.from('{}', 'utf8'), [])
       } catch (error) {
         assert(isError(error))
         assert(/vinyl/.test(error.message))
@@ -67,7 +65,7 @@ describe('PropSet', () => {
     it('saves the file, path, and transforms', () => {
       const file = new gutil.File({
         path: 'foobar.json',
-        contents: new Buffer('{"props":{}}')
+        contents: Buffer.from('{"props":{}}', 'utf8')
       })
       const valueTransforms = ['foo']
       const set = new PropSet(file, valueTransforms)
@@ -79,7 +77,7 @@ describe('PropSet', () => {
       try {
         const file = new gutil.File({
           path: 'foobar.json',
-          contents: new Buffer('{foo:')
+          contents: Buffer.from('{foo:', 'utf8')
         })
         const propset = new PropSet(file, [])
       } catch (error) {
@@ -124,7 +122,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'number.json',
-        contents: new Buffer(JSON.stringify(numberDef))
+        contents: Buffer.from(JSON.stringify(numberDef), 'utf8')
       })
       const numberSet = new PropSet(defFile, [])
       assert.strictEqual(numberSet.def.aliases.a.value, 2)
@@ -142,7 +140,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON5.stringify(def))
+        contents: Buffer.from(JSON.stringify(def), 'utf8')
       })
       set = new PropSet(defFile, [], { resolveAliases: false })
       assert.strictEqual(set.def.props.a.value, '{!sky}')
@@ -161,7 +159,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON5.stringify(def))
+        contents: Buffer.from(JSON.stringify(def), 'utf8')
       })
       set = new PropSet(defFile, [], { includeRawValue: true })
       assert.strictEqual(set.def.props.a.value, 'blue')
@@ -188,8 +186,8 @@ describe('PropSet', () => {
       const keys = ['value', 'type', 'category']
       keys.forEach((key) => {
         try {
-          const def = {props: {a: {}}}
-          _.without(keys, key).forEach(function (k) {
+          const def = { props: { a: {} } }
+          _.without(keys, key).forEach((k) => {
             def.props.a[k] = 'test'
           })
           set._validate(def)
@@ -267,7 +265,7 @@ describe('PropSet', () => {
     it('returns an empty array if no imports are found', () => {
       const def = { props: {} }
       const imports = set._resolveImports(def)
-      assert(_.isArray(imports))
+      assert(Array.isArray(imports))
       assert.strictEqual(imports.length, 0)
     })
     it('throws an error if an import is not found', () => {
@@ -287,7 +285,7 @@ describe('PropSet', () => {
     })
   })
 
-  function transformProps () {
+  const transformProps = () => {
     it('gives each prop a "name" key', () => {
       set._transformProps()
       _.forEach(set.def.props, (prop, key) => {
@@ -383,11 +381,11 @@ describe('PropSet', () => {
     it('returns valid JSON', () => {
       const json = set.toJSON()
       assert.doesNotThrow(() => {
-        JSON5.parse(json)
+        JSON.parse(json)
       })
     })
     it('adds a "propKeys" array', () => {
-      const def = JSON5.parse(set.toJSON())
+      const def = JSON.parse(set.toJSON())
       assert(_.has(def, 'propKeys'))
       assert(_.isArray(def.propKeys))
       assert.strictEqual(def.propKeys.length, _.keys(def.props).length)

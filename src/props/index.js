@@ -11,37 +11,36 @@ Neither the name of salesforce.com, inc. nor the names of its contributors may b
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-let path = require('path')
-let fs = require('fs')
-let _ = require('lodash')
-let through = require('through2')
-let gutil = require('gulp-util')
-let tinycolor = require('tinycolor2')
-let JSON5 = require('json5')
+const path = require('path')
+const fs = require('fs')
+const _ = require('lodash')
+const through = require('through2')
+const gutil = require('gulp-util')
+const tinycolor = require('tinycolor2')
+const JSON5 = require('json5')
 
-let util = require('./util')
-let constants = require('./util/constants')
-let kebabCase = require('./util/kebabCase')
-let TheoError = require('./util/error')
+const util = require('./util')
+const constants = require('./util/constants')
+const kebabCase = require('./util/kebabCase')
+const TheoError = require('./util/error')
 
-let PropSet = require('./prop-set')
+const PropSet = require('./prop-set')
 
-let camelCase = require('lodash/camelCase')
+const camelCase = require('lodash/camelCase')
 
 // //////////////////////////////////////////////////////////////////
 // Helpers
 // //////////////////////////////////////////////////////////////////
 
-function cleanOutput (output) {
-  return output
+const cleanOutput = (output) =>
+  output
     .replace(/^ {4}/gm, '')
     .replace(/^\s*\n/gm, '')
     .trim()
-}
 
-function remToPx (prop, meta) {
-  let baseFontPercentage = typeof meta.baseFontPercentage === 'number' ? meta.baseFontPercentage : 100
-  let baseFontPixel = typeof meta.baseFontPixel === 'number' ? meta.baseFontPixel : 16
+const remToPx = (prop, meta) => {
+  const baseFontPercentage = typeof meta.baseFontPercentage === 'number' ? meta.baseFontPercentage : 100
+  const baseFontPixel = typeof meta.baseFontPixel === 'number' ? meta.baseFontPixel : 16
   return util.remToPx(prop.value, baseFontPercentage, baseFontPixel)
 }
 
@@ -51,7 +50,7 @@ function remToPx (prop, meta) {
 
 let VALUE_TRANSFORMS = {}
 
-function registerValueTransform (name, matcher, transformer) {
+const registerValueTransform = (name, matcher, transformer) => {
   if (typeof name !== 'string') {
     throw TheoError('valueTransform name must be a string')
   }
@@ -103,11 +102,11 @@ registerValueTransform('relative/pixelValue',
 
 let TRANSFORMS = {}
 
-function registerTransform (name, valueTransforms) {
+const registerTransform = (name, valueTransforms) => {
   if (typeof name !== 'string') {
     throw TheoError('transform name must be a string')
   }
-  if (!_.isArray(valueTransforms)) {
+  if (!Array.isArray(valueTransforms)) {
     throw TheoError('valueTransforms must be an array of registered value transforms')
   }
   valueTransforms.forEach(t => {
@@ -148,7 +147,7 @@ registerTransform('aura', [
 
 let FORMATS = {}
 
-function registerFormat (name, formatter) {
+const registerFormat = (name, formatter) => {
   if (typeof name !== 'string') {
     throw TheoError('format name must be a string')
   }
@@ -158,38 +157,39 @@ function registerFormat (name, formatter) {
   FORMATS[name] = formatter
 }
 
-registerFormat('json', json => {
-  let output = {}
-  _.forEach(json.props, prop => {
-    output[prop.name] = prop.value
-  })
-  return JSON5.stringify(output, null, 2)
+registerFormat('json', (json) => {
+  let output = Object.assign(
+    {},
+    ...Object.keys(json.props).map(key =>
+      ({[json.props[key].name]: json.props[key].value})))
+  return JSON.stringify(output, null, 2)
 })
 
-registerFormat('raw.json', json => {
-  return JSON5.stringify(json, null, 2)
-})
+registerFormat('raw.json', (json) =>
+  JSON.stringify(json, null, 2))
 
-registerFormat('ios.json', json => {
+registerFormat('ios.json', (json) => {
   let output = {
-    properties: _.map(json.props, prop => {
+    properties: Object.keys(json.props).map(key => {
+      let prop = json.props[key]
       prop.name = camelCase(prop.name)
       return prop
     })
   }
-  return JSON5.stringify(output, null, 2)
+  return JSON.stringify(output, null, 2)
 })
 
-registerFormat('android.xml', json => {
+registerFormat('android.xml', (json) => {
   let getTag = (prop) => {
     if (prop.type === 'color') {
       return 'color'
     }
     return 'property'
   }
-  let props = _.map(json.props, prop => {
-    let tag = getTag(prop)
-    let name = prop.name.toUpperCase()
+  const props = Object.keys(json.props).map(key => {
+    const prop = json.props[key]
+    const tag = getTag(prop)
+    const name = prop.name.toUpperCase()
     return `<${tag} name="${name}" category="${prop.category}">${prop.value}</${tag}>`
   }).join('\n  ')
   let xml = `
@@ -201,30 +201,24 @@ registerFormat('android.xml', json => {
   return cleanOutput(xml)
 })
 
-registerFormat('scss', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `$${name}: ${prop.value};`
-  }).join('\n')
-})
+registerFormat('scss', (json) =>
+  Object.keys(json.props).map(prop =>
+    `$${kebabCase(json.props[prop].name)}: ${json.props[prop].value};`
+  ).join('\n'))
 
-registerFormat('default.scss', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `$${name}: ${prop.value} !default;`
-  }).join('\n')
-})
+registerFormat('default.scss', (json) =>
+  Object.keys(json.props).map(prop =>
+    `$${kebabCase(json.props[prop].name)}: ${json.props[prop].value} !default;`
+  ).join('\n'))
 
 registerFormat('list.scss', (json, options) => {
-  let items = _.isArray(json.items) ? json.items : []
-  items = _.map(items, item => {
-    return `"${item}"`
-  }).join(',\n  ')
+  let items = Array.isArray(json.items) ? json.items : []
+  items = items.map(item => `"${item}"`).join(',\n  ')
   let basename = path.basename(options.path, path.extname(options.path)).replace(/\..*/g, '')
   let name = `${basename}-list`
-  if (_.isFunction(options.name)) {
+  if (typeof options.name === 'function') {
     let n = options.name(basename, options.path)
-    if (_.isString(n)) {
+    if (typeof n === 'string') {
       name = n
     }
   }
@@ -240,17 +234,16 @@ registerFormat('map.scss', (json, options) => {
   options = _.defaults({}, options, {
     nameSuffix: '-map'
   })
-  let items = _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `"${name}": (${prop.value})`
-  }).join(',\n  ')
+  let items = Object.keys(json.props).map(prop =>
+    `"${kebabCase(json.props[prop].name)}": (${json.props[prop].value})`
+  ).join(',\n  ')
   let basename = path.basename(
     options.path, path.extname(options.path)
   ).replace(/\..*/g, '')
   let name = `${basename}${options.nameSuffix}`
-  if (_.isFunction(options.name)) {
+  if (typeof options.name === 'function') {
     let n = options.name(basename, options.path)
-    if (_.isString(n)) {
+    if (typeof n === 'string') {
       name = n
     }
   }
@@ -273,44 +266,35 @@ registerFormat('map.variables.scss', (json, options) => {
   return FORMATS['map.scss'](json, options)
 })
 
-registerFormat('sass', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `$${name}: ${prop.value}`
-  }).join('\n')
-})
+registerFormat('sass', (json) =>
+  Object.keys(json.props).map(prop =>
+    `$${kebabCase(json.props[prop].name)}: ${json.props[prop].value}`
+  ).join('\n'))
 
-registerFormat('default.sass', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `$${name}: ${prop.value} !default`
-  }).join('\n')
-})
+registerFormat('default.sass', (json) =>
+  Object.keys(json.props).map(prop =>
+    `$${kebabCase(json.props[prop].name)}: ${json.props[prop].value} !default`
+  ).join('\n'))
 
-registerFormat('less', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `@${name}: ${prop.value};`
-  }).join('\n')
-})
+registerFormat('less', (json) =>
+  Object.keys(json.props).map(prop =>
+    `@${kebabCase(json.props[prop].name)}: ${json.props[prop].value};`
+  ).join('\n'))
 
-registerFormat('styl', json => {
-  return _.map(json.props, prop => {
-    let name = kebabCase(prop.name)
-    return `${name} = ${prop.value}`
-  }).join('\n')
-})
+registerFormat('styl', (json) =>
+  Object.keys(json.props).map(prop =>
+    `${kebabCase(json.props[prop].name)} = ${json.props[prop].value}`
+  ).join('\n'))
 
-registerFormat('aura.theme', json => {
-  let auraImports = _.isArray(json.auraImports) ? json.auraImports : []
-  let auraExtends = _.isString(json.auraExtends) ? json.auraExtends : null
+registerFormat('aura.theme', (json) => {
+  let auraImports = Array.isArray(json.auraImports) ? json.auraImports : []
+  let auraExtends = typeof json.auraExtends === 'string' ? json.auraExtends : null
   auraImports = auraImports.map(theme => {
     return `<aura:importTheme name="${theme}" />`
   }).join('\n  ')
-  let props = _.map(json.props, prop => {
-    let name = camelCase(prop.name)
-    return `<aura:var name="${name}" value="${prop.value}" />`
-  }).join('\n  ')
+  let props = Object.keys(json.props).map(prop =>
+    `<aura:var name="${camelCase(json.props[prop].name)}" value="${json.props[prop].value}" />`
+  ).join('\n  ')
   let openTag = auraExtends ? `<aura:theme extends="${auraExtends}">` : '<aura:theme>'
   let xml = `
     ${openTag}
@@ -321,15 +305,16 @@ registerFormat('aura.theme', json => {
   return cleanOutput(xml)
 })
 
-registerFormat('aura.tokens', json => {
+registerFormat('aura.tokens', (json) => {
   let auraImports = _.toArray(json.auraImports).map(theme => {
     return `<aura:import name="${theme}" />`
   }).join('\n  ')
-  let auraExtends = _.isString(json.auraExtends) ? json.auraExtends : null
-  let props = _.map(json.props, prop => {
+  let auraExtends = typeof json.auraExtends === 'string' ? json.auraExtends : null
+  let props = Object.keys(json.props).map(key => {
+    const prop = json.props[key]
     let name = camelCase(prop.name)
     let cssProperties = (() => {
-      if (_.isArray(prop.cssProperties)) {
+      if (Array.isArray(prop.cssProperties)) {
         return `property="${prop.cssProperties.join(',')}"`
       }
       return ''
@@ -350,8 +335,9 @@ registerFormat('aura.tokens', json => {
 
 registerFormat('html', require('./formats/html'))
 
-registerFormat('common.js', json => {
-  let values = _.map(json.props, prop => {
+registerFormat('common.js', (json) => {
+  let values = Object.keys(json.props).map(key => {
+    const prop = json.props[key]
     let name = camelCase(prop.name)
     let value = prop.value
     switch (typeof value) {
@@ -369,8 +355,9 @@ registerFormat('common.js', json => {
   return cleanOutput(output)
 })
 
-registerFormat('amd.js', json => {
-  let values = _.map(json.props, prop => {
+registerFormat('amd.js', (json) => {
+  let values = Object.keys(json.props).map(key => {
+    const prop = json.props[key]
     let name = camelCase(prop.name)
     let value = prop.value
     switch (typeof value) {
@@ -406,7 +393,7 @@ module.exports = {
      * @param {string} filePath
      * @return {stream}
      */
-    file (filePath) {
+    file: (filePath) => {
       let stream = new through.obj()
       fs.readFile(filePath, (err, buffer) => {
         if (err) return stream.emit('error', err)
@@ -425,7 +412,7 @@ module.exports = {
      * @param {string} type
      * @return {stream}
      */
-    transform (type, options = {}) {
+    transform: (type, options = {}) => {
       if (typeof options !== 'undefined' && typeof options !== 'object') {
         throw TheoError('transform() options must be an object')
       }
@@ -450,15 +437,14 @@ module.exports = {
      * @param {function} [callback]
      * @return {stream}
      */
-    getResult (callback) {
-      return through.obj((file, enc, next) => {
+    getResult: (callback) =>
+      through.obj((file, enc, next) => {
         if (typeof callback === 'function' && file.isBuffer()) {
           let result = file.contents.toString()
           callback(result)
           return next(null, file)
         }
-      })
-    },
+      }),
 
     /**
      * Format the props JSON into a new output format
@@ -467,7 +453,7 @@ module.exports = {
      * @param {object} options
      * @param {function} [options.propsFilter] - A function that filters props before formatting
      */
-    format (type, options = {}) {
+    format: (type, options = {}) => {
       let defaults = {
         propsFilter: () => true,
         propsMap: prop => prop
@@ -503,13 +489,13 @@ module.exports = {
           props[prop.name] = prop
           return props
         }, {})
-        json.propKeys = _.keys(json.props)
+        json.propKeys = Object.keys(json.props)
         // Format the json
         let formatted = formatter(json, _.merge({}, options, {
           path: file.path
         }))
         // Set the file contents to the result of the formatter
-        newFile.contents = new Buffer(formatted)
+        newFile.contents = Buffer.from(formatted, 'utf8')
         next(null, newFile)
       })
     }
@@ -531,16 +517,14 @@ module.exports = {
    *
    * @param {string} name
    */
-  valueTransformIsRegistered (name) {
-    return typeof VALUE_TRANSFORMS[name] !== 'undefined'
-  },
+  valueTransformIsRegistered: (name) => typeof VALUE_TRANSFORMS[name] !== 'undefined',
 
   /**
    * Get a registered valueTransform
    *
    * @param {} name
    */
-  getValueTransform (name) {
+  getValueTransform: function (name) {
     if (!this.valueTransformIsRegistered(name)) {
       throw TheoError(`"${name}" is not a registered valueTransform`)
     }
@@ -561,16 +545,14 @@ module.exports = {
    *
    * @param {string} name
    */
-  transformIsRegistered (name) {
-    return typeof TRANSFORMS[name] !== 'undefined'
-  },
+  transformIsRegistered: (name) => typeof TRANSFORMS[name] !== 'undefined',
 
   /**
    * Get a registered format
    *
    * @param {} name
    */
-  getTransform (name) {
+  getTransform: function (name) {
     if (!this.transformIsRegistered(name)) {
       throw TheoError(`"${name}" is not a registered transform`)
     }
@@ -591,16 +573,14 @@ module.exports = {
    *
    * @param {string} name
    */
-  formatIsRegistered (name) {
-    return typeof FORMATS[name] !== 'undefined'
-  },
+  formatIsRegistered: (name) => typeof FORMATS[name] !== 'undefined',
 
   /**
    * Get a registered format
    *
    * @param {} name
    */
-  getFormat (name) {
+  getFormat: function (name) {
     if (!this.formatIsRegistered(name)) {
       throw TheoError(`"${name}" is not a registered format`)
     }

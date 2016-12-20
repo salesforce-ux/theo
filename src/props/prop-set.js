@@ -34,7 +34,7 @@ class PropSet {
     this.file = file
     this.path = file.path
     this.valueTransforms = valueTransforms
-    this.options = _.assign({}, defaults, options)
+    this.options = Object.assign({}, defaults, options)
 
     this._init()
   }
@@ -92,28 +92,28 @@ class PropSet {
   }
 
   toBuffer () {
-    return new Buffer(this.toJSON())
+    return Buffer.from(this.toJSON(), 'utf8')
   }
 
   toJSON () {
     // Create a copy
     let def = _.merge({}, this.def)
     // Provide the keys for easy iteration
-    def.propKeys = _.keys(def.props)
+    def.propKeys = Object.keys(def.props)
     // Go
-    return JSON5.stringify(def, null, 2)
+    return JSON.stringify(def, null, 2)
   }
 
   _resolveGlobals (def) {
-    if (_.keys(def.global).length === 0) return
+    if (Object.keys(def.global).length === 0) return
     _.forEach(def.props, (prop, key) => {
-      def.props[key] = _.assign({}, def.global, prop)
+      def.props[key] = Object.assign({}, def.global, prop)
     })
     delete def.global
   }
 
   _validate (def) {
-    if (_.isArray(def.props)) {
+    if (Array.isArray(def.props)) {
       throw TheoError('Design Token "props" key must be an object')
     }
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
@@ -166,7 +166,7 @@ class PropSet {
   }
 
   _resolveImports (def) {
-    if (!_.isArray(def.imports)) return []
+    if (!Array.isArray(def.imports)) return []
     return def.imports.map(i => {
       let p = path.resolve(path.dirname(this.path), i)
       if (!fs.existsSync(p)) {
@@ -178,7 +178,7 @@ class PropSet {
       }
       let v = new gutil.File({
         path: p,
-        contents: new Buffer(f)
+        contents: Buffer.from(f, 'utf8')
       })
       return new PropSet(v, this._transform, this.options)
     })
@@ -202,8 +202,8 @@ class PropSet {
 
   _transformValue (prop, meta) {
     _.forEach(this.valueTransforms, v => {
-      let p = _.assign({}, prop)
-      let m = _.assign({}, meta)
+      let p = Object.assign({}, prop)
+      let m = Object.assign({}, meta)
       if (v.matcher(p, m) === true) {
         prop.value = v.transformer(p, m)
       }

@@ -19,7 +19,7 @@
   "main": "dist/props/index.js",
   "scripts": {
     "dist": "babel src --out-dir dist",
-    "test": "npm run dist && mocha --recursive --reporter min --require intelli-espower-loader",
+    "test": "mocha --recursive --reporter min --require intelli-espower-loader --compilers js:babel-core/register",
     "prepublish": "npm run dist",
     "lint": "eslint . --ext .js,.jsx --format codeframe"
   },

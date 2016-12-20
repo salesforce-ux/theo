@@ -22,14 +22,12 @@ const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
-const JSON5 = require('json5')
 
-const $stream = require('../../dist/stream-util')
-const $props = require('../../dist/props')
+const $stream = require('../../src/stream-util')
+const $props = require('../../src/props')
 
-function isError (error) {
-  return (error instanceof Error) || (error instanceof gutil.PluginError)
-}
+const isError = (error) =>
+  (error instanceof Error) || error instanceof gutil.PluginError
 
 describe('$props', () => {
   describe('#getValueTransform()', () => {
@@ -88,8 +86,8 @@ describe('$props', () => {
       assert.strictEqual(r.transformer, transformer)
     })
     it('registers the valueTransform and overwrites any pre-existing valueTransforms', () => {
-      const m = () => { return true }
-      const t = function (value) { return value }
+      const m = () => true
+      const t = value => value
       $props.registerValueTransform('foo', m, t)
       const r = $props.getValueTransform('foo')
       assert.notStrictEqual(r.matcher, matcher)
@@ -206,7 +204,7 @@ describe('$props.plugins', () => {
         .file(path.resolve(__dirname, 'mock', 'sample.json'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON5.parse(result), 'props'))
+          assert(_.has(JSON.parse(result), 'props'))
           done()
         }))
     })
@@ -216,7 +214,7 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON5.parse(result), 'props'))
+          assert(_.has(JSON.parse(result), 'props'))
           done()
         }))
     })
@@ -224,7 +222,7 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yml'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON5.parse(result), 'props'))
+          assert(_.has(JSON.parse(result), 'props'))
           done()
         }))
     })
@@ -232,20 +230,20 @@ describe('$props.plugins', () => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.yaml'))
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.getResult((result) => {
-          assert(_.has(JSON5.parse(result), 'props'))
+          assert(_.has(JSON.parse(result), 'props'))
           done()
         }))
     })
     it('transforms accepts a jsonPreProcess function', (done) => {
       gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
         .pipe($props.plugins.transform('web', {
-          jsonPreProcess: function (json) {
+          jsonPreProcess: (json) => {
             json.props.spacing_xx_small.label = 'xx_small'
             return json
           }
         }))
         .pipe($props.plugins.getResult((result) => {
-          assert.strictEqual(JSON5.parse(result).props.spacing_xx_small.label, 'xx_small')
+          assert.strictEqual(JSON.parse(result).props.spacing_xx_small.label, 'xx_small')
           done()
         }))
     })
@@ -287,19 +285,19 @@ describe('$props.plugins', () => {
       const samplePath = path.resolve(__dirname, 'mock', 'sample.json')
       let postResult
       gulp.src(samplePath)
-        .on('error', function (err) {
+        .on('error', (err) => {
           error = err
         })
         .on('finish', () => {
           assert.strictEqual(error instanceof Error, false)
           assert.doesNotThrow(() => {
-            JSON5.parse(postResult)
+            JSON.parse(postResult)
           })
           done()
         })
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json'))
-        .pipe($props.plugins.getResult(function (result) {
+        .pipe($props.plugins.getResult((result) => {
           postResult = result
         }))
     })
@@ -315,9 +313,11 @@ describe('$props.plugins', () => {
           done()
         })
         .pipe($props.plugins.transform('web'))
-        .pipe($props.plugins.format('raw.json', { propsFilter: function (prop) { return prop.name === 'account' } }))
-        .pipe($props.plugins.getResult(function (result) {
-          postResult = JSON5.parse(result)
+        .pipe($props.plugins.format('raw.json', {
+          propsFilter: (prop) => prop.name === 'account'
+        }))
+        .pipe($props.plugins.getResult((result) => {
+          postResult = JSON.parse(result)
         }))
     })
     it('maps props before formatting', (done) => {
@@ -327,20 +327,20 @@ describe('$props.plugins', () => {
       let postResult
       gulp.src(samplePath)
         .on('finish', () => {
-          _.forEach(postResult.props, function (prop) {
+          _.forEach(postResult.props, (prop) => {
             assert(/^PREFIX_/.test(prop.name))
           })
           done()
         })
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json', {
-          propsMap: function (prop) {
+          propsMap: (prop) => {
             prop.name = 'PREFIX_' + prop.name
             return prop
           }
         }))
-        .pipe($props.plugins.getResult(function (result) {
-          postResult = JSON5.parse(result)
+        .pipe($props.plugins.getResult((result) => {
+          postResult = JSON.parse(result)
         }))
     })
     it('renames the file correctly', (done) => {
@@ -372,7 +372,7 @@ describe('$props.plugins', () => {
           assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
-            JSON5.parse(spy.getCall(0).args[0])
+            JSON.parse(spy.getCall(0).args[0])
           })
           done()
         })
@@ -390,7 +390,7 @@ describe('$props.plugins', () => {
           assert.strictEqual(typeof error, 'undefined')
           assert(spy.calledOnce)
           assert.doesNotThrow(() => {
-            JSON5.parse(spy.getCall(0).args[0])
+            JSON.parse(spy.getCall(0).args[0])
           })
           done()
         })
@@ -539,8 +539,8 @@ describe('$props:formats', () => {
 
   let result
 
-  function $format (transform, format, src, done) {
-    return (_done) =>
+  const $format = (transform, format, src, done) =>
+    (_done) =>
       gulp.src(src)
         .pipe($props.plugins.transform(transform))
         .pipe($props.plugins.format(format))
@@ -551,14 +551,13 @@ describe('$props:formats', () => {
           }
           return _done()
         }))
-  }
 
-  function $toJSON (done) {
-    result = JSON5.parse(result)
+  const $toJSON = (done) => {
+    result = JSON.parse(result)
     done()
   }
 
-  function $toXML (done) {
+  const $toXML = (done) => {
     xml2js.parseString(result, (err, r) => {
       if (err) {
         console.log(err)
@@ -578,7 +577,7 @@ describe('$props:formats', () => {
     before($format('raw', 'ios.json', paths.sample, $toJSON))
     it('has a "properties" array', () => {
       assert(_.has(result, 'properties'))
-      assert(_.isArray(result.properties))
+      assert(Array.isArray(result.properties))
     })
     it('properties have a "name" and "value"', () => {
       assert(_.has(result.properties[0], 'name'))
