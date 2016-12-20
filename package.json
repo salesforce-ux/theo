@@ -41,6 +41,7 @@
   "dependencies": {
     "gulp-util": "^3.0.7",
     "js-yaml": "^3.7.0",
+    "json5": "^0.5.1",
     "lodash": "^4.17.2",
     "no-case": "^2.3.0",
     "react": "^15.4.1",
