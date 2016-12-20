@@ -18,6 +18,10 @@ Beta releases are available on npm and release notes are available here: <https:
 
 ### ⚠️ Breaking changes with 4.x
 
+#### Dropped support for Node.js v4
+
+Theo v5 is now compatible with Node.js v6.3 and up, dropping support for Node.js v4.
+
 #### Error handling
 
 Pointing to a non-existing alias now throws an error instead of failing silently.
