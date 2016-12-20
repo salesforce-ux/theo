@@ -1,4 +1,4 @@
-/* eslint-env node, mocha */
+/* eslint-env node, jest */
 /* eslint no-eval: off */
 /*
 Copyright (c) 2015, salesforce.com, inc. All rights reserved.

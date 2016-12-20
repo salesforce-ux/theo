@@ -1,4 +1,4 @@
-/* eslint-env node, mocha */
+/* eslint-env node, jest */
 /* eslint no-eval: off */
 /*
 Copyright (c) 2015, salesforce.com, inc. All rights reserved.
@@ -568,13 +568,13 @@ describe('$props:formats', () => {
   }
 
   describe('json', () => {
-    before($format('raw', 'json', paths.sample, $toJSON))
+    beforeAll($format('raw', 'json', paths.sample, $toJSON))
     it('converts props to json (key/value)', () =>
       assert(_.has(result, 'account')))
   })
 
   describe('ios.json', () => {
-    before($format('raw', 'ios.json', paths.sample, $toJSON))
+    beforeAll($format('raw', 'ios.json', paths.sample, $toJSON))
     it('has a "properties" array', () => {
       assert(_.has(result, 'properties'))
       assert(Array.isArray(result.properties))
@@ -586,7 +586,7 @@ describe('$props:formats', () => {
   })
 
   describe('android.xml', () => {
-    before($format('raw', 'android.xml', paths.sample, $toXML))
+    beforeAll($format('raw', 'android.xml', paths.sample, $toXML))
     it('has a top level resources node', () =>
       assert(_.has(result, 'resources')))
     it('has property nodes', () =>
@@ -602,13 +602,13 @@ describe('$props:formats', () => {
   })
 
   describe('scss', () => {
-    before($format('raw', 'scss', paths.sample))
+    beforeAll($format('raw', 'scss', paths.sample))
     it('creates scss syntax', () =>
       assert.notStrictEqual(result.match(/\$spacing-none: 0;\n/g), null))
   })
 
   describe('default.scss', () => {
-    before($format('raw', 'default.scss', paths.sample))
+    beforeAll($format('raw', 'default.scss', paths.sample))
     it('creates default scss syntax', () =>
       assert.notStrictEqual(result.match(/\$spacing-none: 0 !default;\n/g), null))
   })
@@ -709,31 +709,31 @@ describe('$props:formats', () => {
   })
 
   describe('sass', () => {
-    before($format('raw', 'sass', paths.sample))
+    beforeAll($format('raw', 'sass', paths.sample))
     it('creates sass syntax', () =>
       assert.notStrictEqual(result.match(/\$spacing-none: 0\n/g), null))
   })
 
   describe('default.sass', () => {
-    before($format('raw', 'default.sass', paths.sample))
+    beforeAll($format('raw', 'default.sass', paths.sample))
     it('creates default sass syntax', () =>
       assert.notStrictEqual(result.match(/\$spacing-none: 0 !default\n/g), null))
   })
 
   describe('less', () => {
-    before($format('raw', 'less', paths.sample))
+    beforeAll($format('raw', 'less', paths.sample))
     it('creates less syntax', () =>
       assert.notStrictEqual(result.match(/@spacing-none: 0;\n/g), null))
   })
 
   describe('styl', () => {
-    before($format('raw', 'styl', paths.sample))
+    beforeAll($format('raw', 'styl', paths.sample))
     it('creates stylus syntax', () =>
       assert.notStrictEqual(result.match(/spacing-none = 0\n/g), null))
   })
 
   describe('aura.theme', () => {
-    before($format('raw', 'aura.theme', paths.sample, $toXML))
+    beforeAll($format('raw', 'aura.theme', paths.sample, $toXML))
     it('has a top level aura:theme node', () =>
       assert(_.has(result, 'aura:theme')))
     it('adds the "extends" attribute', () => {
@@ -756,7 +756,7 @@ describe('$props:formats', () => {
   })
 
   describe('aura.tokens', () => {
-    before($format('raw', 'aura.tokens', paths.sample, $toXML))
+    beforeAll($format('raw', 'aura.tokens', paths.sample, $toXML))
     it('has a top level aura:tokens node', () => {
       assert(_.has(result, 'aura:tokens'))
     })
@@ -788,7 +788,7 @@ describe('$props:formats', () => {
   })
 
   describe('html', () => {
-    before($format('raw', 'html', paths.sink))
+    beforeAll($format('raw', 'html', paths.sink))
     it('outputs HTML', () => {
       const re = new RegExp(_.escapeRegExp('<!DOCTYPE html>'))
       assert(re.test(result))
@@ -800,7 +800,7 @@ describe('$props:formats', () => {
   })
 
   describe('common.js', () => {
-    before($format('ios', 'common.js', paths.sink))
+    beforeAll($format('ios', 'common.js', paths.sink))
     it('outputs a CommonJS module', () => {
       const a = new RegExp('^' + _.escapeRegExp('module.exports = {'))
       assert(a.test(result))
@@ -813,7 +813,7 @@ describe('$props:formats', () => {
   })
 
   describe('amd.js', () => {
-    before($format('ios', 'amd.js', paths.sink))
+    beforeAll($format('ios', 'amd.js', paths.sink))
     it('outputs a CommonJS module', () => {
       const a = new RegExp('^' + _.escapeRegExp('define(function() {'))
       assert(a.test(result))
