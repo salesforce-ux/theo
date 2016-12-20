@@ -10,7 +10,7 @@
   "aliases": {
     "baz": {
       "value": "green",
-      "otherInfo": "ignoreMe"
+      "aliasData": "importantData"
     },
     "land": "{!baz}",
     "foo": "{!land}",

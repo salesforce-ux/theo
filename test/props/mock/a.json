@@ -1,4 +1,5 @@
 {
+  // JSON5 comment
   "global": {
     ".meta": {
       "baseFontPixel": 16,
@@ -24,6 +25,6 @@
     "c": {
       "value": "{!land}",
       "type": "color"
-    }
+    }, // JSON5 trailing comma
   }
 }

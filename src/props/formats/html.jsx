@@ -368,9 +368,8 @@ let Styleguide = React.createClass({
   }
 })
 
-module.exports = function (json) {
-  return `
+module.exports = (json) =>
+  `
     <!DOCTYPE html>
     ${ReactDOMServer.renderToStaticMarkup(<Styleguide json={json} />)}
   `
-}

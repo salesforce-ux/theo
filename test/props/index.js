@@ -23,12 +23,11 @@ const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
 
-const $stream = require('../../dist/stream-util')
-const $props = require('../../dist/props')
+const $stream = require('../../src/stream-util')
+const $props = require('../../src/props')
 
-function isError (error) {
-  return (error instanceof Error) || (error instanceof gutil.PluginError)
-}
+const isError = (error) =>
+  (error instanceof Error) || error instanceof gutil.PluginError
 
 describe('$props', () => {
   describe('#getValueTransform()', () => {
@@ -87,12 +86,12 @@ describe('$props', () => {
       assert.strictEqual(r.transformer, transformer)
     })
     it('registers the valueTransform and overwrites any pre-existing valueTransforms', () => {
-      const m = () => { return true }
-      const t = function (value) { return value }
+      const m = () => true
+      const t = value => value
       $props.registerValueTransform('foo', m, t)
       const r = $props.getValueTransform('foo')
-      assert(r.matcher !== matcher)
-      assert(r.transformer !== transformer)
+      assert.notStrictEqual(r.matcher, matcher)
+      assert.notStrictEqual(r.transformer, transformer)
     })
   })
 
@@ -235,6 +234,19 @@ describe('$props.plugins', () => {
           done()
         }))
     })
+    it('transforms accepts a jsonPreProcess function', (done) => {
+      gulp.src(path.resolve(__dirname, 'mock', 'sample.json'))
+        .pipe($props.plugins.transform('web', {
+          jsonPreProcess: (json) => {
+            json.props.spacing_xx_small.label = 'xx_small'
+            return json
+          }
+        }))
+        .pipe($props.plugins.getResult((result) => {
+          assert.strictEqual(JSON.parse(result).props.spacing_xx_small.label, 'xx_small')
+          done()
+        }))
+    })
   })
 
   describe('#format', () => {
@@ -273,7 +285,7 @@ describe('$props.plugins', () => {
       const samplePath = path.resolve(__dirname, 'mock', 'sample.json')
       let postResult
       gulp.src(samplePath)
-        .on('error', function (err) {
+        .on('error', (err) => {
           error = err
         })
         .on('finish', () => {
@@ -285,7 +297,7 @@ describe('$props.plugins', () => {
         })
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json'))
-        .pipe($props.plugins.getResult(function (result) {
+        .pipe($props.plugins.getResult((result) => {
           postResult = result
         }))
     })
@@ -301,8 +313,10 @@ describe('$props.plugins', () => {
           done()
         })
         .pipe($props.plugins.transform('web'))
-        .pipe($props.plugins.format('raw.json', { propsFilter: function (prop) { return prop.name === 'account' } }))
-        .pipe($props.plugins.getResult(function (result) {
+        .pipe($props.plugins.format('raw.json', {
+          propsFilter: (prop) => prop.name === 'account'
+        }))
+        .pipe($props.plugins.getResult((result) => {
           postResult = JSON.parse(result)
         }))
     })
@@ -313,19 +327,19 @@ describe('$props.plugins', () => {
       let postResult
       gulp.src(samplePath)
         .on('finish', () => {
-          _.forEach(postResult.props, function (prop) {
+          _.forEach(postResult.props, (prop) => {
             assert(/^PREFIX_/.test(prop.name))
           })
           done()
         })
         .pipe($props.plugins.transform('web'))
         .pipe($props.plugins.format('raw.json', {
-          propsMap: function (prop) {
+          propsMap: (prop) => {
             prop.name = 'PREFIX_' + prop.name
             return prop
           }
         }))
-        .pipe($props.plugins.getResult(function (result) {
+        .pipe($props.plugins.getResult((result) => {
           postResult = JSON.parse(result)
         }))
     })
@@ -525,8 +539,8 @@ describe('$props:formats', () => {
 
   let result
 
-  function $format (transform, format, src, done) {
-    return (_done) =>
+  const $format = (transform, format, src, done) =>
+    (_done) =>
       gulp.src(src)
         .pipe($props.plugins.transform(transform))
         .pipe($props.plugins.format(format))
@@ -537,14 +551,13 @@ describe('$props:formats', () => {
           }
           return _done()
         }))
-  }
 
-  function $toJSON (done) {
+  const $toJSON = (done) => {
     result = JSON.parse(result)
     done()
   }
 
-  function $toXML (done) {
+  const $toXML = (done) => {
     xml2js.parseString(result, (err, r) => {
       if (err) {
         console.log(err)
@@ -564,7 +577,7 @@ describe('$props:formats', () => {
     before($format('raw', 'ios.json', paths.sample, $toJSON))
     it('has a "properties" array', () => {
       assert(_.has(result, 'properties'))
-      assert(_.isArray(result.properties))
+      assert(Array.isArray(result.properties))
     })
     it('properties have a "name" and "value"', () => {
       assert(_.has(result.properties[0], 'name'))
@@ -591,13 +604,13 @@ describe('$props:formats', () => {
   describe('scss', () => {
     before($format('raw', 'scss', paths.sample))
     it('creates scss syntax', () =>
-      assert(result.match(/\$spacing-none: 0;\n/g) !== null))
+      assert.notStrictEqual(result.match(/\$spacing-none: 0;\n/g), null))
   })
 
   describe('default.scss', () => {
     before($format('raw', 'default.scss', paths.sample))
     it('creates default scss syntax', () =>
-      assert(result.match(/\$spacing-none: 0 !default;\n/g) !== null))
+      assert.notStrictEqual(result.match(/\$spacing-none: 0 !default;\n/g), null))
   })
 
   describe('map.scss', () => {
@@ -698,25 +711,25 @@ describe('$props:formats', () => {
   describe('sass', () => {
     before($format('raw', 'sass', paths.sample))
     it('creates sass syntax', () =>
-      assert(result.match(/\$spacing-none: 0\n/g) !== null))
+      assert.notStrictEqual(result.match(/\$spacing-none: 0\n/g), null))
   })
 
   describe('default.sass', () => {
     before($format('raw', 'default.sass', paths.sample))
     it('creates default sass syntax', () =>
-      assert(result.match(/\$spacing-none: 0 !default\n/g) !== null))
+      assert.notStrictEqual(result.match(/\$spacing-none: 0 !default\n/g), null))
   })
 
   describe('less', () => {
     before($format('raw', 'less', paths.sample))
     it('creates less syntax', () =>
-      assert(result.match(/@spacing-none: 0;\n/g) !== null))
+      assert.notStrictEqual(result.match(/@spacing-none: 0;\n/g), null))
   })
 
   describe('styl', () => {
     before($format('raw', 'styl', paths.sample))
     it('creates stylus syntax', () =>
-      assert(result.match(/spacing-none = 0\n/g) !== null))
+      assert.notStrictEqual(result.match(/spacing-none = 0\n/g), null))
   })
 
   describe('aura.theme', () => {

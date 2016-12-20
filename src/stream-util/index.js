@@ -14,6 +14,7 @@ let path = require('path')
 let _ = require('lodash')
 let through = require('through2')
 let gutil = require('gulp-util')
+let JSON5 = require('json5')
 
 module.exports = {
 
@@ -23,7 +24,7 @@ module.exports = {
    * @param {function} fn
    * @return {stream}
    */
-  filter (fn) {
+  filter: function (fn) {
     if (typeof fn !== 'function') {
       throw new Error('filter() requires a functional argument')
     }
@@ -41,7 +42,7 @@ module.exports = {
    * @param {regexp} re
    * @return {stream}
    */
-  filterPath (re) {
+  filterPath: function (re) {
     if (!(re instanceof RegExp)) {
       throw new Error('filterPath() requires a RegExp argument')
     }
@@ -57,12 +58,12 @@ module.exports = {
    * @param {function} [fn] - An optional function to be called on the first item
    * @return {stream}
    */
-  first (fn) {
+  first: function (fn) {
     let first = false
     if (typeof fn !== 'undefined' && typeof fn !== 'function') {
       throw new Error('first() needs a functional argument')
     }
-    return through.obj((file, enc, next) => {
+    return through.obj(function (file, enc, next) {
       if (!first) {
         if (fn) { fn(file) }
         first = true
@@ -81,8 +82,8 @@ module.exports = {
    * @param {boolean} options.includeExtensions - Indicates if the file extensions should be included as part of the name for each item
    * @return {stream}
    */
-  list (options = {}) {
-    let defaults = {
+  list: function (options = {}) {
+    const defaults = {
       name: 'list',
       includeExtension: false
     }
@@ -99,16 +100,16 @@ module.exports = {
     let json = {
       items: []
     }
-    function transform (file, enc, next) {
+    const transform = function (file, enc, next) {
       let ext = path.extname(file.relative)
       let name = options.includeExtension !== true ? file.relative.replace(ext, '') : file.relative
       json.items.push(name)
       next(null, null)
     }
-    function flush (next) {
+    const flush = function (next) {
       let file = new gutil.File({
         path: `${options.name}.json`,
-        contents: new Buffer(JSON.stringify(json, null, 2))
+        contents: Buffer.from(JSON.stringify(json, null, 2), 'utf8')
       })
       this.push(file)
       next()
@@ -122,8 +123,8 @@ module.exports = {
    * @param {boolean} [isRelative] - just log the filename
    * @return {stream}
    */
-  logPath (isRelative) {
-    return this.spy(file => {
+  logPath: function (isRelative) {
+    return this.spy(function (file) {
       console.log(isRelative ? file.relative : file.path)
     })
   },
@@ -134,7 +135,7 @@ module.exports = {
    * @param {object} options
    * @return {stream}
    */
-  mergeJSON (options = {}) {
+  mergeJSON: function (options = {}) {
     let defaults = {
       name: 'merge'
     }
@@ -146,11 +147,11 @@ module.exports = {
       throw new Error('mergeJSON() options.name must be a string')
     }
     let items = [{}]
-    function transform (file, enc, next) {
+    const transform = (file, enc, next) => {
       let ext = path.extname(file.relative)
       if (ext === '.json') {
         try {
-          let json = JSON.parse(file.contents.toString())
+          let json = JSON5.parse(file.contents.toString())
           items.push(json)
         } catch (e) {
           let err = new Error('mergeJSON() encountered an invalid JSON file', file.path)
@@ -159,11 +160,11 @@ module.exports = {
       }
       next()
     }
-    function flush (next) {
-      let content = _.merge.apply(null, items)
+    const flush = function (next) {
+      const content = _.merge.apply(null, items)
       let file = new gutil.File({
         path: `${options.name}.json`,
-        contents: new Buffer(JSON.stringify(content, null, 2))
+        contents: Buffer.from(JSON.stringify(content, null, 2), 'utf8')
       })
       this.push(file)
       next()
@@ -177,7 +178,7 @@ module.exports = {
    * @param {function} fn
    * @return {stream}
    */
-  spy (fn) {
+  spy: (fn) => {
     if (typeof fn !== 'function') {
       throw new Error('spy() requires a functional argument')
     }
@@ -192,14 +193,14 @@ module.exports = {
    *
    * @param {function} [callback]
    */
-  parseJSON (callback) {
-    return through.obj((file, enc, next) => {
+  parseJSON: (callback) =>
+    through.obj((file, enc, next) => {
       let ext = path.extname(file.path)
       if (ext !== '.json') {
         return next(new Error('parseJSON() encountered on non ".json" file'))
       }
       try {
-        let json = JSON.parse(file.contents.toString())
+        let json = JSON5.parse(file.contents.toString())
         if (typeof callback === 'function') {
           callback(json)
         }
@@ -209,6 +210,5 @@ module.exports = {
         return next(err)
       }
     })
-  }
 
 }

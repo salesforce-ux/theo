@@ -10,28 +10,6 @@ Neither the name of salesforce.com, inc. nor the names of its contributors may b
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-let yaml = require('js-yaml')
-let JSON5 = require('json5')
-let path = require('path')
+const noCase = require('no-case')
 
-module.exports = {
-
-  isRelativeSpacing (value) {
-    return /rem$/.test(value)
-  },
-
-  remToPx (rem, baseFontPercentage, baseFontPixel) {
-    return ((parseFloat(rem.replace(/rem/g, '')) * baseFontPixel) * (baseFontPercentage / 100)) + 'px'
-  },
-
-  parsePropsFile (file) {
-    switch (path.extname(file.path)) {
-      case '.yaml':
-      case '.yml':
-        return yaml.safeLoad(file.contents.toString())
-      default:
-        return JSON5.parse(file.contents.toString())
-    }
-  }
-
-}
+module.exports = (string) => noCase(string, null, '-')

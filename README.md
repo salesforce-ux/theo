@@ -175,11 +175,20 @@ Include raw value in prop object as `prop['.rawValue']`
 **@param {boolean} [options.includeMeta]**
 Don't remove ".meta" key from a prop
 
+**@param {function} [options.jsonPreProcess]**
+A function that is ran before each YAML/JSON file is merged. Should return an object representing the modified JSON data.
+
 #### Example:
 
 ```js
 gulp.src('./design/props.json')
-  .pipe(theo.plugins.transform('web', { includeRawValue: true }))
+  .pipe(theo.plugins.transform('web', {
+    includeRawValue: true,
+    jsonPreProcess: json => {
+      json.global.category = 'someCategory'
+      return json
+    }
+  }))
 ```
 
 ***
@@ -383,7 +392,7 @@ Here is the layout of the `json` argument
 
 ###### raw.json
 
-```json
+```json5
 {
   "props": {
     "PROP_NAME": {
@@ -397,7 +406,7 @@ Here is the layout of the `json` argument
 
 ###### ios.json
 
-```json
+```json5
 {
   "properties": [
     {

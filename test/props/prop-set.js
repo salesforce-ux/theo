@@ -22,11 +22,10 @@ const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 
-const PropSet = require('../../dist/props/prop-set')
+const PropSet = require('../../src/props/prop-set')
 
-function isError (error) {
-  return (error instanceof Error) || error instanceof gutil.PluginError
-}
+const isError = (error) =>
+  (error instanceof Error) || error instanceof gutil.PluginError
 
 describe('PropSet', () => {
   let def
@@ -41,7 +40,7 @@ describe('PropSet', () => {
     def = JSON.parse(f)
     file = new gutil.File({
       path: p,
-      contents: new Buffer(f)
+      contents: Buffer.from(f, 'utf8')
     })
     t1 = {
       matcher: (prop) => prop.category === 'test-a',
@@ -57,7 +56,7 @@ describe('PropSet', () => {
   describe('#constructor', () => {
     it('throws an error if a non-vinyl file is passed', () => {
       try {
-        const propset = new PropSet(new Buffer('{}'), [])
+        const propset = new PropSet(Buffer.from('{}', 'utf8'), [])
       } catch (error) {
         assert(isError(error))
         assert(/vinyl/.test(error.message))
@@ -66,7 +65,7 @@ describe('PropSet', () => {
     it('saves the file, path, and transforms', () => {
       const file = new gutil.File({
         path: 'foobar.json',
-        contents: new Buffer('{"props":{}}')
+        contents: Buffer.from('{"props":{}}', 'utf8')
       })
       const valueTransforms = ['foo']
       const set = new PropSet(file, valueTransforms)
@@ -78,7 +77,7 @@ describe('PropSet', () => {
       try {
         const file = new gutil.File({
           path: 'foobar.json',
-          contents: new Buffer('{foo:')
+          contents: Buffer.from('{foo:', 'utf8')
         })
         const propset = new PropSet(file, [])
       } catch (error) {
@@ -112,8 +111,29 @@ describe('PropSet', () => {
       assert.strictEqual(set.def.props.g.value, 'green')
       assert.strictEqual(set.def.props.h.value, 'green')
     })
-    it('resolves aliases set inside of alias objects', () => {
-      assert.strictEqual(set.def.props.j.value, 'green')
+    it('resolves aliases passing alias data to .alias key', () => {
+      assert.strictEqual(set.def.aliases.land.value, 'green')
+      assert.strictEqual(set.def.aliases.land['.alias'].value, 'green')
+      assert.strictEqual(set.def.aliases.land['.alias'].aliasData, 'importantData')
+      assert.strictEqual(set.def.props.f['.alias']['.alias'].aliasData, 'importantData')
+      assert.notStrictEqual(set.def.props.f['.alias'].aliasData, 'importantData')
+    })
+    it('accepts numbers as values', () => {
+      const numberDef = {
+        aliases: {
+          a: 2
+        },
+        props: {
+          b: { value: 3, type: 'foo', category: 'bar' }
+        }
+      }
+      const defFile = new gutil.File({
+        path: 'number.json',
+        contents: Buffer.from(JSON.stringify(numberDef), 'utf8')
+      })
+      const numberSet = new PropSet(defFile, [])
+      assert.strictEqual(numberSet.def.aliases.a.value, 2)
+      assert.strictEqual(numberSet.def.props.b.value, 3)
     })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
       const def = {
@@ -127,7 +147,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON.stringify(def))
+        contents: Buffer.from(JSON.stringify(def), 'utf8')
       })
       set = new PropSet(defFile, [], { resolveAliases: false })
       assert.strictEqual(set.def.props.a.value, '{!sky}')
@@ -146,7 +166,7 @@ describe('PropSet', () => {
       }
       const defFile = new gutil.File({
         path: 'test.json',
-        contents: new Buffer(JSON.stringify(def))
+        contents: Buffer.from(JSON.stringify(def), 'utf8')
       })
       set = new PropSet(defFile, [], { includeRawValue: true })
       assert.strictEqual(set.def.props.a.value, 'blue')
@@ -173,8 +193,8 @@ describe('PropSet', () => {
       const keys = ['value', 'type', 'category']
       keys.forEach((key) => {
         try {
-          const def = {props: {a: {}}}
-          _.without(keys, key).forEach(function (k) {
+          const def = { props: { a: {} } }
+          _.without(keys, key).forEach((k) => {
             def.props.a[k] = 'test'
           })
           set._validate(def)
@@ -252,7 +272,7 @@ describe('PropSet', () => {
     it('returns an empty array if no imports are found', () => {
       const def = { props: {} }
       const imports = set._resolveImports(def)
-      assert(_.isArray(imports))
+      assert(Array.isArray(imports))
       assert.strictEqual(imports.length, 0)
     })
     it('throws an error if an import is not found', () => {
@@ -272,7 +292,7 @@ describe('PropSet', () => {
     })
   })
 
-  function transformProps () {
+  const transformProps = () => {
     it('gives each prop a "name" key', () => {
       set._transformProps()
       _.forEach(set.def.props, (prop, key) => {
@@ -336,14 +356,14 @@ describe('PropSet', () => {
     it('calls each matcher with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.matcher.calledOnce)
-      assert(t1.matcher.getCall(0).args[0] !== prop)
-      assert(t1.matcher.getCall(0).args[1] !== meta)
+      assert.notStrictEqual(t1.matcher.getCall(0).args[0], prop)
+      assert.notStrictEqual(t1.matcher.getCall(0).args[1], meta)
     })
     it('calls each transformer with the cloned prop and meta', () => {
       set._transformValue(prop, meta)
       assert(t1.transformer.calledOnce)
-      assert(t1.transformer.getCall(0).args[0] !== prop)
-      assert(t1.transformer.getCall(0).args[1] !== meta)
+      assert.notStrictEqual(t1.transformer.getCall(0).args[0], prop)
+      assert.notStrictEqual(t1.transformer.getCall(0).args[1], meta)
     })
     it('only calls the transformer if the matcher returns true', () => {
       t1.matcher = sinon.stub().returns(false)

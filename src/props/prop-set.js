@@ -12,6 +12,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 let path = require('path')
 let fs = require('fs')
+let JSON5 = require('json5')
 let _ = require('lodash')
 let gutil = require('gulp-util')
 let util = require('./util')
@@ -33,7 +34,7 @@ class PropSet {
     this.file = file
     this.path = file.path
     this.valueTransforms = valueTransforms
-    this.options = _.assign({}, defaults, options)
+    this.options = Object.assign({}, defaults, options)
 
     this._init()
   }
@@ -48,6 +49,9 @@ class PropSet {
     // Merge the JSON into the definition
     try {
       let json = util.parsePropsFile(this.file)
+      if (options.jsonPreProcess) {
+        json = options.jsonPreProcess(json)
+      }
       def = _.merge(def, json)
     } catch (e) {
       throw TheoError(`transform() encountered an invalid Design Token file: ${this.file.path}`)
@@ -88,28 +92,28 @@ class PropSet {
   }
 
   toBuffer () {
-    return new Buffer(this.toJSON())
+    return Buffer.from(this.toJSON(), 'utf8')
   }
 
   toJSON () {
     // Create a copy
     let def = _.merge({}, this.def)
     // Provide the keys for easy iteration
-    def.propKeys = _.keys(def.props)
+    def.propKeys = Object.keys(def.props)
     // Go
     return JSON.stringify(def, null, 2)
   }
 
   _resolveGlobals (def) {
-    if (_.keys(def.global).length === 0) return
+    if (Object.keys(def.global).length === 0) return
     _.forEach(def.props, (prop, key) => {
-      def.props[key] = _.assign({}, def.global, prop)
+      def.props[key] = Object.assign({}, def.global, prop)
     })
     delete def.global
   }
 
   _validate (def) {
-    if (_.isArray(def.props)) {
+    if (Array.isArray(def.props)) {
       throw TheoError('Design Token "props" key must be an object')
     }
     if (!_.has(def, 'props') || !_.isObject(def.props)) {
@@ -127,19 +131,19 @@ class PropSet {
   }
 
   _resolveAliases (def, type) {
-    let options = this.options
+    // convert all aliases to object format
     _.forEach(def.aliases, (value, key) => {
+      if (typeof value !== 'object') {
+        def.aliases[key] = {'value': value}
+      }
+    })
+    _.forEach(def.aliases, (replace, key) => {
       let s = _.escapeRegExp(key)
-      let v = _.isString(value) ? value : value.value
-      _.forEach(def.aliases, (value, key) => {
-        if (_.isString(value)) {
-          value = {'value': value}
-        }
-        def.aliases[key]['value'] = this._replaceAliasedValues(s, value.value, v, def, type)
-        def.aliases[key]['.alias'] = value
+      _.forEach(def.aliases, alias => {
+        this._replaceAliasedValues(s, alias, replace, def, type)
       })
       _.forEach(def.props, prop => {
-        prop.value = this._replaceAliasedValues(s, prop.value, v, def, type)
+        this._replaceAliasedValues(s, prop, replace, def, type)
       })
     })
   }
@@ -147,24 +151,24 @@ class PropSet {
   _replaceAliasedValues (needle, haystack, replacement, def, type) {
     let isAlias = new RegExp(`{!${needle}}`, 'g')
     let isAliasStructure = RegExp('{![^}]*}', 'g')
-    if (_.isString(haystack)) {
-      // Value contains an alias
-      if (isAlias.test(haystack)) {
-        // Resolve the alias
-        haystack = haystack.replace(isAlias, replacement)
-      }
-      if ((type !== 'local') && isAliasStructure.test(haystack)) {
-        _.forEach(haystack.match(isAliasStructure), a => {
-          let alias = a.toString().replace('{!', '').replace('}', '')
-          if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
-        })
-      }
+    // Value contains an alias
+
+    if (isAlias.test(haystack.value)) {
+      // Resolve the alias
+      haystack.value = haystack.value.replace(isAlias, replacement.value)
+      // Pass original alias data to .alias key
+      haystack['.alias'] = replacement
     }
-    return haystack
+    if ((type !== 'local') && isAliasStructure.test(haystack.value)) {
+      _.forEach(haystack.value.match(isAliasStructure), a => {
+        let alias = a.toString().replace('{!', '').replace('}', '')
+        if (!def.aliases[alias]) throw new Error(`Alias ${a} not found`)
+      })
+    }
   }
 
   _resolveImports (def) {
-    if (!_.isArray(def.imports)) return []
+    if (!Array.isArray(def.imports)) return []
     return def.imports.map(i => {
       let p = path.resolve(path.dirname(this.path), i)
       if (!fs.existsSync(p)) {
@@ -176,7 +180,7 @@ class PropSet {
       }
       let v = new gutil.File({
         path: p,
-        contents: new Buffer(f)
+        contents: Buffer.from(f, 'utf8')
       })
       return new PropSet(v, this._transform, this.options)
     })
@@ -200,8 +204,8 @@ class PropSet {
 
   _transformValue (prop, meta) {
     _.forEach(this.valueTransforms, v => {
-      let p = _.assign({}, prop)
-      let m = _.assign({}, meta)
+      let p = Object.assign({}, prop)
+      let m = Object.assign({}, meta)
       if (v.matcher(p, m) === true) {
         prop.value = v.transformer(p, m)
       }
