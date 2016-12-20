@@ -1,5 +1,7 @@
 /*
 /*/
-!/dist/
+!/lib/
 !README.md
-!package.jsona
+!package.json
+!RELEASENOTES.md
+!LICENSE
