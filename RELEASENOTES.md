@@ -11,7 +11,7 @@ Beta releases are available on npm and release notes are available here: <https:
 - Improved styleguide theme ([#56](https://github.com/salesforce-ux/theo/pull/56))
 - Aliases can reference other aliases ([#69](https://github.com/salesforce-ux/theo/pull/69))
 - Users may now pre-process the input with custom functions ([#71](https://github.com/salesforce-ux/theo/pull/71))
-- Improved testing results
+- Improved test results and moved test suite to [Jest](https://facebook.github.io/jest/)
 - JavaScript is now linted using our internal standards
 - Added an [EditorConfig](http://editorconfig.org/) file
 - Various tweaks and fixes
