@@ -41,7 +41,8 @@ each platform.
 ### Spec
 
 A *Design Token* file is written in either
-`json` or `yml` and should conform to the following spec:
+[JSON](http://json.org/) ([JSON5](http://json5.org/) supported)
+or [YAML](http://yaml.org/) and should conform to the following spec:
 
 ```json5
 {
