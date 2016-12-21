@@ -1,0 +1,1815 @@
+exports[`$props:formats html renders a full html document 1`] = `
+"
+      <!DOCTYPE html>
+      <html lang=\"en\">
+        <head>
+          <meta charset=\"utf-8\" />
+          <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+          <title>Design Tokens</title>
+          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+          <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css\" />
+          <style>
+
+  html {
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    background: #fff;
+    color: #444;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body { font-size: .75rem; }
+
+  ::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  .banner,
+  .contentinfo { background: #f5f5f5; }
+
+  .banner { padding: 1em 0; }
+
+  .container {
+    margin: 0 auto;
+    padding: 0 2rem;
+    max-width: 80rem;
+  }
+
+  main {
+    margin-right: -2rem;
+    margin-left:  -2rem;
+    padding-bottom: 2rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.25;
+  }
+
+  table {
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 1rem;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 0 1rem;
+    vertical-align: baseline;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  th {
+    font-weight: normal;
+    text-align: left;
+  }
+
+  thead th {
+    border-bottom: 1px solid #eee;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+    color: #999;
+  }
+
+  thead th:first-child {
+    font-size: 1.25rem;
+    color: inherit;
+  }
+
+  code { font-family: monaco, Consolas, monospace, monospace; }
+
+  hr {
+    display: block;
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 0;
+    height: 1px;
+  }
+
+  .metric-box,
+  .radius-box {
+    display: inline-block;
+    vertical-align: middle;
+    background: #eee;
+  }
+
+  .radius-box {
+    width: 100%;
+    height: 3rem;
+  }
+
+  .radius-box.borderRadiusCircle {
+    width: 3rem;
+  }
+
+  .line-height-example {
+    border-bottom: 1px solid #eee;
+    background-image: -webkit-linear-gradient(#eee 1px, transparent 1px);
+    background-image: linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 1rem;
+  }
+
+</style>
+        </head>
+        <body>
+          <header role=\"banner\" class=\"banner\">
+            <div class=\"container\">
+              <h1>Design Tokens</h1>
+            </div>
+          </header>
+
+          <div class=\"container\">
+            <main role=\"main\">
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=spacing>
+          <th scope=\"column\">Spacing</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>spacingXxSmall</code>
+        </th>
+        <td>
+          <code>2px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 2px; height: 2px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>spacingXSmall</code>
+        </th>
+        <td>
+          <code>7px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 7px; height: 7px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>spacingSmall</code>
+        </th>
+        <td>
+          <code>8px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 8px; height: 8px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>spacingMedium</code>
+        </th>
+        <td>
+          <code>14px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 14px; height: 14px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>spacingLarge</code>
+        </th>
+        <td>
+          <code>18px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 18px; height: 18px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>spacingXLarge</code>
+        </th>
+        <td>
+          <code>28px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 28px; height: 28px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>borderWidthThin</code>
+        </th>
+        <td>
+          <code>1px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 1px; height: 1px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>borderWidthThick</code>
+        </th>
+        <td>
+          <code>2px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 2px; height: 2px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=font>
+          <th scope=\"column\">Fonts</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>fontFamilyBody</code>
+        </th>
+        <td>
+          <code>\'ProximaNovaSoft-Regular\'</code>
+        </td>
+        
+        <td>
+          <div style=\"font-family: \'ProximaNovaSoft-Regular\';\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontFamilyStrong</code>
+        </th>
+        <td>
+          <code>\'ProximaNovaSoft-Semibold\'</code>
+        </td>
+        
+        <td>
+          <div style=\"font-family: \'ProximaNovaSoft-Semibold\';\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=font-size>
+          <th scope=\"column\">Font Sizes</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>fontSizeXxSmall</code>
+        </th>
+        <td>
+          <code>10px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 10px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeXSmall</code>
+        </th>
+        <td>
+          <code>13px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 13px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeSmall</code>
+        </th>
+        <td>
+          <code>14px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 14px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeMedium</code>
+        </th>
+        <td>
+          <code>15px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 15px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeLarge</code>
+        </th>
+        <td>
+          <code>16px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 16px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeXLarge</code>
+        </th>
+        <td>
+          <code>18px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 18px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeXlLarge</code>
+        </th>
+        <td>
+          <code>19px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 19px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeRecordTitle</code>
+        </th>
+        <td>
+          <code>20px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 20px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeXxLarge</code>
+        </th>
+        <td>
+          <code>22px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 22px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>fontSizeXxxLarge</code>
+        </th>
+        <td>
+          <code>25px</code>
+        </td>
+        
+        <td>
+          <div style=\"font-size: 25px;\">
+            The quick brown fox jumps over the lazy dog.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=line-height>
+          <th scope=\"column\">Line Heights</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>lineHeightHeading</code>
+        </th>
+        <td>
+          <code>1.25</code>
+        </td>
+        
+        <td>
+          <div class=\"line-height-example\" style=\"line-height: 1.25; background-size: 100% 1.25em;\">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum
+            id feugiat at, venenatis quis erat.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>lineHeightText</code>
+        </th>
+        <td>
+          <code>1.5</code>
+        </td>
+        
+        <td>
+          <div class=\"line-height-example\" style=\"line-height: 1.5; background-size: 100% 1.5em;\">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            elementum odio et lacus rutrum molestie. Nunc arcu enim, elementum
+            id feugiat at, venenatis quis erat.
+          </div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=border-color>
+          <th scope=\"column\">Border Colors</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>colorBorder</code>
+        </th>
+        <td>
+          <code>#F5F6F7</code>
+        </td>
+        <td style=\"border: 2px solid #F5F6F7;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderBrand</code>
+        </th>
+        <td>
+          <code>#137CBD</code>
+        </td>
+        <td style=\"border: 2px solid #137CBD;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderButtonBrowser</code>
+        </th>
+        <td>
+          <code>#DADEE2</code>
+        </td>
+        <td style=\"border: 2px solid #DADEE2;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderHint</code>
+        </th>
+        <td>
+          <code>#3C3D3E</code>
+        </td>
+        <td style=\"border: 2px solid #3C3D3E;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderInput</code>
+        </th>
+        <td>
+          <code>transparent</code>
+        </td>
+        <td style=\"border: 2px solid transparent;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderInputActive</code>
+        </th>
+        <td>
+          <code>transparent</code>
+        </td>
+        <td style=\"border: 2px solid transparent;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSelection</code>
+        </th>
+        <td>
+          <code>#006EB3</code>
+        </td>
+        <td style=\"border: 2px solid #006EB3;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSelectionActive</code>
+        </th>
+        <td>
+          <code>#F0F1F2</code>
+        </td>
+        <td style=\"border: 2px solid #F0F1F2;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSelectionHover</code>
+        </th>
+        <td>
+          <code>#2A94D6</code>
+        </td>
+        <td style=\"border: 2px solid #2A94D6;\"></td>
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=radius>
+          <th scope=\"column\">Radius</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>borderRadiusSmall</code>
+        </th>
+        <td>
+          <code>3px</code>
+        </td>
+        
+        <td>
+          <div class=\"radius-box borderRadiusSmall\" style=\"border-radius: 3px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>borderRadiusMedium</code>
+        </th>
+        <td>
+          <code>5px</code>
+        </td>
+        
+        <td>
+          <div class=\"radius-box borderRadiusMedium\" style=\"border-radius: 5px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>borderRadiusLarge</code>
+        </th>
+        <td>
+          <code>8px</code>
+        </td>
+        
+        <td>
+          <div class=\"radius-box borderRadiusLarge\" style=\"border-radius: 8px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>borderRadiusCircle</code>
+        </th>
+        <td>
+          <code>50%</code>
+        </td>
+        
+        <td>
+          <div class=\"radius-box borderRadiusCircle\" style=\"border-radius: 50%;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=hr-color>
+          <th scope=\"column\">Horizontal Rule Colors</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>colorBorderSeparator</code>
+        </th>
+        <td>
+          <code>#F5F6F7</code>
+        </td>
+        
+        <td>
+          <hr style=\"border-top-color: #F5F6F7;\" />
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSeparatorAlt</code>
+        </th>
+        <td>
+          <code>#DADEE2</code>
+        </td>
+        
+        <td>
+          <hr style=\"border-top-color: #DADEE2;\" />
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSeparatorInverse</code>
+        </th>
+        <td>
+          <code>#34495E</code>
+        </td>
+        
+        <td>
+          <hr style=\"border-top-color: #34495E;\" />
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBorderSeparatorInverseAlt</code>
+        </th>
+        <td>
+          <code>#2A4158</code>
+        </td>
+        
+        <td>
+          <hr style=\"border-top-color: #2A4158;\" />
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=background-color>
+          <th scope=\"column\">Background Colors</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>colorBackground</code>
+        </th>
+        <td>
+          <code>#F0F1F2</code>
+        </td>
+        <td style=\"background-color: #F0F1F2; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundActiveInverse</code>
+        </th>
+        <td>
+          <code>#F5F6F7</code>
+        </td>
+        <td style=\"background-color: #F5F6F7; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundAlt</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        <td style=\"background-color: #FFFFFF; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundAltInverse</code>
+        </th>
+        <td>
+          <code>#2A4158</code>
+        </td>
+        <td style=\"background-color: #2A4158; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundAnchor</code>
+        </th>
+        <td>
+          <code>#34495E</code>
+        </td>
+        <td style=\"background-color: #34495E; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundBrowser</code>
+        </th>
+        <td>
+          <code>#66788A</code>
+        </td>
+        <td style=\"background-color: #66788A; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundBrowserActive</code>
+        </th>
+        <td>
+          <code>#F5F6F7</code>
+        </td>
+        <td style=\"background-color: #F5F6F7; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonBrand</code>
+        </th>
+        <td>
+          <code>#2A94D6</code>
+        </td>
+        <td style=\"background-color: #2A94D6; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonBrandActive</code>
+        </th>
+        <td>
+          <code>#137CBD</code>
+        </td>
+        <td style=\"background-color: #137CBD; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonBrandHover</code>
+        </th>
+        <td>
+          <code>#137CBD</code>
+        </td>
+        <td style=\"background-color: #137CBD; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonComment</code>
+        </th>
+        <td>
+          <code>#137CBD</code>
+        </td>
+        <td style=\"background-color: #137CBD; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonCommentActive</code>
+        </th>
+        <td>
+          <code>#006EB3</code>
+        </td>
+        <td style=\"background-color: #006EB3; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundDisabled</code>
+        </th>
+        <td>
+          <code>#F0F1F2</code>
+        </td>
+        <td style=\"background-color: #F0F1F2; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonInverse</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.16)</code>
+        </td>
+        <td style=\"background-color: rgba(0,0,0,.16); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundButtonInverseActive</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.24)</code>
+        </td>
+        <td style=\"background-color: rgba(0,0,0,.24); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundCustomer</code>
+        </th>
+        <td>
+          <code>#FF9F05</code>
+        </td>
+        <td style=\"background-color: #FF9F05; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundError</code>
+        </th>
+        <td>
+          <code>#B5362D</code>
+        </td>
+        <td style=\"background-color: #B5362D; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundErrorAlt</code>
+        </th>
+        <td>
+          <code>#D68184</code>
+        </td>
+        <td style=\"background-color: #D68184; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundHighlight</code>
+        </th>
+        <td>
+          <code>#FFEC70</code>
+        </td>
+        <td style=\"background-color: #FFEC70; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundIconUtility</code>
+        </th>
+        <td>
+          <code>#8595A6</code>
+        </td>
+        <td style=\"background-color: #8595A6; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundIndicatorDot</code>
+        </th>
+        <td>
+          <code>#9FAAB5</code>
+        </td>
+        <td style=\"background-color: #9FAAB5; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInput</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        <td style=\"background-color: #FFFFFF; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInputActive</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        <td style=\"background-color: #FFFFFF; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInputDisabled</code>
+        </th>
+        <td>
+          <code>#DADEE2</code>
+        </td>
+        <td style=\"background-color: #DADEE2; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInputError</code>
+        </th>
+        <td>
+          <code>#F6E4E4</code>
+        </td>
+        <td style=\"background-color: #F6E4E4; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInputSearch</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.16)</code>
+        </td>
+        <td style=\"background-color: rgba(0,0,0,.16); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundInverse</code>
+        </th>
+        <td>
+          <code>#34495E</code>
+        </td>
+        <td style=\"background-color: #34495E; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundModal</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        <td style=\"background-color: #FFFFFF; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundModalBrand</code>
+        </th>
+        <td>
+          <code>#2A94D6</code>
+        </td>
+        <td style=\"background-color: #2A94D6; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundModalButton</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.07)</code>
+        </td>
+        <td style=\"background-color: rgba(0,0,0,.07); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundModalButtonActive</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.16)</code>
+        </td>
+        <td style=\"background-color: rgba(0,0,0,.16); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundNotificationBadge</code>
+        </th>
+        <td>
+          <code>#C06057</code>
+        </td>
+        <td style=\"background-color: #C06057; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundNotificationNew</code>
+        </th>
+        <td>
+          <code>#F0F8FC</code>
+        </td>
+        <td style=\"background-color: #F0F8FC; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundOrgSwitcherArrow</code>
+        </th>
+        <td>
+          <code>#253647</code>
+        </td>
+        <td style=\"background-color: #253647; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundPayload</code>
+        </th>
+        <td>
+          <code>#F5F6F7</code>
+        </td>
+        <td style=\"background-color: #F5F6F7; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundShade</code>
+        </th>
+        <td>
+          <code>#E4ECF4</code>
+        </td>
+        <td style=\"background-color: #E4ECF4; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundSuccess</code>
+        </th>
+        <td>
+          <code>#43B66A</code>
+        </td>
+        <td style=\"background-color: #43B66A; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundTempModal</code>
+        </th>
+        <td>
+          <code>rgba(37,54,71,.8)</code>
+        </td>
+        <td style=\"background-color: rgba(37,54,71,.8); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundTempModalTint</code>
+        </th>
+        <td>
+          <code>rgba(37,54,71,.3)</code>
+        </td>
+        <td style=\"background-color: rgba(37,54,71,.3); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundToast</code>
+        </th>
+        <td>
+          <code>rgba(255,255,255,.97)</code>
+        </td>
+        <td style=\"background-color: rgba(255,255,255,.97); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBackgroundWarning</code>
+        </th>
+        <td>
+          <code>#E6B739</code>
+        </td>
+        <td style=\"background-color: #E6B739; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorBrand</code>
+        </th>
+        <td>
+          <code>#2A94D6</code>
+        </td>
+        <td style=\"background-color: #2A94D6; border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+              
+              
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=text-color>
+          <th scope=\"column\">Text Colors</th>
+          <th scope=\"column\">Value</th>
+          <th scope=\"column\">Examples</th>
+          <th scope=\"column\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>colorTextActionLabel</code>
+        </th>
+        <td>
+          <code>#66788A</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #66788A;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextActionLabelActive</code>
+        </th>
+        <td>
+          <code>#686C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #686C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextAlt</code>
+        </th>
+        <td>
+          <code>#485C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #485C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextBrowser</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #FFFFFF;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextBrowserActive</code>
+        </th>
+        <td>
+          <code>rgba(0,0,0,.4)</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: rgba(0,0,0,.4);\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextCustomer</code>
+        </th>
+        <td>
+          <code>#FF9F05</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #FF9F05;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextDefault</code>
+        </th>
+        <td>
+          <code>#3C3D3E</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #3C3D3E;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextError</code>
+        </th>
+        <td>
+          <code>#B5362D</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #B5362D;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextHeadingWeak</code>
+        </th>
+        <td>
+          <code>#006EB3</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #006EB3;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextHint</code>
+        </th>
+        <td>
+          <code>#9FAAB5</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #9FAAB5;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInputDisabled</code>
+        </th>
+        <td>
+          <code>#485C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #485C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInputFocusInverse</code>
+        </th>
+        <td>
+          <code>#2A4158</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #2A4158;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInputIcon</code>
+        </th>
+        <td>
+          <code>#9FAAB5</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #9FAAB5;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInverse</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #FFFFFF;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInverseActive</code>
+        </th>
+        <td>
+          <code>#5EBFFC</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #5EBFFC;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextInverseHover</code>
+        </th>
+        <td>
+          <code>#9FAAB5</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #9FAAB5;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextLabel</code>
+        </th>
+        <td>
+          <code>#686C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #686C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextLinkActive</code>
+        </th>
+        <td>
+          <code>#005C94</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #005C94;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextLinkDisabled</code>
+        </th>
+        <td>
+          <code>#66788A</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #66788A;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextLinkHover</code>
+        </th>
+        <td>
+          <code>#005C94</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #005C94;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextModal</code>
+        </th>
+        <td>
+          <code>#FFFFFF</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #FFFFFF;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextModalButton</code>
+        </th>
+        <td>
+          <code>#686C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #686C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextLink</code>
+        </th>
+        <td>
+          <code>#006EB3</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #006EB3;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextPlaceholder</code>
+        </th>
+        <td>
+          <code>#66788A</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #66788A;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextPlaceholderInverse</code>
+        </th>
+        <td>
+          <code>#DADEE2</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #DADEE2;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextSecondaryButton</code>
+        </th>
+        <td>
+          <code>#485C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #485C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextSelectionHover</code>
+        </th>
+        <td>
+          <code>#2A94D6</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #2A94D6;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextStageLeft</code>
+        </th>
+        <td>
+          <code>#DADEE2</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #DADEE2;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextWarning</code>
+        </th>
+        <td>
+          <code>#E6B739</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #E6B739;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+    
+      <tr>
+        <th scope=\"row\">
+          <code>colorTextWeak</code>
+        </th>
+        <td>
+          <code>#686C70</code>
+        </td>
+        
+        <td style=\"background-color: #f6f6f6; color: #686C70;\">
+          The quick brown fox jumps over the lazy dog.
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+            </main>
+          </div>
+        </body>
+      </html>
+    "
+`;
