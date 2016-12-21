@@ -17,9 +17,7 @@ const sinon = require('sinon')
 
 const fs = require('fs')
 const path = require('path')
-const gulp = require('gulp')
 const gutil = require('gulp-util')
-const through = require('through2')
 const _ = require('lodash')
 
 const PropSet = require('../../lib/props/prop-set')
@@ -56,7 +54,9 @@ describe('PropSet', () => {
   describe('#constructor', () => {
     it('throws an error if a non-vinyl file is passed', () => {
       try {
+        /* eslint-disable no-unused-vars */
         const propset = new PropSet(Buffer.from('{}', 'utf8'), [])
+        /* eslint-enable */
       } catch (error) {
         assert(isError(error))
         assert(/vinyl/.test(error.message))
@@ -79,7 +79,9 @@ describe('PropSet', () => {
           path: 'foobar.json',
           contents: Buffer.from('{foo:', 'utf8')
         })
+        /* eslint-disable no-unused-vars */
         const propset = new PropSet(file, [])
+        /* eslint-enable */
       } catch (error) {
         assert(isError(error))
         assert(/encountered an invalid/.test(error.message))

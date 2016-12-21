@@ -19,7 +19,7 @@
   "main": "lib/props/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx --format codeframe"
+    "lint": "eslint . --ext .js --format codeframe"
   },
   "engines": {
     "node": ">=6.3.1"
