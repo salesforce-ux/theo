@@ -15,19 +15,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 const assert = require('assert')
 const sinon = require('sinon')
 
-const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gutil = require('gulp-util')
 const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
 
 const $stream = require('../../lib/stream-util')
 const $props = require('../../lib/props')
-
-const isError = (error) =>
-  (error instanceof Error) || error instanceof gutil.PluginError
 
 describe('$props', () => {
   describe('#getValueTransform()', () => {
@@ -281,7 +276,6 @@ describe('$props.plugins', () => {
     })
     it('formats props', (done) => {
       let error
-      let result
       const samplePath = path.resolve(__dirname, 'mock', 'sample.json')
       let postResult
       gulp.src(samplePath)
@@ -302,8 +296,6 @@ describe('$props.plugins', () => {
         }))
     })
     it('filters props before formatting', (done) => {
-      let error
-      let result
       const samplePath = path.resolve(__dirname, 'mock', 'sample.json')
       let postResult
       gulp.src(samplePath)
@@ -321,8 +313,6 @@ describe('$props.plugins', () => {
         }))
     })
     it('maps props before formatting', (done) => {
-      let error
-      let result
       const samplePath = path.resolve(__dirname, 'mock', 'sample.json')
       let postResult
       gulp.src(samplePath)

@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "5.0.0-rc.4",
+  "version": "5.0.0-rc.5",
   "license": "SEE LICENSE IN README.md",
   "description": "A set of Gulp plugins for transforming and formatting Design Tokens",
   "keywords": [
@@ -19,7 +19,7 @@
   "main": "lib/props/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx --format codeframe"
+    "lint": "eslint . --ext .js --format codeframe"
   },
   "engines": {
     "node": ">=6.3.1"

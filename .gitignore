@@ -2,7 +2,6 @@
 .*
 
 # Whitelist useful dotfiles
-!/.babelrc
 !/.editorconfig
 !/.eslintrc.yml
 !/.eslintignore
