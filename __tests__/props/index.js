@@ -797,6 +797,9 @@ describe('$props:formats', () => {
       const re = new RegExp(_.escapeRegExp('<div class="metric-box"'))
       assert(re.test(result))
     })
+    it('renders a full html document', () =>
+      expect(result).toMatchSnapshot()
+    )
   })
 
   describe('common.js', () => {
