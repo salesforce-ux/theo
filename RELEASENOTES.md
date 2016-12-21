@@ -19,6 +19,7 @@ A massive thanks to the contributors who made this release possible, especially 
 - Users may now pre-process the input with custom functions ([#71](https://github.com/salesforce-ux/theo/pull/71))
 - Improved test results and moved test suite to [Jest](https://facebook.github.io/jest/)
 - JavaScript is now linted using our internal standards
+- Removed React from devDependencies
 - Added an [EditorConfig](http://editorconfig.org/) file
 - Various tweaks and fixes
 
