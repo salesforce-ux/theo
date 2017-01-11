@@ -18,6 +18,3 @@
 
 # Ignore logs
 *.log
-
-# Distribution folder
-/dist
