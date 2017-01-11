@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "5.0.0-rc.6",
+  "version": "5.0.0-rc.7",
   "license": "SEE LICENSE IN README.md",
   "description": "A set of Gulp plugins for transforming and formatting Design Tokens",
   "keywords": [
