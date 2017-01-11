@@ -235,7 +235,7 @@ No valueTransforms will be applied
 `['color/rgb', 'relative/pixelValue', 'percentage/float']`
 
 **android**:
-`['color/hex8', 'relative/pixelValue', 'percentage/float']`
+`['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
 
 **aura**:
 `['color/hex']`
@@ -279,8 +279,14 @@ Parse the value as a color and return an rgb(a) string
 **color/hex**
 Parse the value as a color and return an 6 digit hex string
 
-**color/hex8**
-Parse the value as a color and return an 8 digit hex string
+**⚠  DEPRECATED: color/hex8**
+Replaced with color/hex8argb and color/hex8rgba (see below).
+
+**color/hex8rgba**
+Parse the value as a color and return an 8 digit hex string in the form `RRGGBBAA` (as defined by the [CSS Color specification](https://drafts.csswg.org/css-color-4/#hex-notation)).
+
+**color/hex8argb**
+Parse the value as a color and return an 8 digit hex string in the form `AARRGGBB` (as used for [colors in Android](https://developer.android.com/reference/android/graphics/Color.html)).
 
 **percentage/float**
 Parse a string percentage value and return a float representation
