@@ -32,7 +32,7 @@ formatted as Sass variables in an **.scss** file.
 
 iOS might like **rgba** values formatted as **.json**.
 
-Finally, Android might like **8 Digit Hex** values formatted as **.xml**.
+Finally, Android might like **8 Digit Hex (AARRGGBB)** values formatted as **.xml**.
 
 Instead of hard coding this information in each platform/format, Theo
 can consume the centralized **Design Tokens** and output files for
@@ -144,7 +144,7 @@ An Android app might prefer to consume the final values as XML:
 Push a new file into a transform stream and return the stream.
 This is an alternative to using gulp.
 
-**@param {string} filePath**
+**`@param {string} filePath`**  
 The name of the registered transform
 
 #### Example:
@@ -166,21 +166,21 @@ the specified type.
 A transform is list of [valueTransforms](#registerValueTransform) that should be applied
 to each property.
 
-**@param {string} type**
+**`@param {string} type`**  
 The name of the registered transform
 
-**@param {object} [options]**
+**`@param {object} [options]`**  
 Additional options (see below)
 
-**@param {boolean} [options.includeRawValue]**
+**`@param {boolean} [options.includeRawValue]`**  
 Include raw value in prop object as `prop['.rawValue']`
 
-**@param {boolean} [options.resolveAliases]**
+**`@param {boolean} [options.resolveAliases]`**  
 
-**@param {boolean} [options.includeMeta]**
+**`@param {boolean} [options.includeMeta]`**  
 Don't remove ".meta" key from a prop
 
-**@param {function} [options.jsonPreProcess]**
+**`@param {function} [options.jsonPreProcess]`**  
 A function that is ran before each YAML/JSON file is merged. Should return an object representing the modified JSON data.
 
 #### Example:
@@ -203,10 +203,10 @@ gulp.src('./design/props.json')
 Register a new transform. Existing transforms with the same name
 will be overwritten.
 
-**@param {string} type**
+**`@param {string} type`**  
 The name of the transform
 
-**@param {array} valueTransforms**
+**`@param {array} valueTransforms`**  
 An array of registered value transforms
 
 #### Example:
@@ -225,19 +225,19 @@ Below is a list of pre-defined transforms and the corresponding
 *Note*: Generally speaking, the pre-defined transforms assume the original
 *Design Tokens* are formatted for the web.
 
-**raw**:
+**raw**:  
 No valueTransforms will be applied
 
-**web**:
+**web**:  
 `['color/rgb']`
 
-**ios**:
+**ios**:  
 `['color/rgb', 'relative/pixelValue', 'percentage/float']`
 
-**android**:
+**android**:  
 `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
 
-**aura**:
+**aura**:  
 `['color/hex']`
 
 ***
@@ -247,14 +247,14 @@ No valueTransforms will be applied
 Register a new valueTransform. Existing valueTransforms with the same name
 will be overwritten.
 
-**@param {string} type**
+**`@param {string} type`**  
 The name of the valueTransform
 
-**@param {function} matcher**
+**`@param {function} matcher`**  
 An function that should return a boolean indicating if the provided property
 should be transformed
 
-**@param {function} transformer**
+**`@param {function} transformer`**  
 An function that should return a new value for the provided property
 
 #### Example:
@@ -273,31 +273,31 @@ theo.registerValueTransform('animation/web/curve',
 
 #### Pre-defined ValueTransforms:
 
-**color/rgb**
+**color/rgb**  
 Parse the value as a color and return an rgb(a) string
 
-**color/hex**
+**color/hex**  
 Parse the value as a color and return an 6 digit hex string
 
-**⚠  DEPRECATED: color/hex8**
+**color/hex8 (⚠  Removed in v5)**  
 Replaced with color/hex8argb and color/hex8rgba (see below).
 
-**color/hex8rgba**
+**color/hex8rgba**  
 Parse the value as a color and return an 8 digit hex string in the form `RRGGBBAA` (as defined by the [CSS Color specification](https://drafts.csswg.org/css-color-4/#hex-notation)).
 
-**color/hex8argb**
+**color/hex8argb**  
 Parse the value as a color and return an 8 digit hex string in the form `AARRGGBB` (as used for [colors in Android](https://developer.android.com/reference/android/graphics/Color.html)).
 
-**percentage/float**
+**percentage/float**  
 Parse a string percentage value and return a float representation
 
-**relative/pixel**
+**relative/pixel**  
 Parse a relative size value (em/rem) and return a pixel representation.
 By default, the `baseFontSize` is set to 16 and
 the `baseFontPercentage` is set to 1. These values can be overwritten in a property's
 `.meta` object.
 
-**relative/pixelValue**
+**relative/pixelValue**  
 Same as *relative/pixel*, but removes the `px` extension
 
 ***
@@ -309,16 +309,16 @@ the specified type.
 
 *Note*: This plugin will almost always run after a `transform` call.
 
-**@param {string} type**
+**`@param {string} type`**  
 The name of the registered format
 
-**@param {object} [options]**
+**`@param {object} [options]`**  
 Additional options to be passed along to the formatter
 
-**@param {function} [options.propsFilter]**
+**`@param {function} [options.propsFilter]`**  
 A filter function that can be used to filter down the props before formatting
 
-**@param {function} [options.propsMap]**
+**`@param {function} [options.propsMap]`**  
 A map function that can be used modify the props before formatting
 
 #### Example:
@@ -353,16 +353,14 @@ gulp.src('design/props.json')
 Register a new format. Existing formats with the same name
 will be overwritten.
 
-**@param {string} type**
+**`@param {string} type`**  
 The name of the format
 
-**@param {function} formatter**
+**`@param {function} formatter`**  
 An function that should return a string representation
 of the reformatted *Design Tokens*.
 
-The formatter will be called with two arguments:
-
-**json** - an object with the following layout:
+The formatter will be called with two arguments: `json` and `options`.
 
 #### Example:
 
@@ -382,6 +380,7 @@ theo.registerFormat('scss', (json, options) => {
 ```
 
 Here is the layout of the `json` argument
+
 ```json5
 {
   // An object containing the transformed tokens
@@ -440,7 +439,7 @@ Here is the layout of the `json` argument
 </resources>
 ```
 
-*Note*: PROP_NAME will be set to upper case
+*Note*: `PROP_NAME` will be set to upper case
 
 ###### scss
 
@@ -521,7 +520,7 @@ See <https://salesforce-ux.github.io/design-properties>.
 
 Get the result of a transform/format
 
-**@param {function} [callback]**
+**`@param {function} [callback]`**  
 The function to call for each result in the stream
 
 #### Example:
