@@ -38,22 +38,22 @@
   },
   "homepage": "https://github.com/salesforce-ux/theo",
   "dependencies": {
-    "gulp-util": "^3.0.7",
+    "gulp-util": "^3.0.8",
     "js-yaml": "^3.7.0",
     "json5": "^0.5.1",
-    "lodash": "^4.17.2",
-    "no-case": "^2.3.0",
+    "lodash": "^4.17.4",
+    "no-case": "^2.3.1",
     "through2": "^2.0.3",
     "tinycolor2": "~1.1.2",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
+    "eslint": "^3.13.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
     "gulp": "^3.9.1",
-    "jest": "^18.0.0",
-    "sinon": "^1.17.6"
+    "jest": "^18.1.0",
+    "sinon": "^1.17.7"
   }
 }
