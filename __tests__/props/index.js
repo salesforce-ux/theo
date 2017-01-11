@@ -443,17 +443,33 @@ describe('$props:valueTransforms', () => {
     })
   })
 
-  describe('color/hex8', () => {
-    const t = $props.getValueTransform('color/hex8').transformer
-    it('converts hex to hex8', () => {
+  describe('color/hex8rgba', () => {
+    const t = $props.getValueTransform('color/hex8rgba').transformer
+    it('converts hex to hex8 (RRGGBBAA)', () => {
+      const p = { value: '#FF0000' }
+      assert.strictEqual(t(p), '#ff0000ff')
+    })
+    it('converts rgba to hex8 (RRGGBBAA)', () => {
+      const p = { value: 'rgba(255, 0, 0, 0.8)' }
+      assert.strictEqual(t(p), '#ff0000cc')
+    })
+    it('converts hsla to hex8 (RRGGBBAA)', () => {
+      const p = { value: 'hsla(0, 100%, 50%, 0.8)' }
+      assert.strictEqual(t(p), '#ff0000cc')
+    })
+  })
+
+  describe('color/hex8argb', () => {
+    const t = $props.getValueTransform('color/hex8argb').transformer
+    it('converts hex to hex8 (AARRGGBB)', () => {
       const p = { value: '#FF0000' }
       assert.strictEqual(t(p), '#ffff0000')
     })
-    it('converts rgba to hex8', () => {
+    it('converts rgba to hex8 (AARRGGBB)', () => {
       const p = { value: 'rgba(255, 0, 0, 0.8)' }
       assert.strictEqual(t(p), '#ccff0000')
     })
-    it('converts hsla to hex8', () => {
+    it('converts hsla to hex8 (AARRGGBB)', () => {
       const p = { value: 'hsla(0, 100%, 50%, 0.8)' }
       assert.strictEqual(t(p), '#ccff0000')
     })
