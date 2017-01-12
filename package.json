@@ -33,6 +33,9 @@
     "Adam Putinski",
     "Sönke Rohde <soenke.rohde@gmail.com>"
   ],
+  "jest": {
+    "testRegex": "/__tests__/.*\\.test\\.js$"
+  },
   "bugs": {
     "url": "https://github.com/salesforce-ux/theo/issues"
   },

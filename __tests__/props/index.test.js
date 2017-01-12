@@ -21,7 +21,7 @@ const through = require('through2')
 const _ = require('lodash')
 const xml2js = require('xml2js')
 
-const $stream = require('../../lib/stream-util')
+const $stream = require('../stream-util/stream-util')
 const $props = require('../../lib/props')
 
 describe('$props', () => {
