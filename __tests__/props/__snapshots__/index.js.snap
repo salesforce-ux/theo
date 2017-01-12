@@ -144,10 +144,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=spacing>
-          <th scope=\"column\">Spacing</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Spacing</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -282,10 +282,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=font>
-          <th scope=\"column\">Fonts</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Fonts</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -336,10 +336,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=font-size>
-          <th scope=\"column\">Font Sizes</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Font Sizes</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -524,10 +524,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=line-height>
-          <th scope=\"column\">Line Heights</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Line Heights</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -582,10 +582,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=border-color>
-          <th scope=\"column\">Border Colors</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Border Colors</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -699,10 +699,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=radius>
-          <th scope=\"column\">Radius</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Radius</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -778,10 +778,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=hr-color>
-          <th scope=\"column\">Horizontal Rule Colors</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Horizontal Rule Colors</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -856,10 +856,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=background-color>
-          <th scope=\"column\">Background Colors</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Background Colors</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
@@ -1342,10 +1342,10 @@ exports[`$props:formats html renders a full html document 1`] = `
           
       <thead>
         <tr id=text-color>
-          <th scope=\"column\">Text Colors</th>
-          <th scope=\"column\">Value</th>
-          <th scope=\"column\">Examples</th>
-          <th scope=\"column\">Usage</th>
+          <th scope=\"col\">Text Colors</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
         </tr>
       </thead>
     
