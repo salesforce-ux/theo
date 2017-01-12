@@ -215,13 +215,13 @@ describe('PropSet', () => {
       assert.strictEqual(set._resolveGlobals(def), undefined)
     })
     it('merges def.global into each def.props', () => {
-      const def = { global: {foo: 'bar'}, props: { a: { value: 'hello' } } }
+      const def = { global: { foo: 'bar' }, props: { a: { value: 'hello' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.strictEqual(def.props.a.foo, 'bar')
     })
     it('doesn\'t overwrite existing keys', () => {
-      const def = { global: {foo: 'bar'}, props: { a: { foo: 'baz' } } }
+      const def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.strictEqual(def.props.a.foo, 'baz')
@@ -233,7 +233,7 @@ describe('PropSet', () => {
       assert.deepEqual(def.props.a.foo, ['d'])
     })
     it('removes the "global" key from the def', () => {
-      const def = { global: {foo: 'bar'}, props: { a: { foo: 'baz' } } }
+      const def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(!_.has(def, 'global'))
     })
