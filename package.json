@@ -16,7 +16,7 @@
     "Android",
     "aura"
   ],
-  "main": "lib/props/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .js --format codeframe"

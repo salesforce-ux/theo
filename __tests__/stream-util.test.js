@@ -31,7 +31,7 @@ describe('$stream', () => {
     })
 
   const mockPath = (p) =>
-    path.resolve(__dirname, 'mock', p)
+    path.resolve(__dirname, 'stream-util/mock', p)
 
   const src = () =>
     gulp.src(mockPath('*.json'))

@@ -20,7 +20,7 @@ const path = require('path')
 const gutil = require('gulp-util')
 const _ = require('lodash')
 
-const PropSet = require('../../lib/props/prop-set')
+const PropSet = require('../lib/prop-set')
 
 const isError = (error) =>
   (error instanceof Error) || error instanceof gutil.PluginError
