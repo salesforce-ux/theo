@@ -270,6 +270,15 @@ describe('PropSet', () => {
     })
   })
 
+  it('throws an error if two aliases reference each other', () => {
+    const def = {
+      aliases: { sky: '{!fall}', fall: '{!sky}' }
+    }
+    assert.throws(() => {
+      set._resolveAliases(def)
+    })
+  })
+
   describe('#_resolveImports', () => {
     it('returns an empty array if no imports are found', () => {
       const def = { props: {} }
