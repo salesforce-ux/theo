@@ -21,6 +21,7 @@ A massive thanks to the contributors who made this release possible, especially 
 - JavaScript is now linted using our internal standards
 - Removed React from devDependencies
 - Added an [EditorConfig](http://editorconfig.org/) file
+- Inline comments in the output of popular formats (e.g. scss) (fixes [#58](https://github.com/salesforce-ux/theo/issues/58))
 - **Breaking change:** removed the `color/hex8` transform. Instead, use `color/hex8argb` in Android, and `color/hex8rgba` in, for example, CSS level 4 values
 - **Breaking change:** Node.js 6 and up is required
 - Various tweaks and fixes
