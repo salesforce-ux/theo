@@ -270,15 +270,6 @@ describe('PropSet', () => {
     })
   })
 
-  it('throws an error if two aliases reference each other', () => {
-    def = {
-      aliases: { sky: '{!fall}', fall: '{!sky}' }
-    }
-    assert.throws(() => {
-      set._resolveAliases(def)
-    })
-  })
-
   it('resolves properly a property that points to an alias with the same name', () => {
     def = {
       aliases: {
