@@ -613,6 +613,13 @@ describe('$props:formats', () => {
       assert.notStrictEqual(result.match(/\$spacing-none: 0;\n/g), null))
   })
 
+  describe('scss comments', () => {
+    beforeAll($format('raw', 'scss', paths.sample))
+    it('preserves comments in the scss syntax', () => {
+      assert.strictEqual(result.match(/\/\/ comment example\n/g).length, 1)
+    })
+  })
+
   describe('default.scss', () => {
     beforeAll($format('raw', 'default.scss', paths.sample))
     it('creates default scss syntax', () =>

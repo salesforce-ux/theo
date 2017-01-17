@@ -27,7 +27,8 @@
     },
     "account": {
       "value": "#FF0000",
-      "type": "color"
+      "type": "color",
+      "comment": "comment example"
     },
     "opportunity": {
       "value": "rgba(255, 255, 0)",
