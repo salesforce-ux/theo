@@ -138,7 +138,7 @@ describe('PropSet', () => {
       assert.strictEqual(numberSet.def.props.b.value, 3)
     })
     it('only resolves aliases if options.resolveAliases isn\'t false', () => {
-      const def = {
+      def = {
         aliases: { sky: 'blue', land: 'green' },
         global: { type: 'foo', category: 'bar' },
         props: {
@@ -157,7 +157,7 @@ describe('PropSet', () => {
       assert.strictEqual(set.def.props.c.value, '{!land} {!sea}')
     })
     it('includes a ".rawValue" if options.includeRawValue is true', () => {
-      const def = {
+      def = {
         aliases: { sky: 'blue', land: 'green', sea: 'clear' },
         global: { type: 'foo', category: 'bar' },
         props: {
@@ -183,7 +183,7 @@ describe('PropSet', () => {
   describe('#_validate', () => {
     it('throws an error if "props" is an array', () => {
       try {
-        const def = {props: []}
+        def = {props: []}
         set._validate(def)
       } catch (error) {
         assert(isError(error))
@@ -195,7 +195,7 @@ describe('PropSet', () => {
       const keys = ['value', 'type', 'category']
       keys.forEach((key) => {
         try {
-          const def = { props: { a: {} } }
+          def = { props: { a: {} } }
           _.without(keys, key).forEach((k) => {
             def.props.a[k] = 'test'
           })
@@ -211,29 +211,29 @@ describe('PropSet', () => {
 
   describe('#_resolveGlobals', () => {
     it('returns undefined if no keys were found in def.global', () => {
-      const def = { global: {} }
+      def = { global: {} }
       assert.strictEqual(set._resolveGlobals(def), undefined)
     })
     it('merges def.global into each def.props', () => {
-      const def = { global: { foo: 'bar' }, props: { a: { value: 'hello' } } }
+      def = { global: { foo: 'bar' }, props: { a: { value: 'hello' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.strictEqual(def.props.a.foo, 'bar')
     })
     it('doesn\'t overwrite existing keys', () => {
-      const def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
+      def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.strictEqual(def.props.a.foo, 'baz')
     })
     it('doesn\'t merge object values', () => {
-      const def = { global: {foo: ['a', 'b', 'c']}, props: { a: { foo: ['d'] } } }
+      def = { global: {foo: ['a', 'b', 'c']}, props: { a: { foo: ['d'] } } }
       set._resolveGlobals(def)
       assert(_.has(def.props.a, 'foo'))
       assert.deepEqual(def.props.a.foo, ['d'])
     })
     it('removes the "global" key from the def', () => {
-      const def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
+      def = { global: { foo: 'bar' }, props: { a: { foo: 'baz' } } }
       set._resolveGlobals(def)
       assert(!_.has(def, 'global'))
     })
@@ -241,7 +241,7 @@ describe('PropSet', () => {
 
   describe('#_resolveAliases', () => {
     it('replaces all instances of an alias in string values', () => {
-      const def = {
+      def = {
         aliases: { sky: 'blue', land: 'green' },
         props: {
           a: { value: '{!sky}' },
@@ -257,7 +257,7 @@ describe('PropSet', () => {
     })
   })
   it('throws an error if an alias does not exist', () => {
-    const def = {
+    def = {
       aliases: { sky: 'blue' },
       global: { type: 'foo', category: 'bar' },
       props: {
@@ -271,7 +271,7 @@ describe('PropSet', () => {
   })
 
   it('throws an error if two aliases reference each other', () => {
-    const def = {
+    def = {
       aliases: { sky: '{!fall}', fall: '{!sky}' }
     }
     assert.throws(() => {
@@ -281,13 +281,13 @@ describe('PropSet', () => {
 
   describe('#_resolveImports', () => {
     it('returns an empty array if no imports are found', () => {
-      const def = { props: {} }
+      def = { props: {} }
       const imports = set._resolveImports(def)
       assert(Array.isArray(imports))
       assert.strictEqual(imports.length, 0)
     })
     it('throws an error if an import is not found', () => {
-      const def = { props: {}, imports: ['./foo/bar.json'] }
+      def = { props: {}, imports: ['./foo/bar.json'] }
       assert.throws(() => {
         set._resolveImports(def)
       })
@@ -403,7 +403,7 @@ describe('PropSet', () => {
       })
     })
     it('adds a "propKeys" array', () => {
-      const def = JSON.parse(set.toJSON())
+      def = JSON.parse(set.toJSON())
       assert(_.has(def, 'propKeys'))
       assert(_.isArray(def.propKeys))
       assert.strictEqual(def.propKeys.length, _.keys(def.props).length)
