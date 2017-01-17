@@ -279,6 +279,21 @@ describe('PropSet', () => {
     })
   })
 
+  it('resolves properly a property that points to an alias with the same name', () => {
+    def = {
+      aliases: {
+        sky: 'blue'
+      },
+      props: {
+        sky: {
+          value: '{!sky}'
+        }
+      }
+    }
+    set._resolveAliases(def)
+    assert.strictEqual(def.props.sky.value, 'blue')
+  })
+
   describe('#_resolveImports', () => {
     it('returns an empty array if no imports are found', () => {
       def = { props: {} }
