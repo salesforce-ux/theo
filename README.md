@@ -444,8 +444,11 @@ Here is the layout of the `json` argument
 ###### scss
 
 ```scss
+// If prop has 'comment' key, that value will go here.
 $prop-name: PROP_VALUE;
 ```
+
+*Note*: `$prop-name` will be set to kebab-case.
 
 ###### map.scss
 
@@ -455,6 +458,8 @@ $file-name-map: (
 );
 ```
 
+*Note*: `prop-name` will be set to kebab-case.
+
 ###### map.variables.scss
 
 ```sass
@@ -463,17 +468,23 @@ $file-name-map-variables: (
 );
 ```
 
+*Note*: `prop-name` will be set to kebab-case.
+
 ###### sass
 
 ```sass
 $prop-name: PROP_VALUE
 ```
 
+*Note*: `$prop-name` will be set to kebab-case.
+
 ###### less
 
 ```less
 @prop-name: PROP_VALUE;
 ```
+
+*Note*: `@prop-name` will be set to kebab-case.
 
 ###### aura.theme
 
