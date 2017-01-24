@@ -444,8 +444,11 @@ Here is the layout of the `json` argument
 ###### scss
 
 ```scss
+// If prop has 'comment' key, that value will go here.
 $prop-name: PROP_VALUE;
 ```
+
+*Note*: `$prop-name` will be set to kebab-case
 
 ###### map.scss
 
