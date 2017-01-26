@@ -11,6 +11,9 @@
     },
     "TOKEN_A_B": {
       "value": "{!white}"
+    },
+    "TOKEN_SAME_NAME_AS_ALIAS": {
+      "value": "{!TOKEN_SAME_NAME_AS_ALIAS}"
     }
   },
   "aliases": {
