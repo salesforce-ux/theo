@@ -1,6 +1,8 @@
 /*
 /*/
 !/lib/
+/lib/__tests__
+/lib/__fixtures__
 !README.md
 !package.json
 !RELEASENOTES.md
