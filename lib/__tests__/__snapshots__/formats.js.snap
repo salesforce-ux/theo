@@ -1,9 +1,69 @@
+exports[`formats android.xml 1`] = `
+"<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<resources>
+        <property name=\"TOKEN_A\" category=\"test\">#FF0000</property>
+        <property name=\"TOKEN_A_A\" category=\"test\">#FF0000 #FF0000</property>
+        <property name=\"TOKEN_A_B\" category=\"test\">#FFFFFF</property>
+        <property name=\"TOKEN_SAME_NAME_AS_ALIAS\" category=\"test\">foo</property>
+        <property name=\"SIZINGA\" category=\"spacing\">20px</property>
+        <color name=\"COLORA\" category=\"background-color\">#ffbada55</color>
+        <property name=\"TOKEN_B\" category=\"test\">#FFFFFF</property>
+</resources>"
+`;
+
+exports[`formats less 1`] = `
+"  
+  @token-a: #FF0000;
+  
+  @token-a-a: #FF0000 #FF0000;
+  
+  @token-a-b: #FFFFFF;
+  
+  @token-same-name-as-alias: foo;
+  
+  @sizing-a: 20px;
+  
+  @color-a: rgb(186, 218, 85);
+  
+  @token-b: #FFFFFF;
+"
+`;
+
+exports[`formats list.scss 1`] = `
+"$a-list: (
+    \"token-a\",
+    \"token-a-a\",
+    \"token-a-b\",
+    \"token-same-name-as-alias\",
+    \"sizing-a\",
+    \"color-a\",
+    \"token-b\",
+);
+"
+`;
+
 exports[`formats map.scss 1`] = `
 "$a-map: (
-    \'token-a\': \'#FF0000\',
-    \'token-a-a\': \'#FF0000 #FF0000\',
-    \'token-a-b\': \'#FFFFFF\',
-    \'token-b\': \'#FFFFFF\'
+    \'token-a\': (#FF0000),
+    \'token-a-a\': (#FF0000 #FF0000),
+    \'token-a-b\': (#FFFFFF),
+    \'token-same-name-as-alias\': (foo),
+    \'sizing-a\': (20px),
+    \'color-a\': (rgb(186, 218, 85)),
+    \'token-b\': (#FFFFFF),
+);
+"
+`;
+
+exports[`formats map.variables.scss 1`] = `
+"$a-map: (
+    \'token-a\': $TOKEN_A,
+    \'token-a-a\': $TOKEN_A_A,
+    \'token-a-b\': $TOKEN_A_B,
+    \'token-same-name-as-alias\': $TOKEN_SAME_NAME_AS_ALIAS,
+    \'sizing-a\': $sizingA,
+    \'color-a\': $colorA,
+    \'token-b\': $TOKEN_B,
 );
 "
 `;
@@ -22,6 +82,9 @@ exports[`formats raw.json 1`] = `
     },
     \"white\": {
       \"value\": \"#FFFFFF\"
+    },
+    \"TOKEN_SAME_NAME_AS_ALIAS\": {
+      \"value\": \"foo\"
     }
   },
   \"props\": {
@@ -43,6 +106,24 @@ exports[`formats raw.json 1`] = `
       \"name\": \"TOKEN_A_B\",
       \"value\": \"#FFFFFF\"
     },
+    \"TOKEN_SAME_NAME_AS_ALIAS\": {
+      \"type\": \"token\",
+      \"category\": \"test\",
+      \"name\": \"TOKEN_SAME_NAME_AS_ALIAS\",
+      \"value\": \"foo\"
+    },
+    \"sizingA\": {
+      \"type\": \"size\",
+      \"category\": \"spacing\",
+      \"name\": \"sizingA\",
+      \"value\": \"20px\"
+    },
+    \"colorA\": {
+      \"type\": \"color\",
+      \"category\": \"background-color\",
+      \"name\": \"colorA\",
+      \"value\": \"#bada55\"
+    },
     \"TOKEN_B\": {
       \"type\": \"token\",
       \"category\": \"test\",
@@ -53,6 +134,42 @@ exports[`formats raw.json 1`] = `
 }"
 `;
 
+exports[`formats sass 1`] = `
+"  
+  $token-a: #FF0000
+  
+  $token-a-a: #FF0000 #FF0000
+  
+  $token-a-b: #FFFFFF
+  
+  $token-same-name-as-alias: foo
+  
+  $sizing-a: 20px
+  
+  $color-a: rgb(186, 218, 85)
+  
+  $token-b: #FFFFFF
+"
+`;
+
+exports[`formats sass.default 1`] = `
+"  
+  $token-a: #FF0000 !default
+  
+  $token-a-a: #FF0000 #FF0000 !default
+  
+  $token-a-b: #FFFFFF !default
+  
+  $token-same-name-as-alias: foo !default
+  
+  $sizing-a: 20px !default
+  
+  $color-a: rgb(186, 218, 85) !default
+  
+  $token-b: #FFFFFF !default
+"
+`;
+
 exports[`formats scss 1`] = `
 "  
   $token-a: #FF0000;
@@ -61,6 +178,48 @@ exports[`formats scss 1`] = `
   
   $token-a-b: #FFFFFF;
   
+  $token-same-name-as-alias: foo;
+  
+  $sizing-a: 20px;
+  
+  $color-a: rgb(186, 218, 85);
+  
   $token-b: #FFFFFF;
+"
+`;
+
+exports[`formats scss.default 1`] = `
+"  
+  $token-a: #FF0000 !default;
+  
+  $token-a-a: #FF0000 #FF0000 !default;
+  
+  $token-a-b: #FFFFFF !default;
+  
+  $token-same-name-as-alias: foo !default;
+  
+  $sizing-a: 20px !default;
+  
+  $color-a: rgb(186, 218, 85) !default;
+  
+  $token-b: #FFFFFF !default;
+"
+`;
+
+exports[`formats styl 1`] = `
+"  
+  $token-a: #FF0000
+  
+  $token-a-a: #FF0000 #FF0000
+  
+  $token-a-b: #FFFFFF
+  
+  $token-same-name-as-alias: foo
+  
+  $sizing-a: 20px
+  
+  $color-a: rgb(186, 218, 85)
+  
+  $token-b: #FFFFFF
 "
 `;

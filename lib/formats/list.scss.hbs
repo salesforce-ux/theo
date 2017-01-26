@@ -1,0 +1,5 @@
+${{stem meta.file}}-list: (
+  {{#each props as |prop|}}
+    "{{kebabCase prop.name}}",
+  {{/each}}
+);

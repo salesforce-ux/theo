@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+{{#each props as |prop|}}
+    {{#compare prop.type '===' 'color'}}
+        <color name="{{uppercase prop.name}}" category="{{prop.category}}">{{prop.value}}</color>
+    {{else}}
+        <property name="{{uppercase prop.name}}" category="{{prop.category}}">{{prop.value}}</property>
+    {{/compare}}
+{{/each}}
+</resources>
