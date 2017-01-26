@@ -1,0 +1,66 @@
+exports[`formats map.scss 1`] = `
+"$a-map: (
+    \'token-a\': \'#FF0000\',
+    \'token-a-a\': \'#FF0000 #FF0000\',
+    \'token-a-b\': \'#FFFFFF\',
+    \'token-b\': \'#FFFFFF\'
+);
+"
+`;
+
+exports[`formats raw.json 1`] = `
+"{
+  \"aliases\": {
+    \"red\": {
+      \"value\": \"#FF0000\"
+    },
+    \"scarlet\": {
+      \"value\": \"#FF0000\"
+    },
+    \"crimson\": {
+      \"value\": \"#FF0000\"
+    },
+    \"white\": {
+      \"value\": \"#FFFFFF\"
+    }
+  },
+  \"props\": {
+    \"TOKEN_A\": {
+      \"type\": \"token\",
+      \"category\": \"test\",
+      \"name\": \"TOKEN_A\",
+      \"value\": \"#FF0000\"
+    },
+    \"TOKEN_A_A\": {
+      \"type\": \"token\",
+      \"category\": \"test\",
+      \"name\": \"TOKEN_A_A\",
+      \"value\": \"#FF0000 #FF0000\"
+    },
+    \"TOKEN_A_B\": {
+      \"type\": \"token\",
+      \"category\": \"test\",
+      \"name\": \"TOKEN_A_B\",
+      \"value\": \"#FFFFFF\"
+    },
+    \"TOKEN_B\": {
+      \"type\": \"token\",
+      \"category\": \"test\",
+      \"name\": \"TOKEN_B\",
+      \"value\": \"#FFFFFF\"
+    }
+  }
+}"
+`;
+
+exports[`formats scss 1`] = `
+"  
+  $token-a: #FF0000;
+  
+  $token-a-a: #FF0000 #FF0000;
+  
+  $token-a-b: #FFFFFF;
+  
+  $token-b: #FFFFFF;
+"
+`;

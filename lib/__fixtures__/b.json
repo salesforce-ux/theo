@@ -1,0 +1,19 @@
+{
+  "props": {
+    "TOKEN_B": {
+      "value": "{!white}"
+    }
+  },
+  "aliases": {
+    "white": {
+      "value": "#FFFFFF"
+    }
+  },
+  "global": {
+    "type": "token",
+    "category": "test",
+    "meta": {
+      "fixture": "b"
+    }
+  }
+}

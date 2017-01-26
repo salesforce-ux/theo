@@ -1,0 +1,4 @@
+{{#each props as |prop|}}
+  {{#if prop.comment}}// {{prop.comment}}{{/if}}
+  ${{kebabCase prop.name}}: {{prop.value}};
+{{/each}}

@@ -1,0 +1,68 @@
+{
+  "name": "theo",
+  "version": "6.0.0-alpha.1",
+  "license": "SEE LICENSE IN README.md",
+  "description": "Design Tokens formatter",
+  "keywords": [
+    "css",
+    "design",
+    "properties",
+    "tokens",
+    "sass",
+    "scss",
+    "stylus",
+    "less",
+    "iOS",
+    "Android",
+    "aura"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --ext .js --format codeframe"
+  },
+  "engines": {
+    "node": ">=6.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salesforce-ux/theo.git"
+  },
+  "authors": [
+    "Salesforce and contributors",
+    "Adam Putinski",
+    "Sönke Rohde <soenke.rohde@gmail.com>"
+  ],
+  "jest": {
+    "testRegex": "/__tests__/.*\\.test\\.js$"
+  },
+  "bugs": {
+    "url": "https://github.com/salesforce-ux/theo/issues"
+  },
+  "homepage": "https://github.com/salesforce-ux/theo",
+  "dependencies": {
+    "core.lambda": "^1.0.0",
+    "data.either": "^1.4.0",
+    "handlebars": "^4.0.6",
+    "handlebars-helpers": "^0.8.0",
+    "immutable": "^3.8.1",
+    "immutable-ext": "^1.0.8",
+    "js-yaml": "^3.7.0",
+    "json5": "^0.5.1",
+    "lodash": "^4.17.4",
+    "no-case": "^2.3.1",
+    "tinycolor2": "~1.4.1",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "jest": "^18.1.0",
+    "standard": "^8.6.0"
+  },
+  "standard": {
+    "global": [
+      "describe",
+      "it",
+      "expect"
+    ]
+  }
+}

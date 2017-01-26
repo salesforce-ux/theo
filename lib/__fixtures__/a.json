@@ -1,0 +1,39 @@
+{
+  "props": {
+    "TOKEN_A": {
+      "value": "{!red}"
+    },
+    "TOKEN_A_A": {
+      "value": "{!scarlet} {!crimson}",
+      "meta": {
+        "fixture": "override"
+      }
+    },
+    "TOKEN_A_B": {
+      "value": "{!white}"
+    }
+  },
+  "aliases": {
+    "red": {
+      "value": "#FF0000"
+    },
+    "scarlet": {
+      "value": "{!red}"
+    },
+    "crimson": {
+      "value": "{!scarlet}"
+    }
+  },
+  "imports": [
+    "./b.json"
+  ],
+  "global": {
+    "type": "token",
+    "category": "test",
+    "meta": {
+      "fixture": "a",
+      "baseFontPixel": 16,
+      "baseFontPercentage": 100
+    }
+  }
+}

@@ -1,0 +1,5 @@
+${{stem meta.file}}-map: (
+  {{#each props as |prop|}}
+    '{{kebabCase prop.name}}': '{{prop.value}}'{{#unless @last}},{{/unless}}
+  {{/each}}
+);
