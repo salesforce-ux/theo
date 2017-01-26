@@ -2,6 +2,7 @@
 
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-ux/theo.svg)](https://greenkeeper.io/)
 
 Theo is a set of [Gulp](http://gulpjs.com) plugins for
 transforming and formatting [Design Tokens](#overview)
