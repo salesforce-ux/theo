@@ -1,5 +1,7 @@
 # <img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/theo.png" alt="Theo logo" width="28" /> Theo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-ux/theo.svg)](https://greenkeeper.io/)
+
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 
