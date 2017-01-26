@@ -13,6 +13,213 @@ exports[`formats android.xml 1`] = `
 "
 `;
 
+exports[`formats html 1`] = `
+"
+      <!DOCTYPE html>
+      <html lang=\"en\">
+        <head>
+          <meta charset=\"utf-8\" />
+          <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+          <title>Design Tokens</title>
+          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+          <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css\" />
+          <style>
+            html {
+              box-sizing: border-box;
+              font-size: 1em;
+              font-family: Helvetica, Arial, sans-serif;
+              line-height: 1.5;
+              background: #fff;
+              color: #444;
+            }
+            *,
+            *:before,
+            *:after {
+              box-sizing: inherit;
+            }
+            body { font-size: .75rem; }
+            ::-moz-selection {
+              background: #b3d4fc;
+              text-shadow: none;
+            }
+            ::selection {
+              background: #b3d4fc;
+              text-shadow: none;
+            }
+            .banner,
+            .contentinfo { background: #f5f5f5; }
+            .banner { padding: 1em 0; }
+            .container {
+              margin: 0 auto;
+              padding: 0 2rem;
+              max-width: 80rem;
+            }
+            main {
+              margin-right: -2rem;
+              margin-left:  -2rem;
+              padding-bottom: 2rem;
+            }
+            h1 {
+              margin: 0;
+              font-weight: normal;
+              line-height: 1.25;
+            }
+            table {
+              table-layout: fixed;
+              border-collapse: separate;
+              border-spacing: 1rem;
+              width: 100%;
+            }
+            th,
+            td {
+              padding: 0 1rem;
+              vertical-align: baseline;
+              word-break: break-word;
+              hyphens: auto;
+            }
+            th {
+              font-weight: normal;
+              text-align: left;
+            }
+            thead th {
+              border-bottom: 1px solid #eee;
+              padding-top: 1rem;
+              padding-bottom: .5rem;
+              color: #999;
+            }
+            thead th:first-child {
+              font-size: 1.25rem;
+              color: inherit;
+            }
+            code { font-family: monaco, Consolas, monospace, monospace; }
+            hr {
+              display: block;
+              margin: 2rem 0;
+              border: 0;
+              border-top: 1px solid #eee;
+              padding: 0;
+              height: 1px;
+            }
+            .metric-box,
+            .radius-box {
+              display: inline-block;
+              vertical-align: middle;
+              background: #eee;
+            }
+            .radius-box {
+              width: 100%;
+              height: 3rem;
+            }
+            .radius-box.borderRadiusCircle {
+              width: 3rem;
+            }
+            .line-height-example {
+              border-bottom: 1px solid #eee;
+              background-image: -webkit-linear-gradient(#eee 1px, transparent 1px);
+              background-image: linear-gradient(#eee 1px, transparent 1px);
+              background-size: 100% 1rem;
+            }
+          </style>
+        </head>
+        <body>
+          <header role=\"banner\" class=\"banner\">
+            <div class=\"container\">
+              <h1>Design Tokens</h1>
+            </div>
+          </header>
+          <div class=\"container\">
+            <main role=\"main\">
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=spacing>
+          <th scope=\"col\">Spacing</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>sizingA</code>
+        </th>
+        <td>
+          <code>20px</code>
+        </td>
+        
+        <td>
+          <div class=\"metric-box\" style=\"width: 20px; height: 20px;\"></div>
+        </td>
+      
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+      <section>
+        <table>
+          
+      <thead>
+        <tr id=background-color>
+          <th scope=\"col\">Background Colors</th>
+          <th scope=\"col\">Value</th>
+          <th scope=\"col\">Examples</th>
+          <th scope=\"col\">Usage</th>
+        </tr>
+      </thead>
+    
+          <tbody>
+            <tr>
+        <th scope=\"row\">
+          <code>colorA</code>
+        </th>
+        <td>
+          <code>rgb(186, 218, 85)</code>
+        </td>
+        <td style=\"background-color: rgb(186, 218, 85); border: 1px solid #f6f6f6;\"></td>
+        <td></td>
+      </tr>
+          </tbody>
+        </table>
+        <hr />
+      </section>
+    
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+            </main>
+          </div>
+        </body>
+      </html>
+    "
+`;
+
 exports[`formats less 1`] = `
 "
   
