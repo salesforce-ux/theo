@@ -5,9 +5,9 @@
 <resources>
 {{#each props as |prop|}}
   {{#compare prop.type '===' 'color'}}
-    <color name="{{uppercase prop.name}}" category="{{prop.category}}">{{prop.value}}</color>
+    <color name="{{uppercase prop.name}}" category="{{prop.category}}">{{{prop.value}}}</color>
   {{else}}
-    <property name="{{uppercase prop.name}}" category="{{prop.category}}">{{prop.value}}</property>
+    <property name="{{uppercase prop.name}}" category="{{prop.category}}">{{{prop.value}}}</property>
   {{/compare}}
 {{/each}}
 </resources>

@@ -2,6 +2,6 @@
 {{! Licensed under BSD 3-Clause - https://opensource.org/licenses/BSD-3-Clause }}
 
 {{#each props as |prop|}}
-  {{#if prop.comment}}// {{prop.comment}}{{/if}}
-  ${{kebabCase prop.name}}: {{prop.value}} !default;
+  {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
+  ${{kebabCase prop.name}}: {{{prop.value}}} !default;
 {{/each}}
