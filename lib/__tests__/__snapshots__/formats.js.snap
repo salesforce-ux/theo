@@ -366,24 +366,7 @@ exports[`formats sass 1`] = `
 "
 `;
 
-exports[`formats sass.default 1`] = `
-"
-  
-  $token-a: #FF0000 !default
-  
-  $token-a-a: #FF0000 #FF0000 !default
-  
-  $token-a-b: #FFFFFF !default
-  
-  $token-same-name-as-alias: foo !default
-  
-  $sizing-a: 20px !default
-  
-  $color-a: rgb(186, 218, 85) !default
-  
-  $token-b: #FFFFFF !default
-"
-`;
+exports[`formats sass.default 1`] = `"Format \"sass.default\" is not registered"`;
 
 exports[`formats scss 1`] = `
 "
@@ -404,24 +387,7 @@ exports[`formats scss 1`] = `
 "
 `;
 
-exports[`formats scss.default 1`] = `
-"
-  
-  $token-a: #FF0000 !default;
-  
-  $token-a-a: #FF0000 #FF0000 !default;
-  
-  $token-a-b: #FFFFFF !default;
-  
-  $token-same-name-as-alias: foo !default;
-  
-  $sizing-a: 20px !default;
-  
-  $color-a: rgb(186, 218, 85) !default;
-  
-  $token-b: #FFFFFF !default;
-"
-`;
+exports[`formats scss.default 1`] = `"Format \"scss.default\" is not registered"`;
 
 exports[`formats styl 1`] = `
 "
