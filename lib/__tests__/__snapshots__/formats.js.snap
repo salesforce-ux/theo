@@ -14,6 +14,29 @@ exports[`formats android.xml 1`] = `
 "
 `;
 
+exports[`formats common.js 1`] = `
+"
+module.exports = {
+    
+    tokenA: \"#FF0000\",
+    
+    tokenAA: \"#FF0000 #FF0000\",
+    
+    tokenAB: \"#FFFFFF\",
+    
+    tokenSameNameAsAlias: \"foo\",
+    // This should not get escaped in the output
+    tokenWithQuotesInValue: \"\'Salesforce Sans\', \\\"Helvetica Neue\\\", sans-serif\",
+    
+    sizinga: \"20px\",
+    
+    colora: \"rgb(186, 218, 85)\",
+    
+    tokenB: \"#FFFFFF\",
+};
+"
+`;
+
 exports[`formats html 1`] = `
 "
       <!DOCTYPE html>
