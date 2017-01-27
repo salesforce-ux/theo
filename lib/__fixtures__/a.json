@@ -15,6 +15,10 @@
     "TOKEN_SAME_NAME_AS_ALIAS": {
       "value": "{!TOKEN_SAME_NAME_AS_ALIAS}"
     },
+    "TOKEN_WITH_QUOTES_IN_VALUE": {
+      "value": "'Salesforce Sans', \"Helvetica Neue\", sans-serif",
+      "comment": "This should not get escaped in the output"
+    },
     "sizingA": {
       "value": "20px",
       "category": "spacing",
