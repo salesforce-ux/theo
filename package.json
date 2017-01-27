@@ -58,6 +58,7 @@
     "global": [
       "describe",
       "it",
+      "xit",
       "expect"
     ]
   }
