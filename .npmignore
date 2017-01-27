@@ -5,5 +5,5 @@
 /lib/__fixtures__
 !README.md
 !package.json
-!RELEASENOTES.md
+!CHANGELOG.md
 !LICENSE.txt
