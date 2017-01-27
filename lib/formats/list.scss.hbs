@@ -3,6 +3,7 @@
 
 ${{stem meta.file}}-list: (
   {{#each props as |prop|}}
+    {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
     "{{kebabCase prop.name}}",
   {{/each}}
 );
