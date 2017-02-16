@@ -1,7 +1,7 @@
 # Contributing Code
 
-External contributors will be required to sign a Contributor’s License
-Agreement. You will be prompted to sign it when you open a pull request.
+External contributors are required to sign a Contributor’s License Agreement.
+You will be prompted to sign it when you open a pull request.
 
 1. Create a new issue before starting your project so that we can keep
    track of what you are trying to add/fix. That way, we can also offer
