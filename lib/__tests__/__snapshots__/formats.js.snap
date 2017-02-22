@@ -1,15 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`formats android.xml 1`] = `
 "
-<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <resources>
-    <property name=\"TOKEN_A\" category=\"test\">#FF0000</property>
-    <property name=\"TOKEN_A_A\" category=\"test\">#FF0000 #FF0000</property>
-    <property name=\"TOKEN_A_B\" category=\"test\">#FFFFFF</property>
-    <property name=\"TOKEN_SAME_NAME_AS_ALIAS\" category=\"test\">foo</property>
-    <property name=\"TOKEN_WITH_QUOTES_IN_VALUE\" category=\"test\">\'Salesforce Sans\', \"Helvetica Neue\", sans-serif</property>
-    <property name=\"SIZINGA\" category=\"spacing\">20px</property>
-    <color name=\"COLORA\" category=\"background-color\">#ffbada55</color>
-    <property name=\"TOKEN_B\" category=\"test\">#FFFFFF</property>
+    <property name=\\"TOKEN_A\\" category=\\"test\\">#FF0000</property>
+    <property name=\\"TOKEN_A_A\\" category=\\"test\\">#FF0000 #FF0000</property>
+    <property name=\\"TOKEN_A_B\\" category=\\"test\\">#FFFFFF</property>
+    <property name=\\"TOKEN_SAME_NAME_AS_ALIAS\\" category=\\"test\\">foo</property>
+    <property name=\\"TOKEN_WITH_QUOTES_IN_VALUE\\" category=\\"test\\">'Salesforce Sans', \\"Helvetica Neue\\", sans-serif</property>
+    <property name=\\"SIZINGA\\" category=\\"spacing\\">20px</property>
+    <color name=\\"COLORA\\" category=\\"background-color\\">#ffbada55</color>
+    <property name=\\"TOKEN_B\\" category=\\"test\\">#FFFFFF</property>
 </resources>
 "
 `;
@@ -18,21 +20,21 @@ exports[`formats common.js 1`] = `
 "
 module.exports = {
     
-    tokenA: \"#FF0000\",
+    tokenA: \\"#FF0000\\",
     
-    tokenAA: \"#FF0000 #FF0000\",
+    tokenAA: \\"#FF0000 #FF0000\\",
     
-    tokenAB: \"#FFFFFF\",
+    tokenAB: \\"#FFFFFF\\",
     
-    tokenSameNameAsAlias: \"foo\",
+    tokenSameNameAsAlias: \\"foo\\",
     // This should not get escaped in the output
-    tokenWithQuotesInValue: \"\'Salesforce Sans\', \\\"Helvetica Neue\\\", sans-serif\",
+    tokenWithQuotesInValue: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
     
-    sizinga: \"20px\",
+    sizinga: \\"20px\\",
     
-    colora: \"rgb(186, 218, 85)\",
+    colora: \\"rgb(186, 218, 85)\\",
     
-    tokenB: \"#FFFFFF\",
+    tokenB: \\"#FFFFFF\\",
 };
 "
 `;
@@ -40,13 +42,13 @@ module.exports = {
 exports[`formats html 1`] = `
 "
       <!DOCTYPE html>
-      <html lang=\"en\">
+      <html lang=\\"en\\">
         <head>
-          <meta charset=\"utf-8\" />
-          <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />
+          <meta charset=\\"utf-8\\" />
+          <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\" />
           <title>Design Tokens</title>
-          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
-          <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css\" />
+          <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+          <link rel=\\"stylesheet\\" href=\\"https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css\\" />
           <style>
             html {
               box-sizing: border-box;
@@ -146,13 +148,13 @@ exports[`formats html 1`] = `
           </style>
         </head>
         <body>
-          <header role=\"banner\" class=\"banner\">
-            <div class=\"container\">
+          <header role=\\"banner\\" class=\\"banner\\">
+            <div class=\\"container\\">
               <h1>Design Tokens</h1>
             </div>
           </header>
-          <div class=\"container\">
-            <main role=\"main\">
+          <div class=\\"container\\">
+            <main role=\\"main\\">
               
               
       <section>
@@ -160,16 +162,16 @@ exports[`formats html 1`] = `
           
       <thead>
         <tr id=spacing>
-          <th scope=\"col\">Spacing</th>
-          <th scope=\"col\">Value</th>
-          <th scope=\"col\">Examples</th>
-          <th scope=\"col\">Usage</th>
+          <th scope=\\"col\\">Spacing</th>
+          <th scope=\\"col\\">Value</th>
+          <th scope=\\"col\\">Examples</th>
+          <th scope=\\"col\\">Usage</th>
         </tr>
       </thead>
     
           <tbody>
             <tr>
-        <th scope=\"row\">
+        <th scope=\\"row\\">
           <code>sizingA</code>
         </th>
         <td>
@@ -177,7 +179,7 @@ exports[`formats html 1`] = `
         </td>
         
         <td>
-          <div class=\"metric-box\" style=\"width: 20px; height: 20px;\"></div>
+          <div class=\\"metric-box\\" style=\\"width: 20px; height: 20px;\\"></div>
         </td>
       
         <td></td>
@@ -204,22 +206,22 @@ exports[`formats html 1`] = `
           
       <thead>
         <tr id=background-color>
-          <th scope=\"col\">Background Colors</th>
-          <th scope=\"col\">Value</th>
-          <th scope=\"col\">Examples</th>
-          <th scope=\"col\">Usage</th>
+          <th scope=\\"col\\">Background Colors</th>
+          <th scope=\\"col\\">Value</th>
+          <th scope=\\"col\\">Examples</th>
+          <th scope=\\"col\\">Usage</th>
         </tr>
       </thead>
     
           <tbody>
             <tr>
-        <th scope=\"row\">
+        <th scope=\\"row\\">
           <code>colorA</code>
         </th>
         <td>
           <code>rgb(186, 218, 85)</code>
         </td>
-        <td style=\"background-color: rgb(186, 218, 85); border: 1px solid #f6f6f6;\"></td>
+        <td style=\\"background-color: rgb(186, 218, 85); border: 1px solid #f6f6f6;\\"></td>
         <td></td>
       </tr>
           </tbody>
@@ -255,7 +257,7 @@ exports[`formats less 1`] = `
   
   @token-same-name-as-alias: foo;
   // This should not get escaped in the output
-  @token-with-quotes-in-value: \'Salesforce Sans\', \"Helvetica Neue\", sans-serif;
+  @token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
   
   @sizing-a: 20px;
   
@@ -269,21 +271,21 @@ exports[`formats list.scss 1`] = `
 "
 $a-list: (
     
-    \"token-a\",
+    \\"token-a\\",
     
-    \"token-a-a\",
+    \\"token-a-a\\",
     
-    \"token-a-b\",
+    \\"token-a-b\\",
     
-    \"token-same-name-as-alias\",
+    \\"token-same-name-as-alias\\",
     // This should not get escaped in the output
-    \"token-with-quotes-in-value\",
+    \\"token-with-quotes-in-value\\",
     
-    \"sizing-a\",
+    \\"sizing-a\\",
     
-    \"color-a\",
+    \\"color-a\\",
     
-    \"token-b\",
+    \\"token-b\\",
 );
 "
 `;
@@ -292,21 +294,21 @@ exports[`formats map.scss 1`] = `
 "
 $a-map: (
     
-    \'token-a\': (#FF0000),
+    'token-a': (#FF0000),
     
-    \'token-a-a\': (#FF0000 #FF0000),
+    'token-a-a': (#FF0000 #FF0000),
     
-    \'token-a-b\': (#FFFFFF),
+    'token-a-b': (#FFFFFF),
     
-    \'token-same-name-as-alias\': (foo),
+    'token-same-name-as-alias': (foo),
     // This should not get escaped in the output
-    \'token-with-quotes-in-value\': (\'Salesforce Sans\', \"Helvetica Neue\", sans-serif),
+    'token-with-quotes-in-value': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
     
-    \'sizing-a\': (20px),
+    'sizing-a': (20px),
     
-    \'color-a\': (rgb(186, 218, 85)),
+    'color-a': (rgb(186, 218, 85)),
     
-    \'token-b\': (#FFFFFF),
+    'token-b': (#FFFFFF),
 );
 "
 `;
@@ -315,93 +317,93 @@ exports[`formats map.variables.scss 1`] = `
 "
 $a-map: (
     
-    \'token-a\': $token-a,
+    'token-a': $token-a,
     
-    \'token-a-a\': $token-a-a,
+    'token-a-a': $token-a-a,
     
-    \'token-a-b\': $token-a-b,
+    'token-a-b': $token-a-b,
     
-    \'token-same-name-as-alias\': $token-same-name-as-alias,
+    'token-same-name-as-alias': $token-same-name-as-alias,
     // This should not get escaped in the output
-    \'token-with-quotes-in-value\': $token-with-quotes-in-value,
+    'token-with-quotes-in-value': $token-with-quotes-in-value,
     
-    \'sizing-a\': $sizing-a,
+    'sizing-a': $sizing-a,
     
-    \'color-a\': $color-a,
+    'color-a': $color-a,
     
-    \'token-b\': $token-b,
+    'token-b': $token-b,
 );
 "
 `;
 
 exports[`formats raw.json 1`] = `
 "{
-  \"aliases\": {
-    \"red\": {
-      \"value\": \"#FF0000\"
+  \\"aliases\\": {
+    \\"red\\": {
+      \\"value\\": \\"#FF0000\\"
     },
-    \"scarlet\": {
-      \"value\": \"#FF0000\"
+    \\"scarlet\\": {
+      \\"value\\": \\"#FF0000\\"
     },
-    \"crimson\": {
-      \"value\": \"#FF0000\"
+    \\"crimson\\": {
+      \\"value\\": \\"#FF0000\\"
     },
-    \"white\": {
-      \"value\": \"#FFFFFF\"
+    \\"white\\": {
+      \\"value\\": \\"#FFFFFF\\"
     },
-    \"TOKEN_SAME_NAME_AS_ALIAS\": {
-      \"value\": \"foo\"
+    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
+      \\"value\\": \\"foo\\"
     }
   },
-  \"props\": {
-    \"TOKEN_A\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_A\",
-      \"value\": \"#FF0000\"
+  \\"props\\": {
+    \\"TOKEN_A\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_A\\",
+      \\"value\\": \\"#FF0000\\"
     },
-    \"TOKEN_A_A\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_A_A\",
-      \"value\": \"#FF0000 #FF0000\"
+    \\"TOKEN_A_A\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_A_A\\",
+      \\"value\\": \\"#FF0000 #FF0000\\"
     },
-    \"TOKEN_A_B\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_A_B\",
-      \"value\": \"#FFFFFF\"
+    \\"TOKEN_A_B\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_A_B\\",
+      \\"value\\": \\"#FFFFFF\\"
     },
-    \"TOKEN_SAME_NAME_AS_ALIAS\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_SAME_NAME_AS_ALIAS\",
-      \"value\": \"foo\"
+    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_SAME_NAME_AS_ALIAS\\",
+      \\"value\\": \\"foo\\"
     },
-    \"TOKEN_WITH_QUOTES_IN_VALUE\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_WITH_QUOTES_IN_VALUE\",
-      \"value\": \"\'Salesforce Sans\', \\\"Helvetica Neue\\\", sans-serif\",
-      \"comment\": \"This should not get escaped in the output\"
+    \\"TOKEN_WITH_QUOTES_IN_VALUE\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_WITH_QUOTES_IN_VALUE\\",
+      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+      \\"comment\\": \\"This should not get escaped in the output\\"
     },
-    \"sizingA\": {
-      \"type\": \"size\",
-      \"category\": \"spacing\",
-      \"name\": \"sizingA\",
-      \"value\": \"20px\"
+    \\"sizingA\\": {
+      \\"type\\": \\"size\\",
+      \\"category\\": \\"spacing\\",
+      \\"name\\": \\"sizingA\\",
+      \\"value\\": \\"20px\\"
     },
-    \"colorA\": {
-      \"type\": \"color\",
-      \"category\": \"background-color\",
-      \"name\": \"colorA\",
-      \"value\": \"#bada55\"
+    \\"colorA\\": {
+      \\"type\\": \\"color\\",
+      \\"category\\": \\"background-color\\",
+      \\"name\\": \\"colorA\\",
+      \\"value\\": \\"#bada55\\"
     },
-    \"TOKEN_B\": {
-      \"type\": \"token\",
-      \"category\": \"test\",
-      \"name\": \"TOKEN_B\",
-      \"value\": \"#FFFFFF\"
+    \\"TOKEN_B\\": {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_B\\",
+      \\"value\\": \\"#FFFFFF\\"
     }
   }
 }"
@@ -418,7 +420,7 @@ exports[`formats sass 1`] = `
   
   $token-same-name-as-alias: foo
   // This should not get escaped in the output
-  $token-with-quotes-in-value: \'Salesforce Sans\', \"Helvetica Neue\", sans-serif
+  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
   
   $sizing-a: 20px
   
@@ -428,7 +430,7 @@ exports[`formats sass 1`] = `
 "
 `;
 
-exports[`formats sass.default 1`] = `"Format \"sass.default\" is not registered"`;
+exports[`formats sass.default 1`] = `"Format \\"sass.default\\" is not registered"`;
 
 exports[`formats scss 1`] = `
 "
@@ -441,7 +443,7 @@ exports[`formats scss 1`] = `
   
   $token-same-name-as-alias: foo;
   // This should not get escaped in the output
-  $token-with-quotes-in-value: \'Salesforce Sans\', \"Helvetica Neue\", sans-serif;
+  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
   
   $sizing-a: 20px;
   
@@ -451,7 +453,7 @@ exports[`formats scss 1`] = `
 "
 `;
 
-exports[`formats scss.default 1`] = `"Format \"scss.default\" is not registered"`;
+exports[`formats scss.default 1`] = `"Format \\"scss.default\\" is not registered"`;
 
 exports[`formats styl 1`] = `
 "
@@ -464,7 +466,7 @@ exports[`formats styl 1`] = `
   
   $token-same-name-as-alias: foo
   // This should not get escaped in the output
-  $token-with-quotes-in-value: \'Salesforce Sans\', \"Helvetica Neue\", sans-serif
+  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
   
   $sizing-a: 20px
   
