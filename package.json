@@ -44,14 +44,14 @@
     "handlebars-helpers": "^0.8.0",
     "immutable": "^3.8.1",
     "immutable-ext": "^1.0.8",
-    "js-yaml": "^3.7.0",
+    "js-yaml": "^3.8.1",
     "json5": "^0.5.1",
     "lodash": "^4.17.4",
     "no-case": "^2.3.1",
     "tinycolor2": "~1.4.1"
   },
   "devDependencies": {
-    "jest": "^18.1.0",
+    "jest": "^19.0.0",
     "standard": "^8.6.0"
   },
   "standard": {
