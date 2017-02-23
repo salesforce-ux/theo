@@ -51,7 +51,7 @@
     "tinycolor2": "~1.4.1"
   },
   "devDependencies": {
-    "jest": "^19.0.0",
+    "jest": "^19.0.2",
     "standard": "^8.6.0"
   },
   "standard": {
