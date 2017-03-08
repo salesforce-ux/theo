@@ -246,6 +246,62 @@ exports[`formats html 1`] = `
     "
 `;
 
+exports[`formats ios.json 1`] = `
+"{
+  \\"properties\\": [
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenA\\",
+      \\"value\\": \\"#FF0000\\"
+    },
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenAA\\",
+      \\"value\\": \\"#FF0000 #FF0000\\"
+    },
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenAB\\",
+      \\"value\\": \\"#FFFFFF\\"
+    },
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenSameNameAsAlias\\",
+      \\"value\\": \\"foo\\"
+    },
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenWithQuotesInValue\\",
+      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+      \\"comment\\": \\"This should not get escaped in the output\\"
+    },
+    {
+      \\"type\\": \\"size\\",
+      \\"category\\": \\"spacing\\",
+      \\"name\\": \\"sizingA\\",
+      \\"value\\": \\"20px\\"
+    },
+    {
+      \\"type\\": \\"color\\",
+      \\"category\\": \\"background-color\\",
+      \\"name\\": \\"colorA\\",
+      \\"value\\": \\"rgb(186, 218, 85)\\"
+    },
+    {
+      \\"type\\": \\"token\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenB\\",
+      \\"value\\": \\"#FFFFFF\\"
+    }
+  ]
+}"
+`;
+
 exports[`formats less 1`] = `
 "
   
