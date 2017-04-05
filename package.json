@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "jest": "^19.0.2",
-    "standard": "^9.0.0"
+    "standard": "^10.0.0"
   },
   "standard": {
     "global": [
