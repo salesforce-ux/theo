@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- Complete rewrite
+We completely re-wrote Theo so we could separate its core engine from the gulp part. This means that other adapters and task runners can leverage Theo (e.g. Grunt, Broccoli…)!
 
 ### ⚠️ Breaking changes with 5.x
 
