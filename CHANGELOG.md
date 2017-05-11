@@ -11,8 +11,51 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### ⚠️ Breaking changes with 5.x
 
+- Alias files are treated like JavaScript modules would and do not spread across multiple imported files in the global scope (like Sass imports would) – see [issue #101](https://github.com/salesforce-ux/theo/issues/101)
+- The Gulp plugin is in a separate [gulp-theo](https://github.com/salesforce-ux/gulp-theo) package
+
 ### Migration guide
 
+If you want to keep using Theo as a Gulp plugin with Theo v6,
+here is what a typical update would look like:
+
+#### v5 and below
+
+```sh
+npm install theo --save-dev
+```
+
+```js
+const gulp = require('gulp')
+const theo = require('theo')
+
+// Transform design/props.yml to dist/props.scss
+gulp.src('design/props.yml')
+  .pipe(theo.plugins.transform('web'))
+  .pipe(theo.plugins.format('scss'))
+  .pipe(gulp.dest('dist'))
+```
+
+#### v6
+
+The Gulp plugin is in a separate [gulp-theo](https://github.com/salesforce-ux/gulp-theo) package:
+
+```sh
+npm install gulp-theo --save-dev
+```
+
+```js
+const gulp = require('gulp')
+const theo = require('gulp-theo')
+
+// Transform design/props.yml to dist/props.scss
+gulp.src('design/props.yml')
+  .pipe(theo.plugin({
+    transform: { type: 'web' },
+    format: { type: 'scss' }
+  }))
+  .pipe(gulp.dest('dist'))
+```
 
 
 ## [5.0.0]
