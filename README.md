@@ -52,6 +52,53 @@ theo.convert({
 .catch(error => console.log(`Something went wrong: ${error}`))
 ```
 
+## Custom formats
+
+### Using a Handlebars template
+
+Declaring a custom format goes like this:
+
+```js
+const theo = require('theo')
+
+theo.registerFormat('array.js', `
+  // Source: {{stem meta.file}}
+  module.exports = [
+    {{#each props as |prop|}}
+      {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
+      ['{{camelcase prop.name}}', '{{prop.value}}'],
+    {{/each}}
+  ]
+`)
+```
+
+A plethora of [handlebars helpers](https://github.com/helpers/handlebars-helpers#helpers),
+such as `camelcase` and `stem`, are available and will assist in formatting strings in templates.
+
+### Using a function
+
+You may also register a format using a function:
+
+```js
+let camelCase = require('lodash/camelCase')
+
+theo.registerFormat('ios.json', (json) => {
+  // "json" is an ImmutableJS map, we're converting it back to JavaScript
+  // and extracting its props
+  let props = json.toJS().props
+  let output = {
+    properties: Object.keys(props).map(key => {
+      let prop = props[key]
+      prop.name = camelCase(prop.name)
+      return prop
+    })
+  }
+  return JSON.stringify(output, null, 2)
+})
+```
+
+----
+
 ## Design Tokens <a name="overview"></a>
 
 Theo consumes **Design Token** files which are a central location to store
