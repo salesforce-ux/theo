@@ -40,6 +40,7 @@
   "dependencies": {
     "core.lambda": "^1.0.0",
     "data.either": "^1.5.0",
+    "glob": "^7.1.2",
     "handlebars": "^4.0.6",
     "handlebars-helpers": "^0.8.0",
     "immutable": "^3.8.1",
