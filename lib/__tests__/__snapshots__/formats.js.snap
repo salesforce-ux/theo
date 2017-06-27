@@ -17,6 +17,16 @@ exports[`formats android.xml 1`] = `
 "
 `;
 
+exports[`formats aura.tokens 1`] = `
+"    
+<aura:tokens extends=\\"theme\\">
+  <aura:import name=\\"importOne\\" />
+  <aura:import name=\\"importTwo\\" />
+  <aura:token name=\\"tokenA\\" property=\\"background\\" value=\\"#FFFFFF\\" />
+</aura:tokens>
+  "
+`;
+
 exports[`formats common.js 1`] = `
 "
 module.exports = {

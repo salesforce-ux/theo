@@ -1,0 +1,22 @@
+{
+  "auraImports": [
+    "importOne",
+    "importTwo"
+  ],
+  "auraExtends": "theme",
+  "props": {
+    "TOKEN_A": {
+      "value": "{!white}",
+      "cssProperties": ["background"]
+    }
+  },
+  "aliases": {
+    "white": {
+      "value": "#FFFFFF"
+    }
+  },
+  "global": {
+    "type": "token",
+    "category": "test"
+  }
+}
