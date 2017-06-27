@@ -49,7 +49,8 @@
     "json5": "0.5.1",
     "lodash": "4.17.4",
     "no-case": "2.3.1",
-    "tinycolor2": "~1.4.1"
+    "pretty-data": "0.40.0",
+    "tinycolor2": "1.4.1"
   },
   "devDependencies": {
     "jest": "20.0.0",
