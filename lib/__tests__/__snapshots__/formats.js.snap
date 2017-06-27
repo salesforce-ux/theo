@@ -10,7 +10,7 @@ exports[`formats android.xml 1`] = `
     <property name=\\"TOKEN_A\\" category=\\"test\\">#FF0000</property>
     <property name=\\"TOKEN_B\\" category=\\"test\\">#FFFFFF</property>
     <property name=\\"TOKEN_A_A\\" category=\\"test\\">#FF0000 #FF0000</property>
-    <property name=\\"TOKEN_C\\" category=\\"test\\">#FFFFFF</property>
+    <property name=\\"TOKEN_C\\" category=\\"test\\">#000000</property>
     <property name=\\"TOKEN_A_B\\" category=\\"test\\">#FFFFFF</property>
     <color name=\\"COLORA\\" category=\\"background-color\\">#ffbada55</color>
 </resources>
@@ -43,7 +43,7 @@ module.exports = {
     
     tokenAA: \\"#FF0000 #FF0000\\",
     
-    tokenC: \\"#FFFFFF\\",
+    tokenC: \\"#000000\\",
     
     tokenAB: \\"#FFFFFF\\",
     
@@ -303,7 +303,7 @@ exports[`formats ios.json 1`] = `
       \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
       \\"name\\": \\"tokenC\\",
-      \\"value\\": \\"#FFFFFF\\"
+      \\"value\\": \\"#000000\\"
     },
     {
       \\"type\\": \\"token\\",
@@ -336,7 +336,7 @@ exports[`formats less 1`] = `
   
   @token-a-a: #FF0000 #FF0000;
   
-  @token-c: #FFFFFF;
+  @token-c: #000000;
   
   @token-a-b: #FFFFFF;
   
@@ -385,7 +385,7 @@ $a-map: (
     
     'token-a-a': (#FF0000 #FF0000),
     
-    'token-c': (#FFFFFF),
+    'token-c': (#000000),
     
     'token-a-b': (#FFFFFF),
     
@@ -422,6 +422,15 @@ $a-map: (
 exports[`formats raw.json 1`] = `
 "{
   \\"aliases\\": {
+    \\"white\\": {
+      \\"value\\": \\"#FFFFFF\\"
+    },
+    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
+      \\"value\\": \\"foo\\"
+    },
+    \\"burgundy\\": {
+      \\"value\\": \\"#FF0000\\"
+    },
     \\"red\\": {
       \\"value\\": \\"#FF0000\\"
     },
@@ -430,15 +439,6 @@ exports[`formats raw.json 1`] = `
     },
     \\"crimson\\": {
       \\"value\\": \\"#FF0000\\"
-    },
-    \\"burgundy\\": {
-      \\"value\\": \\"#800020\\"
-    },
-    \\"white\\": {
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
-      \\"value\\": \\"foo\\"
     }
   },
   \\"props\\": {
@@ -483,7 +483,7 @@ exports[`formats raw.json 1`] = `
       \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
       \\"name\\": \\"TOKEN_C\\",
-      \\"value\\": \\"#FFFFFF\\"
+      \\"value\\": \\"#000000\\"
     },
     \\"TOKEN_A_B\\": {
       \\"type\\": \\"token\\",
@@ -516,7 +516,7 @@ exports[`formats sass 1`] = `
   
   $token-a-a: #FF0000 #FF0000
   
-  $token-c: #FFFFFF
+  $token-c: #000000
   
   $token-a-b: #FFFFFF
   
@@ -541,7 +541,7 @@ exports[`formats scss 1`] = `
   
   $token-a-a: #FF0000 #FF0000;
   
-  $token-c: #FFFFFF;
+  $token-c: #000000;
   
   $token-a-b: #FFFFFF;
   
@@ -566,7 +566,7 @@ exports[`formats styl 1`] = `
   
   $token-a-a: #FF0000 #FF0000
   
-  $token-c: #FFFFFF
+  $token-c: #000000
   
   $token-a-b: #FFFFFF
   
