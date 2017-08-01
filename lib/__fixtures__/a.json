@@ -22,6 +22,10 @@
       "value": "'Salesforce Sans', \"Helvetica Neue\", sans-serif",
       "comment": "This should not get escaped in the output"
     },
+    "TOKEN_STRING": {
+      "value": "/assets/images",
+      "type": "string"
+    },
     "sizingA": {
       "value": "20px",
       "category": "spacing",

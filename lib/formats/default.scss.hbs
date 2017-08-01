@@ -3,5 +3,5 @@
 
 {{#each props as |prop|}}
   {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-  ${{kebabcase prop.name}}: {{{prop.value}}} !default;
+  ${{kebabcase prop.name}}: {{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}} !default;
 {{/each}}

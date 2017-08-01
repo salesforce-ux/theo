@@ -10,6 +10,6 @@
 ${{stem meta.file}}-map: (
   {{#each props as |prop|}}
     {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-    '{{kebabcase prop.name}}': ({{{prop.value}}}),
+    '{{kebabcase prop.name}}': ({{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}}),
   {{/each}}
 );
