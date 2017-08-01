@@ -52,6 +52,52 @@ module.exports = {
 "
 `;
 
+exports[`default.sass 1`] = `
+"
+  
+  $sizing-a: 20PX !default
+  
+  $token-same-name-as-alias: FOO !default
+  // This should not get escaped in the output
+  $token-with-quotes-in-value: 'SALESFORCE SANS', \\"HELVETICA NEUE\\", SANS-SERIF !default
+  
+  $token-a: #FF0000 !default
+  
+  $token-b: #FFFFFF !default
+  
+  $token-a-a: #FF0000 #FF0000 !default
+  
+  $token-c: #000000 !default
+  
+  $token-a-b: #FFFFFF !default
+  
+  $color-a: RGB(186, 218, 85) !default
+"
+`;
+
+exports[`default.scss 1`] = `
+"
+  
+  $sizing-a: 20px !default;
+  
+  $token-same-name-as-alias: foo !default;
+  // This should not get escaped in the output
+  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
+  
+  $token-a: #FF0000 !default;
+  
+  $token-b: #FFFFFF !default;
+  
+  $token-a-a: #FF0000 #FF0000 !default;
+  
+  $token-c: #000000 !default;
+  
+  $token-a-b: #FFFFFF !default;
+  
+  $color-a: rgb(186, 218, 85) !default;
+"
+`;
+
 exports[`html 1`] = `
 "
       <!DOCTYPE html>
@@ -538,8 +584,6 @@ exports[`sass 1`] = `
 "
 `;
 
-exports[`sass.default 1`] = `"Format \\"sass.default\\" is not registered"`;
-
 exports[`scss 1`] = `
 "
   
@@ -562,8 +606,6 @@ exports[`scss 1`] = `
   $color-a: rgb(186, 218, 85);
 "
 `;
-
-exports[`scss.default 1`] = `"Format \\"scss.default\\" is not registered"`;
 
 exports[`styl 1`] = `
 "
