@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`formats android.xml 1`] = `
+exports[`android.xml 1`] = `
 "
 <?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <resources>
@@ -17,7 +17,7 @@ exports[`formats android.xml 1`] = `
 "
 `;
 
-exports[`formats aura.tokens 1`] = `
+exports[`aura.tokens 1`] = `
 "    
 <aura:tokens extends=\\"theme\\">
   <aura:import name=\\"importOne\\" />
@@ -27,7 +27,7 @@ exports[`formats aura.tokens 1`] = `
   "
 `;
 
-exports[`formats common.js 1`] = `
+exports[`common.js 1`] = `
 "
 module.exports = {
     
@@ -52,7 +52,7 @@ module.exports = {
 "
 `;
 
-exports[`formats html 1`] = `
+exports[`html 1`] = `
 "
       <!DOCTYPE html>
       <html lang=\\"en\\">
@@ -259,7 +259,7 @@ exports[`formats html 1`] = `
     "
 `;
 
-exports[`formats ios.json 1`] = `
+exports[`ios.json 1`] = `
 "{
   \\"properties\\": [
     {
@@ -321,9 +321,21 @@ exports[`formats ios.json 1`] = `
 }"
 `;
 
-exports[`formats json 1`] = `"{\\"sizingA\\":\\"20px\\",\\"TOKEN_SAME_NAME_AS_ALIAS\\":\\"foo\\",\\"TOKEN_WITH_QUOTES_IN_VALUE\\":\\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",\\"TOKEN_A\\":\\"#FF0000\\",\\"TOKEN_B\\":\\"#FFFFFF\\",\\"TOKEN_A_A\\":\\"#FF0000 #FF0000\\",\\"TOKEN_C\\":\\"#000000\\",\\"TOKEN_A_B\\":\\"#FFFFFF\\",\\"colorA\\":\\"rgb(186, 218, 85)\\"}"`;
+exports[`json 1`] = `
+"{
+  \\"sizingA\\": \\"20px\\",
+  \\"TOKEN_SAME_NAME_AS_ALIAS\\": \\"foo\\",
+  \\"TOKEN_WITH_QUOTES_IN_VALUE\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+  \\"TOKEN_A\\": \\"#FF0000\\",
+  \\"TOKEN_B\\": \\"#FFFFFF\\",
+  \\"TOKEN_A_A\\": \\"#FF0000 #FF0000\\",
+  \\"TOKEN_C\\": \\"#000000\\",
+  \\"TOKEN_A_B\\": \\"#FFFFFF\\",
+  \\"colorA\\": \\"#bada55\\"
+}"
+`;
 
-exports[`formats less 1`] = `
+exports[`less 1`] = `
 "
   
   @sizing-a: 20px;
@@ -346,7 +358,7 @@ exports[`formats less 1`] = `
 "
 `;
 
-exports[`formats list.scss 1`] = `
+exports[`list.scss 1`] = `
 "
 $a-list: (
     
@@ -371,7 +383,7 @@ $a-list: (
 "
 `;
 
-exports[`formats map.scss 1`] = `
+exports[`map.scss 1`] = `
 "
 $a-map: (
     
@@ -396,7 +408,7 @@ $a-map: (
 "
 `;
 
-exports[`formats map.variables.scss 1`] = `
+exports[`map.variables.scss 1`] = `
 "
 $a-map: (
     
@@ -421,7 +433,7 @@ $a-map: (
 "
 `;
 
-exports[`formats raw.json 1`] = `
+exports[`raw.json 1`] = `
 "{
   \\"aliases\\": {
     \\"white\\": {
@@ -503,7 +515,7 @@ exports[`formats raw.json 1`] = `
 }"
 `;
 
-exports[`formats sass 1`] = `
+exports[`sass 1`] = `
 "
   
   $sizing-a: 20px
@@ -526,9 +538,9 @@ exports[`formats sass 1`] = `
 "
 `;
 
-exports[`formats sass.default 1`] = `"Format \\"sass.default\\" is not registered"`;
+exports[`sass.default 1`] = `"Format \\"sass.default\\" is not registered"`;
 
-exports[`formats scss 1`] = `
+exports[`scss 1`] = `
 "
   
   $sizing-a: 20px;
@@ -551,9 +563,9 @@ exports[`formats scss 1`] = `
 "
 `;
 
-exports[`formats scss.default 1`] = `"Format \\"scss.default\\" is not registered"`;
+exports[`scss.default 1`] = `"Format \\"scss.default\\" is not registered"`;
 
-exports[`formats styl 1`] = `
+exports[`styl 1`] = `
 "
   
   $sizing-a: 20px
