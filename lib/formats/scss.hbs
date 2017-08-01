@@ -3,5 +3,5 @@
 
 {{#each props as |prop|}}
   {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-  ${{kebabCase prop.name}}: {{{prop.value}}};
+  ${{kebabcase prop.name}}: {{{prop.value}}};
 {{/each}}
