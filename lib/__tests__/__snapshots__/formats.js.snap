@@ -7,6 +7,7 @@ exports[`android.xml 1`] = `
     <property name=\\"SIZINGA\\" category=\\"spacing\\">20px</property>
     <property name=\\"TOKEN_SAME_NAME_AS_ALIAS\\" category=\\"test\\">foo</property>
     <property name=\\"TOKEN_WITH_QUOTES_IN_VALUE\\" category=\\"test\\">'Salesforce Sans', \\"Helvetica Neue\\", sans-serif</property>
+    <property name=\\"TOKEN_STRING\\" category=\\"test\\">/assets/images</property>
     <property name=\\"TOKEN_A\\" category=\\"test\\">#FF0000</property>
     <property name=\\"TOKEN_B\\" category=\\"test\\">#FFFFFF</property>
     <property name=\\"TOKEN_A_A\\" category=\\"test\\">#FF0000 #FF0000</property>
@@ -37,6 +38,8 @@ module.exports = {
     // This should not get escaped in the output
     tokenWithQuotesInValue: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
     
+    tokenString: \\"/assets/images\\",
+    
     tokenA: \\"#FF0000\\",
     
     tokenB: \\"#FFFFFF\\",
@@ -61,6 +64,8 @@ exports[`default.sass 1`] = `
   // This should not get escaped in the output
   $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
   
+  $token-string: \\"/assets/images\\" !default
+  
   $token-a: #FF0000 !default
   
   $token-b: #FFFFFF !default
@@ -83,6 +88,8 @@ exports[`default.scss 1`] = `
   $token-same-name-as-alias: foo !default;
   // This should not get escaped in the output
   $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
+  
+  $token-string: \\"/assets/images\\" !default;
   
   $token-a: #FF0000 !default;
   
@@ -328,6 +335,12 @@ exports[`ios.json 1`] = `
       \\"comment\\": \\"This should not get escaped in the output\\"
     },
     {
+      \\"type\\": \\"string\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"tokenString\\",
+      \\"value\\": \\"/assets/images\\"
+    },
+    {
       \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
       \\"name\\": \\"tokenA\\",
@@ -372,6 +385,7 @@ exports[`json 1`] = `
   \\"sizingA\\": \\"20px\\",
   \\"TOKEN_SAME_NAME_AS_ALIAS\\": \\"foo\\",
   \\"TOKEN_WITH_QUOTES_IN_VALUE\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+  \\"TOKEN_STRING\\": \\"/assets/images\\",
   \\"TOKEN_A\\": \\"#FF0000\\",
   \\"TOKEN_B\\": \\"#FFFFFF\\",
   \\"TOKEN_A_A\\": \\"#FF0000 #FF0000\\",
@@ -389,6 +403,8 @@ exports[`less 1`] = `
   @token-same-name-as-alias: foo;
   // This should not get escaped in the output
   @token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+  
+  @token-string: \\"/assets/images\\";
   
   @token-a: #FF0000;
   
@@ -413,6 +429,8 @@ $a-list: (
     \\"token-same-name-as-alias\\",
     // This should not get escaped in the output
     \\"token-with-quotes-in-value\\",
+    
+    \\"token-string\\",
     
     \\"token-a\\",
     
@@ -439,6 +457,8 @@ $a-map: (
     // This should not get escaped in the output
     'token-with-quotes-in-value': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
     
+    'token-string': (\\"/assets/images\\"),
+    
     'token-a': (#FF0000),
     
     'token-b': (#FFFFFF),
@@ -463,6 +483,8 @@ $a-map: (
     'token-same-name-as-alias': $token-same-name-as-alias,
     // This should not get escaped in the output
     'token-with-quotes-in-value': $token-with-quotes-in-value,
+    
+    'token-string': $token-string,
     
     'token-a': $token-a,
     
@@ -521,6 +543,12 @@ exports[`raw.json 1`] = `
       \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
       \\"comment\\": \\"This should not get escaped in the output\\"
     },
+    \\"TOKEN_STRING\\": {
+      \\"type\\": \\"string\\",
+      \\"category\\": \\"test\\",
+      \\"name\\": \\"TOKEN_STRING\\",
+      \\"value\\": \\"/assets/images\\"
+    },
     \\"TOKEN_A\\": {
       \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
@@ -570,6 +598,8 @@ exports[`sass 1`] = `
   // This should not get escaped in the output
   $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
   
+  $token-string: \\"/assets/images\\"
+  
   $token-a: #FF0000
   
   $token-b: #FFFFFF
@@ -593,6 +623,8 @@ exports[`scss 1`] = `
   // This should not get escaped in the output
   $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
   
+  $token-string: \\"/assets/images\\";
+  
   $token-a: #FF0000;
   
   $token-b: #FFFFFF;
@@ -615,6 +647,8 @@ exports[`styl 1`] = `
   $token-same-name-as-alias: foo
   // This should not get escaped in the output
   $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
+  
+  $token-string: \\"/assets/images\\"
   
   $token-a: #FF0000
   
