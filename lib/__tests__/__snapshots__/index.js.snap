@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`convert works 1`] = `
+"{
+  \\"aliases\\": {},
+  \\"props\\": {
+    \\"TOKEN_B\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"b\\",
+      \\"name\\": \\"TOKEN_B\\"
+    },
+    \\"TOKEN_A\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"a\\",
+      \\"name\\": \\"TOKEN_A\\"
+    }
+  }
+}"
+`;
+
+exports[`convertSync works 1`] = `
+"{
+  \\"aliases\\": {},
+  \\"props\\": {
+    \\"TOKEN_B\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"b\\",
+      \\"name\\": \\"TOKEN_B\\"
+    },
+    \\"TOKEN_A\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"a\\",
+      \\"name\\": \\"TOKEN_A\\"
+    }
+  }
+}"
+`;
+
+exports[`format works 1`] = `
+"{
+  \\"aliases\\": {},
+  \\"props\\": {
+    \\"TOKEN_B\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"b\\",
+      \\"name\\": \\"TOKEN_B\\"
+    },
+    \\"TOKEN_A\\": {
+      \\"category\\": \\"test\\",
+      \\"type\\": \\"test\\",
+      \\"value\\": \\"a\\",
+      \\"name\\": \\"TOKEN_A\\"
+    }
+  }
+}"
+`;
+
+exports[`transform works 1`] = `
+Immutable.Map {
+  aliases: Immutable.Map {
+  },
+  props: Immutable.Map {
+    TOKEN_B: Immutable.Map {
+      category: "test",
+      type: "test",
+      value: "b",
+      name: "TOKEN_B",
+    },
+    TOKEN_A: Immutable.Map {
+      category: "test",
+      type: "test",
+      value: "a",
+      name: "TOKEN_A",
+    },
+  },
+}
+`;

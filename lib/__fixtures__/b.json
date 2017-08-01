@@ -1,28 +1,9 @@
 {
   "props": {
     "TOKEN_B": {
-      "value": "{!white}"
-    },
-    "TOKEN_C": {
-      "value": "#FFFFFF"
-    }
-  },
-  "aliases": {
-    "white": {
-      "value": "#FFFFFF"
-    },
-    "TOKEN_SAME_NAME_AS_ALIAS": {
-      "value": "foo"
-    },
-    "burgundy": {
-      "value": "#800020"
-    }
-  },
-  "global": {
-    "type": "token",
-    "category": "test",
-    "meta": {
-      "fixture": "b"
+      "category": "test",
+      "type": "test",
+      "value": "b"
     }
   }
 }

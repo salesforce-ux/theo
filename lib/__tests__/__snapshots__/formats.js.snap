@@ -1,56 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`android.xml 1`] = `
-"
-<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 <resources>
-    <property name=\\"SIZINGA\\" category=\\"spacing\\">20px</property>
-    <property name=\\"TOKEN_SAME_NAME_AS_ALIAS\\" category=\\"test\\">foo</property>
-    <property name=\\"TOKEN_WITH_QUOTES_IN_VALUE\\" category=\\"test\\">'Salesforce Sans', \\"Helvetica Neue\\", sans-serif</property>
-    <property name=\\"TOKEN_STRING\\" category=\\"test\\">/assets/images</property>
-    <property name=\\"TOKEN_A\\" category=\\"test\\">#FF0000</property>
-    <property name=\\"TOKEN_B\\" category=\\"test\\">#FFFFFF</property>
-    <property name=\\"TOKEN_A_A\\" category=\\"test\\">#FF0000 #FF0000</property>
-    <property name=\\"TOKEN_C\\" category=\\"test\\">#000000</property>
-    <property name=\\"TOKEN_A_B\\" category=\\"test\\">#FFFFFF</property>
-    <color name=\\"COLORA\\" category=\\"background-color\\">#ffbada55</color>
-</resources>
-"
+  <property name=\\"TOKEN_COLOR\\" category=\\"background-color\\" value=\\"#bada55\\"/>
+  <property name=\\"TOKEN_SIZE\\" category=\\"spacing\\" value=\\"20px\\"/>
+  <property name=\\"TOKEN_STRING\\" category=\\"test\\" value=\\"/assets/images\\"/>
+  <property name=\\"TOKEN_QUOTES\\" category=\\"test\\" value=\\"&apos;Salesforce Sans&apos;, &quot;Helvetica Neue&quot;, sans-serif\\"/>
+</resources>"
 `;
 
 exports[`aura.tokens 1`] = `
-"    
-<aura:tokens extends=\\"theme\\">
-  <aura:import name=\\"importOne\\" />
-  <aura:import name=\\"importTwo\\" />
-  <aura:token name=\\"tokenA\\" property=\\"background\\" value=\\"#FFFFFF\\" />
-</aura:tokens>
-  "
+"<aura:tokens extends=\\"theme\\">
+  <aura:import name=\\"importOne\\"/>
+  <aura:import name=\\"importTwo\\"/>
+  <aura:token name=\\"tokenColor\\" value=\\"#bada55\\"/>
+  <aura:token name=\\"tokenSize\\" value=\\"20px\\"/>
+  <aura:token name=\\"tokenString\\" value=\\"/assets/images\\"/>
+  <aura:token name=\\"tokenQuotes\\" value=\\"&apos;Salesforce Sans&apos;, &quot;Helvetica Neue&quot;, sans-serif\\"/>
+  <aura:token name=\\"tokenCss\\" property=\\"background,border\\" value=\\"white\\"/>
+</aura:tokens>"
 `;
 
 exports[`common.js 1`] = `
 "
 module.exports = {
     
-    sizinga: \\"20px\\",
+    tokenColor: \\"#bada55\\",
     
-    tokenSameNameAsAlias: \\"foo\\",
-    // This should not get escaped in the output
-    tokenWithQuotesInValue: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+    tokenSize: \\"20px\\",
     
     tokenString: \\"/assets/images\\",
-    
-    tokenA: \\"#FF0000\\",
-    
-    tokenB: \\"#FFFFFF\\",
-    
-    tokenAA: \\"#FF0000 #FF0000\\",
-    
-    tokenC: \\"#000000\\",
-    
-    tokenAB: \\"#FFFFFF\\",
-    
-    colora: \\"rgb(186, 218, 85)\\",
+    // This should not get escaped in the output
+    tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
 };
 "
 `;
@@ -58,50 +40,26 @@ module.exports = {
 exports[`default.sass 1`] = `
 "
   
-  $sizing-a: 20px !default
+  $token-color: #bada55 !default
   
-  $token-same-name-as-alias: foo !default
-  // This should not get escaped in the output
-  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
+  $token-size: 20px !default
   
   $token-string: \\"/assets/images\\" !default
-  
-  $token-a: #FF0000 !default
-  
-  $token-b: #FFFFFF !default
-  
-  $token-a-a: #FF0000 #FF0000 !default
-  
-  $token-c: #000000 !default
-  
-  $token-a-b: #FFFFFF !default
-  
-  $color-a: rgb(186, 218, 85) !default
+  // This should not get escaped in the output
+  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
 "
 `;
 
 exports[`default.scss 1`] = `
 "
   
-  $sizing-a: 20px !default;
+  $token-color: #bada55 !default;
   
-  $token-same-name-as-alias: foo !default;
-  // This should not get escaped in the output
-  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
+  $token-size: 20px !default;
   
   $token-string: \\"/assets/images\\" !default;
-  
-  $token-a: #FF0000 !default;
-  
-  $token-b: #FFFFFF !default;
-  
-  $token-a-a: #FF0000 #FF0000 !default;
-  
-  $token-c: #000000 !default;
-  
-  $token-a-b: #FFFFFF !default;
-  
-  $color-a: rgb(186, 218, 85) !default;
+  // This should not get escaped in the output
+  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
 "
 `;
 
@@ -238,7 +196,7 @@ exports[`html 1`] = `
           <tbody>
             <tr>
         <th scope=\\"row\\">
-          <code>sizingA</code>
+          <code>tokenSize</code>
         </th>
         <td>
           <code>20px</code>
@@ -282,12 +240,12 @@ exports[`html 1`] = `
           <tbody>
             <tr>
         <th scope=\\"row\\">
-          <code>colorA</code>
+          <code>tokenColor</code>
         </th>
         <td>
-          <code>rgb(186, 218, 85)</code>
+          <code>#bada55</code>
         </td>
-        <td style=\\"background-color: rgb(186, 218, 85); border: 1px solid #f6f6f6;\\"></td>
+        <td style=\\"background-color: #bada55; border: 1px solid #f6f6f6;\\"></td>
         <td></td>
       </tr>
           </tbody>
@@ -316,65 +274,29 @@ exports[`ios.json 1`] = `
 "{
   \\"properties\\": [
     {
-      \\"type\\": \\"size\\",
+      \\"category\\": \\"background-color\\",
+      \\"type\\": \\"color\\",
+      \\"name\\": \\"tokenColor\\",
+      \\"value\\": \\"#bada55\\"
+    },
+    {
       \\"category\\": \\"spacing\\",
-      \\"name\\": \\"sizingA\\",
+      \\"type\\": \\"size\\",
+      \\"name\\": \\"tokenSize\\",
       \\"value\\": \\"20px\\"
     },
     {
-      \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenSameNameAsAlias\\",
-      \\"value\\": \\"foo\\"
-    },
-    {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenWithQuotesInValue\\",
-      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
-      \\"comment\\": \\"This should not get escaped in the output\\"
-    },
-    {
       \\"type\\": \\"string\\",
-      \\"category\\": \\"test\\",
       \\"name\\": \\"tokenString\\",
       \\"value\\": \\"/assets/images\\"
     },
     {
-      \\"type\\": \\"token\\",
       \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenA\\",
-      \\"value\\": \\"#FF0000\\"
-    },
-    {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenB\\",
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenAA\\",
-      \\"value\\": \\"#FF0000 #FF0000\\"
-    },
-    {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenC\\",
-      \\"value\\": \\"#000000\\"
-    },
-    {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"tokenAB\\",
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    {
-      \\"type\\": \\"color\\",
-      \\"category\\": \\"background-color\\",
-      \\"name\\": \\"colorA\\",
-      \\"value\\": \\"rgb(186, 218, 85)\\"
+      \\"type\\": \\"test\\",
+      \\"name\\": \\"tokenQuotes\\",
+      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+      \\"comment\\": \\"This should not get escaped in the output\\"
     }
   ]
 }"
@@ -382,208 +304,99 @@ exports[`ios.json 1`] = `
 
 exports[`json 1`] = `
 "{
-  \\"sizingA\\": \\"20px\\",
-  \\"TOKEN_SAME_NAME_AS_ALIAS\\": \\"foo\\",
-  \\"TOKEN_WITH_QUOTES_IN_VALUE\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+  \\"TOKEN_COLOR\\": \\"#bada55\\",
+  \\"TOKEN_SIZE\\": \\"20px\\",
   \\"TOKEN_STRING\\": \\"/assets/images\\",
-  \\"TOKEN_A\\": \\"#FF0000\\",
-  \\"TOKEN_B\\": \\"#FFFFFF\\",
-  \\"TOKEN_A_A\\": \\"#FF0000 #FF0000\\",
-  \\"TOKEN_C\\": \\"#000000\\",
-  \\"TOKEN_A_B\\": \\"#FFFFFF\\",
-  \\"colorA\\": \\"#bada55\\"
+  \\"TOKEN_QUOTES\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\"
 }"
 `;
 
 exports[`less 1`] = `
 "
   
-  @sizing-a: 20px;
+  @token-color: #bada55;
   
-  @token-same-name-as-alias: foo;
-  // This should not get escaped in the output
-  @token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+  @token-size: 20px;
   
   @token-string: \\"/assets/images\\";
-  
-  @token-a: #FF0000;
-  
-  @token-b: #FFFFFF;
-  
-  @token-a-a: #FF0000 #FF0000;
-  
-  @token-c: #000000;
-  
-  @token-a-b: #FFFFFF;
-  
-  @color-a: rgb(186, 218, 85);
+  // This should not get escaped in the output
+  @token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
 
 exports[`list.scss 1`] = `
 "
-$a-list: (
+$fixture-list: (
     
-    \\"sizing-a\\",
+    \\"token-color\\",
     
-    \\"token-same-name-as-alias\\",
-    // This should not get escaped in the output
-    \\"token-with-quotes-in-value\\",
+    \\"token-size\\",
     
     \\"token-string\\",
-    
-    \\"token-a\\",
-    
-    \\"token-b\\",
-    
-    \\"token-a-a\\",
-    
-    \\"token-c\\",
-    
-    \\"token-a-b\\",
-    
-    \\"color-a\\",
+    // This should not get escaped in the output
+    \\"token-quotes\\",
 );
 "
 `;
 
 exports[`map.scss 1`] = `
 "
-$a-map: (
+$fixture-map: (
     
-    'sizing-a': (20px),
+    'token-color': (#bada55),
     
-    'token-same-name-as-alias': (foo),
-    // This should not get escaped in the output
-    'token-with-quotes-in-value': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
+    'token-size': (20px),
     
     'token-string': (\\"/assets/images\\"),
-    
-    'token-a': (#FF0000),
-    
-    'token-b': (#FFFFFF),
-    
-    'token-a-a': (#FF0000 #FF0000),
-    
-    'token-c': (#000000),
-    
-    'token-a-b': (#FFFFFF),
-    
-    'color-a': (rgb(186, 218, 85)),
+    // This should not get escaped in the output
+    'token-quotes': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
 );
 "
 `;
 
 exports[`map.variables.scss 1`] = `
 "
-$a-map: (
+$fixture-map: (
     
-    'sizing-a': $sizing-a,
+    'token-color': $token-color,
     
-    'token-same-name-as-alias': $token-same-name-as-alias,
-    // This should not get escaped in the output
-    'token-with-quotes-in-value': $token-with-quotes-in-value,
+    'token-size': $token-size,
     
     'token-string': $token-string,
-    
-    'token-a': $token-a,
-    
-    'token-b': $token-b,
-    
-    'token-a-a': $token-a-a,
-    
-    'token-c': $token-c,
-    
-    'token-a-b': $token-a-b,
-    
-    'color-a': $color-a,
+    // This should not get escaped in the output
+    'token-quotes': $token-quotes,
 );
 "
 `;
 
 exports[`raw.json 1`] = `
 "{
-  \\"aliases\\": {
-    \\"white\\": {
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
-      \\"value\\": \\"foo\\"
-    },
-    \\"burgundy\\": {
-      \\"value\\": \\"#FF0000\\"
-    },
-    \\"red\\": {
-      \\"value\\": \\"#FF0000\\"
-    },
-    \\"scarlet\\": {
-      \\"value\\": \\"#FF0000\\"
-    },
-    \\"crimson\\": {
-      \\"value\\": \\"#FF0000\\"
-    }
-  },
+  \\"aliases\\": {},
   \\"props\\": {
-    \\"sizingA\\": {
-      \\"type\\": \\"size\\",
+    \\"TOKEN_COLOR\\": {
+      \\"category\\": \\"background-color\\",
+      \\"type\\": \\"color\\",
+      \\"name\\": \\"TOKEN_COLOR\\",
+      \\"value\\": \\"#bada55\\"
+    },
+    \\"TOKEN_SIZE\\": {
       \\"category\\": \\"spacing\\",
-      \\"name\\": \\"sizingA\\",
+      \\"type\\": \\"size\\",
+      \\"name\\": \\"TOKEN_SIZE\\",
       \\"value\\": \\"20px\\"
     },
-    \\"TOKEN_SAME_NAME_AS_ALIAS\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_SAME_NAME_AS_ALIAS\\",
-      \\"value\\": \\"foo\\"
-    },
-    \\"TOKEN_WITH_QUOTES_IN_VALUE\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_WITH_QUOTES_IN_VALUE\\",
-      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
-      \\"comment\\": \\"This should not get escaped in the output\\"
-    },
     \\"TOKEN_STRING\\": {
-      \\"type\\": \\"string\\",
       \\"category\\": \\"test\\",
+      \\"type\\": \\"string\\",
       \\"name\\": \\"TOKEN_STRING\\",
       \\"value\\": \\"/assets/images\\"
     },
-    \\"TOKEN_A\\": {
-      \\"type\\": \\"token\\",
+    \\"TOKEN_QUOTES\\": {
       \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_A\\",
-      \\"value\\": \\"#FF0000\\"
-    },
-    \\"TOKEN_B\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_B\\",
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    \\"TOKEN_A_A\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_A_A\\",
-      \\"value\\": \\"#FF0000 #FF0000\\"
-    },
-    \\"TOKEN_C\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_C\\",
-      \\"value\\": \\"#000000\\"
-    },
-    \\"TOKEN_A_B\\": {
-      \\"type\\": \\"token\\",
-      \\"category\\": \\"test\\",
-      \\"name\\": \\"TOKEN_A_B\\",
-      \\"value\\": \\"#FFFFFF\\"
-    },
-    \\"colorA\\": {
-      \\"type\\": \\"color\\",
-      \\"category\\": \\"background-color\\",
-      \\"name\\": \\"colorA\\",
-      \\"value\\": \\"#bada55\\"
+      \\"type\\": \\"test\\",
+      \\"name\\": \\"TOKEN_QUOTES\\",
+      \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+      \\"comment\\": \\"This should not get escaped in the output\\"
     }
   }
 }"
@@ -592,74 +405,38 @@ exports[`raw.json 1`] = `
 exports[`sass 1`] = `
 "
   
-  $sizing-a: 20px
+  $token-color: #bada55
   
-  $token-same-name-as-alias: foo
-  // This should not get escaped in the output
-  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
+  $token-size: 20px
   
   $token-string: \\"/assets/images\\"
-  
-  $token-a: #FF0000
-  
-  $token-b: #FFFFFF
-  
-  $token-a-a: #FF0000 #FF0000
-  
-  $token-c: #000000
-  
-  $token-a-b: #FFFFFF
-  
-  $color-a: rgb(186, 218, 85)
+  // This should not get escaped in the output
+  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
 
 exports[`scss 1`] = `
 "
   
-  $sizing-a: 20px;
+  $token-color: #bada55;
   
-  $token-same-name-as-alias: foo;
-  // This should not get escaped in the output
-  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+  $token-size: 20px;
   
   $token-string: \\"/assets/images\\";
-  
-  $token-a: #FF0000;
-  
-  $token-b: #FFFFFF;
-  
-  $token-a-a: #FF0000 #FF0000;
-  
-  $token-c: #000000;
-  
-  $token-a-b: #FFFFFF;
-  
-  $color-a: rgb(186, 218, 85);
+  // This should not get escaped in the output
+  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
 
 exports[`styl 1`] = `
 "
   
-  $sizing-a: 20px
+  token-color: #bada55
   
-  $token-same-name-as-alias: foo
+  token-size: 20px
+  
+  token-string: \\"/assets/images\\"
   // This should not get escaped in the output
-  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
-  
-  $token-string: \\"/assets/images\\"
-  
-  $token-a: #FF0000
-  
-  $token-b: #FFFFFF
-  
-  $token-a-a: #FF0000 #FF0000
-  
-  $token-c: #000000
-  
-  $token-a-b: #FFFFFF
-  
-  $color-a: rgb(186, 218, 85)
+  token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
