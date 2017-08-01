@@ -55,11 +55,11 @@ module.exports = {
 exports[`default.sass 1`] = `
 "
   
-  $sizing-a: 20PX !default
+  $sizing-a: 20px !default
   
-  $token-same-name-as-alias: FOO !default
+  $token-same-name-as-alias: foo !default
   // This should not get escaped in the output
-  $token-with-quotes-in-value: 'SALESFORCE SANS', \\"HELVETICA NEUE\\", SANS-SERIF !default
+  $token-with-quotes-in-value: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
   
   $token-a: #FF0000 !default
   
@@ -71,7 +71,7 @@ exports[`default.sass 1`] = `
   
   $token-a-b: #FFFFFF !default
   
-  $color-a: RGB(186, 218, 85) !default
+  $color-a: rgb(186, 218, 85) !default
 "
 `;
 
