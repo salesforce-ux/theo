@@ -2,12 +2,11 @@
 
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
-[![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-ux/theo.svg)](https://greenkeeper.io/)
 
 Theo is a an abstraction for transforming and formatting [Design Tokens](#overview).
 
 > ### Looking for the gulp plugin?
-> 
+>
 > As of Theo v6, the gulp plugin is distributed as a separate package: [gulp-theo](https://www.npmjs.com/package/gulp-theo).
 
 ## Example
@@ -43,11 +42,11 @@ theo.convert({
     type: 'raw.json'
   }
 })
-.then(result => {
-  const rawJSON = JSON.parse(result)
-  console.log(rawJSON.props.buttonBackground.value) // '#0070d2'
-  console.log(rawJSON.props.buttonBackground.category) // 'buttons'
-  console.log(rawJSON.props.buttonBackground.type) // 'token'
+.then(jsonString => {
+  const result = JSON.parse(jsonString)
+  console.log(result.props.buttonBackground.value) // '#0070d2'
+  console.log(result.props.buttonBackground.category) // 'buttons'
+  console.log(result.props.buttonBackground.type) // 'token'
 })
 .catch(error => console.log(`Something went wrong: ${error}`))
 ```
@@ -80,20 +79,21 @@ such as `camelcase` and `stem`, are available and will assist in formatting stri
 You may also register a format using a function:
 
 ```js
-let camelCase = require('lodash/camelCase')
+const camelCase = require('lodash/camelCase')
+const path = require('path')
+const theo = require('theo')
 
-theo.registerFormat('ios.json', (json) => {
-  // "json" is an ImmutableJS map, we're converting it back to JavaScript
-  // and extracting its props
-  let props = json.toJS().props
-  let output = {
-    properties: Object.keys(props).map(key => {
-      let prop = props[key]
-      prop.name = camelCase(prop.name)
-      return prop
-    })
-  }
-  return JSON.stringify(output, null, 2)
+theo.registerFormat('array.js', (result) => {
+  // "result" is an Immutable.Map
+  // https://facebook.github.io/immutable-js/
+  return `
+    module.exports = [
+      // Source: ${path.basename(result.getIn(['meta', 'file']))}
+      ${result.get('props').map(prop => `
+        ['${camelCase(prop.get('name'))}', '${prop.get('value')}'],
+      `).toJS()}
+    ]
+  `
 })
 ```
 
