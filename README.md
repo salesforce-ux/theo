@@ -281,6 +281,13 @@ $prop-name: PROP_VALUE
 @prop-name: PROP_VALUE;
 ```
 
+### cssmodules.css
+
+```css
+/* If prop has 'comment' key, that value will go here. */
+@value prop-name: PROP_VALUE;
+```
+
 *Note*: `@prop-name` will be set to kebab-case.
 
 ### aura.tokens
