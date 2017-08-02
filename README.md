@@ -101,7 +101,7 @@ type ConvertOptions = {
   format: FormatOptions
 }
 
-type TransformOpions = {
+type TransformOptions = {
   // If no "type" is specified, values will not be transformed
   type: ?string,
   // Path to a token file
