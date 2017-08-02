@@ -377,26 +377,30 @@ exports[`raw.json 1`] = `
       \\"category\\": \\"background-color\\",
       \\"type\\": \\"color\\",
       \\"name\\": \\"TOKEN_COLOR\\",
-      \\"value\\": \\"#bada55\\"
+      \\"value\\": \\"#bada55\\",
+      \\"originalValue\\": \\"#bada55\\"
     },
     \\"TOKEN_SIZE\\": {
       \\"category\\": \\"spacing\\",
       \\"type\\": \\"size\\",
       \\"name\\": \\"TOKEN_SIZE\\",
-      \\"value\\": \\"20px\\"
+      \\"value\\": \\"20px\\",
+      \\"originalValue\\": \\"20px\\"
     },
     \\"TOKEN_STRING\\": {
       \\"category\\": \\"test\\",
       \\"type\\": \\"string\\",
       \\"name\\": \\"TOKEN_STRING\\",
-      \\"value\\": \\"/assets/images\\"
+      \\"value\\": \\"/assets/images\\",
+      \\"originalValue\\": \\"/assets/images\\"
     },
     \\"TOKEN_QUOTES\\": {
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"name\\": \\"TOKEN_QUOTES\\",
       \\"value\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
-      \\"comment\\": \\"This should not get escaped in the output\\"
+      \\"comment\\": \\"This should not get escaped in the output\\",
+      \\"originalValue\\": \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\"
     }
   }
 }"

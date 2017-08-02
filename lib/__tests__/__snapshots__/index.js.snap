@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`convert works 1`] = `
+exports[`convert 1`] = `
 "{
   \\"aliases\\": {},
   \\"props\\": {
@@ -8,19 +8,21 @@ exports[`convert works 1`] = `
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"b\\",
+      \\"originalValue\\": \\"b\\",
       \\"name\\": \\"TOKEN_B\\"
     },
     \\"TOKEN_A\\": {
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"a\\",
+      \\"originalValue\\": \\"a\\",
       \\"name\\": \\"TOKEN_A\\"
     }
   }
 }"
 `;
 
-exports[`convertSync works 1`] = `
+exports[`convertSync 1`] = `
 "{
   \\"aliases\\": {},
   \\"props\\": {
@@ -28,19 +30,21 @@ exports[`convertSync works 1`] = `
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"b\\",
+      \\"originalValue\\": \\"b\\",
       \\"name\\": \\"TOKEN_B\\"
     },
     \\"TOKEN_A\\": {
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"a\\",
+      \\"originalValue\\": \\"a\\",
       \\"name\\": \\"TOKEN_A\\"
     }
   }
 }"
 `;
 
-exports[`format works 1`] = `
+exports[`format 1`] = `
 "{
   \\"aliases\\": {},
   \\"props\\": {
@@ -48,19 +52,21 @@ exports[`format works 1`] = `
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"b\\",
+      \\"originalValue\\": \\"b\\",
       \\"name\\": \\"TOKEN_B\\"
     },
     \\"TOKEN_A\\": {
       \\"category\\": \\"test\\",
       \\"type\\": \\"test\\",
       \\"value\\": \\"a\\",
+      \\"originalValue\\": \\"a\\",
       \\"name\\": \\"TOKEN_A\\"
     }
   }
 }"
 `;
 
-exports[`transform works 1`] = `
+exports[`transform 1`] = `
 Immutable.Map {
   aliases: Immutable.Map {
   },
@@ -69,12 +75,14 @@ Immutable.Map {
       category: "test",
       type: "test",
       value: "b",
+      originalValue: "b",
       name: "TOKEN_B",
     },
     TOKEN_A: Immutable.Map {
       category: "test",
       type: "test",
       value: "a",
+      originalValue: "a",
       name: "TOKEN_A",
     },
   },
