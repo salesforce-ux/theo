@@ -94,6 +94,57 @@ theo.registerFormat('array.js', (result) => {
 })
 ```
 
+## API
+```js
+type ConvertOptions = {
+  transform: TransformOpions,
+  format: FormatOptions
+}
+
+type TransformOpions = {
+  // If no "type" is specified, values will not be transformed
+  type: ?string,
+  // Path to a token file
+  // or just a filename if using the "data" option
+  file: string,
+  // Pass in a data string insead of reading from a file
+  data: ?string
+}
+
+type FormatOptions = {
+  type: string
+}
+
+type Prop = Immutable.Map
+type Result = Immutable.Map
+
+theo.convert(options: ConvertOptions): Promise<string>
+
+theo.convertSync(options: ConvertOptions): string
+
+theo.registerFormat(
+  name: string,
+  // Either a handlebars template string
+  // or a function that returns a string
+  format: string | (result: Result) => string
+): void
+
+theo.registerValueTransform(
+  // Referenced in "registerTransform"
+  name: string,
+  // Indicate if the transform should run for the provided prop
+  predicate: (prop: Prop) => boolean,
+  // Return the new "value"
+  transform: (prop: Prop) => any
+): void
+
+theo.registerTransform(
+  name: string,
+  // An array of registered value transforms
+  valueTransforms: Array<string>
+): void
+```
+
 ----
 
 ## Design Tokens <a name="overview"></a>
