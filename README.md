@@ -35,18 +35,15 @@ const theo = require('theo')
 
 theo.convert({
   transform: {
-    type: 'raw',
+    type: 'web',
     file: 'buttons.yml'
   },
   format: {
-    type: 'raw.json'
+    type: 'scss'
   }
 })
-.then(jsonString => {
-  const result = JSON.parse(jsonString)
-  console.log(result.props.buttonBackground.value) // '#0070d2'
-  console.log(result.props.buttonBackground.category) // 'buttons'
-  console.log(result.props.buttonBackground.type) // 'token'
+.then(scss => {
+  // $buttonBackground: rgba(0, 112, 210, 1);
 })
 .catch(error => console.log(`Something went wrong: ${error}`))
 ```
@@ -236,8 +233,6 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 </resources>
 ```
 
-*Note*: `PROP_NAME` will be set to upper case
-
 ### scss
 
 ```scss
@@ -245,39 +240,35 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 $prop-name: PROP_VALUE;
 ```
 
-*Note*: `$prop-name` will be set to kebab-case.
-
 ### map.scss
 
 ```sass
 $file-name-map: (
+  // If prop has 'comment' key, that value will go here.
   "prop-name": (PROP_VALUE),
 );
 ```
-
-*Note*: `prop-name` will be set to kebab-case.
 
 ### map.variables.scss
 
 ```sass
 $file-name-map-variables: (
+  // If prop has 'comment' key, that value will go here.
   "prop-name": ($prop-name)
 );
 ```
 
-*Note*: `prop-name` will be set to kebab-case.
-
 ### sass
 
 ```sass
+// If prop has 'comment' key, that value will go here.
 $prop-name: PROP_VALUE
 ```
-
-*Note*: `$prop-name` will be set to kebab-case.
 
 ### less
 
 ```less
+// If prop has 'comment' key, that value will go here.
 @prop-name: PROP_VALUE;
 ```
 
@@ -287,8 +278,6 @@ $prop-name: PROP_VALUE
 /* If prop has 'comment' key, that value will go here. */
 @value prop-name: PROP_VALUE;
 ```
-
-*Note*: `@prop-name` will be set to kebab-case.
 
 ### aura.tokens
 
@@ -304,16 +293,6 @@ $prop-name: PROP_VALUE
 module.exports = {
   propName: PROP_VALUE
 };
-```
-
-### amd.js
-
-```js
-define(function() {
-  return {
-    propName: PROP_VALUE
-  };
-});
 ```
 
 [npm-url]: https://npmjs.org/package/theo
