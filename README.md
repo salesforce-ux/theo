@@ -103,12 +103,12 @@ type ConvertOptions = {
 
 type TransformOptions = {
   // If no "type" is specified, values will not be transformed
-  type: ?string,
+  type?: string,
   // Path to a token file
   // or just a filename if using the "data" option
   file: string,
-  // Pass in a data string insead of reading from a file
-  data: ?string
+  // Pass in a data string instead of reading from a file
+  data?: string
 }
 
 type FormatOptions = {
