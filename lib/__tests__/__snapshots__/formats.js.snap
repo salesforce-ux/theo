@@ -37,6 +37,20 @@ module.exports = {
 "
 `;
 
+exports[`cssmodules.css 1`] = `
+"
+  
+  @value token-color: #bada55;
+  
+  @value token-size: 20px;
+  
+  @value token-string: \\"/assets/images\\";
+  /* This should not get escaped in the output */
+  @value token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+
+"
+`;
+
 exports[`default.sass 1`] = `
 "
   
