@@ -10,6 +10,16 @@ exports[`android.xml 1`] = `
 </resources>"
 `;
 
+exports[`aura.tokens (exclude attrs) 1`] = `
+"<aura:tokens>
+  <aura:token name=\\"tokenColor\\" value=\\"#bada55\\"/>
+  <aura:token name=\\"tokenSize\\" value=\\"20px\\"/>
+  <aura:token name=\\"tokenString\\" value=\\"/assets/images\\"/>
+  <aura:token name=\\"tokenQuotes\\" value=\\"&apos;Salesforce Sans&apos;, &quot;Helvetica Neue&quot;, sans-serif\\"/>
+  <aura:token name=\\"tokenCss\\" value=\\"white\\"/>
+</aura:tokens>"
+`;
+
 exports[`aura.tokens 1`] = `
 "<aura:tokens extends=\\"theme\\">
   <aura:import name=\\"importOne\\"/>
