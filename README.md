@@ -145,6 +145,10 @@ theo.registerTransform(
 ): void
 ```
 
+## CLI
+
+Please refere to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
+
 ----
 
 ## Design Tokens <a name="overview"></a>
