@@ -2,22 +2,19 @@
 // Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
 // Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
 
-const argv = require('optimist').argv
-const build = require('./scripts/build')
+const fs = require("fs");
+const argv = require("optimist").argv;
+
+const build = require("./scripts/build");
 
 const options = {
-  formats: argv._,
-  packagePath: argv.path || argv.p || process.cwd(),
-  distPath: argv.dist || argv.d || '.',
-  fileName: argv.output || argv.o || 'token',
-  source: argv.src || argv.s || 'token.yml',
-  test: argv.test || argv.t || false
-}
+  src: argv._[0],
+  dest: argv.dest,
+  formats: (argv.format || "raw.json").split(","),
+  transform: argv.transform || 'raw'
+};
 
-build(options, error => {
-  if (error) {
-    console.log(`💩  Oups, something went wrong: ${error}`)
-    return process.exit(1)
-  }
-  return process.exit(0)
-})
+build(options).catch(error => {
+  console.log(`💩  Oops, something went wrong: ${error}`);
+  return process.exit(1);
+});

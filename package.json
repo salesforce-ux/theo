@@ -41,7 +41,6 @@
   },
   "homepage": "https://github.com/salesforce-ux/theo",
   "dependencies": {
-    "async": "^2.5.0",
     "core.lambda": "1.0.0",
     "data.either": "1.5.1",
     "fs-extra": "^4.0.1",
@@ -58,7 +57,6 @@
     "xml": "1.0.1"
   },
   "devDependencies": {
-    "cross-spawn": "^5.1.0",
     "jest": "20.0.4",
     "standard": "10.0.2"
   },

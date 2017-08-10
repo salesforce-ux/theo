@@ -1,0 +1,5 @@
+props:
+  TOKEN_A:
+    type: 'color'
+    category: 'color'
+    value: 'red'
