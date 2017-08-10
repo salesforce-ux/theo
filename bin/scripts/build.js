@@ -25,7 +25,7 @@ module.exports = ({ src = '', dest, formats, transform }) =>
           return fs.outputFile(file, data)
             .then(() => console.log(`✏️  ${format} tokens created at "${fileBase}"`))
         } else {
-          console.log(data);
+          console.log(data)
         }
       })
     )
