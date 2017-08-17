@@ -3,6 +3,9 @@
 !/lib/
 /lib/__tests__
 /lib/__fixtures__
+!/bin/theo.js
+!/bin/scripts
+!CLI.md
 !README.md
 !package.json
 !CHANGELOG.md
