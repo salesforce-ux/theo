@@ -1,0 +1,57 @@
+# Theo CLI
+
+Theo come with a [CLI](https://en.wikipedia.org/wiki/Command-line_interface) that allows you to use
+`theo` to buld one or multiple tokens. The CLI forwards on the `formats`
+and other relevant options to `theo` in order to build the token in the desired formats.
+
+## Basic usage
+
+```
+$ theo <[file]> [options]
+```
+
+### Options
+
+|Name|Description|Default|
+|----|-----------|-------|
+|`--transform`|valid theo transform|`raw`|
+|`--format`|Comma separated list of valid theo formats|`raw.json`|
+|`--dest`|The path where the result should be written|stdout|
+
+### transforms / formats
+
+Formats are valid theo supported formats, check the [documentation](https://github.com/salesforce-ux/theo#available-formats) for a full list of supported transforms and formats.
+
+Usage example with formats:
+```
+$ theo tokens.yml --transform web --format scss,cssmodules.css
+```
+
+## npm scripts usage
+
+Typically usage is within [npm scripts](https://docs.npmjs.com/misc/scripts):
+
+```json
+{
+  "scripts": {
+    "build": "theo tokens.yml --format scss,cssmodules.css --dest ."
+  }
+}
+```
+
+the following result will be printed on your terminal:
+
+```
+✏️  scss tokens created at "./tokens.scss"
+✏️  cssmodules.css tokens created at "./tokens.cssmodules.css"
+```
+
+and the following files will be written in your project directory:
+
+```
+yourTokenDir/
+├── ...
+├── tokens.scss
+├── tokens.cssmodules.css
+└── ...
+```
