@@ -68,9 +68,9 @@ exports[`format 1`] = `
 
 exports[`transform 1`] = `
 Immutable.Map {
-  aliases: Immutable.Map {
+  aliases: Immutable.OrderedMap {
   },
-  props: Immutable.Map {
+  props: Immutable.OrderedMap {
     TOKEN_B: Immutable.Map {
       category: "test",
       type: "test",
