@@ -2,16 +2,14 @@
 
 exports[`should pass through transform (--transform) 1`] = `
 "
-  
-  $token-a: rgb(255, 0, 0);
+$token-a: rgb(255, 0, 0);
 
 "
 `;
 
 exports[`should print the result if no --dest is passed 1`] = `
 "
-  
-  $token-a: red;
+$token-a: red;
 
 "
 `;
