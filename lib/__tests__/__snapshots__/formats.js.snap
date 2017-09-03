@@ -433,10 +433,10 @@ $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 
 exports[`styl 1`] = `
 "
-token-color: #bada55
-token-size: 20px
-token-string: \\"/assets/images\\"
+$token-color = #bada55
+$token-size = 20px
+$token-string = \\"/assets/images\\"
 // This should not get escaped in the output
-token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
+$token-quotes = 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
