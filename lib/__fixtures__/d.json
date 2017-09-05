@@ -1,0 +1,10 @@
+{
+  "props": [
+    {
+      "comment": "This will throw an error because no name was provided",
+      "category": "test",
+      "type": "test",
+      "value": "c"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "props": [
+    {
+      "comment": "This will get converted to an OrderedMap",
+      "name": "TOKEN_C",
+      "category": "test",
+      "type": "test",
+      "value": "c"
+    }
+  ]
+}
