@@ -2,8 +2,10 @@
 {{! Licensed under BSD 3-Clause - https://opensource.org/licenses/BSD-3-Clause }}
 
 ${{stem meta.file}}-list: (
-  {{#each props as |prop|}}
-    {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-    "{{kebabcase prop.name}}",
-  {{/each}}
+{{#each props as |prop|}}
+  {{#if prop.comment}}
+  // {{{prop.comment}}}
+  {{/if}}
+  "{{kebabcase prop.name}}",
+{{/each}}
 );

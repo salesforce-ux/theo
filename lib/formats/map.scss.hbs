@@ -8,8 +8,10 @@
   See issue here: http://www.sassmeister.com/gist/705e0d611be460d7bed020283ea1ffd2
 }}
 ${{stem meta.file}}-map: (
-  {{#each props as |prop|}}
-    {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-    '{{kebabcase prop.name}}': ({{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}}),
-  {{/each}}
+{{#each props as |prop|}}
+  {{#if prop.comment}}
+  // {{{prop.comment}}}
+  {{/if}}
+  '{{kebabcase prop.name}}': ({{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}}),
+{{/each}}
 );

@@ -35,29 +35,22 @@ exports[`aura.tokens 1`] = `
 exports[`common.js 1`] = `
 "
 module.exports = {
-    
-    tokenColor: \\"#bada55\\",
-    
-    tokenSize: \\"20px\\",
-    
-    tokenString: \\"/assets/images\\",
-    // This should not get escaped in the output
-    tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+  tokenColor: \\"#bada55\\",
+  tokenSize: \\"20px\\",
+  tokenString: \\"/assets/images\\",
+  // This should not get escaped in the output
+  tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
 };
 "
 `;
 
 exports[`cssmodules.css 1`] = `
 "
-  
-  @value token-color: #bada55;
-  
-  @value token-size: 20px;
-  
-  @value token-string: \\"/assets/images\\";
-  /* This should not get escaped in the output */
-  @value token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
-
+@value token-color: #bada55;
+@value token-size: 20px;
+@value token-string: \\"/assets/images\\";
+/* This should not get escaped in the output */
+@value token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
 
@@ -337,28 +330,22 @@ exports[`json 1`] = `
 
 exports[`less 1`] = `
 "
-  
-  @token-color: #bada55;
-  
-  @token-size: 20px;
-  
-  @token-string: \\"/assets/images\\";
-  // This should not get escaped in the output
-  @token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+@token-color: #bada55;
+@token-size: 20px;
+@token-string: \\"/assets/images\\";
+// This should not get escaped in the output
+@token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
 
 exports[`list.scss 1`] = `
 "
 $fixture-list: (
-    
-    \\"token-color\\",
-    
-    \\"token-size\\",
-    
-    \\"token-string\\",
-    // This should not get escaped in the output
-    \\"token-quotes\\",
+  \\"token-color\\",
+  \\"token-size\\",
+  \\"token-string\\",
+  // This should not get escaped in the output
+  \\"token-quotes\\",
 );
 "
 `;
@@ -366,14 +353,11 @@ $fixture-list: (
 exports[`map.scss 1`] = `
 "
 $fixture-map: (
-    
-    'token-color': (#bada55),
-    
-    'token-size': (20px),
-    
-    'token-string': (\\"/assets/images\\"),
-    // This should not get escaped in the output
-    'token-quotes': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
+  'token-color': (#bada55),
+  'token-size': (20px),
+  'token-string': (\\"/assets/images\\"),
+  // This should not get escaped in the output
+  'token-quotes': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
 );
 "
 `;
@@ -381,14 +365,11 @@ $fixture-map: (
 exports[`map.variables.scss 1`] = `
 "
 $fixture-map: (
-    
-    'token-color': $token-color,
-    
-    'token-size': $token-size,
-    
-    'token-string': $token-string,
-    // This should not get escaped in the output
-    'token-quotes': $token-quotes,
+  'token-color': $token-color,
+  'token-size': $token-size,
+  'token-string': $token-string,
+  // This should not get escaped in the output
+  'token-quotes': $token-quotes,
 );
 "
 `;
@@ -432,39 +413,30 @@ exports[`raw.json 1`] = `
 
 exports[`sass 1`] = `
 "
-  
-  $token-color: #bada55
-  
-  $token-size: 20px
-  
-  $token-string: \\"/assets/images\\"
-  // This should not get escaped in the output
-  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
+$token-color: #bada55
+$token-size: 20px
+$token-string: \\"/assets/images\\"
+// This should not get escaped in the output
+$token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
 
 exports[`scss 1`] = `
 "
-  
-  $token-color: #bada55;
-  
-  $token-size: 20px;
-  
-  $token-string: \\"/assets/images\\";
-  // This should not get escaped in the output
-  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+$token-color: #bada55;
+$token-size: 20px;
+$token-string: \\"/assets/images\\";
+// This should not get escaped in the output
+$token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
 
 exports[`styl 1`] = `
 "
-  
-  token-color: #bada55
-  
-  token-size: 20px
-  
-  token-string: \\"/assets/images\\"
-  // This should not get escaped in the output
-  token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
+token-color: #bada55
+token-size: 20px
+token-string: \\"/assets/images\\"
+// This should not get escaped in the output
+token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
