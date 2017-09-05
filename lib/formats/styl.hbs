@@ -5,5 +5,5 @@
   {{#if prop.comment~}}
     // {{{prop.comment}}}
   {{/if~}}
-  {{kebabcase prop.name}}: {{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}}
+  ${{kebabcase prop.name}} = {{#eq prop.type "string"}}"{{/eq}}{{{prop.value}}}{{#eq prop.type "string"}}"{{/eq}}
 {{/each}}
