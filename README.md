@@ -97,7 +97,7 @@ theo.registerFormat('array.js', (result) => {
 ## API
 ```js
 type ConvertOptions = {
-  transform: TransformOpions,
+  transform: TransformOptions,
   format: FormatOptions
 }
 
@@ -147,7 +147,7 @@ theo.registerTransform(
 
 ## CLI
 
-Please refere to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
+Please refer to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
 
 ----
 
