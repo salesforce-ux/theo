@@ -312,12 +312,19 @@ $file-name-list: (
 );
 ```
 
+### module.js
+
+```js
+// If prop has 'comment' key, that value will go here.
+export const propName = "PROP_VALUE";
+```
+
 ### common.js
 
 ```js
 module.exports = {
   // If prop has 'comment' key, that value will go here.
-  propName: PROP_VALUE
+  propName: "PROP_VALUE"
 };
 ```
 

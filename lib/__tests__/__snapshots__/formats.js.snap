@@ -380,6 +380,16 @@ $fixture-map: (
 "
 `;
 
+exports[`module.js 1`] = `
+"
+export const tokenColor = \\"#bada55\\";
+export const tokenSize = \\"20px\\";
+export const tokenString = \\"/assets/images\\";
+// This should not get escaped in the output
+export const tokenQuotes = \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\";
+"
+`;
+
 exports[`raw.json 1`] = `
 "{
   \\"aliases\\": {},
