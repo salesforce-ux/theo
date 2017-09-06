@@ -56,27 +56,21 @@ exports[`cssmodules.css 1`] = `
 
 exports[`default.sass 1`] = `
 "
-  
-  $token-color: #bada55 !default
-  
-  $token-size: 20px !default
-  
-  $token-string: \\"/assets/images\\" !default
-  // This should not get escaped in the output
-  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
+$token-color: #bada55 !default
+$token-size: 20px !default
+$token-string: \\"/assets/images\\" !default
+// This should not get escaped in the output
+$token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
 "
 `;
 
 exports[`default.scss 1`] = `
 "
-  
-  $token-color: #bada55 !default;
-  
-  $token-size: 20px !default;
-  
-  $token-string: \\"/assets/images\\" !default;
-  // This should not get escaped in the output
-  $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
+$token-color: #bada55 !default;
+$token-size: 20px !default;
+$token-string: \\"/assets/images\\" !default;
+// This should not get escaped in the output
+$token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
 "
 `;
 
