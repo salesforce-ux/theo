@@ -14,19 +14,19 @@ Theo is a an abstraction for transforming and formatting [Design Tokens](#overvi
 ```yaml
 # buttons.yml
 props:
-  buttonBackground:
-    value: "{!primaryColor}"
+  button_background:
+    value: "{!primary_color}"
 imports:
   - aliases.yml
 global:
-  type: token
+  type: color
   category: buttons
 ```
 
 ```yaml
 # aliases.yml
 aliases:
-  primaryColor:
+  primary_color:
     value: "#0070d2"
 ```
 
@@ -43,7 +43,7 @@ theo.convert({
   }
 })
 .then(scss => {
-  // $buttonBackground: rgba(0, 112, 210, 1);
+  // $button-background: rgb(0, 112, 210);
 })
 .catch(error => console.log(`Something went wrong: ${error}`))
 ```
@@ -290,7 +290,7 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 
 ### scss
 
-```scss
+```sass
 // If prop has 'comment' key, that value will go here.
 $prop-name: PROP_VALUE;
 ```
@@ -307,9 +307,18 @@ $file-name-map: (
 ### map.variables.scss
 
 ```sass
-$file-name-map-variables: (
+$file-name-map: (
   // If prop has 'comment' key, that value will go here.
   "prop-name": ($prop-name)
+);
+```
+
+### list.scss
+
+```sass
+$file-name-list: (
+  // If prop has 'comment' key, that value will go here.
+  "prop-name"
 );
 ```
 
@@ -325,6 +334,13 @@ $prop-name: PROP_VALUE
 ```less
 // If prop has 'comment' key, that value will go here.
 @prop-name: PROP_VALUE;
+```
+
+### styl
+
+```styl
+// If prop has 'comment' key, that value will go here.
+$prop-name = PROP_VALUE
 ```
 
 ### cssmodules.css
@@ -346,6 +362,7 @@ $prop-name: PROP_VALUE
 
 ```js
 module.exports = {
+  // If prop has 'comment' key, that value will go here.
   propName: PROP_VALUE
 };
 ```
