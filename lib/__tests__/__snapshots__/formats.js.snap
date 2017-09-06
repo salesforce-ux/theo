@@ -54,6 +54,18 @@ exports[`cssmodules.css 1`] = `
 "
 `;
 
+exports[`custom-properties.css 1`] = `
+"
+:root {
+  --token-color: #bada55;
+  --token-size: 20px;
+  --token-string: \\"/assets/images\\";
+  /* This should not get escaped in the output */
+  --token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
+}
+"
+`;
+
 exports[`default.sass 1`] = `
 "
 $token-color: #bada55 !default

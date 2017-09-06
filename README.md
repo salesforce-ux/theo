@@ -241,6 +241,86 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 
 ## Available Formats
 
+### custom-properties.css
+
+```css
+:root {
+  /* If prop has 'comment' key, that value will go here. */
+  --prop-name: PROP_VALUE;
+}
+```
+
+### cssmodules.css
+
+```css
+/* If prop has 'comment' key, that value will go here. */
+@value prop-name: PROP_VALUE;
+```
+
+### scss
+
+```sass
+// If prop has 'comment' key, that value will go here.
+$prop-name: PROP_VALUE;
+```
+
+### sass
+
+```sass
+// If prop has 'comment' key, that value will go here.
+$prop-name: PROP_VALUE
+```
+
+### less
+
+```less
+// If prop has 'comment' key, that value will go here.
+@prop-name: PROP_VALUE;
+```
+
+### styl
+
+```styl
+// If prop has 'comment' key, that value will go here.
+$prop-name = PROP_VALUE
+```
+
+### map.scss
+
+```sass
+$file-name-map: (
+  // If prop has 'comment' key, that value will go here.
+  "prop-name": (PROP_VALUE),
+);
+```
+
+### map.variables.scss
+
+```sass
+$file-name-map: (
+  // If prop has 'comment' key, that value will go here.
+  "prop-name": ($prop-name)
+);
+```
+
+### list.scss
+
+```sass
+$file-name-list: (
+  // If prop has 'comment' key, that value will go here.
+  "prop-name"
+);
+```
+
+### common.js
+
+```js
+module.exports = {
+  // If prop has 'comment' key, that value will go here.
+  propName: PROP_VALUE
+};
+```
+
 ### json
 
 ```json
@@ -288,83 +368,12 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 </resources>
 ```
 
-### scss
-
-```sass
-// If prop has 'comment' key, that value will go here.
-$prop-name: PROP_VALUE;
-```
-
-### map.scss
-
-```sass
-$file-name-map: (
-  // If prop has 'comment' key, that value will go here.
-  "prop-name": (PROP_VALUE),
-);
-```
-
-### map.variables.scss
-
-```sass
-$file-name-map: (
-  // If prop has 'comment' key, that value will go here.
-  "prop-name": ($prop-name)
-);
-```
-
-### list.scss
-
-```sass
-$file-name-list: (
-  // If prop has 'comment' key, that value will go here.
-  "prop-name"
-);
-```
-
-### sass
-
-```sass
-// If prop has 'comment' key, that value will go here.
-$prop-name: PROP_VALUE
-```
-
-### less
-
-```less
-// If prop has 'comment' key, that value will go here.
-@prop-name: PROP_VALUE;
-```
-
-### styl
-
-```styl
-// If prop has 'comment' key, that value will go here.
-$prop-name = PROP_VALUE
-```
-
-### cssmodules.css
-
-```css
-/* If prop has 'comment' key, that value will go here. */
-@value prop-name: PROP_VALUE;
-```
-
 ### aura.tokens
 
 ```xml
 <aura:tokens>
   <aura:token name="propName" value="PROP_VALUE" />
 </aura:tokens>
-```
-
-### common.js
-
-```js
-module.exports = {
-  // If prop has 'comment' key, that value will go here.
-  propName: PROP_VALUE
-};
 ```
 
 [npm-url]: https://npmjs.org/package/theo
