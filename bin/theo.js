@@ -9,6 +9,7 @@ const build = require("./scripts/build");
 const options = {
   src: argv._[0],
   dest: argv.dest,
+  setup: argv.setup,
   formats: (argv.format || "raw.json").split(","),
   transform: argv.transform || "raw"
 };

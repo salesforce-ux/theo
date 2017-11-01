@@ -5,8 +5,13 @@ const theo = require("../../lib");
 const fs = require("fs-extra");
 const path = require("path");
 
-module.exports = ({ src = "", dest, formats, transform }) =>
-  Promise.all(
+module.exports = ({ src = "", dest, setup, formats, transform }) => {
+  if (setup) {
+    const setupModuleFile = path.resolve(process.cwd(), setup);
+    require(setupModuleFile)(theo);
+  }
+
+  return Promise.all(
     formats.map(format =>
       theo
         .convert({
@@ -34,3 +39,4 @@ module.exports = ({ src = "", dest, formats, transform }) =>
         })
     )
   );
+};

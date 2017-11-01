@@ -17,6 +17,7 @@ $ theo <[file]> [options]
 |`--transform`|valid theo transform|`raw`|
 |`--format`|Comma separated list of valid theo formats|`raw.json`|
 |`--dest`|The path where the result should be written|stdout|
+|`--setup`|The path to an optional JS module that can set up Theo before transformation.||
 
 ### transforms / formats
 
