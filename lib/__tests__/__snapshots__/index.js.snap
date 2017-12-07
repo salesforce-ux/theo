@@ -68,22 +68,21 @@ exports[`format 1`] = `
 
 exports[`transform 1`] = `
 Immutable.Map {
-  aliases: Immutable.OrderedMap {
-  },
-  props: Immutable.OrderedMap {
-    TOKEN_B: Immutable.Map {
-      category: "test",
-      type: "test",
-      value: "b",
-      originalValue: "b",
-      name: "TOKEN_B",
+  "aliases": Immutable.OrderedMap {},
+  "props": Immutable.OrderedMap {
+    "TOKEN_B": Immutable.Map {
+      "category": "test",
+      "type": "test",
+      "value": "b",
+      "originalValue": "b",
+      "name": "TOKEN_B",
     },
-    TOKEN_A: Immutable.Map {
-      category: "test",
-      type: "test",
-      value: "a",
-      originalValue: "a",
-      name: "TOKEN_A",
+    "TOKEN_A": Immutable.Map {
+      "category": "test",
+      "type": "test",
+      "value": "a",
+      "originalValue": "a",
+      "name": "TOKEN_A",
     },
   },
 }
