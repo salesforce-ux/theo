@@ -31,21 +31,22 @@ aliases:
 ```
 
 ```js
-const theo = require('theo')
+const theo = require('theo');
 
-theo.convert({
-  transform: {
-    type: 'web',
-    file: 'buttons.yml'
-  },
-  format: {
-    type: 'scss'
-  }
-})
-.then(scss => {
-  // $button-background: rgb(0, 112, 210);
-})
-.catch(error => console.log(`Something went wrong: ${error}`))
+theo
+  .convert({
+    transform: {
+      type: 'web',
+      file: 'buttons.yml'
+    },
+    format: {
+      type: 'scss'
+    }
+  })
+  .then(scss => {
+    // $button-background: rgb(0, 112, 210);
+  })
+  .catch(error => console.log(`Something went wrong: ${error}`));
 ```
 
 ## Custom formats
@@ -55,9 +56,11 @@ theo.convert({
 Declaring a custom format goes like this:
 
 ```js
-const theo = require('theo')
+const theo = require('theo');
 
-theo.registerFormat('array.js', `
+theo.registerFormat(
+  'array.js',
+  `
   // Source: {{stem meta.file}}
   module.exports = [
     {{#each props as |prop|}}
@@ -65,7 +68,8 @@ theo.registerFormat('array.js', `
       ['{{camelcase prop.name}}', '{{prop.value}}'],
     {{/each}}
   ]
-`)
+`
+);
 ```
 
 A plethora of [handlebars helpers](https://github.com/helpers/handlebars-helpers#helpers),
@@ -76,25 +80,31 @@ such as `camelcase` and `stem`, are available and will assist in formatting stri
 You may also register a format using a function:
 
 ```js
-const camelCase = require('lodash/camelCase')
-const path = require('path')
-const theo = require('theo')
+const camelCase = require('lodash/camelCase');
+const path = require('path');
+const theo = require('theo');
 
-theo.registerFormat('array.js', (result) => {
+theo.registerFormat('array.js', result => {
   // "result" is an Immutable.Map
   // https://facebook.github.io/immutable-js/
   return `
     module.exports = [
       // Source: ${path.basename(result.getIn(['meta', 'file']))}
-      ${result.get('props').map(prop => `
+      ${result
+        .get('props')
+        .map(
+          prop => `
         ['${camelCase(prop.get('name'))}', '${prop.get('value')}'],
-      `).toJS()}
+      `
+        )
+        .toJS()}
     ]
-  `
-})
+  `;
+});
 ```
 
 ## API
+
 ```js
 type ConvertOptions = {
   transform: TransformOptions,
@@ -149,7 +159,7 @@ theo.registerTransform(
 
 Please refer to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
 
-----
+---
 
 ## Design Tokens <a name="overview"></a>
 
@@ -173,7 +183,7 @@ each platform.
 
 ### Spec
 
-A *Design Token* file is written in either
+A _Design Token_ file is written in either
 [JSON](http://json.org/) ([JSON5](http://json5.org/) supported)
 or [YAML](http://yaml.org/) and should conform to the following spec:
 
@@ -233,9 +243,7 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
   // "aliases" will be imported as well
   // "aliases" will already be resolved
   // "global" will already be merged into each prop
-  "imports": [
-    "./some/dir/file.json"
-  ]
+  "imports": ["./some/dir/file.json"]
 }
 ```
 
@@ -316,7 +324,7 @@ $file-name-list: (
 
 ```js
 // If prop has 'comment' key, that value will go here.
-export const propName = "PROP_VALUE";
+export const propName = 'PROP_VALUE';
 ```
 
 ### common.js
@@ -324,7 +332,7 @@ export const propName = "PROP_VALUE";
 ```js
 module.exports = {
   // If prop has 'comment' key, that value will go here.
-  propName: "PROP_VALUE"
+  propName: 'PROP_VALUE'
 };
 ```
 
@@ -385,6 +393,5 @@ module.exports = {
 
 [npm-url]: https://npmjs.org/package/theo
 [npm-image]: http://img.shields.io/npm/v/theo.svg
-
 [travis-url]: https://travis-ci.org/salesforce-ux/theo
 [travis-image]: http://img.shields.io/travis/salesforce-ux/theo.svg
