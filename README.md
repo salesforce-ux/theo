@@ -122,7 +122,9 @@ type TransformOptions = {
 }
 
 type FormatOptions = {
-  type: string
+  type: string,
+  // Available to the format function/template
+  options?: object
 }
 
 type Prop = Immutable.Map
@@ -334,6 +336,26 @@ module.exports = {
   // If prop has 'comment' key, that value will go here.
   propName: 'PROP_VALUE'
 };
+```
+
+### html
+
+A simple HTML style guide based on the category of each prop
+
+```js
+const theo = require('theo');
+
+theo.convert({
+  transform: {
+    type: 'web'
+  },
+  format: {
+    type: 'html',
+    options: {
+      transformPropName: name => name.toUpperCase()
+    }
+  }
+});
 ```
 
 ### json
