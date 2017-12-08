@@ -340,22 +340,17 @@ module.exports = {
 
 ### html
 
-A simple HTML style guide based on the category of each prop
+<img src="https://raw.githubusercontent.com/salesforce-ux/theo/master/assets/doc_example.png" alt="" height="400" />
 
 ```js
-const theo = require('theo');
-
-theo.convert({
-  transform: {
-    type: 'web'
-  },
-  format: {
-    type: 'html',
-    options: {
-      transformPropName: name => name.toUpperCase()
-    }
+// When passing "format" options to theo.convert(), this format can be
+// passed some additional options
+let formatOptions = {
+  type: 'html',
+  options: {
+    transformPropName: name => name.toUpperCase()
   }
-});
+};
 ```
 
 ### json
