@@ -17,6 +17,7 @@ $ theo <[file]> [options]
 |`--transform`|valid theo transform|`raw`|
 |`--format`|Comma separated list of valid theo formats|`raw.json`|
 |`--dest`|The path where the result should be written|stdout|
+|`--setup`|The path to an optional JS module that can set up Theo before transformation.||
 
 ### transforms / formats
 
@@ -25,6 +26,27 @@ Formats are valid theo supported formats, check the [documentation](https://gith
 Usage example with formats:
 ```
 $ theo tokens.yml --transform web --format scss,cssmodules.css
+```
+
+### setup module
+
+A valid setup module exports a function that takes theo as the first argument.
+
+Example module (example.js):
+```
+module.exports = theo => {
+  theo.registerValueTransform(
+    'addpx', 
+    prop => prop.get('type') === 'size', 
+    prop => prop.get('value') + 'px'
+  );
+  theo.registerTransform("web", ['addpx']);
+}
+```
+
+Usage example with setup
+```
+$ theo tokens.yml --setup example.js --transform web --format scss
 ```
 
 ## npm scripts usage

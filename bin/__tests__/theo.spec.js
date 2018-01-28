@@ -51,3 +51,12 @@ it("should pass through transform (--transform)", () => {
     expect(result).toMatchSnapshot();
   });
 });
+
+it("should load setup module and pass custom through transform (--setup)", () => {
+  return exec(
+    `node bin/theo.js ./bin/__fixtures__/tokens.yml ` +
+      `--setup bin/__fixtures__/setup.js --format array.js`
+  ).then(result => {
+    expect(result).toMatchSnapshot();
+  });
+});
