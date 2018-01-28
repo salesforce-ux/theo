@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should load setup module and pass custom through transform (--setup) 1`] = `
+"module.exports = [
+  ['TOKEN_A', 'red'],
+]
+"
+`;
+
 exports[`should pass through transform (--transform) 1`] = `
 "
 $token-a: rgb(255, 0, 0);
