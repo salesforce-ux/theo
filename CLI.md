@@ -32,15 +32,21 @@ $ theo tokens.yml --transform web --format scss,cssmodules.css
 
 A valid setup module exports a function that takes theo as the first argument.
 
-Example JS module:
+Example module (example.js):
 ```
 module.exports = theo => {
   theo.registerValueTransform(
     'addpx', 
     prop => prop.get('type') === 'size', 
-    prop => ${prop.get('value')} + 'px'
+    prop => prop.get('value') + 'px'
   );
+  theo.registerTransform("web", ['addpx']);
 }
+```
+
+Usage example with setup
+```
+$ theo tokens.yml --setup example.js --transform web --format scss
 ```
 
 ## npm scripts usage
