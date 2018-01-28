@@ -28,6 +28,21 @@ Usage example with formats:
 $ theo tokens.yml --transform web --format scss,cssmodules.css
 ```
 
+### setup module
+
+A valid setup module exports a function that takes theo as the first argument.
+
+Example JS module:
+```
+module.exports = theo => {
+  theo.registerValueTransform(
+    'addpx', 
+    prop => prop.get('type') === 'size', 
+    prop => ${prop.get('value')} + 'px'
+  );
+}
+```
+
 ## npm scripts usage
 
 Typically usage is within [npm scripts](https://docs.npmjs.com/misc/scripts):
