@@ -49,8 +49,6 @@ theo
   .catch(error => console.log(`Something went wrong: ${error}`));
 ```
 
----
-
 ## Transforms
 
 Theo is divided into two primary features: transforms and formats.
@@ -69,7 +67,7 @@ Transforms are a named group of value transforms. Theo ships with several predef
 Value transforms are used to conditionaly transform the value of a property. Below are the value transforms that ship with Theo along with the predicate that triggers them.
 
 | Name | Predicate | Description
-|-- | ---
+|--- | --- | ---
 | `color/rgb` | `prop.type === 'color'` | Convert to rgb
 | `color/hex` | `prop.type === 'color'` | Convert to hex
 | `color/hex8rgba` | `prop.type === 'color'` | Convert to hex8rgba
@@ -106,8 +104,6 @@ theo.registerValueTransform(
 // Override the default "web" transform
 theo.registerTransform("web", ["color/rgb", "easing/web"]);
 ```
-
----
 
 ## Formats
 
@@ -320,8 +316,6 @@ theo.registerFormat('array.js', result => {
 });
 ```
 
----
-
 ## API
 
 ```js
@@ -376,13 +370,9 @@ theo.registerTransform(
 ): void
 ```
 
----
-
 ## CLI
 
 Please refer to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
-
----
 
 ## Design Tokens <a name="overview"></a>
 
