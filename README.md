@@ -49,207 +49,69 @@ theo
   .catch(error => console.log(`Something went wrong: ${error}`));
 ```
 
-## Custom formats
+---
 
-### Using a Handlebars template
+## Transforms
 
-Declaring a custom format goes like this:
+Theo is divided into two primary features: transforms and formats.
 
-```js
-const theo = require('theo');
+Transforms are a named group of value transforms. Theo ships with several predefined transforms.
 
-theo.registerFormat(
-  'array.js',
-  `
-  // Source: {{stem meta.file}}
-  module.exports = [
-    {{#each props as |prop|}}
-      {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
-      ['{{camelcase prop.name}}', '{{prop.value}}'],
-    {{/each}}
-  ]
-`
-);
-```
+| Name | Value Transforms
+|-- | ---
+| `raw` | `[]`
+| `web` | `['color/rgb']`
+| `ios` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
+| `android` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
 
-A plethora of [handlebars helpers](https://github.com/helpers/handlebars-helpers#helpers),
-such as `camelcase` and `stem`, are available and will assist in formatting strings in templates.
+### Value Transforms
 
-### Using a function
+Value transforms are used to conditionaly transform the value of a property. Below are the value transforms that ship with Theo along with the predicate that triggers them.
 
-You may also register a format using a function:
+| Name | Predicate | Description
+|-- | ---
+| `color/rgb` | `prop.type === 'color'` | Convert to rgb
+| `color/hex` | `prop.type === 'color'` | Convert to hex
+| `color/hex8rgba` | `prop.type === 'color'` | Convert to hex8rgba
+| `color/hex8argb` | `prop.type === 'color'` | Convert to hex8argb
+| `percentage/float`| `/%/.test(prop.value)` | Convert a percentage to a decimal percentage
+| `relative/pixel` | `isRelativeSpacing` | Convert a r/em value to a pixel value
+| `relative/pixelValue` | `isRelativeSpacing` | Convert a r/em value to a pixel value (excluding the `px` suffix)
 
-```js
-const camelCase = require('lodash/camelCase');
-const path = require('path');
-const theo = require('theo');
+### Custom Transforms / Value Transforms
 
-theo.registerFormat('array.js', result => {
-  // "result" is an Immutable.Map
-  // https://facebook.github.io/immutable-js/
-  return `
-    module.exports = [
-      // Source: ${path.basename(result.getIn(['meta', 'file']))}
-      ${result
-        .get('props')
-        .map(
-          prop => `
-        ['${camelCase(prop.get('name'))}', '${prop.get('value')}'],
-      `
-        )
-        .toJS()}
-    ]
-  `;
-});
-```
-
-## API
-
-```js
-type ConvertOptions = {
-  transform: TransformOptions,
-  format: FormatOptions
+```javascript
+/*
+{
+  CUSTOM_EASING: {
+    type: 'easing',
+    value: [1,2,3,4]
+  }
 }
-
-type TransformOptions = {
-  // If no "type" is specified, values will not be transformed
-  type?: string,
-  // Path to a token file
-  // or just a filename if using the "data" option
-  file: string,
-  // Pass in a data string instead of reading from a file
-  data?: string
-}
-
-type FormatOptions = {
-  type: string,
-  // Available to the format function/template
-  options?: object
-}
-
-type Prop = Immutable.Map
-type Result = Immutable.Map
-
-theo.convert(options: ConvertOptions): Promise<string>
-
-theo.convertSync(options: ConvertOptions): string
-
-theo.registerFormat(
-  name: string,
-  // Either a handlebars template string
-  // or a function that returns a string
-  format: string | (result: Result) => string
-): void
+*/
 
 theo.registerValueTransform(
-  // Referenced in "registerTransform"
-  name: string,
-  // Indicate if the transform should run for the provided prop
-  predicate: (prop: Prop) => boolean,
-  // Return the new "value"
-  transform: (prop: Prop) => any
-): void
+  // Name to be used with registerTransform()
+  "easing/web",
+  // Determine if the value transform
+  // should be run on the specified prop
+  prop => prop.get("type") === "easing",
+  // Return the new value
+  prop => {
+    const [x1, y1, x2, y2] = prop.get("value").toArray();
+    return `cubic-bezier(${x1}, ${y1}, ${x2}, ${y2})`;
+  }
+);
 
-theo.registerTransform(
-  name: string,
-  // An array of registered value transforms
-  valueTransforms: Array<string>
-): void
+// Override the default "web" transform
+theo.registerTransform("web", ["color/rgb", "easing/web"]);
 ```
-
-## CLI
-
-Please refer to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
 
 ---
 
-## Design Tokens <a name="overview"></a>
+## Formats
 
-Theo consumes **Design Token** files which are a central location to store
-design related information such as colors, fonts, widths, animations, etc. These raw
-values can then be transformed and formatted to meet the needs of any platform.
-
-Let's say you have a web, native iOS, and native Android application that
-would like to share information such as background colors.
-
-The web might like to consume the colors as **hsla** values
-formatted as Sass variables in an **.scss** file.
-
-iOS might like **rgba** values formatted as **.json**.
-
-Finally, Android might like **8 Digit Hex (AARRGGBB)** values formatted as **.xml**.
-
-Instead of hard coding this information in each platform/format, Theo
-can consume the centralized **Design Tokens** and output files for
-each platform.
-
-### Spec
-
-A _Design Token_ file is written in either
-[JSON](http://json.org/) ([JSON5](http://json5.org/) supported)
-or [YAML](http://yaml.org/) and should conform to the following spec:
-
-```json5
-{
-  // Required
-  // A map of property names and value objects
-  "props": {
-    "color_brand": {
-      // Required
-      // Can be any valid JSON value
-      "value": "#ff0000",
-
-      // Required
-      // Describe the type of value
-      // [color|number|...]
-      "type": "color",
-
-      // Required
-      // Describe the category of this property
-      // Often used for style guide generation
-      "category": "background",
-
-      // Optional
-      // This value will be included during transform
-      // but excluded during formatting
-      "meta": {
-        // This value might be needed for some special transform
-        "foo": "bar"
-      }
-    }
-  },
-
-  // Optional
-  // This object will be merged into each property
-  // Values defined on a property level will take precedence
-  "global": {
-    "category": "some-category",
-    "meta": {
-      "foo": "baz"
-    }
-  },
-
-  // Optional
-  // Share values across multiple props
-  // Aliases are resolved like: {!sky}
-  "aliases": {
-    "sky": "blue",
-    "grass": {
-      "value": "green",
-      "yourMetadata": "How grass looks"
-    }
-  },
-
-  // Optional
-  // Array of design token files to be imported
-  // "aliases" will be imported as well
-  // "aliases" will already be resolved
-  // "global" will already be merged into each prop
-  "imports": ["./some/dir/file.json"]
-}
-```
-
-## Available Formats
+Theo ships with the following predefined formats.
 
 ### custom-properties.css
 
@@ -406,6 +268,206 @@ let formatOptions = {
 <aura:tokens>
   <aura:token name="propName" value="PROP_VALUE" />
 </aura:tokens>
+```
+
+### Custom Format (Handlebars)
+
+```js
+const theo = require('theo');
+
+theo.registerFormat(
+  'array.js',
+  `
+  // Source: {{stem meta.file}}
+  module.exports = [
+    {{#each props as |prop|}}
+      {{#if prop.comment}}// {{{prop.comment}}}{{/if}}
+      ['{{camelcase prop.name}}', '{{prop.value}}'],
+    {{/each}}
+  ]
+`
+);
+```
+
+A plethora of [handlebars helpers](https://github.com/helpers/handlebars-helpers#helpers),
+such as `camelcase` and `stem`, are available and will assist in formatting strings in templates.
+
+### Custom Format (function)
+
+You may also register a format using a function:
+
+```js
+const camelCase = require('lodash/camelCase');
+const path = require('path');
+const theo = require('theo');
+
+theo.registerFormat('array.js', result => {
+  // "result" is an Immutable.Map
+  // https://facebook.github.io/immutable-js/
+  return `
+    module.exports = [
+      // Source: ${path.basename(result.getIn(['meta', 'file']))}
+      ${result
+        .get('props')
+        .map(
+          prop => `
+        ['${camelCase(prop.get('name'))}', '${prop.get('value')}'],
+      `
+        )
+        .toJS()}
+    ]
+  `;
+});
+```
+
+---
+
+## API
+
+```js
+type ConvertOptions = {
+  transform: TransformOptions,
+  format: FormatOptions
+}
+
+type TransformOptions = {
+  // If no "type" is specified, values will not be transformed
+  type?: string,
+  // Path to a token file
+  // or just a filename if using the "data" option
+  file: string,
+  // Pass in a data string instead of reading from a file
+  data?: string
+}
+
+type FormatOptions = {
+  type: string,
+  // Available to the format function/template
+  options?: object
+}
+
+type Prop = Immutable.Map
+type Result = Immutable.Map
+
+theo.convert(options: ConvertOptions): Promise<string>
+
+theo.convertSync(options: ConvertOptions): string
+
+theo.registerFormat(
+  name: string,
+  // Either a handlebars template string
+  // or a function that returns a string
+  format: string | (result: Result) => string
+): void
+
+theo.registerValueTransform(
+  // Referenced in "registerTransform"
+  name: string,
+  // Indicate if the transform should run for the provided prop
+  predicate: (prop: Prop) => boolean,
+  // Return the new "value"
+  transform: (prop: Prop) => any
+): void
+
+theo.registerTransform(
+  name: string,
+  // An array of registered value transforms
+  valueTransforms: Array<string>
+): void
+```
+
+---
+
+## CLI
+
+Please refer to the [documentation of the CLI](https://github.com/salesforce-ux/theo/blob/master/CLI.md)
+
+---
+
+## Design Tokens <a name="overview"></a>
+
+Theo consumes **Design Token** files which are a central location to store
+design related information such as colors, fonts, widths, animations, etc. These raw
+values can then be transformed and formatted to meet the needs of any platform.
+
+Let's say you have a web, native iOS, and native Android application that
+would like to share information such as background colors.
+
+The web might like to consume the colors as **hsla** values
+formatted as Sass variables in an **.scss** file.
+
+iOS might like **rgba** values formatted as **.json**.
+
+Finally, Android might like **8 Digit Hex (AARRGGBB)** values formatted as **.xml**.
+
+Instead of hard coding this information in each platform/format, Theo
+can consume the centralized **Design Tokens** and output files for
+each platform.
+
+### Spec
+
+A _Design Token_ file is written in either
+[JSON](http://json.org/) ([JSON5](http://json5.org/) supported)
+or [YAML](http://yaml.org/) and should conform to the following spec:
+
+```json5
+{
+  // Required
+  // A map of property names and value objects
+  "props": {
+    "color_brand": {
+      // Required
+      // Can be any valid JSON value
+      "value": "#ff0000",
+
+      // Required
+      // Describe the type of value
+      // [color|number|...]
+      "type": "color",
+
+      // Required
+      // Describe the category of this property
+      // Often used for style guide generation
+      "category": "background",
+
+      // Optional
+      // This value will be included during transform
+      // but excluded during formatting
+      "meta": {
+        // This value might be needed for some special transform
+        "foo": "bar"
+      }
+    }
+  },
+
+  // Optional
+  // This object will be merged into each property
+  // Values defined on a property level will take precedence
+  "global": {
+    "category": "some-category",
+    "meta": {
+      "foo": "baz"
+    }
+  },
+
+  // Optional
+  // Share values across multiple props
+  // Aliases are resolved like: {!sky}
+  "aliases": {
+    "sky": "blue",
+    "grass": {
+      "value": "green",
+      "yourMetadata": "How grass looks"
+    }
+  },
+
+  // Optional
+  // Array of design token files to be imported
+  // "aliases" will be imported as well
+  // "aliases" will already be resolved
+  // "global" will already be merged into each prop
+  "imports": ["./some/dir/file.json"]
+}
 ```
 
 [npm-url]: https://npmjs.org/package/theo
