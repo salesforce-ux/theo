@@ -5,21 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [6.0.0]
 
-We completely re-wrote Theo so we could separate its core engine from the gulp part. This means that other adapters and task runners can leverage Theo (e.g. Grunt, Broccoli…)!
+Theo v6 is a complete re-write that allowed us to fix some long standing issues and separate the core engine from the Gulp plugin.
+
+- Handlebars support for `registerFormat()` ([@kaelig](https://github.com/kaelig))
+- Formats can now receive additional options
+- Added new formats
+  - `cssmodules.css` ([@nickbalestra](https://github.com/nickbalestra))
+  - `custom-properties.css`
+  - `module.js`
+- CLI support ([@nickbalestra](https://github.com/nickbalestra) [@tomger](https://github.com/tomger))
+- Array support for "props" (as long as each prop has a "name" key) which will preserve prop order in the final output
+- Bug fixes and documentation for several existing formats ([@corygibbons](https://github.com/corygibbons) [@dennisreimann ](https://github.com/dennisreimann) [@micahwood](https://github.com/micahwood) [@didoo](https://github.com/didoo))
+
+Big thanks to [@kaelig](https://github.com/kaelig) for helping kickstart this release and to all the alpha/beta testers who reported issues and fixed bugs!
 
 ### ⚠️ Breaking changes with 5.x
 
-- Alias files are treated like JavaScript modules would and do not spread across multiple imported files in the global scope (like Sass imports would) – see [issue #101](https://github.com/salesforce-ux/theo/issues/101)
+- Aliases are only available to files that directly import them  – see [#101](https://github.com/salesforce-ux/theo/issues/101)
 - The Gulp plugin is in a separate [gulp-theo](https://github.com/salesforce-ux/gulp-theo) package
+- Renamed the `.meta` key to `meta`
+- Removed the `includeRawValue` option in favor of always adding an `originalValue` key in each transformed prop
 
 ### Migration guide
 
-If you want to keep using Theo as a Gulp plugin with Theo v6,
+If you would like to keep using Theo as a Gulp plugin with Theo v6,
 here is what a typical update would look like:
 
-#### v5 and below
+#### <= 5.0.0
 
 ```sh
 npm install theo --save-dev
@@ -36,7 +50,7 @@ gulp.src('design/props.yml')
   .pipe(gulp.dest('dist'))
 ```
 
-#### v6
+#### >= 6.0.0
 
 The Gulp plugin is in a separate [gulp-theo](https://github.com/salesforce-ux/gulp-theo) package:
 
@@ -101,5 +115,5 @@ Lodash's implementation of `kebabCase` was dropped because it separated numbers 
 
 See <https://github.com/salesforce-ux/theo/releases>
 
-[Unreleased]: https://github.com/salesforce-ux/theo/compare/v5.0.0...master
+[6.0.0]: https://github.com/salesforce-ux/theo/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/salesforce-ux/theo/compare/v4.2.1...v5.0.0
