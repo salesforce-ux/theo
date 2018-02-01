@@ -59,7 +59,7 @@ Transforms are a named group of value transforms. Theo ships with several predef
 |-- | ---
 | `raw` | `[]`
 | `web` | `['color/rgb']`
-| `ios` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
+| `ios` | `['color/rgb', 'relative/pixelValue', 'percentage/float']`
 | `android` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
 
 ### Value Transforms
