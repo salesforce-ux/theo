@@ -17,5 +17,8 @@
 # Ignore modules
 node_modules
 
+# Whitelist node_modules test dir
+!lib/__fixtures__/node_modules
+
 # Ignore logs
 *.log
