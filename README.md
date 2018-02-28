@@ -17,7 +17,7 @@ props:
   button_background:
     value: "{!primary_color}"
 imports:
-  - aliases.yml
+  - ./aliases.yml
 global:
   type: color
   category: buttons
@@ -59,7 +59,7 @@ Transforms are a named group of value transforms. Theo ships with several predef
 |-- | ---
 | `raw` | `[]`
 | `web` | `['color/rgb']`
-| `ios` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
+| `ios` | `['color/rgb', 'relative/pixelValue', 'percentage/float']`
 | `android` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
 
 ### Value Transforms
@@ -456,7 +456,16 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
   // "aliases" will be imported as well
   // "aliases" will already be resolved
   // "global" will already be merged into each prop
-  "imports": ["./some/dir/file.json"]
+  // Imports resolve according to the Node.js module resolution algorithm: 
+  // https://nodejs.org/api/modules.html#modules_all_together
+  "imports": [
+    // Absolute file path
+    "/home/me/file.json",
+    // Relative file path: resolves from the directory of the file where the import occurs
+    "./some/dir/file.json",
+    // Module path
+    "some-node-module"
+  ]
 }
 ```
 
