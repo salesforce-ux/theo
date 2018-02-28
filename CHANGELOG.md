@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [7.0.1]
+
+* Correctly handle number types
+
 ## [7.0.0]
 
 * Imports are now resolved using [resolve-from](https://www.npmjs.com/package/resolve-from) [@stevenbenisek](https://github.com/stevenbenisek)
@@ -127,6 +131,7 @@ Lodash's implementation of `kebabCase` was dropped because it separated numbers 
 
 See <https://github.com/salesforce-ux/theo/releases>
 
+[7.0.1]: https://github.com/salesforce-ux/theo/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/salesforce-ux/theo/compare/v6.0.0...v7.0.0
 [6.0.0]: https://github.com/salesforce-ux/theo/compare/v5.0.0...v6.0.0
 [5.0.0]: https://github.com/salesforce-ux/theo/compare/v4.2.1...v5.0.0
