@@ -33,15 +33,13 @@ exports[`aura.tokens 1`] = `
 `;
 
 exports[`common.js 1`] = `
-"
-module.exports = {
+"module.exports = {
   tokenColor: \\"#bada55\\",
   tokenSize: \\"20px\\",
   tokenString: \\"/assets/images\\",
   // This should not get escaped in the output
   tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
-};
-"
+};"
 `;
 
 exports[`cssmodules.css 1`] = `
@@ -380,13 +378,11 @@ $fixture-map: (
 `;
 
 exports[`module.js 1`] = `
-"
-export const tokenColor = \\"#bada55\\";
+"export const tokenColor = \\"#bada55\\";
 export const tokenSize = \\"20px\\";
 export const tokenString = \\"/assets/images\\";
 // This should not get escaped in the output
-export const tokenQuotes = \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\";
-"
+export const tokenQuotes = \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\";"
 `;
 
 exports[`raw.json 1`] = `
