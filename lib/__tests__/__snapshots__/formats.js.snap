@@ -3,11 +3,11 @@
 exports[`android.xml 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
 <resources>
-  <property name=\\"TOKEN_COLOR\\" category=\\"background-color\\" value=\\"#bada55\\"/>
-  <property name=\\"TOKEN_SIZE\\" category=\\"spacing\\" value=\\"20px\\"/>
-  <property name=\\"TOKEN_STRING\\" category=\\"test\\" value=\\"/assets/images\\"/>
-  <property name=\\"TOKEN_NUMBER\\" category=\\"test\\" value=\\"2\\"/>
-  <property name=\\"TOKEN_QUOTES\\" category=\\"test\\" value=\\"&apos;Salesforce Sans&apos;, &quot;Helvetica Neue&quot;, sans-serif\\"/>
+  <property name=\\"TOKEN_COLOR\\" category=\\"background-color\\">#bada55</property>
+  <property name=\\"TOKEN_SIZE\\" category=\\"spacing\\">20px</property>
+  <property name=\\"TOKEN_STRING\\" category=\\"test\\">/assets/images</property>
+  <property name=\\"TOKEN_NUMBER\\" category=\\"test\\">2</property>
+  <property name=\\"TOKEN_QUOTES\\" category=\\"test\\">&apos;Salesforce Sans&apos;, &quot;Helvetica Neue&quot;, sans-serif</property>
 </resources>"
 `;
 
