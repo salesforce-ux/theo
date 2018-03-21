@@ -46,6 +46,20 @@ exports[`common.js 1`] = `
 };"
 `;
 
+exports[`common.js with multiline comments 1`] = `
+"module.exports = {
+  tokenColor: \\"#bada55\\",
+  tokenSize: \\"20px\\",
+  tokenString: \\"/assets/images\\",
+  tokenNumber: 2,
+  /*
+    Multiline
+    Comment
+  */
+  tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
+};"
+`;
+
 exports[`cssmodules.css 1`] = `
 "
 @value token-color: #bada55;
