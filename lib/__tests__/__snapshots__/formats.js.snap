@@ -41,7 +41,7 @@ exports[`common.js 1`] = `
   tokenSize: \\"20px\\",
   tokenString: \\"/assets/images\\",
   tokenNumber: 2,
-  // This should not get escaped in the output
+  /* This should not get escaped in the output */
   tokenQuotes: \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\",
 };"
 `;
@@ -90,7 +90,7 @@ $token-color: #bada55 !default
 $token-size: 20px !default
 $token-string: \\"/assets/images\\" !default
 $token-number: 2 !default
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default
 "
 `;
@@ -101,7 +101,7 @@ $token-color: #bada55 !default;
 $token-size: 20px !default;
 $token-string: \\"/assets/images\\" !default;
 $token-number: 2 !default;
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif !default;
 "
 `;
@@ -366,7 +366,7 @@ exports[`less 1`] = `
 @token-size: 20px;
 @token-string: \\"/assets/images\\";
 @token-number: 2;
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 @token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
@@ -378,7 +378,7 @@ $fixture-list: (
   \\"token-size\\",
   \\"token-string\\",
   \\"token-number\\",
-  // This should not get escaped in the output
+  /* This should not get escaped in the output */
   \\"token-quotes\\",
 );
 "
@@ -391,7 +391,7 @@ $fixture-map: (
   'token-size': (20px),
   'token-string': (\\"/assets/images\\"),
   'token-number': (2),
-  // This should not get escaped in the output
+  /* This should not get escaped in the output */
   'token-quotes': ('Salesforce Sans', \\"Helvetica Neue\\", sans-serif),
 );
 "
@@ -404,7 +404,7 @@ $fixture-map: (
   'token-size': $token-size,
   'token-string': $token-string,
   'token-number': $token-number,
-  // This should not get escaped in the output
+  /* This should not get escaped in the output */
   'token-quotes': $token-quotes,
 );
 "
@@ -415,7 +415,7 @@ exports[`module.js 1`] = `
 export const tokenSize = \\"20px\\";
 export const tokenString = \\"/assets/images\\";
 export const tokenNumber = 2;
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 export const tokenQuotes = \\"'Salesforce Sans', \\\\\\"Helvetica Neue\\\\\\", sans-serif\\";"
 `;
 
@@ -469,7 +469,7 @@ $token-color: #bada55
 $token-size: 20px
 $token-string: \\"/assets/images\\"
 $token-number: 2
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
@@ -480,7 +480,7 @@ $token-color: #bada55;
 $token-size: 20px;
 $token-string: \\"/assets/images\\";
 $token-number: 2;
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 $token-quotes: 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif;
 "
 `;
@@ -491,7 +491,7 @@ $token-color = #bada55
 $token-size = 20px
 $token-string = \\"/assets/images\\"
 $token-number = 2
-// This should not get escaped in the output
+/* This should not get escaped in the output */
 $token-quotes = 'Salesforce Sans', \\"Helvetica Neue\\", sans-serif
 "
 `;
