@@ -4,7 +4,7 @@
 ${{stem meta.file}}-list: (
 {{#each props as |prop|}}
   {{#if prop.comment}}
-  // {{{prop.comment}}}
+  {{{trimLeft (indent (comment (trim prop.comment)))}}}
   {{/if}}
   "{{kebabcase prop.name}}",
 {{/each}}
