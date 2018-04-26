@@ -3,7 +3,7 @@
 [![Build Status][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 
-Theo is a an abstraction for transforming and formatting [Design Tokens](#overview).
+Theo is  an abstraction for transforming and formatting [Design Tokens](#overview).
 
 > ### Looking for the gulp plugin?
 >
