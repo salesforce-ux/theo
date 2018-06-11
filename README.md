@@ -253,8 +253,11 @@ let formatOptions = {
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <property name="PROP_NAME" type="PROP_TYPE" category="PROP_CATEGORY">PROP_VALUE</property>
-  <color name="PROP_NAME" type="color" category="PROP_CATEGORY">PROP_VALUE</color>
+  <color name="PROP_NAME" category="PROP_CATEGORY">PROP_VALUE</color>
+  <dimen name="PROP_NAME" category="PROP_CATEGORY">PROP_VALUE</dimen>
+  <string name="PROP_NAME" category="PROP_CATEGORY">PROP_VALUE</string>
+  <integer name="PROP_NAME" category="PROP_CATEGORY">PROP_VALUE</integer>
+  <property name="PROP_NAME" category="PROP_CATEGORY">PROP_VALUE</property>
 </resources>
 ```
 
