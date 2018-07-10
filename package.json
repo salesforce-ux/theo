@@ -1,6 +1,6 @@
 {
   "name": "theo",
-  "version": "7.0.1",
+  "version": "8.0.0-beta.1",
   "license": "BSD-3-Clause",
   "description": "Design Tokens formatter",
   "keywords": [
@@ -26,7 +26,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": ["prettier --write", "npm run lint", "git add"]
+    "*.js": [
+      "prettier --write",
+      "npm run lint",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=6.3.1"
