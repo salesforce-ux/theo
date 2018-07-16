@@ -202,7 +202,7 @@ module.exports = {
 
 ```js
 // When passing "format" options to theo.convert(), this format can be
-// passed some additional options
+// passed with an additional options object.
 let formatOptions = {
   type: 'html',
   options: {
@@ -210,6 +210,40 @@ let formatOptions = {
   }
 };
 ```
+
+#### Configurable options
+| Option | Type | Default | Description
+|-- | -- | -- | ---
+| `transformPropName` | `function` | [`lodash/camelCase`](https://lodash.com/docs/#camelCase) | Converts `name` to camel case.
+
+#### Supported categories
+Tokens are grouped by category then categories are conditionally rendered under a human-friendly display name. Tokens with `category` values not in this list will still be converted and included in the generated output for all other formats.
+
+| Category | Friendly Name
+|-- | ---
+| `spacing` | Spacing
+| `sizing` | Sizing
+| `font` | Fonts
+| `font-style` | Font Styles
+| `font-weight` | Font Weights
+| `font-size` | Font Sizes
+| `line-height` | Line Heights
+| `font-family` | Font Families
+| `border-style` | Border Styles
+| `border-color` | Border Colors
+| `radius` | Radius
+| `border-radius` | Border Radii
+| `hr-color` | Horizontal Rule Colors
+| `background-color` | Background Colors
+| `gradient` | Gradients
+| `background-gradient` | Background Gradients
+| `drop-shadow` | Drop Shadows
+| `box-shadow` | Box Shadows
+| `inner-shadow` | Inner Drop Shadows
+| `text-color` | Text Colors
+| `text-shadow` | Text Shadows
+| `time` | Time
+| `media-query` | Media Queries
 
 ### json
 
