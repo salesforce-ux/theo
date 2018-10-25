@@ -21,14 +21,16 @@
     "theo": "bin/theo.js"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint . --format codeframe --ext .js",
-    "precommit": "lint-staged"
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,jsx,json}": [
       "prettier --write",
-      "npm run lint",
       "git add"
     ]
   },
@@ -66,16 +68,9 @@
     "xml": "1.0.1"
   },
   "devDependencies": {
-    "eslint": "4.19.1",
-    "eslint-config-prettier": "2.9.0",
-    "eslint-config-standard": "11.0.0-beta.0",
-    "eslint-plugin-import": "2.8.0",
-    "eslint-plugin-node": "5.2.1",
-    "eslint-plugin-promise": "3.6.0",
-    "eslint-plugin-standard": "3.0.1",
-    "husky": "0.14.3",
+    "husky": "^1.1.2",
     "jest": "^23.6.0",
-    "lint-staged": "6.1.0",
-    "prettier": "1.10.2"
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.2"
   }
 }
