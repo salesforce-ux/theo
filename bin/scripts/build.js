@@ -5,7 +5,14 @@ const theo = require("../../lib");
 const fs = require("fs-extra");
 const path = require("path");
 
-module.exports = ({ src = "", dest, setup, formats, transform }) => {
+module.exports = ({
+  src = "",
+  dest,
+  setup,
+  formats,
+  transform,
+  resolveMetaAliases
+}) => {
   if (setup) {
     const setupModuleFile = path.resolve(process.cwd(), setup);
     require(setupModuleFile)(theo);
@@ -17,7 +24,8 @@ module.exports = ({ src = "", dest, setup, formats, transform }) => {
         .convert({
           transform: {
             type: transform,
-            file: path.resolve(process.cwd(), src)
+            file: path.resolve(process.cwd(), src),
+            resolveMetaAliases
           },
           format: {
             type: format
