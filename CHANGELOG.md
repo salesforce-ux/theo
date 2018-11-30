@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [8.1.1]
+
+### ⚠️ Breaking changes
+
+- Added `resolveMetaAliases` option to resolve aliases in metadata. - see [#172](https://github.com/salesforce-ux/theo/issues/172)
 
 ## [8.0.1]
 
