@@ -31,16 +31,16 @@ aliases:
 ```
 
 ```js
-const theo = require('theo');
+const theo = require("theo");
 
 theo
   .convert({
     transform: {
-      type: 'web',
-      file: 'buttons.yml'
+      type: "web",
+      file: "buttons.yml"
     },
     format: {
-      type: 'scss'
+      type: "scss"
     }
   })
   .then(scss => {
@@ -55,26 +55,26 @@ Theo is divided into two primary features: transforms and formats.
 
 Transforms are a named group of value transforms. Theo ships with several predefined transforms.
 
-| Name | Value Transforms
-|-- | ---
-| `raw` | `[]`
-| `web` | `['color/rgb']`
-| `ios` | `['color/rgb', 'relative/pixelValue', 'percentage/float']`
-| `android` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']`
+| Name      | Value Transforms                                                |
+| --------- | --------------------------------------------------------------- |
+| `raw`     | `[]`                                                            |
+| `web`     | `['color/rgb']`                                                 |
+| `ios`     | `['color/rgb', 'relative/pixelValue', 'percentage/float']`      |
+| `android` | `['color/hex8argb', 'relative/pixelValue', 'percentage/float']` |
 
 ### Value Transforms
 
 Value transforms are used to conditionaly transform the value of a property. Below are the value transforms that ship with Theo along with the predicate that triggers them.
 
-| Name | Predicate | Description
-|--- | --- | ---
-| `color/rgb` | `prop.type === 'color'` | Convert to rgb
-| `color/hex` | `prop.type === 'color'` | Convert to hex
-| `color/hex8rgba` | `prop.type === 'color'` | Convert to hex8rgba
-| `color/hex8argb` | `prop.type === 'color'` | Convert to hex8argb
-| `percentage/float`| `/%/.test(prop.value)` | Convert a percentage to a decimal percentage
-| `relative/pixel` | `isRelativeSpacing` | Convert a r/em value to a pixel value
-| `relative/pixelValue` | `isRelativeSpacing` | Convert a r/em value to a pixel value (excluding the `px` suffix)
+| Name                  | Predicate               | Description                                                       |
+| --------------------- | ----------------------- | ----------------------------------------------------------------- |
+| `color/rgb`           | `prop.type === 'color'` | Convert to rgb                                                    |
+| `color/hex`           | `prop.type === 'color'` | Convert to hex                                                    |
+| `color/hex8rgba`      | `prop.type === 'color'` | Convert to hex8rgba                                               |
+| `color/hex8argb`      | `prop.type === 'color'` | Convert to hex8argb                                               |
+| `percentage/float`    | `/%/.test(prop.value)`  | Convert a percentage to a decimal percentage                      |
+| `relative/pixel`      | `isRelativeSpacing`     | Convert a r/em value to a pixel value                             |
+| `relative/pixelValue` | `isRelativeSpacing`     | Convert a r/em value to a pixel value (excluding the `px` suffix) |
 
 ### Custom Transforms / Value Transforms
 
@@ -184,7 +184,7 @@ $file-name-list: (
 
 ```js
 // If prop has 'comment' key, that value will go here.
-export const propName = 'PROP_VALUE';
+export const propName = "PROP_VALUE";
 ```
 
 ### common.js
@@ -192,7 +192,7 @@ export const propName = 'PROP_VALUE';
 ```js
 module.exports = {
   // If prop has 'comment' key, that value will go here.
-  propName: 'PROP_VALUE'
+  propName: "PROP_VALUE"
 };
 ```
 
@@ -204,7 +204,7 @@ module.exports = {
 // When passing "format" options to theo.convert(), this format can be
 // passed with an additional options object.
 let formatOptions = {
-  type: 'html',
+  type: "html",
   options: {
     transformPropName: name => name.toUpperCase()
   }
@@ -212,38 +212,40 @@ let formatOptions = {
 ```
 
 #### Configurable options
-| Option | Type | Default | Description
-|-- | -- | -- | ---
-| `transformPropName` | `function` | [`lodash/camelCase`](https://lodash.com/docs/#camelCase) | Converts `name` to camel case.
+
+| Option              | Type       | Default                                                  | Description                    |
+| ------------------- | ---------- | -------------------------------------------------------- | ------------------------------ |
+| `transformPropName` | `function` | [`lodash/camelCase`](https://lodash.com/docs/#camelCase) | Converts `name` to camel case. |
 
 #### Supported categories
+
 Tokens are grouped by category then categories are conditionally rendered under a human-friendly display name. Tokens with `category` values not in this list will still be converted and included in the generated output for all other formats.
 
-| Category | Friendly Name
-|-- | ---
-| `spacing` | Spacing
-| `sizing` | Sizing
-| `font` | Fonts
-| `font-style` | Font Styles
-| `font-weight` | Font Weights
-| `font-size` | Font Sizes
-| `line-height` | Line Heights
-| `font-family` | Font Families
-| `border-style` | Border Styles
-| `border-color` | Border Colors
-| `radius` | Radius
-| `border-radius` | Border Radii
-| `hr-color` | Horizontal Rule Colors
-| `background-color` | Background Colors
-| `gradient` | Gradients
-| `background-gradient` | Background Gradients
-| `drop-shadow` | Drop Shadows
-| `box-shadow` | Box Shadows
-| `inner-shadow` | Inner Drop Shadows
-| `text-color` | Text Colors
-| `text-shadow` | Text Shadows
-| `time` | Time
-| `media-query` | Media Queries
+| Category              | Friendly Name          |
+| --------------------- | ---------------------- |
+| `spacing`             | Spacing                |
+| `sizing`              | Sizing                 |
+| `font`                | Fonts                  |
+| `font-style`          | Font Styles            |
+| `font-weight`         | Font Weights           |
+| `font-size`           | Font Sizes             |
+| `line-height`         | Line Heights           |
+| `font-family`         | Font Families          |
+| `border-style`        | Border Styles          |
+| `border-color`        | Border Colors          |
+| `radius`              | Radius                 |
+| `border-radius`       | Border Radii           |
+| `hr-color`            | Horizontal Rule Colors |
+| `background-color`    | Background Colors      |
+| `gradient`            | Gradients              |
+| `background-gradient` | Background Gradients   |
+| `drop-shadow`         | Drop Shadows           |
+| `box-shadow`          | Box Shadows            |
+| `inner-shadow`        | Inner Drop Shadows     |
+| `text-color`          | Text Colors            |
+| `text-shadow`         | Text Shadows           |
+| `time`                | Time                   |
+| `media-query`         | Media Queries          |
 
 ### json
 
@@ -257,11 +259,11 @@ Tokens are grouped by category then categories are conditionally rendered under 
 
 ```json5
 {
-  "props": {
-    "PROP_NAME": {
-      "value": "PROP_VALUE",
-      "type": "PROP_TYPE",
-      "category": "PROP_CATEGORY"
+  props: {
+    PROP_NAME: {
+      value: "PROP_VALUE",
+      type: "PROP_TYPE",
+      category: "PROP_CATEGORY"
     }
   }
 }
@@ -271,12 +273,12 @@ Tokens are grouped by category then categories are conditionally rendered under 
 
 ```json5
 {
-  "properties": [
+  properties: [
     {
-      "name": "propName",
-      "value": "PROP_VALUE",
-      "type": "PROP_TYPE",
-      "category": "PROP_CATEGORY"
+      name: "propName",
+      value: "PROP_VALUE",
+      type: "PROP_TYPE",
+      category: "PROP_CATEGORY"
     }
   ]
 }
@@ -306,10 +308,10 @@ Tokens are grouped by category then categories are conditionally rendered under 
 ### Custom Format (Handlebars)
 
 ```js
-const theo = require('theo');
+const theo = require("theo");
 
 theo.registerFormat(
-  'array.js',
+  "array.js",
   `
   // Source: {{stem meta.file}}
   module.exports = [
@@ -330,21 +332,21 @@ such as `camelcase` and `stem`, are available and will assist in formatting stri
 You may also register a format using a function:
 
 ```js
-const camelCase = require('lodash/camelCase');
-const path = require('path');
-const theo = require('theo');
+const camelCase = require("lodash/camelCase");
+const path = require("path");
+const theo = require("theo");
 
-theo.registerFormat('array.js', result => {
+theo.registerFormat("array.js", result => {
   // "result" is an Immutable.Map
   // https://facebook.github.io/immutable-js/
   return `
     module.exports = [
-      // Source: ${path.basename(result.getIn(['meta', 'file']))}
+      // Source: ${path.basename(result.getIn(["meta", "file"]))}
       ${result
-        .get('props')
+        .get("props")
         .map(
           prop => `
-        ['${camelCase(prop.get('name'))}', '${prop.get('value')}'],
+        ['${camelCase(prop.get("name"))}', '${prop.get("value")}'],
       `
         )
         .toJS()}
@@ -358,7 +360,15 @@ theo.registerFormat('array.js', result => {
 ```js
 type ConvertOptions = {
   transform: TransformOptions,
-  format: FormatOptions
+  format: FormatOptions,
+  /*
+    This option configures theo to resolve aliases. It is set (true) by default and
+    currently CANNOT be disabled.
+  */
+  resolveAliases?: boolean,
+
+  // This option configures theo to resolve aliases in metadata. This is off (false) by default.
+  resolveMetaAliases?: boolean
 }
 
 type TransformOptions = {
@@ -441,40 +451,40 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
 {
   // Required
   // A map of property names and value objects
-  "props": {
-    "color_brand": {
+  props: {
+    color_brand: {
       // Required
       // Can be any valid JSON value
-      "value": "#ff0000",
+      value: "#ff0000",
 
       // Required
       // Describe the type of value
       // [color|number|...]
-      "type": "color",
+      type: "color",
 
       // Required
       // Describe the category of this property
       // Often used for style guide generation
-      "category": "background",
+      category: "background",
 
       // Optional
       // This value will be included during transform
       // but excluded during formatting
-      "meta": {
+      meta: {
         // This value might be needed for some special transform
-        "foo": "bar"
+        foo: "bar"
       }
     }
   },
-  
+
   // Optional
   // Alternatively, you can define props as an array
   // Useful for maintaining source order in output tokens
-  "props": [
+  props: [
     {
       // Required
-      "name": "color_brand",
-      
+      name: "color_brand"
+
       // All other properties same as above
     }
   ],
@@ -482,21 +492,21 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
   // Optional
   // This object will be merged into each property
   // Values defined on a property level will take precedence
-  "global": {
-    "category": "some-category",
-    "meta": {
-      "foo": "baz"
+  global: {
+    category: "some-category",
+    meta: {
+      foo: "baz"
     }
   },
 
   // Optional
   // Share values across multiple props
   // Aliases are resolved like: {!sky}
-  "aliases": {
-    "sky": "blue",
-    "grass": {
-      "value": "green",
-      "yourMetadata": "How grass looks"
+  aliases: {
+    sky: "blue",
+    grass: {
+      value: "green",
+      yourMetadata: "How grass looks"
     }
   },
 
@@ -505,9 +515,9 @@ or [YAML](http://yaml.org/) and should conform to the following spec:
   // "aliases" will be imported as well
   // "aliases" will already be resolved
   // "global" will already be merged into each prop
-  // Imports resolve according to the Node.js module resolution algorithm: 
+  // Imports resolve according to the Node.js module resolution algorithm:
   // https://nodejs.org/api/modules.html#modules_all_together
-  "imports": [
+  imports: [
     // Absolute file path
     "/home/me/file.json",
     // Relative file path: resolves from the directory of the file where the import occurs
