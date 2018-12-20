@@ -148,7 +148,8 @@ Lodash's implementation of `kebabCase` was dropped because it separated numbers 
 
 See <https://github.com/salesforce-ux/theo/releases>
 
-[8.0.1]: https://github.com/salesforce-ux/theo/compare/v7.0.1...v8.0.1
+[8.1.1]: https://github.com/salesforce-ux/theo/compare/v8.0.1...v8.1.1
+[8.0.1]: https://github.com/salesforce-ux/theo/compare/v8.0.0...v8.0.1
 [8.0.0]: https://github.com/salesforce-ux/theo/compare/v7.0.1...v8.0.0
 [7.0.1]: https://github.com/salesforce-ux/theo/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/salesforce-ux/theo/compare/v6.0.0...v7.0.0
