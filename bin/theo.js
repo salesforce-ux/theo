@@ -11,7 +11,8 @@ const options = {
   dest: argv.dest,
   setup: argv.setup,
   formats: (argv.format || "raw.json").split(","),
-  transform: argv.transform || "raw"
+  transform: argv.transform || "raw",
+  resolveMetaAliases: argv.resolveMetaAliases || false
 };
 
 build(options).catch(error => {
