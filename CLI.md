@@ -1,7 +1,7 @@
 # Theo CLI
 
 Theo comes with a [CLI](https://en.wikipedia.org/wiki/Command-line_interface) that allows you to use
-`theo` to buld one or multiple tokens. The CLI forwards on the `formats`
+`theo` to build one or multiple tokens. The CLI forwards on the `formats`
 and other relevant options to `theo` in order to build the token in the desired formats.
 
 ## Basic usage
