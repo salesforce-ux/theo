@@ -59,7 +59,7 @@
     "handlebars-helpers": "0.10.0",
     "immutable": "3.8.2",
     "immutable-ext": "1.1.2",
-    "js-yaml": "3.10.0",
+    "js-yaml": "3.13.1",
     "json5": "0.5.1",
     "lodash": "^4.17.11",
     "no-case": "2.3.2",
