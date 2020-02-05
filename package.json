@@ -70,7 +70,7 @@
   "devDependencies": {
     "husky": "^1.1.2",
     "jest": "^24.1.0",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^10.0.7",
     "prettier": "^1.14.2"
   }
 }
