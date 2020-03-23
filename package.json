@@ -62,7 +62,7 @@
     "js-yaml": "3.13.1",
     "json5": "0.5.1",
     "lodash": "^4.17.15",
-    "no-case": "2.3.2",
+    "no-case": "3.0.3",
     "resolve-from": "5.0.0",
     "tinycolor2": "1.4.1",
     "xml": "1.0.1"
