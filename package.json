@@ -68,7 +68,7 @@
     "xml": "1.0.1"
   },
   "devDependencies": {
-    "husky": "^1.1.2",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
     "prettier": "^1.14.2"
