@@ -52,7 +52,7 @@
   "homepage": "https://github.com/salesforce-ux/theo",
   "dependencies": {
     "core.lambda": "1.0.0",
-    "data.either": "1.5.1",
+    "data.either": "1.5.2",
     "fs-extra": "9.0.0",
     "glob": "7.1.6",
     "handlebars": "^4.7.2",
