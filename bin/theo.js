@@ -2,7 +2,7 @@
 // Copyright (c) 2015-present, salesforce.com, inc. All rights reserved
 // Licensed under BSD 3-Clause - see LICENSE.txt or git.io/sfdc-license
 
-const argv = require("optimist").argv;
+const argv = require("yargs").argv;
 
 const build = require("./scripts/build");
 
